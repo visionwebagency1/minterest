@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/Reveal'
+import { BlurReveal } from '@/components/BlurReveal'
 import { Accent } from '@/components/Accent'
 import { PageHero } from '@/components/PageHero'
 import { BorderBeam } from '@/components/BorderBeam'
@@ -30,13 +31,11 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
       />
 
       <div className="bg-cream text-near-black">
-        {/* intro statement */}
+        {/* intro statement with scroll blur word-reveal */}
         <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32 lg:px-16">
-          <Reveal>
-            <p className="max-w-3xl text-balance font-display text-[clamp(1.6rem,3.4vw,2.6rem)] font-medium leading-[1.2] tracking-tight text-near-black">
-              {s.intro}
-            </p>
-          </Reveal>
+          <p className="max-w-3xl font-display text-[clamp(1.6rem,3.4vw,2.6rem)] font-medium leading-[1.2] tracking-tight text-near-black">
+            <BlurReveal text={s.intro} stagger={0.022} />
+          </p>
         </section>
 
         {/* audit callout (websites only) */}
@@ -112,18 +111,27 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
           </div>
         </section>
 
-        {/* what's included */}
+        {/* how we lift your business */}
         <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-28 lg:px-16">
           <Reveal delay={0.05}>
-            <h2 className="font-display text-2xl font-semibold md:text-3xl">Wat zit erin</h2>
+            <h2 className="max-w-3xl text-balance font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-[1.05]">
+              Hoe we jouw bedrijf naar een <Accent>nieuw niveau</Accent> tillen.
+            </h2>
           </Reveal>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {s.deliverables.map((d, i) => (
-              <Reveal key={d} delay={i * 0.04}>
-                <span className="inline-flex items-center gap-2.5 rounded-full border border-emerald/30 bg-white px-5 py-2.5 font-sans text-sm font-medium text-emerald-deep shadow-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald" />
-                  {d}
+              <Reveal
+                key={d.title}
+                delay={(i % 3) * 0.06}
+                className="rounded-2xl border border-emerald-deep/10 bg-white p-7 shadow-[0_18px_50px_rgba(15,92,77,0.08)]"
+              >
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald/10 text-emerald">
+                  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12.5 10 17 19 7" />
+                  </svg>
                 </span>
+                <h3 className="mt-5 font-display text-lg font-semibold">{d.title}</h3>
+                <p className="mt-2 font-sans text-sm leading-relaxed text-near-black/60">{d.desc}</p>
               </Reveal>
             ))}
           </div>
