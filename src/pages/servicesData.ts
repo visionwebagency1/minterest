@@ -1,69 +1,157 @@
 /** Content for the four service pages, rendered through ServicePage. */
 
+export type Feature = { title: string; desc: string; img: string }
+
 export type Service = {
   no: string
   kicker: string
   label: string
   tagline: string
   intro: string
-  deliverables: { title: string; desc: string }[]
+  features: Feature[]
+  deliverables: string[]
 }
+
+// Stock photos via Lorem Picsum (reliable). Swap the seeds for real project /
+// brand photography when available.
+export const img = (seed: string) =>
+  `https://picsum.photos/seed/${seed}/1000/720`
 
 export const SERVICES: Record<string, Service> = {
   websites: {
     no: '01',
     kicker: 'Web & commerce',
-    label: 'Website & Webshops',
-    tagline: 'Snelle, schaalbare sites die converteren.',
+    label: 'Websites & webshops',
+    tagline:
+      'Snelle, converterende websites en webshops die er strak uitzien en verkopen. Van landingspagina tot complete Shopify of WooCommerce shop.',
     intro:
-      'Van portfolio tot volwaardige webshop. We bouwen digitale producten die laden in een oogwenk, fijn werken op elk scherm en meegroeien met je ambitie.',
+      'Je website is je hardst werkende verkoper. Wij bouwen digitale producten die laden in een oogwenk, fijn werken op elk scherm en meegroeien met je ambitie, van eerste bezoeker tot duizenden orders.',
+    features: [
+      {
+        title: 'Gebouwd op snelheid',
+        desc: 'Elke milliseconde telt. We bouwen op een moderne stack zoals Next.js en React, zodat je site al staat voordat bezoekers afhaken. Een 100 op PageSpeed is geen toeval, maar het uitgangspunt.',
+        img: 'mint-speed-web',
+      },
+      {
+        title: 'Gemaakt om te verkopen',
+        desc: 'Van productpagina tot afrekenen: elke stap is ontworpen op conversie. Shopify of WooCommerce, volledig op maat ingericht rond hoe jouw klanten kopen.',
+        img: 'mint-shop-cart',
+      },
+      {
+        title: 'Vindbaar en schaalbaar',
+        desc: 'Technische SEO, schone code en een fundament dat meegroeit. Vandaag een strakke site, morgen een platform dat duizenden bezoekers moeiteloos aankan.',
+        img: 'mint-seo-growth',
+      },
+    ],
     deliverables: [
-      { title: 'Maatwerk websites', desc: 'Ontworpen en gebouwd rond jouw merk en doelen, geen template-gevoel.' },
-      { title: 'Webshops', desc: 'Conversiegerichte e-commerce die schaalt met je omzet.' },
-      { title: 'Web-apps', desc: 'Interactieve producten en portals die het verschil maken.' },
-      { title: 'Performance & SEO', desc: 'Topsnelheid en vindbaarheid als fundament, niet als bijzaak.' },
+      'Shopify & WooCommerce',
+      'Next.js & React',
+      'Technische SEO',
+      'Conversie-optimalisatie',
+      'Hosting & onderhoud',
+      'Analytics & tracking',
     ],
   },
   branding: {
     no: '02',
     kicker: 'Merk & identiteit',
     label: 'Design & branding',
-    tagline: 'Een identiteit die blijft hangen en groeit.',
+    tagline:
+      'Een merk dat blijft hangen. Van logo en huisstijl tot een compleet designsysteem dat overal consistent werkt.',
     intro:
-      'We bouwen merken met karakter. Een visuele taal die vertrouwen wekt, herkenbaar is en consistent meebeweegt over elk kanaal.',
+      'Een sterk merk is herkenbaar in een oogopslag en consistent over elk kanaal. We bouwen een visuele taal met karakter, die vertrouwen wekt en met je meegroeit.',
+    features: [
+      {
+        title: 'Een merk met karakter',
+        desc: 'Logo, wordmark en kernidentiteit die kloppen, van visitekaartje tot billboard. Onderscheidend, tijdloos en helemaal van jou.',
+        img: 'mint-brand-logo',
+      },
+      {
+        title: 'Consistent op elk kanaal',
+        desc: 'Een designsysteem met herbruikbare bouwstenen: kleuren, typografie en componenten. Zo ziet alles er overal even scherp uit.',
+        img: 'mint-design-system',
+      },
+      {
+        title: 'Richtlijnen die houvast geven',
+        desc: 'Heldere merkrichtlijnen zodat iedereen, intern en extern, je merk juist inzet. Geen ruis, wel consistentie.',
+        img: 'mint-brand-guidelines',
+      },
+    ],
     deliverables: [
-      { title: 'Logo & identiteit', desc: 'Een merkteken en systeem dat klopt, van visitekaartje tot billboard.' },
-      { title: 'Design system', desc: 'Herbruikbare bouwstenen voor een consistente uitstraling.' },
-      { title: 'Art direction', desc: 'De toon en richting die je merk onmiskenbaar maken.' },
-      { title: 'Merkstrategie', desc: 'Positionering die je onderscheidt en laat groeien.' },
+      'Logo & wordmark',
+      'Visuele identiteit',
+      'Designsysteem',
+      'Merkrichtlijnen',
+      'Art direction',
+      'Merkstrategie',
     ],
   },
   video: {
     no: '03',
     kicker: 'Bewegend beeld',
     label: 'Short video content',
-    tagline: 'Scroll-stoppende video die merken laat bewegen.',
+    tagline:
+      'Video die kijkers vasthoudt en aanzet tot actie. Wij bedenken, draaien en monteren content die het goed doet op social.',
     intro:
-      'Korte, krachtige video gemaakt voor de feed. Concept, productie en montage die aandacht vangen en vasthouden.',
+      'Korte video is het snelste pad naar aandacht. We maken scroll-stoppende content die past bij je merk en werkt op de feed, van concept tot kant-en-klare clip.',
+    features: [
+      {
+        title: 'Concept dat blijft hangen',
+        desc: 'Ideeën en scenario afgestemd op je publiek en platform. Eerst de haak, dan de boodschap, altijd in jouw merkstijl.',
+        img: 'mint-video-concept',
+      },
+      {
+        title: 'Productie van A tot Z',
+        desc: 'Van shoot tot set, strak geregeld en in hoge kwaliteit. Wij regelen de regie, jij ziet het resultaat.',
+        img: 'mint-video-production',
+      },
+      {
+        title: 'Klaar voor elk platform',
+        desc: 'Montage en motion die het ritme bepalen, geoptimaliseerd voor Reels, TikTok en Shorts. Direct te plaatsen.',
+        img: 'mint-video-edit',
+      },
+    ],
     deliverables: [
-      { title: 'Concept & scripting', desc: 'Ideeën die blijven hangen, afgestemd op je publiek.' },
-      { title: 'Productie', desc: 'Van shoot tot set, strak geregeld, hoge kwaliteit.' },
-      { title: 'Editing & motion', desc: 'Montage en motion graphics die het ritme bepalen.' },
-      { title: 'Platform-optimalisatie', desc: 'Per kanaal op maat: Reels, TikTok, Shorts.' },
+      'Concept & scenario',
+      'Draaiboek',
+      'Opname & regie',
+      'Montage & motion',
+      'Social-ready exports',
+      'Contentkalender',
     ],
   },
   influencer: {
     no: '04',
     kicker: 'Bereik & creators',
     label: 'Influencer marketing',
-    tagline: 'Bereik via stemmen die jouw publiek vertrouwt.',
+    tagline:
+      'De juiste makers aan jouw merk koppelen. Wij regelen matching, strategie en content die echt resultaat oplevert.',
     intro:
-      'We koppelen je merk aan de juiste makers en sturen op resultaat. Authentiek bereik dat zich vertaalt in groei.',
+      'Mensen vertrouwen mensen. We koppelen je merk aan creators die jouw publiek echt bereiken en sturen op resultaat, niet op ijdele cijfers.',
+    features: [
+      {
+        title: 'De juiste creators',
+        desc: 'We selecteren makers die passen bij je merk en publiek, op basis van echte betrokkenheid in plaats van alleen volgers.',
+        img: 'mint-creator-match',
+      },
+      {
+        title: 'Strategie op resultaat',
+        desc: 'Heldere doelen, boodschap en kanalen vooraf scherp. Elke campagne is gebouwd om iets te bereiken.',
+        img: 'mint-influencer-strategy',
+      },
+      {
+        title: 'Meten en opschalen',
+        desc: 'Transparante rapportage en bijsturen op wat werkt. We schalen op wat presteert en laten de rest los.',
+        img: 'mint-analytics-report',
+      },
+    ],
     deliverables: [
-      { title: 'Strategie', desc: 'De juiste boodschap, kanalen en doelen vooraf scherp.' },
-      { title: 'Creator matching', desc: 'Makers die écht bij je merk en publiek passen.' },
-      { title: 'Campagnemanagement', desc: 'Van briefing tot oplevering, wij regelen het.' },
-      { title: 'Meten & schalen', desc: 'Heldere rapportage en opschalen wat werkt.' },
+      'Creator-matching',
+      'Campagnestrategie',
+      'Content & video',
+      'Briefing & coördinatie',
+      'Heldere rapportage',
+      'Opschalen wat werkt',
     ],
   },
 }

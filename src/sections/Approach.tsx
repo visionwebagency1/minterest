@@ -60,26 +60,32 @@ export function Approach() {
   const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   return (
-    <section className="relative bg-cream py-28 text-near-black md:py-40">
+    <section
+      className="relative overflow-hidden py-28 text-cream md:py-40"
+      style={{
+        backgroundImage:
+          'radial-gradient(60% 50% at 80% 8%, rgba(31,166,122,0.28), transparent 60%), radial-gradient(50% 45% at 10% 95%, rgba(15,92,77,0.4), transparent 60%), linear-gradient(170deg, #0A1B16 0%, #08120F 100%)',
+      }}
+    >
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <Reveal className="flex items-center gap-3">
-          <span className="h-px w-10 bg-emerald/50" />
-          <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
+          <span className="h-px w-10 bg-mint/50" />
+          <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/70">
             Onze aanpak
           </span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-8 max-w-3xl text-balance font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight text-near-black">
+          <h2 className="mt-8 max-w-3xl text-balance font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight text-cream">
             De <Accent>klim</Accent>, in vier stappen.
           </h2>
         </Reveal>
 
         <div ref={ref} className="relative mt-20 md:mt-28">
           {/* track */}
-          <div className="absolute left-[39px] top-2 h-[calc(100%-1rem)] w-px bg-emerald/15 md:left-1/2 md:-translate-x-1/2" />
+          <div className="absolute left-[39px] top-2 h-[calc(100%-1rem)] w-px bg-white/10 md:left-1/2 md:-translate-x-1/2" />
           {/* fill */}
           <motion.div
-            className="absolute left-[39px] top-2 h-[calc(100%-1rem)] w-px origin-top bg-gradient-to-b from-emerald to-mint md:left-1/2 md:-translate-x-1/2"
+            className="absolute left-[39px] top-2 h-[calc(100%-1rem)] w-px origin-top bg-gradient-to-b from-emerald to-lime-bright md:left-1/2 md:-translate-x-1/2"
             style={{ scaleY: lineScale }}
           />
 
@@ -103,17 +109,17 @@ export function Approach() {
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.7, ease: EASE }}
                   >
-                    <span className="font-accent text-2xl italic text-emerald">{s.no}</span>
-                    <h3 className="mt-1 font-display text-2xl font-semibold text-near-black md:text-3xl">
+                    <span className="font-accent text-2xl italic text-mint">{s.no}</span>
+                    <h3 className="mt-1 font-display text-2xl font-semibold text-cream md:text-3xl">
                       {s.title}
                     </h3>
-                    <p className="mt-2 max-w-sm font-sans text-base leading-relaxed text-near-black/60">
+                    <p className="mt-2 max-w-sm font-sans text-base leading-relaxed text-cream/60">
                       {s.desc}
                     </p>
                   </motion.div>
                 </div>
                 {/* node on the centre line (desktop) */}
-                <span className="absolute left-[35px] top-9 h-2.5 w-2.5 rounded-full bg-emerald ring-4 ring-cream md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2" />
+                <span className="absolute left-[35px] top-9 h-2.5 w-2.5 rounded-full bg-lime-bright ring-4 ring-[#0a1b16] md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2" />
               </div>
             ))}
           </div>
