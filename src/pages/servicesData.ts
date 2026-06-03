@@ -2,6 +2,7 @@
 
 export type Service = {
   no: string
+  kicker: string
   label: string
   tagline: string
   intro: string
@@ -11,6 +12,7 @@ export type Service = {
 export const SERVICES: Record<string, Service> = {
   websites: {
     no: '01',
+    kicker: 'Web & commerce',
     label: 'Website & Webshops',
     tagline: 'Snelle, schaalbare sites die converteren.',
     intro:
@@ -24,6 +26,7 @@ export const SERVICES: Record<string, Service> = {
   },
   branding: {
     no: '02',
+    kicker: 'Merk & identiteit',
     label: 'Design & branding',
     tagline: 'Een identiteit die blijft hangen en groeit.',
     intro:
@@ -37,6 +40,7 @@ export const SERVICES: Record<string, Service> = {
   },
   video: {
     no: '03',
+    kicker: 'Bewegend beeld',
     label: 'Short video content',
     tagline: 'Scroll-stoppende video die merken laat bewegen.',
     intro:
@@ -50,6 +54,7 @@ export const SERVICES: Record<string, Service> = {
   },
   influencer: {
     no: '04',
+    kicker: 'Bereik & creators',
     label: 'Influencer marketing',
     tagline: 'Bereik via stemmen die jouw publiek vertrouwt.',
     intro:

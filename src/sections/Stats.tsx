@@ -52,15 +52,19 @@ function CountUp({
 
 export function Stats() {
   return (
-    <section className="relative py-24 md:py-32">
+    <section className="relative bg-cream py-24 text-near-black md:py-32">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4">
           {STATS.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08}>
-              <div className="font-display text-5xl font-semibold tracking-tight text-mint md:text-6xl">
+            <Reveal
+              key={s.label}
+              delay={i * 0.08}
+              className={i % 2 === 1 ? 'lg:mt-10' : ''}
+            >
+              <div className="font-display text-[clamp(3rem,7vw,5.5rem)] font-semibold leading-none tracking-tight text-emerald">
                 <CountUp to={s.to} decimals={s.decimals} suffix={s.suffix} />
               </div>
-              <div className="mt-3 font-sans text-sm uppercase tracking-[0.18em] text-white/45">
+              <div className="mt-3 font-sans text-sm uppercase tracking-[0.18em] text-near-black/50">
                 {s.label}
               </div>
             </Reveal>
