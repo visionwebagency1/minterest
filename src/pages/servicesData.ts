@@ -26,7 +26,7 @@ export const SERVICES: Record<string, Service> = {
     tagline:
       'Snelle, converterende websites en webshops die er strak uitzien en verkopen. Van landingspagina tot complete Shopify of WooCommerce shop.',
     intro:
-      'Je website is je hardst werkende verkoper. Wij bouwen digitale producten die laden in een oogwenk, fijn werken op elk scherm en meegroeien met je ambitie, van eerste bezoeker tot duizenden orders.',
+      'Je website is je hardst werkende *verkoper*. Wij bouwen digitale producten die laden in een *oogwenk*, fijn werken op elk scherm en meegroeien met je *ambitie*, van eerste bezoeker tot *duizenden orders*.',
     features: [
       { title: 'Gebouwd op snelheid', desc: 'Elke milliseconde telt. We bouwen op een moderne stack zoals Next.js en React, zodat je site al staat voordat bezoekers afhaken. Een 100 op PageSpeed is geen toeval, maar het uitgangspunt.', img: 'mint-speed-web' },
       { title: 'Gemaakt om te verkopen', desc: 'Van productpagina tot afrekenen: elke stap is ontworpen op conversie. Shopify of WooCommerce, volledig op maat ingericht rond hoe jouw klanten kopen.', img: 'mint-shop-cart' },
@@ -48,7 +48,7 @@ export const SERVICES: Record<string, Service> = {
     tagline:
       'Een merk dat blijft hangen. Van logo en huisstijl tot een compleet designsysteem dat overal consistent werkt.',
     intro:
-      'Een sterk merk is herkenbaar in een oogopslag en consistent over elk kanaal. We bouwen een visuele taal met karakter, die vertrouwen wekt en met je meegroeit.',
+      'Een sterk *merk* is herkenbaar in een oogopslag en consistent over elk kanaal. We bouwen een visuele taal met *karakter*, die *vertrouwen* wekt en met je meegroeit.',
     features: [
       { title: 'Een merk met karakter', desc: 'Logo, wordmark en kernidentiteit die kloppen, van visitekaartje tot billboard. Onderscheidend, tijdloos en helemaal van jou.', img: 'mint-brand-logo' },
       { title: 'Consistent op elk kanaal', desc: 'Een designsysteem met herbruikbare bouwstenen: kleuren, typografie en componenten. Zo ziet alles er overal even scherp uit.', img: 'mint-design-system' },
@@ -70,7 +70,7 @@ export const SERVICES: Record<string, Service> = {
     tagline:
       'Video die kijkers vasthoudt en aanzet tot actie. Wij bedenken, draaien en monteren content die het goed doet op social.',
     intro:
-      'Korte video is het snelste pad naar aandacht. We maken scroll-stoppende content die past bij je merk en werkt op de feed, van concept tot kant-en-klare clip.',
+      'Korte video is het snelste pad naar *aandacht*. We maken *scroll-stoppende* content die past bij je merk en werkt op de feed, van concept tot kant-en-klare *clip*.',
     features: [
       { title: 'Concept dat blijft hangen', desc: 'Ideeën en scenario afgestemd op je publiek en platform. Eerst de haak, dan de boodschap, altijd in jouw merkstijl.', img: 'mint-video-concept' },
       { title: 'Productie van A tot Z', desc: 'Van shoot tot set, strak geregeld en in hoge kwaliteit. Wij regelen de regie, jij ziet het resultaat.', img: 'mint-video-production' },
@@ -92,7 +92,7 @@ export const SERVICES: Record<string, Service> = {
     tagline:
       'De juiste makers aan jouw merk koppelen. Wij regelen matching, strategie en content die echt resultaat oplevert.',
     intro:
-      'Mensen vertrouwen mensen. We koppelen je merk aan creators die jouw publiek echt bereiken en sturen op resultaat, niet op ijdele cijfers.',
+      'Mensen *vertrouwen* mensen. We koppelen je merk aan *creators* die jouw publiek echt bereiken en sturen op *resultaat*, niet op ijdele cijfers.',
     features: [
       { title: 'De juiste creators', desc: 'We selecteren makers die passen bij je merk en publiek, op basis van echte betrokkenheid in plaats van alleen volgers.', img: 'mint-creator-match' },
       { title: 'Strategie op resultaat', desc: 'Heldere doelen, boodschap en kanalen vooraf scherp. Elke campagne is gebouwd om iets te bereiken.', img: 'mint-influencer-strategy' },
