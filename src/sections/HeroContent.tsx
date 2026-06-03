@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router-dom'
 
 /**
  * Hero HTML overlay above the WebGL canvas — editorial split layout:
@@ -94,8 +95,8 @@ export function HeroContent() {
               className="mt-9 flex flex-row flex-wrap justify-center gap-3 md:justify-start"
             >
               {/* Primary: gradient fill + sweeping shimmer */}
-              <a
-                href="#contact"
+              <Link
+                to="/start"
                 className="group pointer-events-auto relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-3.5 font-sans text-sm font-medium text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] lg:px-9 lg:py-4 lg:text-base"
               >
                 <span className="relative z-10">Start jouw project</span>
@@ -113,7 +114,7 @@ export function HeroContent() {
                   <path d="M8 7 H17 V16" />
                 </svg>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
-              </a>
+              </Link>
 
               {/* Secondary: dark glass (matches the header CTA) */}
               <a

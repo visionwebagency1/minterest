@@ -25,7 +25,7 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
         kicker={s.kicker}
         title={s.label}
         tagline={s.tagline}
-        primary={{ label: 'Start jouw project', to: '/contact' }}
+        primary={{ label: 'Start jouw project', to: '/start' }}
         secondary={{ label: 'Bekijk werk', to: '/work' }}
       />
 
@@ -38,6 +38,29 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
             </p>
           </Reveal>
         </section>
+
+        {/* audit callout (websites only) */}
+        {slug === 'websites' && (
+          <section className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
+            <Reveal>
+              <div className="flex flex-col items-start gap-5 rounded-3xl border border-emerald/30 bg-white p-8 shadow-[0_18px_50px_rgba(15,92,77,0.1)] md:flex-row md:items-center md:justify-between md:p-10">
+                <div>
+                  <h3 className="font-display text-xl font-semibold md:text-2xl">Benieuwd hoe jouw site nu scoort?</h3>
+                  <p className="mt-2 font-sans text-near-black/60">Ontvang gratis een audit met concrete groeikansen, binnen 24 uur.</p>
+                </div>
+                <Link
+                  to="/website-audit"
+                  className="group relative inline-flex shrink-0 items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-3.5 font-sans text-sm font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03]"
+                >
+                  <BorderBeam rx={12} />
+                  <span className="relative z-10">Gratis website-audit</span>
+                  <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+                  <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+                </Link>
+              </div>
+            </Reveal>
+          </section>
+        )}
 
         {/* features with photos, alternating */}
         <section className="bg-[#EEF1E7] py-24 md:py-32">
@@ -187,7 +210,7 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
                 Klaar om hiermee te <Accent>klimmen</Accent>?
               </h2>
               <Link
-                to="/contact"
+                to="/start"
                 className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-mint to-lime-bright px-8 py-4 font-sans text-base font-semibold text-emerald-deep shadow-lg shadow-mint/30 transition-transform duration-300 hover:scale-[1.03]"
               >
                 <BorderBeam rx={12} />

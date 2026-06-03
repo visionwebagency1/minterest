@@ -11,6 +11,8 @@ import { ServicePage } from '@/pages/ServicePage'
 import { Work } from '@/pages/Work'
 import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
+import { Start } from '@/pages/Start'
+import { Audit } from '@/pages/Audit'
 
 export default function App() {
   // App-wide smooth scroll.
@@ -38,6 +40,8 @@ export default function App() {
         <Route path="/work" element={<Work />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/start" element={<Start />} />
+        <Route path="/website-audit" element={<Audit />} />
         {/* Fallback to Home for anything unmatched. */}
         <Route path="*" element={<Home />} />
       </Routes>

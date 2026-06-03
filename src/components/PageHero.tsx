@@ -22,8 +22,8 @@ export function PageHero({
   kicker: string
   title: ReactNode
   tagline: string
-  primary: Cta
-  secondary: Cta
+  primary?: Cta
+  secondary?: Cta
 }) {
   return (
     <section
@@ -73,30 +73,36 @@ export function PageHero({
           {tagline}
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
-          className="mt-10 flex flex-row flex-wrap gap-3"
-        >
-          <Link
-            to={primary.to}
-            className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03]"
+        {(primary || secondary) && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
+            className="mt-10 flex flex-row flex-wrap gap-3"
           >
-            <span className="relative z-10">{primary.label}</span>
-            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">
-              &rarr;
-            </span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
-          </Link>
-          <Link
-            to={secondary.to}
-            className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-sans text-base font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40"
-          >
-            <span className="h-1.5 w-1.5 bg-lime-accent" />
-            {secondary.label}
-          </Link>
-        </motion.div>
+            {primary && (
+              <Link
+                to={primary.to}
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03]"
+              >
+                <span className="relative z-10">{primary.label}</span>
+                <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">
+                  &rarr;
+                </span>
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+              </Link>
+            )}
+            {secondary && (
+              <Link
+                to={secondary.to}
+                className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-sans text-base font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40"
+              >
+                <span className="h-1.5 w-1.5 bg-lime-accent" />
+                {secondary.label}
+              </Link>
+            )}
+          </motion.div>
+        )}
       </div>
     </section>
   )

@@ -18,7 +18,7 @@ export function Work() {
           </>
         }
         tagline="Een greep uit het werk waarmee we interesse in groei veranderden, van strakke webshops tot complete merken."
-        primary={{ label: 'Start jouw project', to: '/contact' }}
+        primary={{ label: 'Start jouw project', to: '/start' }}
         secondary={{ label: 'Onze diensten', to: '/websites' }}
       />
 

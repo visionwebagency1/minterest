@@ -33,7 +33,7 @@ export function About() {
           </>
         }
         tagline="Minterest is een digitaal groeibureau waar interesse je groei wordt. Vier disciplines onder één dak, plus alles eromheen geregeld."
-        primary={{ label: 'Werk met ons', to: '/contact' }}
+        primary={{ label: 'Werk met ons', to: '/start' }}
         secondary={{ label: 'Bekijk werk', to: '/work' }}
       />
 

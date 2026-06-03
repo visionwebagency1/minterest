@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { M_PATH } from '@/three/mPath'
 import { BorderBeam } from './BorderBeam'
+import { WebIcon, BrandIcon, VideoIcon, NetworkIcon } from './serviceIcons'
 
 /**
  * Floating glass header + a slide-down navigation panel:
@@ -12,43 +13,6 @@ import { BorderBeam } from './BorderBeam'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 const ICON_VB = '-1.75 -1 3.5 2'
-
-/* ---- service icons (clean mint line art) ---- */
-function WebIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="4" width="18" height="16" rx="2" />
-      <path d="M3 8h18" />
-      <circle cx="6" cy="6" r="0.6" fill="currentColor" />
-    </svg>
-  )
-}
-function BrandIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 16.5 14 6.5a2.1 2.1 0 0 1 3 3L7 19.5l-4 1 1-4Z" />
-      <path d="M12.5 8 16 11.5" />
-    </svg>
-  )
-}
-function VideoIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="5" width="18" height="14" rx="2.5" />
-      <path d="M10 9.5v5l4-2.5-4-2.5Z" fill="currentColor" stroke="none" />
-    </svg>
-  )
-}
-function NetworkIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="6" r="2.2" />
-      <circle cx="5.5" cy="17" r="2.2" />
-      <circle cx="18.5" cy="17" r="2.2" />
-      <path d="M10.5 7.8 7 15M13.5 7.8 17 15M7.7 17h8.6" />
-    </svg>
-  )
-}
 
 const SERVICES = [
   { label: 'Website & webshops', desc: 'Snelle sites die verkopen', to: '/websites', Icon: WebIcon },
@@ -131,7 +95,7 @@ export function Header() {
           <span className="relative z-10 mx-1 hidden h-7 w-px bg-white/12 sm:block" />
 
           <Link
-            to="/contact"
+            to="/start"
             onClick={close}
             className="group relative z-10 hidden items-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 font-sans text-sm font-medium text-white transition-colors duration-300 hover:border-mint/40 sm:inline-flex"
           >
@@ -252,7 +216,7 @@ export function Header() {
                   className="mt-10 flex flex-col items-start gap-6"
                 >
                   <Link
-                    to="/contact"
+                    to="/start"
                     onClick={close}
                     className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.01] sm:w-auto"
                   >
