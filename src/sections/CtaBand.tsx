@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
+import { BorderBeam } from '@/components/BorderBeam'
 
 /**
  * Closing climax: full-bleed, dark, strong typography. Doubles as the free
@@ -52,10 +53,12 @@ export function CtaBand() {
             />
             <button
               type="submit"
-              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
+              className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
             >
-              Audit aanvragen
-              <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+              <BorderBeam rx={12} />
+              <span className="relative z-10">Audit aanvragen</span>
+              <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+              <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
             </button>
           </form>
         </Reveal>

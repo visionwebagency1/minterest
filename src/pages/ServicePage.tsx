@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
 import { PageHero } from '@/components/PageHero'
+import { BorderBeam } from '@/components/BorderBeam'
 import { Footer } from '@/sections/Footer'
 import { SERVICES, img } from './servicesData'
+import { EXTRAS } from './serviceExtras'
 
 const STEPS = [
   { no: '01', title: 'Kennismaken', desc: 'We brengen je doel en markt scherp in beeld.' },
@@ -15,6 +17,7 @@ const STEPS = [
 /** Shared, light, extensive template for the four service pages. */
 export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
   const s = SERVICES[slug]
+  const x = EXTRAS[slug]
 
   return (
     <>
@@ -121,19 +124,76 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* how we approach it (per service) */}
+        <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-28 lg:px-16">
+          <Reveal delay={0.05}>
+            <h2 className="font-display text-2xl font-semibold md:text-3xl">Zo pakken wij dit aan</h2>
+          </Reveal>
+          <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3">
+            {x.why.map((w, i) => (
+              <Reveal key={w.title} delay={i * 0.08}>
+                <span className="font-accent text-3xl italic text-emerald">{`0${i + 1}`}</span>
+                <h3 className="mt-3 font-display text-xl font-semibold">{w.title}</h3>
+                <p className="mt-3 font-sans text-base leading-relaxed text-near-black/60">{w.desc}</p>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* per-service review (green) */}
+        <section
+          className="relative overflow-hidden py-24 text-cream md:py-32"
+          style={{
+            backgroundImage:
+              'radial-gradient(60% 60% at 25% 0%, rgba(79,216,155,0.25), transparent 60%), linear-gradient(160deg, #0F5C4D 0%, #08120F 100%)',
+          }}
+        >
+          <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
+            <div className="mb-7 flex justify-center gap-1 text-lime-bright">
+              {[0, 1, 2, 3, 4].map((st) => (
+                <svg key={st} viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
+                  <path d="M12 2l2.9 6.3 6.8.6-5.1 4.5 1.5 6.7L12 17.8 5.9 20.6l1.5-6.7L2.3 8.9l6.8-.6L12 2Z" />
+                </svg>
+              ))}
+            </div>
+            <Reveal>
+              <blockquote className="text-balance font-display text-[clamp(1.6rem,4vw,3rem)] font-semibold leading-[1.15] text-cream">
+                {x.review.quote}
+              </blockquote>
+            </Reveal>
+            <div className="mt-8 flex items-center justify-center gap-3">
+              <span className="grid h-12 w-12 place-items-center rounded-full bg-mint/20 font-display text-lg font-semibold text-lime-bright ring-1 ring-mint/30">
+                {x.review.initials}
+              </span>
+              <div className="text-left">
+                <div className="font-sans font-semibold text-cream">{x.review.name}</div>
+                <div className="font-sans text-sm text-cream/55">{x.review.role}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA — centred, gradient, animated button */}
         <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 lg:px-16">
           <Reveal>
-            <div className="flex flex-col items-start gap-6 rounded-3xl bg-emerald-deep p-10 text-cream md:flex-row md:items-center md:justify-between md:p-14">
-              <h2 className="max-w-xl text-balance font-display text-2xl font-semibold md:text-4xl">
+            <div
+              className="flex flex-col items-center gap-7 rounded-3xl p-10 text-center text-cream md:p-16"
+              style={{
+                backgroundImage:
+                  'radial-gradient(70% 90% at 50% 0%, rgba(79,216,155,0.32), transparent 60%), linear-gradient(160deg, #0F5C4D 0%, #0A3329 100%)',
+              }}
+            >
+              <h2 className="max-w-xl text-balance font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold">
                 Klaar om hiermee te <Accent>klimmen</Accent>?
               </h2>
               <Link
                 to="/contact"
-                className="group inline-flex shrink-0 items-center gap-2 rounded-xl bg-gradient-to-r from-mint to-lime-bright px-8 py-4 font-sans text-base font-semibold text-emerald-deep transition-transform duration-300 hover:scale-[1.03]"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-mint to-lime-bright px-8 py-4 font-sans text-base font-semibold text-emerald-deep shadow-lg shadow-mint/30 transition-transform duration-300 hover:scale-[1.03]"
               >
-                Start jouw project
-                <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+                <BorderBeam rx={12} />
+                <span className="relative z-10">Start jouw project</span>
+                <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+                <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
               </Link>
             </div>
           </Reveal>

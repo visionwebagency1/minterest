@@ -106,7 +106,7 @@ export function Showcase() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2">
+        <div className="mt-16 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-14">
           {PROJECTS.map((p, i) => (
             <motion.div
               key={p.name}
@@ -135,12 +135,12 @@ export function Showcase() {
                   </div>
                 </motion.div>
               </Link>
-              <div className="mt-5 flex items-center justify-between">
+              <div className="mt-4 flex items-center justify-between gap-2 md:mt-5">
                 <div>
-                  <h3 className="font-display text-xl font-semibold md:text-2xl">{p.name}</h3>
-                  <p className="mt-1 font-sans text-sm text-near-black/50">{p.cat}</p>
+                  <h3 className="font-display text-base font-semibold md:text-2xl">{p.name}</h3>
+                  <p className="mt-1 font-sans text-xs text-near-black/50 md:text-sm">{p.cat}</p>
                 </div>
-                <span className="font-sans text-sm text-emerald-deep">Bekijk project &nearr;</span>
+                <span className="hidden font-sans text-sm text-emerald-deep sm:inline">Bekijk project &nearr;</span>
               </div>
             </motion.div>
           ))}

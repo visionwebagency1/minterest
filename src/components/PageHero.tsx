@@ -36,7 +36,7 @@ export function PageHero({
       {/* faint M watermark */}
       <svg
         viewBox="-1.75 -1 3.5 2"
-        className="pointer-events-none absolute -right-10 top-1/2 hidden h-[120%] -translate-y-1/2 opacity-[0.06] md:block"
+        className="pointer-events-none absolute -right-12 top-1/2 h-[80%] -translate-y-1/2 opacity-[0.08] md:-right-10 md:h-[120%] md:opacity-[0.06]"
         aria-hidden="true"
       >
         <path d={M_PATH} transform="scale(1,-1)" fill="#4FD89B" />

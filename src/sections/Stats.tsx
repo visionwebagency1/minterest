@@ -59,7 +59,7 @@ export function Stats() {
             <Reveal
               key={s.label}
               delay={i * 0.08}
-              className={i % 2 === 1 ? 'lg:mt-10' : ''}
+              className={`text-center md:text-left ${i % 2 === 1 ? 'lg:mt-10' : ''}`}
             >
               <div className="font-display text-[clamp(3rem,7vw,5.5rem)] font-semibold leading-none tracking-tight text-emerald">
                 <CountUp to={s.to} decimals={s.decimals} suffix={s.suffix} />
