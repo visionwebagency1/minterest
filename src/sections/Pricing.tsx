@@ -143,7 +143,7 @@ export function Pricing() {
                   to="/start"
                   className={`mt-9 inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 font-sans text-sm font-semibold transition-transform duration-300 hover:scale-[1.02] ${
                     p.popular
-                      ? 'bg-gradient-to-r from-mint to-lime-bright text-emerald-deep'
+                      ? 'bg-gradient-to-r from-emerald to-emerald-deep text-cream ring-1 ring-mint/40'
                       : 'bg-emerald-deep text-cream'
                   }`}
                 >

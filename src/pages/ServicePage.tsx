@@ -219,7 +219,7 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
               </h2>
               <Link
                 to="/start"
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-mint to-lime-bright px-8 py-4 font-sans text-base font-semibold text-emerald-deep shadow-lg shadow-mint/30 transition-transform duration-300 hover:scale-[1.03]"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-emerald-deep px-8 py-4 font-sans text-base font-semibold text-cream shadow-lg shadow-emerald/40 transition-transform duration-300 hover:scale-[1.03]"
               >
                 <BorderBeam rx={12} />
                 <span className="relative z-10">Start jouw project</span>
