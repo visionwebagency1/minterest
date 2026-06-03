@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#0A1512"/>
+  <!-- Three forward-leaning ascending bars = the Minterest M -->
+  <g fill="none" stroke-linecap="round" stroke-width="3.5">
+    <path d="M8 24 L11 14" stroke="#0F5C4D"/>
+    <path d="M14 24 L18 11" stroke="#1FA67A"/>
+    <path d="M20 24 L25 8" stroke="#4FD89B"/>
+  </g>
+</svg>

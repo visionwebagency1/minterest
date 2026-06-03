@@ -1,0 +1,216 @@
+import { motion } from 'motion/react'
+
+/**
+ * Hero HTML overlay above the WebGL canvas — editorial split layout:
+ *   · desktop: copy column on the LEFT, the 3D glass-M lives on the RIGHT
+ *     (MShapes pushes itself right on wide viewports) so they never overlap.
+ *   · mobile: copy stacks below the M, centred.
+ *
+ * Anatomy: floating top bar · indexed eyebrow · big headline with italic
+ * Fraunces accent words · supporting subline · two CTAs · a trust/stats row ·
+ * a fixed contact dock on the right edge · a minimal scroll cue.
+ *
+ * The container is pointer-events-none so the canvas keeps the mouse; only the
+ * interactive bits re-enable pointer events.
+ */
+
+const EASE = [0.22, 1, 0.36, 1] as const
+
+const group = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.11, delayChildren: 0.25 } },
+}
+const rise = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.75, ease: EASE } },
+}
+
+// Editorial accent word: italic Fraunces serif in lime with a soft underline.
+function Accent({ children }: { children: string }) {
+  return (
+    <span className="font-accent italic font-medium text-lime-accent underline decoration-mint/40 decoration-[3px] underline-offset-[0.14em]">
+      {children}
+    </span>
+  )
+}
+
+// Social-proof figures (placeholders — swap for real numbers).
+const STATS = [
+  { value: '5.0★', label: 'Beoordeling' },
+  { value: '50+', label: 'Projecten' },
+  { value: '1.5M+', label: 'Bereik' },
+]
+
+export function HeroContent() {
+  return (
+    <>
+      {/* Main content — mobile: copy on TOP, M + orbit below. Desktop: copy on
+          the left, M on the right (vertically centred). */}
+      <div className="pointer-events-none absolute inset-0 z-10 flex items-start pt-[16vh] md:items-center md:pt-0">
+        {/* Legibility scrim: stronger on the left (desktop) / top (mobile). */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-near-black/85 via-near-black/45 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-near-black/80 to-transparent md:hidden" />
+
+        <div className="relative mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-10 px-[clamp(1.5rem,5vw,5rem)] md:grid-cols-2 md:gap-14">
+          <motion.div
+            variants={group}
+            initial="hidden"
+            animate="show"
+            className="text-center md:text-left"
+          >
+            {/* Indexed eyebrow */}
+            <motion.div
+              variants={rise}
+              className="flex items-center justify-center gap-3 md:justify-start"
+            >
+              <span className="h-px w-10 bg-mint/50" />
+              <span className="font-sans text-xs uppercase tracking-[0.28em] text-white/55">
+                [01] Digitaal groeibureau
+              </span>
+            </motion.div>
+
+            {/* Headline */}
+            <motion.h1
+              variants={rise}
+              className="mt-6 font-display text-[2.3rem] font-semibold leading-[1.04] tracking-tight text-white text-balance sm:text-5xl md:text-6xl lg:text-[4.75rem]"
+            >
+              Where <Accent>interest</Accent>
+              <br />
+              becomes your <Accent>growth</Accent>.
+            </motion.h1>
+
+            {/* Subline */}
+            <motion.p
+              variants={rise}
+              className="mx-auto mt-7 max-w-md font-sans text-base leading-relaxed text-white/65 md:mx-0 md:text-lg"
+            >
+              Websites, branding, video en influencer marketing, gebouwd om
+              aandacht om te zetten in groei die blijft stijgen.
+            </motion.p>
+
+            {/* Two CTAs — squared (header style), centred on mobile */}
+            <motion.div
+              variants={rise}
+              className="mt-9 flex flex-row flex-wrap justify-center gap-3 md:justify-start"
+            >
+              {/* Primary: gradient fill + sweeping shimmer */}
+              <a
+                href="#contact"
+                className="group pointer-events-auto relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-3.5 font-sans text-sm font-medium text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] lg:px-9 lg:py-4 lg:text-base"
+              >
+                <span className="relative z-10">Start jouw project</span>
+                <svg
+                  className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 L17 7" />
+                  <path d="M8 7 H17 V16" />
+                </svg>
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+              </a>
+
+              {/* Secondary: dark glass (matches the header CTA) */}
+              <a
+                href="#diensten"
+                className="group pointer-events-auto relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl border border-white/10 bg-white/5 px-7 py-3.5 font-sans text-sm font-medium text-white backdrop-blur-md transition-colors duration-300 hover:border-mint/40 lg:px-9 lg:py-4 lg:text-base"
+              >
+                <span className="relative z-10 h-1.5 w-1.5 bg-lime-accent transition-transform duration-300 group-hover:rotate-45" />
+                <span className="relative z-10">Onze diensten</span>
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-mint/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+              </a>
+            </motion.div>
+
+            {/* Trust / stats row — single line, side by side */}
+            <motion.div
+              variants={rise}
+              className="mt-12 flex items-center justify-center gap-4 md:justify-start md:gap-6"
+            >
+              {STATS.map((s, i) => (
+                <div key={s.label} className="flex items-center gap-4 md:gap-6">
+                  {i > 0 && (
+                    <span className="h-8 w-px bg-white/15" aria-hidden="true" />
+                  )}
+                  <span className="flex items-baseline gap-1.5 whitespace-nowrap">
+                    <span className="font-display text-xl font-semibold text-mint">
+                      {s.value}
+                    </span>
+                    <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-white/45 sm:text-xs">
+                      {s.label}
+                    </span>
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Right column: the 3D M shows through here (canvas behind). */}
+          <div className="hidden md:block" aria-hidden="true" />
+        </div>
+      </div>
+
+      {/* Fixed contact dock (desktop) */}
+      <motion.div
+        initial={{ opacity: 0, x: 16 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, ease: EASE, delay: 1 }}
+        className="pointer-events-none fixed right-5 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-3 lg:flex"
+      >
+        {[
+          {
+            label: 'WhatsApp',
+            href: 'https://wa.me/',
+            path: 'M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.7.8-.9 1.7-.6 2.9.5 1.9 1.8 3.4 3.7 4.4 1.7.9 2.5.8 3.4.7.5-.1 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.1l-.4-.2Z',
+          },
+          {
+            label: 'Bel ons',
+            href: 'tel:+31',
+            path: 'M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11 11 0 0 0 3.5.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.5a1 1 0 0 1-.3 1l-2.2 2.3Z',
+          },
+          {
+            label: 'Chat',
+            href: '#contact',
+            path: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1Z',
+          },
+        ].map((c) => (
+          <a
+            key={c.label}
+            href={c.href}
+            aria-label={c.label}
+            className="pointer-events-auto grid h-11 w-11 place-items-center rounded-xl border border-white/12 bg-white/5 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-mint/50 hover:bg-mint/15 hover:text-white"
+          >
+            <svg
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d={c.path} />
+            </svg>
+          </a>
+        ))}
+      </motion.div>
+
+      {/* Scroll cue */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.2 }}
+        className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center"
+      >
+        <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/20 p-1">
+          <motion.span
+            className="h-1.5 w-1.5 rounded-full bg-mint"
+            animate={{ y: [0, 12, 0], opacity: [1, 0.2, 1] }}
+            transition={{ duration: 1.8, ease: 'easeInOut', repeat: Infinity }}
+          />
+        </span>
+      </motion.div>
+    </>
+  )
+}

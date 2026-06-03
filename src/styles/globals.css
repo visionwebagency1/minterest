@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens — Minterest                                          */
+/*  No neutral grey: only green-tinted darks for shadow/depth.         */
+/* ------------------------------------------------------------------ */
+:root {
+  --emerald-deep: #0f5c4d;
+  --emerald: #1fa67a;
+  --mint: #4fd89b;
+  --lime-accent: #7fe3a8;
+  --cream: #f4f1ea;
+  --near-black: #0a1512;
+
+  --font-display: 'Clash Display', system-ui, sans-serif;
+  --font-body: 'Satoshi', system-ui, sans-serif;
+  --font-logo: 'Poppins', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--near-black);
+    color: var(--cream);
+    font-family: var(--font-body);
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.05;
+  }
+
+  /* Lenis smooth-scroll baseline */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Flowing brand gradient for accent words (emerald → mint → lime).   */
+/*  The gradient slowly slides so the accent word feels alive.         */
+/* ------------------------------------------------------------------ */
+.text-gradient-flow {
+  background-image: linear-gradient(
+    100deg,
+    var(--emerald) 0%,
+    var(--mint) 30%,
+    var(--lime-accent) 50%,
+    var(--mint) 70%,
+    var(--emerald) 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-flow 7s ease-in-out infinite;
+}
+@keyframes gradient-flow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .text-gradient-flow {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Grain / noise overlay (applied globally, very subtle)             */
+/* ------------------------------------------------------------------ */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.015;
+  /* Tiled SVG fractal noise — crisp, no external asset */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
