@@ -173,7 +173,7 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
           </div>
         </section>
 
-        {/* CTA — centred, gradient, animated button */}
+        {/* CTA: centred, gradient, animated button */}
         <section className="mx-auto max-w-7xl px-6 py-24 md:px-10 lg:px-16">
           <Reveal>
             <div
