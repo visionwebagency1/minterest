@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -15,12 +15,13 @@ export function Reveal({
   className?: string
   as?: 'div' | 'li' | 'span'
 }) {
+  const reduce = useReducedMotion()
   const MotionTag = motion[as]
   return (
     <MotionTag
       className={className}
-      initial={{ opacity: 0, y: 26 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduce ? false : { opacity: 0, y: 26 }}
+      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.75, ease: EASE, delay }}
     >

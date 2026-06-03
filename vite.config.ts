@@ -10,4 +10,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Split heavy vendors so the main bundle stays cacheable and small.
+        manualChunks: {
+          three: ['three', '@react-three/fiber', '@react-three/drei', '@react-three/postprocessing'],
+          motion: ['motion', 'gsap'],
+          router: ['react-router-dom'],
+        },
+      },
+    },
+  },
 })
