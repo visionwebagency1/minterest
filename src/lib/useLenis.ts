@@ -32,7 +32,18 @@ export function useLenis() {
     gsap.ticker.add(onTick)
     gsap.ticker.lagSmoothing(0)
 
+    // Re-measure pinned/scrubbed triggers once the web fonts have swapped in and
+    // once everything has loaded. Font-swap reflow shifts heading heights, which
+    // otherwise leaves ScrollTrigger start/end positions stale and makes pinned
+    // sections jump (a common scroll-flicker source).
+    const refresh = () => ScrollTrigger.refresh()
+    if (typeof document !== 'undefined' && document.fonts?.ready) {
+      document.fonts.ready.then(refresh)
+    }
+    window.addEventListener('load', refresh)
+
     return () => {
+      window.removeEventListener('load', refresh)
       gsap.ticker.remove(onTick)
       lenis.destroy()
       delete (window as unknown as { __lenis?: Lenis }).__lenis

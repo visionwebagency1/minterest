@@ -28,8 +28,18 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
       if (start === null) start = now
       const t = Math.min((now - start) / DURATION_MS, 1)
       setProgress(easeOutCubic(t))
-      if (t < 1) raf = requestAnimationFrame(tick)
-      else setTimeout(onComplete, 500)
+      if (t < 1) {
+        raf = requestAnimationFrame(tick)
+      } else {
+        // Only reveal once the web fonts have actually swapped in, so the hero
+        // doesn't flash unstyled text / reflow the moment the preloader lifts.
+        const finish = () => setTimeout(onComplete, 400)
+        if (typeof document !== 'undefined' && document.fonts?.ready) {
+          document.fonts.ready.then(finish)
+        } else {
+          finish()
+        }
+      }
     }
     raf = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(raf)

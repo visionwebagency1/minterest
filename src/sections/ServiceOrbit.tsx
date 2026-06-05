@@ -125,7 +125,7 @@ export function ServiceOrbit() {
               }}
             >
               <motion.div
-                className="flex items-center gap-2 whitespace-nowrap rounded-full border border-white/60 bg-white/75 px-3.5 py-1.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 backdrop-blur-xl md:gap-2.5 md:px-6 md:py-3"
+                className="flex items-center gap-2 whitespace-nowrap rounded-full border border-white/60 bg-white/90 px-3.5 py-1.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 md:gap-2.5 md:px-6 md:py-3"
                 animate={FLOATS[i]}
                 transition={{
                   duration: 4 + i,
