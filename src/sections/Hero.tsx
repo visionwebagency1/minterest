@@ -55,13 +55,21 @@ export function Hero() {
         <ServiceOrbit />
       </motion.div>
 
+      {/* Mobile legibility: ONE smooth top-down scrim across the whole hero, so
+          the copy reads well and there is no hard edge / seam between the copy
+          area and the M below — they share one continuous background. */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[5] bg-gradient-to-b from-near-black/85 via-near-black/25 to-transparent md:hidden"
+        aria-hidden="true"
+      />
+
       {/* Copy + CTAs + stats. Flows at the top on mobile (over the canvas);
           absolute overlay on desktop. */}
       <HeroContent />
 
       {/* Mobile only: reserve the lower zone where the M + orbit sit, so the copy
           never overlaps them. Desktop centres the M in the viewport instead. */}
-      <div className="h-[420px] md:hidden" aria-hidden="true" />
+      <div className="h-[450px] md:hidden" aria-hidden="true" />
     </section>
   )
 }

@@ -76,7 +76,7 @@ export function ServiceOrbit() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 top-[66%] z-10 -translate-x-1/2 -translate-y-1/2 md:left-[67%] md:top-1/2"
+      className="pointer-events-none absolute left-1/2 top-[72%] z-10 -translate-x-1/2 -translate-y-1/2 md:left-[67%] md:top-1/2"
     >
      <motion.div className="relative" style={{ x, y }}>
       {/* Dashed orbit path */}

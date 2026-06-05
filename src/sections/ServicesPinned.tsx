@@ -152,15 +152,15 @@ export function ServicesPinned() {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Render half (darker solid panel so the light UI pops).
-                    overflow-hidden keeps the mini-UI inside its box on mobile so
-                    it never spills over the text below. */}
-                <div className="relative h-[26vh] w-full shrink-0 overflow-hidden border-b border-white/10 bg-[#082019] md:h-auto md:border-b-0 md:border-r">
+                {/* Render half (darker solid panel so the light UI pops). Tall
+                    enough on mobile (min 300px) that the full mini-UI fits — no
+                    clipping — and overflow-hidden keeps it inside its box. */}
+                <div className="relative h-[36vh] min-h-[300px] w-full shrink-0 overflow-hidden border-b border-white/10 bg-[#082019] md:h-auto md:min-h-0 md:border-b-0 md:border-r">
                   <Render />
                 </div>
 
                 {/* Text half */}
-                <div className="flex min-h-0 flex-1 flex-col justify-center gap-4 p-6 md:gap-7 md:p-14">
+                <div className="flex min-h-0 flex-1 flex-col justify-center gap-3 p-5 md:gap-7 md:p-14">
                   <div className="font-mono text-sm tracking-widest text-mint">
                     {s.no} <span className="text-white/30">/ 06</span>
                   </div>
@@ -184,7 +184,7 @@ export function ServicesPinned() {
                   {/* Animated CTA (border-beam, like the header) */}
                   <Link
                     to={s.to}
-                    className="group relative mt-6 inline-flex w-fit items-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-mint/30 transition-transform duration-300 hover:scale-[1.03]"
+                    className="group relative mt-4 inline-flex w-fit items-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-3.5 font-sans text-base font-semibold text-near-black shadow-lg shadow-mint/30 transition-transform duration-300 hover:scale-[1.03] md:mt-6 md:px-8 md:py-4"
                   >
                     <BorderBeam rx={12} />
                     <span className="relative z-10">Ontdek nu</span>
