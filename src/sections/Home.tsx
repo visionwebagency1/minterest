@@ -1,6 +1,7 @@
 import { Hero } from './Hero'
 import { LogoMarquee } from './LogoMarquee'
 import { IntroStatement } from './IntroStatement'
+import { ServicesIntro } from './ServicesIntro'
 import { ServicesPinned } from './ServicesPinned'
 import { Showcase } from './Showcase'
 import { Approach } from './Approach'
@@ -21,6 +22,7 @@ export function Home() {
       <Hero />
       <LogoMarquee />
       <IntroStatement />
+      <ServicesIntro />
       <ServicesPinned />
       <Showcase />
       <Approach />

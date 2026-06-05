@@ -105,6 +105,8 @@ export function ServicesPinned() {
           start: 'top top',
           end: () => '+=' + window.innerHeight * cards.length,
           pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
           scrub: true,
         },
       })

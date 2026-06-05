@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AnimatePresence } from 'motion/react'
-import { useLenis } from '@/lib/useLenis'
+import { useScrollSetup } from '@/lib/useLenis'
 import { GrainOverlay } from '@/components/GrainOverlay'
 import { Preloader } from '@/components/Preloader'
 import { Header } from '@/components/Header'
@@ -16,8 +16,8 @@ import { Audit } from '@/pages/Audit'
 import { NotFound } from '@/pages/NotFound'
 
 export default function App() {
-  // App-wide smooth scroll.
-  useLenis()
+  // Native scroll + ScrollTrigger refresh on font/asset load.
+  useScrollSetup()
 
   const [loaded, setLoaded] = useState(false)
 
