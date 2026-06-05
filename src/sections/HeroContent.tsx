@@ -127,21 +127,22 @@ export function HeroContent() {
               </a>
             </motion.div>
 
-            {/* Trust / stats row — single line, side by side */}
+            {/* Trust / stats row — compact, always on one line (stacked on
+                mobile, inline on desktop) */}
             <motion.div
               variants={rise}
-              className="mt-12 flex items-center justify-center gap-4 md:justify-start md:gap-6"
+              className="mt-10 flex items-center justify-center gap-3 md:mt-12 md:justify-start md:gap-6"
             >
               {STATS.map((s, i) => (
-                <div key={s.label} className="flex items-center gap-4 md:gap-6">
+                <div key={s.label} className="flex items-center gap-3 md:gap-6">
                   {i > 0 && (
-                    <span className="h-8 w-px bg-white/15" aria-hidden="true" />
+                    <span className="h-7 w-px bg-white/15 md:h-8" aria-hidden="true" />
                   )}
-                  <span className="flex items-baseline gap-1.5 whitespace-nowrap">
-                    <span className="font-display text-xl font-semibold text-mint">
+                  <span className="flex flex-col items-center gap-0.5 whitespace-nowrap md:flex-row md:items-baseline md:gap-1.5">
+                    <span className="font-display text-base font-semibold text-mint sm:text-lg md:text-xl">
                       {s.value}
                     </span>
-                    <span className="font-sans text-[11px] uppercase tracking-[0.18em] text-white/45 sm:text-xs">
+                    <span className="font-sans text-[9px] uppercase tracking-[0.14em] text-white/45 sm:text-[11px] sm:tracking-[0.18em]">
                       {s.label}
                     </span>
                   </span>
@@ -197,21 +198,6 @@ export function HeroContent() {
         ))}
       </motion.div>
 
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
-        className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center"
-      >
-        <span className="flex h-9 w-5 items-start justify-center rounded-full border border-white/20 p-1">
-          <motion.span
-            className="h-1.5 w-1.5 rounded-full bg-mint"
-            animate={{ y: [0, 12, 0], opacity: [1, 0.2, 1] }}
-            transition={{ duration: 1.8, ease: 'easeInOut', repeat: Infinity }}
-          />
-        </span>
-      </motion.div>
     </>
   )
 }
