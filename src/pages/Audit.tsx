@@ -4,6 +4,7 @@ import { Accent } from '@/components/Accent'
 import { PageHero } from '@/components/PageHero'
 import { BorderBeam } from '@/components/BorderBeam'
 import { Footer } from '@/sections/Footer'
+import { useLeadForm } from '@/lib/useLeadForm'
 
 const CHECKS = [
   { title: 'Snelheid', desc: 'Laadtijd en Core Web Vitals, waar je bezoekers afhaken.' },
@@ -25,7 +26,13 @@ const field =
 
 export function Audit() {
   const [url, setUrl] = useState('')
-  const [sent, setSent] = useState(false)
+  const { isSubmitting, isSuccess, error, submit } = useLeadForm('audit')
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const fd = new FormData(e.currentTarget)
+    submit({ url, email: fd.get('email') })
+  }
 
   return (
     <>
@@ -44,13 +51,10 @@ export function Audit() {
         <section className="mx-auto max-w-3xl px-6 py-20 md:px-10 md:py-24 lg:px-16">
           <Reveal>
             <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                setSent(true)
-              }}
+              onSubmit={handleSubmit}
               className="rounded-3xl border border-emerald-deep/10 bg-white p-8 shadow-[0_24px_60px_rgba(15,92,77,0.1)] md:p-10"
             >
-              {sent ? (
+              {isSuccess ? (
                 <div className="flex min-h-[14rem] flex-col items-center justify-center text-center">
                   <span className="font-accent text-3xl italic text-emerald">Onderweg!</span>
                   <p className="mt-4 max-w-sm font-sans text-base text-near-black/60">
@@ -67,16 +71,20 @@ export function Audit() {
                     className={field}
                     required
                   />
-                  <input type="email" placeholder="E-mail voor je rapport" className={field} required />
+                  <input name="email" type="email" placeholder="E-mail voor je rapport" className={field} required />
                   <button
                     type="submit"
-                    className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.02]"
+                    disabled={isSubmitting}
+                    className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                   >
                     <BorderBeam rx={12} />
-                    <span className="relative z-10">Audit aanvragen</span>
-                    <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+                    <span className="relative z-10">{isSubmitting ? 'Versturen…' : 'Audit aanvragen'}</span>
+                    {!isSubmitting && <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>}
                     <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
                   </button>
+                  {error && (
+                    <p role="alert" className="text-center font-sans text-sm text-red-600">{error}</p>
+                  )}
                   <p className="text-center font-sans text-xs uppercase tracking-[0.2em] text-near-black/40">
                     Binnen 24 uur · gratis · geen verplichtingen
                   </p>

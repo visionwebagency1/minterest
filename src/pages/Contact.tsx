@@ -5,11 +5,24 @@ import { PageHero } from '@/components/PageHero'
 import { BorderBeam } from '@/components/BorderBeam'
 import { Footer } from '@/sections/Footer'
 import { SERVICE_OPTIONS } from '@/components/serviceIcons'
+import { useLeadForm } from '@/lib/useLeadForm'
 
 /** Contact page: dark hero + light body with an interest selector and a form. */
 export function Contact() {
-  const [sent, setSent] = useState(false)
+  const { isSubmitting, isSuccess, error, submit } = useLeadForm('contact')
   const [interest, setInterest] = useState<string[]>([])
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const fd = new FormData(e.currentTarget)
+    submit({
+      name: fd.get('name'),
+      email: fd.get('email'),
+      company: fd.get('company'),
+      message: fd.get('message'),
+      interest,
+    })
+  }
 
   const toggle = (key: string) =>
     setInterest((p) => (p.includes(key) ? p.filter((k) => k !== key) : [...p, key]))
@@ -62,13 +75,10 @@ export function Contact() {
           {/* right: form */}
           <Reveal delay={0.1}>
             <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                setSent(true)
-              }}
+              onSubmit={handleSubmit}
               className="rounded-3xl border border-emerald-deep/10 bg-white p-8 shadow-[0_24px_60px_rgba(15,92,77,0.1)] md:p-10"
             >
-              {sent ? (
+              {isSuccess ? (
                 <div className="flex min-h-[22rem] flex-col items-center justify-center text-center">
                   <span className="font-accent text-3xl italic text-emerald">Dank je!</span>
                   <p className="mt-4 max-w-xs font-sans text-sm text-near-black/60">
@@ -101,20 +111,24 @@ export function Contact() {
                     </div>
                   </div>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <input className={field} placeholder="Naam" required />
-                    <input className={field} type="email" placeholder="E-mail" required />
+                    <input name="name" className={field} placeholder="Naam" required />
+                    <input name="email" className={field} type="email" placeholder="E-mail" required />
                   </div>
-                  <input className={field} placeholder="Bedrijf of website" />
-                  <textarea className={`${field} min-h-[8rem] resize-none`} placeholder="Je bericht" required />
+                  <input name="company" className={field} placeholder="Bedrijf of website" />
+                  <textarea name="message" className={`${field} min-h-[8rem] resize-none`} placeholder="Je bericht" required />
                   <button
                     type="submit"
-                    className="group relative mt-2 inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.02]"
+                    disabled={isSubmitting}
+                    className="group relative mt-2 inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                   >
                     <BorderBeam rx={12} />
-                    <span className="relative z-10">Verstuur bericht</span>
-                    <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+                    <span className="relative z-10">{isSubmitting ? 'Versturen…' : 'Verstuur bericht'}</span>
+                    {!isSubmitting && <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>}
                     <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
                   </button>
+                  {error && (
+                    <p role="alert" className="font-sans text-sm text-red-600">{error}</p>
+                  )}
                 </div>
               )}
             </form>

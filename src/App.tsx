@@ -13,6 +13,7 @@ import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
 import { Start } from '@/pages/Start'
 import { Audit } from '@/pages/Audit'
+import { NotFound } from '@/pages/NotFound'
 
 export default function App() {
   // App-wide smooth scroll.
@@ -42,8 +43,8 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/start" element={<Start />} />
         <Route path="/website-audit" element={<Audit />} />
-        {/* Fallback to Home for anything unmatched. */}
-        <Route path="*" element={<Home />} />
+        {/* Dedicated 404 for anything unmatched. */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
