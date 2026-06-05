@@ -12,12 +12,14 @@ import { motion, useMotionValue, useSpring } from 'motion/react'
  * on the right); a tighter, faster ring centred over the M on mobile.
  */
 
-const SERVICES = [
+const SERVICES_DESKTOP = [
   'Website & Webshops',
   'Design & branding',
   'Short video',
   'Influencer Marketing',
 ]
+// Shorter labels on mobile so the pills always fit within the screen width.
+const SERVICES_MOBILE = ['Websites', 'Branding', 'Short video', 'Influencer']
 
 // Each pill drifts in a different direction for a livelier, less mechanical feel.
 const FLOATS = [
@@ -31,10 +33,10 @@ function useIsDesktop() {
   const [desktop, setDesktop] = useState(
     () =>
       typeof window !== 'undefined' &&
-      window.matchMedia('(min-width: 1024px)').matches,
+      window.matchMedia('(min-width: 768px)').matches,
   )
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1024px)')
+    const mq = window.matchMedia('(min-width: 768px)')
     const onChange = () => setDesktop(mq.matches)
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)
@@ -45,7 +47,8 @@ function useIsDesktop() {
 export function ServiceOrbit() {
   const desktop = useIsDesktop()
 
-  const radius = desktop ? 195 : 124
+  const SERVICES = desktop ? SERVICES_DESKTOP : SERVICES_MOBILE
+  const radius = desktop ? 195 : 104
   const orbitSeconds = desktop ? 42 : 24
   const pad = 70
 
@@ -73,7 +76,7 @@ export function ServiceOrbit() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-1/2 top-[74%] z-10 -translate-x-1/2 -translate-y-1/2 lg:left-[67%] lg:top-1/2"
+      className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 md:left-[67%]"
     >
      <motion.div className="relative" style={{ x, y }}>
       {/* Dashed orbit path */}
@@ -122,7 +125,7 @@ export function ServiceOrbit() {
               }}
             >
               <motion.div
-                className="flex items-center gap-2.5 whitespace-nowrap rounded-full border border-white/60 bg-white/75 px-5 py-2.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 backdrop-blur-xl lg:px-6 lg:py-3"
+                className="flex items-center gap-2 whitespace-nowrap rounded-full border border-white/60 bg-white/75 px-3.5 py-1.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 backdrop-blur-xl md:gap-2.5 md:px-6 md:py-3"
                 animate={FLOATS[i]}
                 transition={{
                   duration: 4 + i,
@@ -130,8 +133,8 @@ export function ServiceOrbit() {
                   ease: 'easeInOut',
                 }}
               >
-                <span className="h-2 w-2 rounded-full bg-emerald shadow-[0_0_8px_rgba(31,166,122,0.8)]" />
-                <span className="font-sans text-[15px] font-semibold text-emerald-deep lg:text-base">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald shadow-[0_0_8px_rgba(31,166,122,0.8)] md:h-2 md:w-2" />
+                <span className="font-sans text-[12px] font-semibold text-emerald-deep md:text-base">
                   {label}
                 </span>
               </motion.div>

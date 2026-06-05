@@ -74,9 +74,9 @@ function applyBrandGradient(geo: THREE.BufferGeometry) {
   geo.setAttribute('color', new THREE.BufferAttribute(colors, 3))
 }
 
-// Resting world-Y on mobile: in the lower third so the copy stacks ABOVE it
-// (text on top, the M + orbiting pills below).
-const MOBILE_REST_Y = -0.7
+// Resting world-Y on mobile: the M now lives in its own contained stage block
+// below the copy, so it sits centred in that block (orbit pills ring around it).
+const MOBILE_REST_Y = -0.1
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3)
 const easeOutBack = (t: number) => {
   const c1 = 1.70158

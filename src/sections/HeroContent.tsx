@@ -47,7 +47,7 @@ export function HeroContent() {
     <>
       {/* Main content — mobile: copy on TOP, M + orbit below. Desktop: copy on
           the left, M on the right (vertically centred). */}
-      <div className="pointer-events-none absolute inset-0 z-10 flex items-start pt-[16vh] md:items-center md:pt-0">
+      <div className="pointer-events-none relative z-10 flex items-start pt-28 sm:pt-32 md:absolute md:inset-0 md:items-center md:pt-0">
         {/* Legibility scrim: stronger on the left (desktop) / top (mobile). */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-near-black/85 via-near-black/45 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-near-black/80 to-transparent md:hidden" />
