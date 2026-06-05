@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'motion/react'
 import gsap from 'gsap'
@@ -78,12 +78,32 @@ const SERVICES = [
   },
 ]
 
+/** True from the md breakpoint up — where the pinned stacking effect runs. */
+function useIsDesktop() {
+  const [desktop, setDesktop] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(min-width: 768px)').matches,
+  )
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const onChange = () => setDesktop(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+  return desktop
+}
+
 export function ServicesPinned() {
   const sectionRef = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
+  const desktop = useIsDesktop()
+  // On mobile (and reduced-motion) we skip the pinned card-stacking entirely and
+  // fall back to a clean vertical stack, so each card keeps its own full height.
+  const staticLayout = reduce || !desktop
 
   useLayoutEffect(() => {
-    if (reduce) return
+    if (staticLayout) return
 
     // Mobile browsers fire resize when the URL bar shows/hides; ignore it so
     // the pin doesn't jump mid-scroll.
@@ -116,20 +136,20 @@ export function ServicesPinned() {
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [reduce])
+  }, [staticLayout])
 
   return (
     <section
       ref={sectionRef}
       className={
-        reduce ? 'relative py-20' : 'relative h-screen overflow-hidden'
+        staticLayout ? 'relative py-20' : 'relative h-screen overflow-hidden'
       }
       style={{
         backgroundImage:
           'radial-gradient(55% 50% at 12% 18%, rgba(79,216,155,0.18), transparent 60%), radial-gradient(50% 45% at 88% 82%, rgba(31,166,122,0.16), transparent 60%), linear-gradient(180deg, #0A1B16 0%, #EFF1E7 11%, #EFF1E7 100%)',
       }}
     >
-      <div className={reduce ? 'flex flex-col gap-8' : 'relative h-full'}>
+      <div className={staticLayout ? 'flex flex-col gap-8' : 'relative h-full'}>
         {SERVICES.map((s) => {
           const { Render } = s
           return (
@@ -137,7 +157,7 @@ export function ServicesPinned() {
               key={s.no}
               className={
                 'svc-card ' +
-                (reduce
+                (staticLayout
                   ? 'relative px-4'
                   : 'absolute inset-0 flex items-center justify-center p-4 md:p-10')
               }
@@ -149,8 +169,9 @@ export function ServicesPinned() {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Render half (darker solid panel so the light UI pops) */}
-                <div className="relative h-[26vh] shrink-0 border-b border-white/10 bg-[#082019] md:h-auto md:border-b-0 md:border-r">
+                {/* Render half (darker solid panel so the light UI pops). On
+                    mobile it gets its own tall, clipped box ABOVE the text. */}
+                <div className="relative h-[44vh] min-h-[300px] w-full shrink-0 overflow-hidden border-b border-white/10 bg-[#082019] md:h-auto md:min-h-0 md:border-b-0 md:border-r">
                   <Render />
                 </div>
 
