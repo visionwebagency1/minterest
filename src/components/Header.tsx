@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { M_PATH } from '@/three/mPath'
 import { BorderBeam } from './BorderBeam'
-import { WebIcon, BrandIcon, VideoIcon, NetworkIcon } from './serviceIcons'
+import { WebIcon, BrandIcon, VideoIcon, AiVideoIcon, SeoIcon, NetworkIcon } from './serviceIcons'
 
 /**
  * Floating glass header + a slide-down navigation panel:
@@ -18,6 +18,8 @@ const SERVICES = [
   { label: 'Website & webshops', desc: 'Snelle sites die verkopen', to: '/websites', Icon: WebIcon },
   { label: 'Design & branding', desc: 'Een merk dat blijft hangen', to: '/branding', Icon: BrandIcon },
   { label: 'Short video', desc: 'Scroll-stoppende content', to: '/video', Icon: VideoIcon },
+  { label: 'AI video', desc: 'Schaalbare video met AI', to: '/ai-video', Icon: AiVideoIcon },
+  { label: 'SEO', desc: 'Structureel bovenaan in Google', to: '/seo', Icon: SeoIcon },
   { label: 'Influencer marketing', desc: 'Bereik via echte creators', to: '/influencer', Icon: NetworkIcon },
 ]
 

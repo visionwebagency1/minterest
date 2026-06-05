@@ -373,3 +373,157 @@ export function NetworkRender() {
     </div>
   )
 }
+
+/** 05 — AI video: a prompt is typed and a grid of video frames generates itself
+ *  (blur → sharp), each with a scanning sweep, while a progress bar fills. */
+export function AiVideoRender() {
+  const typed = useTypewriter([
+    'productvideo, cinematic…',
+    'merkvideo, mintgroen…',
+    'reel, energiek…',
+  ])
+  const frames = [
+    'from-emerald-deep to-emerald',
+    'from-emerald to-mint',
+    'from-mint to-lime-accent',
+    'from-emerald-deep to-mint',
+  ]
+  return (
+    <div className="grid h-full w-full place-items-center p-7">
+      <motion.div className="w-full max-w-sm" animate={{ y: [0, -9, 0] }} transition={FLOAT(7.5)}>
+        {/* prompt bar */}
+        <div className="mb-3 flex items-center gap-2 rounded-xl border border-mint/30 bg-[#0c241d] px-3 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]">
+          <motion.span
+            className="text-lime-bright"
+            animate={{ rotate: [0, 90, 0], scale: [1, 1.2, 1] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            &#10022;
+          </motion.span>
+          <span className="font-mono text-[10px] text-cream/90">
+            {typed}
+            <motion.span
+              className="ml-px inline-block h-2.5 w-px bg-lime-bright align-middle"
+              animate={{ opacity: [1, 0, 1] }}
+              transition={{ duration: 0.9, repeat: Infinity }}
+            />
+          </span>
+        </div>
+        {/* generating frames */}
+        <div className="grid grid-cols-2 gap-2.5">
+          {frames.map((g, i) => (
+            <motion.div
+              key={i}
+              className={`relative grid aspect-video place-items-center overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br ${g}`}
+              initial={{ opacity: 0.25, filter: 'blur(6px)' }}
+              animate={{
+                opacity: [0.25, 1, 1, 0.25],
+                filter: ['blur(6px)', 'blur(0px)', 'blur(0px)', 'blur(6px)'],
+              }}
+              transition={{ duration: 4, times: [0, 0.3, 0.85, 1], repeat: Infinity, delay: i * 0.5, ease: 'easeInOut' }}
+            >
+              <motion.div
+                className="pointer-events-none absolute inset-x-0 h-1/3 bg-gradient-to-b from-transparent via-lime-bright/40 to-transparent"
+                animate={{ y: ['-120%', '320%'] }}
+                transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.5, ease: 'linear' }}
+              />
+              <span className="relative grid h-7 w-7 place-items-center rounded-full bg-cream/85 text-emerald-deep">
+                <svg viewBox="0 0 24 24" className="ml-0.5 h-3.5 w-3.5" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </span>
+              <span className="absolute left-1.5 top-1.5 font-mono text-[7px] text-cream/80">&#10022; AI</span>
+            </motion.div>
+          ))}
+        </div>
+        {/* progress */}
+        <div className="mt-3 flex items-center gap-2">
+          <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/10">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-emerald to-lime-bright"
+              animate={{ width: ['8%', '100%'] }}
+              transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </div>
+          <span className="font-mono text-[8px] text-cream/60">genereren</span>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
+/** 06 — SEO: a search result for "jouwmerk.nl" climbs from #5 to #1 on a loop
+ *  (real list reorder), the rest of the results easing aside. */
+export function SeoRender() {
+  const [rank, setRank] = useState(5)
+  useEffect(() => {
+    const id = setInterval(() => setRank((r) => (r === 1 ? 5 : r - 1)), 1500)
+    return () => clearInterval(id)
+  }, [])
+
+  const competitors = ['concurrent-a.nl', 'vergelijk-b.nl', 'shop-c.nl', 'merk-d.nl']
+  const rows: { id: string; brand: boolean; d?: string }[] = []
+  let ci = 0
+  for (let pos = 0; pos < 5; pos++) {
+    if (pos === rank - 1) rows.push({ id: 'brand', brand: true })
+    else rows.push({ id: competitors[ci], brand: false, d: competitors[ci++] })
+  }
+
+  return (
+    <div className="grid h-full w-full place-items-center p-8">
+      <motion.div className="w-full max-w-sm" animate={{ y: [0, -9, 0] }} transition={FLOAT(7)}>
+        <div className="overflow-hidden rounded-xl bg-cream shadow-[0_36px_80px_rgba(0,0,0,0.5)]">
+          {/* search bar */}
+          <div className="flex items-center gap-2 border-b border-black/5 bg-black/[0.03] px-3 py-2.5">
+            <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-emerald" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4.3-4.3" />
+            </svg>
+            <span className="font-sans text-[10px] text-emerald-deep/75">beste merk bij jou in de buurt</span>
+          </div>
+          {/* results */}
+          <div className="flex flex-col gap-1.5 p-2.5">
+            {rows.map((row, i) => (
+              <motion.div
+                key={row.id}
+                layout
+                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                className={`flex items-center gap-2 rounded-lg px-2.5 py-2 ${
+                  row.brand
+                    ? 'bg-gradient-to-r from-emerald to-mint shadow-[0_8px_20px_rgba(31,166,122,0.4)]'
+                    : 'bg-black/[0.03]'
+                }`}
+              >
+                <span
+                  className={`grid h-5 w-5 shrink-0 place-items-center rounded-md font-mono text-[9px] font-bold ${
+                    row.brand ? 'bg-cream text-emerald-deep' : 'bg-black/5 text-emerald-deep/45'
+                  }`}
+                >
+                  {i + 1}
+                </span>
+                {row.brand ? (
+                  <>
+                    <span className="h-3 w-3 rounded bg-cream/90" />
+                    <span className="font-display text-[10px] font-bold text-cream">jouwmerk.nl</span>
+                    <span className="ml-auto flex items-center gap-0.5 font-mono text-[8px] font-bold text-cream">
+                      <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 19V5M6 11l6-6 6 6" />
+                      </svg>
+                      stijgt
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald/20" />
+                    <span className="font-sans text-[9px] text-emerald-deep/40">{row.d}</span>
+                    <span className="ml-auto h-1 w-8 rounded-full bg-emerald-deep/10" />
+                  </>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}

@@ -8,6 +8,8 @@ import {
   BrowserRender,
   BrandingRender,
   VideoRender,
+  AiVideoRender,
+  SeoRender,
   NetworkRender,
 } from './serviceRenders'
 
@@ -52,6 +54,22 @@ const SERVICES = [
   },
   {
     no: '04',
+    title: 'AI video',
+    to: '/ai-video',
+    desc: 'Schaalbare videocontent met AI. Snel en eindeloos variabel, van productvideo tot advertentie, zonder cameraploeg.',
+    subs: ['AI-avatars & voice-over', 'Generatieve productvideo', 'Tientallen ad-varianten', 'Mens bewaakt de stijl'],
+    Render: AiVideoRender,
+  },
+  {
+    no: '05',
+    title: 'SEO',
+    to: '/seo',
+    desc: 'Structureel bovenaan in Google. Technische SEO, content die rankt en lokale vindbaarheid die klanten naar je toe brengt.',
+    subs: ['Technische SEO', 'Content die rankt', 'Linkbuilding', 'Lokale vindbaarheid'],
+    Render: SeoRender,
+  },
+  {
+    no: '06',
     title: 'Influencer marketing',
     to: '/influencer',
     desc: 'De juiste makers aan jouw merk koppelen. Wij regelen matching, strategie en content die echt resultaat oplevert.',
@@ -139,7 +157,7 @@ export function ServicesPinned() {
                 {/* Text half */}
                 <div className="flex min-h-0 flex-1 flex-col justify-center gap-4 p-6 md:gap-7 md:p-14">
                   <div className="font-mono text-sm tracking-widest text-mint">
-                    {s.no} <span className="text-white/30">/ 04</span>
+                    {s.no} <span className="text-white/30">/ 06</span>
                   </div>
                   <h3 className="font-display text-[clamp(2rem,4vw,3.75rem)] font-semibold leading-[1.02] tracking-tight text-cream">
                     {s.title}

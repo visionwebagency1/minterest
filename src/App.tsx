@@ -37,6 +37,8 @@ export default function App() {
         <Route path="/websites" element={<ServicePage slug="websites" />} />
         <Route path="/branding" element={<ServicePage slug="branding" />} />
         <Route path="/video" element={<ServicePage slug="video" />} />
+        <Route path="/ai-video" element={<ServicePage slug="aivideo" />} />
+        <Route path="/seo" element={<ServicePage slug="seo" />} />
         <Route path="/influencer" element={<ServicePage slug="influencer" />} />
         <Route path="/work" element={<Work />} />
         <Route path="/about" element={<About />} />

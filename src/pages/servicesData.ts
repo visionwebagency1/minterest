@@ -85,8 +85,52 @@ export const SERVICES: Record<string, Service> = {
       { title: 'Contentkalender', desc: 'Een vast ritme van content dat je kanaal laat groeien.' },
     ],
   },
-  influencer: {
+  aivideo: {
     no: '04',
+    kicker: 'Generatieve video',
+    label: 'AI video',
+    tagline:
+      'Schaalbare videocontent met AI. Snel, betaalbaar en eindeloos variabel, van productvideo tot advertentie, zonder cameraploeg.',
+    intro:
+      'AI maakt video die vroeger *weken* kostte nu in *dagen*. We combineren generatieve tools met menselijke regie, zodat je merk *opvalt* met content die *schaalt*: tientallen varianten, één consistente *stijl*.',
+    features: [
+      { title: 'Van prompt naar video', desc: 'We vertalen je boodschap naar generatieve beelden: avatars, productshots en scènes die er strak uitzien, zonder dure shoot of lange doorlooptijd.', img: 'mint-ai-generate' },
+      { title: 'Eindeloos variëren', desc: 'Tien versies voor tien doelgroepen, in een handomdraai. Ideaal om advertenties te testen en op te schalen wat het écht doet.', img: 'mint-ai-variants' },
+      { title: 'Mens aan het roer', desc: 'AI doet het zware werk, wij bewaken stijl, merk en kwaliteit. Het resultaat voelt nooit als een generieke template, maar als jouw merk.', img: 'mint-ai-direction' },
+    ],
+    deliverables: [
+      { title: 'AI-avatars & voice-over', desc: 'Pratende presentatoren en stemmen in elke taal, zonder acteur of studio.' },
+      { title: 'Generatieve productvideo', desc: 'Je product in scène in talloze settings, zonder fysieke shoot.' },
+      { title: 'Advertentie-varianten', desc: 'Tientallen versies om razendsnel te testen en op te schalen.' },
+      { title: 'Motion & visual effects', desc: 'AI-beelden strak gemonteerd met ritme, tekst en merkstijl.' },
+      { title: 'Scripts & storyboards', desc: 'Eerst de boodschap scherp, dan pas genereren. Geen losse flodders.' },
+      { title: 'Social-ready exports', desc: 'Elk formaat kant-en-klaar voor Reels, TikTok en Shorts.' },
+    ],
+  },
+  seo: {
+    no: '05',
+    kicker: 'Vindbaarheid & groei',
+    label: 'SEO',
+    tagline:
+      'Structureel bovenaan in Google. We bouwen vindbaarheid die blijft, technisch, inhoudelijk en lokaal, zodat klanten jou vinden in plaats van je concurrent.',
+    intro:
+      'Wie bovenaan staat, *wint*. We maken je vindbaar voor de mensen die nú zoeken naar wat jij biedt, met *techniek* die klopt, *content* die rankt en groei die *blijft* staan, ook na elke Google-update.',
+    features: [
+      { title: 'Technisch fundament', desc: 'Snelheid, structuur en schone code waar Google van houdt. Een site die foutloos crawlbaar is en netjes indexeert.', img: 'mint-seo-tech' },
+      { title: 'Content die rankt', desc: 'We schrijven rond de zoekwoorden die jouw klanten echt gebruiken. Geen keyword-stuffing, wel pagina’s die antwoord geven en scoren.', img: 'mint-seo-content' },
+      { title: 'Lokaal & autoriteit', desc: 'Google Bedrijfsprofiel, reviews en kwalitatieve links die je gezag opbouwen. Zo win je je regio en daarna je markt.', img: 'mint-seo-local' },
+    ],
+    deliverables: [
+      { title: 'SEO-audit & strategie', desc: 'Een helder plan op basis van waar je nu staat en waar de groei zit.' },
+      { title: 'Zoekwoordenonderzoek', desc: 'De termen die jouw klanten gebruiken, met echt zoekvolume en intentie.' },
+      { title: 'Technische SEO', desc: 'Snelheid, structuur en indexatie tot in de puntjes geregeld.' },
+      { title: 'Content & on-page', desc: 'Pagina’s geschreven en ingericht om te ranken én te converteren.' },
+      { title: 'Linkbuilding', desc: 'Kwalitatieve verwijzingen die je autoriteit en posities versterken.' },
+      { title: 'Rapportage & posities', desc: 'Maandelijks inzicht in rankings, verkeer en groei die telt.' },
+    ],
+  },
+  influencer: {
+    no: '06',
     kicker: 'Bereik & creators',
     label: 'Influencer marketing',
     tagline:
