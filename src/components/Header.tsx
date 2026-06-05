@@ -82,16 +82,16 @@ export function Header() {
         transition={{ duration: 0.7, ease: EASE, delay: 0.2 }}
         className="fixed inset-x-0 top-4 z-50 flex justify-center px-4"
       >
-        <div className="relative flex items-center gap-2 rounded-2xl border border-white/10 bg-near-black/70 p-2 pl-4 shadow-[0_16px_50px_rgba(10,21,18,0.5)] backdrop-blur-xl">
+        <div className="relative flex w-full items-center justify-between gap-2 rounded-2xl border border-white/10 bg-near-black/70 p-2 pl-3.5 shadow-[0_16px_50px_rgba(10,21,18,0.5)] backdrop-blur-xl sm:w-auto sm:justify-start sm:pl-4">
           <Link
             to="/"
             onClick={close}
-            className="group relative z-10 flex items-center gap-2.5 pr-1 transition-transform duration-300 hover:scale-[1.03]"
+            className="group relative z-10 flex shrink-0 items-center gap-2 pr-1 transition-transform duration-300 hover:scale-[1.03] sm:gap-2.5"
           >
             <span className="drop-shadow-[0_0_10px_rgba(127,227,168,0.35)]">
               <MIcon />
             </span>
-            <span className="font-logo text-lg font-medium tracking-tight text-white">Minterest</span>
+            <span className="font-logo text-base font-medium tracking-tight text-white sm:text-lg">Minterest</span>
           </Link>
 
           <span className="relative z-10 mx-1 hidden h-7 w-px bg-white/12 sm:block" />
@@ -99,10 +99,11 @@ export function Header() {
           <Link
             to="/start"
             onClick={close}
-            className="group relative z-10 hidden items-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 font-sans text-sm font-medium text-white transition-colors duration-300 hover:border-mint/40 sm:inline-flex"
+            className="group relative z-10 inline-flex flex-1 items-center justify-center gap-2 overflow-hidden rounded-xl border border-white/10 bg-white/5 px-3 py-2 font-sans text-[13px] font-medium text-white transition-colors duration-300 hover:border-mint/40 sm:flex-none sm:justify-start sm:px-5 sm:py-2.5 sm:text-sm"
           >
             <BorderBeam rx={12} />
-            <span className="relative z-10">Start jouw project</span>
+            <span className="relative z-10 sm:hidden">Start project</span>
+            <span className="relative z-10 hidden sm:inline">Start jouw project</span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-mint/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
           </Link>
@@ -112,7 +113,7 @@ export function Header() {
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? 'Menu sluiten' : 'Menu openen'}
             aria-expanded={open}
-            className="relative z-10 grid h-10 w-10 place-items-center rounded-xl border border-white/12 bg-white/5 text-white transition-colors duration-300 hover:border-mint/40 hover:bg-white/10"
+            className="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-white/12 bg-white/5 text-white transition-colors duration-300 hover:border-mint/40 hover:bg-white/10"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
               <motion.line x1="4" x2="20" y1="8" y2="8" animate={open ? { x1: 5, y1: 5, x2: 19, y2: 19 } : { x1: 4, y1: 8, x2: 20, y2: 8 }} transition={{ duration: 0.3, ease: EASE }} />
