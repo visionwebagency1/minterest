@@ -173,7 +173,7 @@ export function Header() {
                           transition={{ duration: 0.4, ease: EASE }}
                           className="overflow-hidden"
                         >
-                          <div className="grid grid-cols-1 gap-3 py-4 sm:grid-cols-2">
+                          <div className="grid grid-cols-2 gap-2.5 py-4 sm:gap-3">
                             {SERVICES.map((s) => {
                               const { Icon } = s
                               return (
@@ -181,15 +181,15 @@ export function Header() {
                                   key={s.to}
                                   to={s.to}
                                   onClick={close}
-                                  className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition-colors duration-300 hover:border-mint/40 hover:bg-white/[0.07]"
+                                  className="group relative flex h-full flex-col items-start gap-2.5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 transition-colors duration-300 hover:border-mint/40 hover:bg-white/[0.07] sm:flex-row sm:items-center sm:gap-4 sm:p-4"
                                 >
                                   <BorderBeam rx={16} />
-                                  <span className="relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-mint/10 text-mint shadow-[0_0_22px_rgba(79,216,155,0.45)]">
+                                  <span className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-mint/10 text-mint shadow-[0_0_22px_rgba(79,216,155,0.45)] sm:h-12 sm:w-12">
                                     <Icon />
                                   </span>
                                   <span className="relative z-10">
-                                    <span className="block font-display text-lg font-semibold text-white">{s.label}</span>
-                                    <span className="block font-sans text-sm text-white/55">{s.desc}</span>
+                                    <span className="block font-display text-[15px] font-semibold leading-tight text-white sm:text-lg">{s.label}</span>
+                                    <span className="mt-0.5 hidden font-sans text-sm text-white/55 sm:block">{s.desc}</span>
                                   </span>
                                 </Link>
                               )
