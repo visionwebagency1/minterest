@@ -57,10 +57,16 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.8, ease: EASE } }}
     >
-      {/* soft mint glow behind the mark, brightens as it fills */}
+      {/* soft mint glow behind the mark, brightens as it fills. A radial
+          gradient (not a large CSS blur) so it never clips to a visible square
+          on mobile GPUs. */}
       <div
-        className="pointer-events-none absolute h-[52vmin] w-[52vmin] rounded-full bg-mint/25 blur-[120px]"
-        style={{ opacity: 0.35 + progress * 0.5 }}
+        className="pointer-events-none absolute h-[85vmin] w-[85vmin]"
+        style={{
+          background:
+            'radial-gradient(closest-side, rgba(79,216,155,0.30), rgba(79,216,155,0) 72%)',
+          opacity: 0.35 + progress * 0.5,
+        }}
       />
 
       <motion.div

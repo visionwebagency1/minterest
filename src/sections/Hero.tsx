@@ -26,6 +26,19 @@ function useIsDesktop() {
 export function Hero() {
   const ref = useRef<HTMLElement>(null)
   const desktop = useIsDesktop()
+  // Pause the WebGL render loop once the hero scrolls out of view, so the canvas
+  // stops eating GPU while you scroll the rest of the homepage (the cause of the
+  // homepage-only scroll jank). Resumes when it comes back into view.
+  const [active, setActive] = useState(true)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(([entry]) => setActive(entry.isIntersecting), {
+      rootMargin: '200px',
+    })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
   // Parallax: the WebGL background + orbiting pills drift slower than the page
   // as you scroll. Desktop only — on mobile the canvas is full-bleed behind a
   // taller hero, so we keep it still to avoid any shift.
@@ -47,7 +60,7 @@ export function Hero() {
       <motion.div style={desktop ? { y: bgY } : undefined} className="absolute inset-0">
         <div className="absolute inset-0">
           <Suspense fallback={<div className="h-full w-full bg-near-black" />}>
-            <HeroCanvas />
+            <HeroCanvas active={active} />
           </Suspense>
         </div>
 

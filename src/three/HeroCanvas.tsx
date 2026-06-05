@@ -13,12 +13,13 @@ import { useIsLowPower } from '@/lib/useIsLowPower'
  *   1.1 gradient mesh · 1.2 glass M · 1.3 particles · bloom postprocessing.
  * Low-power devices skip transmission glass, particles and postprocessing.
  */
-export default function HeroCanvas() {
+export default function HeroCanvas({ active = true }: { active?: boolean }) {
   const lowPower = useIsLowPower()
 
   return (
     <Canvas
-      dpr={[1, 2]}
+      frameloop={active ? 'always' : 'never'}
+      dpr={lowPower ? [1, 1.5] : [1, 2]}
       gl={{ antialias: true, alpha: false }}
       camera={{ position: [0, 0, 5], fov: 45 }}
     >
