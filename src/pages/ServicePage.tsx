@@ -10,24 +10,7 @@ import { Footer } from '@/sections/Footer'
 import { M_PATH } from '@/three/mPath'
 import { SERVICES } from './servicesData'
 import { EXTRAS, type Stat } from './serviceExtras'
-import {
-  BrowserRender,
-  BrandingRender,
-  VideoRender,
-  AiVideoRender,
-  SeoRender,
-  NetworkRender,
-} from '@/sections/serviceRenders'
-
-/** The animated "mini-UI" demo per service — the show-don't-tell centrepiece. */
-const RENDERS: Record<keyof typeof SERVICES, () => JSX.Element> = {
-  websites: BrowserRender,
-  branding: BrandingRender,
-  video: VideoRender,
-  aivideo: AiVideoRender,
-  seo: SeoRender,
-  influencer: NetworkRender,
-}
+import { SceneFrame, type SceneSlug } from '@/sections/SceneFrame'
 
 /**
  * Shared, story-driven template for the service pages, built on one spine:
@@ -38,7 +21,6 @@ const RENDERS: Record<keyof typeof SERVICES, () => JSX.Element> = {
 export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
   const s = SERVICES[slug]
   const x = EXTRAS[slug]
-  const Render = RENDERS[slug]
 
   return (
     <>
@@ -157,11 +139,9 @@ export function ServicePage({ slug }: { slug: keyof typeof SERVICES }) {
                 </div>
               </div>
 
-              {/* the animated demo */}
+              {/* the animated demo — filled, near-square scene */}
               <Reveal delay={0.1}>
-                <div className="relative h-[380px] overflow-hidden rounded-3xl border border-white/10 bg-[#06140F] shadow-[0_40px_120px_rgba(0,0,0,0.5)] md:h-[460px]">
-                  <Render />
-                </div>
+                <SceneFrame slug={slug as SceneSlug} />
               </Reveal>
             </div>
           </div>
