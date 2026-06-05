@@ -2,13 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { M_PATH } from '@/three/mPath'
 import {
-  BrowserRender,
   BrandingRender,
   VideoRender,
   AiVideoRender,
   SeoRender,
   NetworkRender,
 } from './serviceRenders'
+import { SceneWebsites } from './scenes/SceneWebsites'
 
 /**
  * A filled, near-square scene container for the service pages. The animated
@@ -22,7 +22,7 @@ import {
  */
 
 const RENDERS = {
-  websites: BrowserRender,
+  websites: SceneWebsites,
   branding: BrandingRender,
   video: VideoRender,
   aivideo: AiVideoRender,
