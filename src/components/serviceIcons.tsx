@@ -55,11 +55,12 @@ export function SeoIcon() {
   )
 }
 
+/** Lead-form service options — the 6 main services (keys = landing-page slugs). */
 export const SERVICE_OPTIONS = [
-  { key: 'websites', label: 'Website & webshops', Icon: WebIcon },
-  { key: 'branding', label: 'Design & branding', Icon: BrandIcon },
-  { key: 'video', label: 'Short video', Icon: VideoIcon },
-  { key: 'aivideo', label: 'AI video', Icon: AiVideoIcon },
-  { key: 'seo', label: 'SEO', Icon: SeoIcon },
-  { key: 'influencer', label: 'Influencer marketing', Icon: NetworkIcon },
+  { key: 'design-branding', label: 'Design & Branding', Icon: BrandIcon },
+  { key: 'web-development', label: 'Web Development', Icon: WebIcon },
+  { key: 'video-fotografie', label: 'Video & Fotografie', Icon: VideoIcon },
+  { key: 'social-media', label: 'Social Media Beheer', Icon: NetworkIcon },
+  { key: 'seo-sea', label: 'SEO & SEA', Icon: SeoIcon },
+  { key: 'extra', label: 'Extra diensten', Icon: AiVideoIcon },
 ]

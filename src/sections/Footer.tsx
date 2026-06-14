@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { M_PATH } from '@/three/mPath'
+import { MAIN_SERVICES } from '@/data/services'
 
 /**
  * Footer — the M returns one last time. Brand lockup + tagline on the left,
@@ -10,10 +11,8 @@ const COLS = [
   {
     title: 'Diensten',
     links: [
-      { label: 'Website & Webshops', to: '/websites' },
-      { label: 'Design & branding', to: '/branding' },
-      { label: 'Short video', to: '/video' },
-      { label: 'Influencer marketing', to: '/influencer' },
+      ...MAIN_SERVICES.map((s) => ({ label: s.label, to: `/diensten/${s.slug}` })),
+      { label: 'Alle diensten', to: '/diensten' },
     ],
   },
   {
@@ -45,7 +44,7 @@ export function Footer() {
               <svg viewBox="-1.75 -1 3.5 2" className="h-7 w-auto" aria-hidden="true">
                 <path d={M_PATH} transform="scale(1,-1)" fill="#4FD89B" />
               </svg>
-              <span className="font-logo text-xl font-medium tracking-tight text-white">
+              <span className="font-sans text-xl font-bold tracking-[-0.01em] text-white">
                 Minterest
               </span>
             </Link>
@@ -53,7 +52,7 @@ export function Footer() {
               Where interest becomes your growth.
             </p>
             <p className="mt-4 font-sans text-sm leading-relaxed text-white/45">
-              Digitaal groeibureau voor website, merk, video en influence.
+              Merk, website, video, social en vindbaarheid, gebouwd om je groei te laten klimmen.
             </p>
           </div>
 

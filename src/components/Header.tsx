@@ -3,28 +3,20 @@ import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { M_PATH } from '@/three/mPath'
 import { BorderBeam } from './BorderBeam'
-import { WebIcon, BrandIcon, VideoIcon, AiVideoIcon, SeoIcon, NetworkIcon } from './serviceIcons'
 
 /**
  * Floating glass header + a slide-down navigation panel:
- *   Home · Onze diensten (accordion → 2x2 grid of services) · Onze projecten ·
- *   Over ons · Contact, with a CTA and social links at the bottom.
+ *   Home · Onze diensten · Onze projecten · Over ons · Contact, with a CTA and
+ *   social links at the bottom. No services dropdown: "Onze diensten" links
+ *   straight to the diensten-overzicht (/diensten).
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const
 const ICON_VB = '-1.75 -1 3.5 2'
 
-const SERVICES = [
-  { label: 'Website & webshops', desc: 'Snelle sites die verkopen', to: '/websites', Icon: WebIcon },
-  { label: 'Design & branding', desc: 'Een merk dat blijft hangen', to: '/branding', Icon: BrandIcon },
-  { label: 'Short video', desc: 'Scroll-stoppende content', to: '/video', Icon: VideoIcon },
-  { label: 'AI video', desc: 'Schaalbare video met AI', to: '/ai-video', Icon: AiVideoIcon },
-  { label: 'SEO', desc: 'Structureel bovenaan in Google', to: '/seo', Icon: SeoIcon },
-  { label: 'Influencer marketing', desc: 'Bereik via echte creators', to: '/influencer', Icon: NetworkIcon },
-]
-
 const PRIMARY = [
   { no: '01', label: 'Home', to: '/' },
+  { no: '02', label: 'Onze diensten', to: '/diensten' },
   { no: '03', label: 'Onze projecten', to: '/work' },
   { no: '04', label: 'Over ons', to: '/about' },
   { no: '05', label: 'Contact', to: '/contact' },
@@ -71,7 +63,6 @@ function MIcon() {
 
 export function Header() {
   const [open, setOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(true)
   const close = () => setOpen(false)
 
   return (
@@ -91,7 +82,7 @@ export function Header() {
             <span className="drop-shadow-[0_0_10px_rgba(127,227,168,0.35)]">
               <MIcon />
             </span>
-            <span className="font-logo text-base font-medium tracking-tight text-white sm:text-lg">Minterest</span>
+            <span className="font-sans text-lg font-bold tracking-[-0.01em] text-white sm:text-xl">Minterest</span>
           </Link>
 
           <span className="relative z-10 mx-1 hidden h-7 w-px bg-white/12 sm:block" />
@@ -144,65 +135,8 @@ export function Header() {
             >
               <div className="mx-auto max-w-5xl">
                 <ul className="flex flex-col">
-                  {/* Home */}
-                  <NavRow no="01" delay={0.1}>
-                    <Link to="/" onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
-                      <BigLabel>Home</BigLabel>
-                      <Arrow />
-                    </Link>
-                  </NavRow>
-
-                  {/* Onze diensten — accordion */}
-                  <NavRow no="02" delay={0.15}>
-                    <button
-                      onClick={() => setServicesOpen((o) => !o)}
-                      aria-expanded={servicesOpen}
-                      className="group flex w-full items-baseline gap-4 py-3 text-left md:gap-6"
-                    >
-                      <BigLabel>Onze diensten</BigLabel>
-                      <span className={`ml-auto grid h-9 w-9 shrink-0 self-center place-items-center rounded-full border border-white/15 text-mint transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`}>
-                        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
-                      </span>
-                    </button>
-                    <AnimatePresence initial={false}>
-                      {servicesOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.4, ease: EASE }}
-                          className="overflow-hidden"
-                        >
-                          <div className="grid grid-cols-2 gap-2.5 py-4 sm:gap-3">
-                            {SERVICES.map((s) => {
-                              const { Icon } = s
-                              return (
-                                <Link
-                                  key={s.to}
-                                  to={s.to}
-                                  onClick={close}
-                                  className="group relative flex h-full flex-col items-start gap-2.5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-3.5 transition-colors duration-300 hover:border-mint/40 hover:bg-white/[0.07] sm:flex-row sm:items-center sm:gap-4 sm:p-4"
-                                >
-                                  <BorderBeam rx={16} />
-                                  <span className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-mint/10 text-mint shadow-[0_0_22px_rgba(79,216,155,0.45)] sm:h-12 sm:w-12">
-                                    <Icon />
-                                  </span>
-                                  <span className="relative z-10">
-                                    <span className="block font-display text-[15px] font-semibold leading-tight text-white sm:text-lg">{s.label}</span>
-                                    <span className="mt-0.5 hidden font-sans text-sm text-white/55 sm:block">{s.desc}</span>
-                                  </span>
-                                </Link>
-                              )
-                            })}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </NavRow>
-
-                  {/* the rest */}
-                  {PRIMARY.slice(1).map((item, i) => (
-                    <NavRow key={item.to} no={item.no} delay={0.2 + i * 0.05}>
+                  {PRIMARY.map((item, i) => (
+                    <NavRow key={item.to} no={item.no} delay={0.1 + i * 0.05}>
                       <Link to={item.to} onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
                         <BigLabel>{item.label}</BigLabel>
                         <Arrow />

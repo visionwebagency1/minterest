@@ -26,10 +26,10 @@ export function LogoMarquee() {
   const items = [...CLIENTS, ...CLIENTS]
 
   return (
-    <section className="relative overflow-hidden border-y border-white/5 bg-ink py-7 md:py-9">
+    <section className="relative overflow-hidden border-y border-white/5 bg-near-black/45 py-7 backdrop-blur-sm md:py-9">
       {/* edge fades */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-ink to-transparent md:w-48" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-ink to-transparent md:w-48" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-near-black/80 to-transparent md:w-48" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-near-black/80 to-transparent md:w-48" />
 
       <motion.div
         className="flex w-max items-center gap-12 md:gap-20"

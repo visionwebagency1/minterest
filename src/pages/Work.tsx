@@ -19,7 +19,7 @@ export function Work() {
         }
         tagline="Een greep uit het werk waarmee we interesse in groei veranderden, van strakke webshops tot complete merken."
         primary={{ label: 'Start jouw project', to: '/start' }}
-        secondary={{ label: 'Onze diensten', to: '/websites' }}
+        secondary={{ label: 'Onze diensten', to: '/diensten' }}
       />
 
       <div className="bg-cream text-near-black">
