@@ -79,15 +79,16 @@ export function HeroContent() {
               aandacht om te zetten in groei die blijft stijgen.
             </motion.p>
 
-            {/* Two CTAs — squared (header style), centred on mobile */}
+            {/* Two CTAs — squared (header style), always on one row (also on
+                the smallest phones), centred on mobile */}
             <motion.div
               variants={rise}
-              className="mt-9 flex flex-row flex-wrap justify-center gap-3 md:justify-start"
+              className="mt-9 flex flex-row flex-nowrap items-stretch justify-center gap-2.5 md:justify-start md:gap-3"
             >
               {/* Primary: gradient fill + sweeping shimmer */}
               <Link
                 to="/start"
-                className="group pointer-events-auto relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-3.5 font-sans text-sm font-medium text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] lg:px-9 lg:py-4 lg:text-base"
+                className="group pointer-events-auto relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl bg-gradient-to-r from-emerald to-mint px-4 py-3.5 font-sans text-[13px] font-medium text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] sm:px-7 sm:text-sm lg:px-9 lg:py-4 lg:text-base"
               >
                 <span className="relative z-10">Start jouw project</span>
                 <svg
@@ -110,7 +111,7 @@ export function HeroContent() {
               <button
                 type="button"
                 onClick={() => lenisScrollTo('#diensten', { offset: -80 })}
-                className="group pointer-events-auto relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl border border-white/10 bg-white/5 px-7 py-3.5 font-sans text-sm font-medium text-white backdrop-blur-md transition-colors duration-300 hover:border-mint/40 lg:px-9 lg:py-4 lg:text-base"
+                className="group pointer-events-auto relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 font-sans text-[13px] font-medium text-white backdrop-blur-md transition-colors duration-300 hover:border-mint/40 sm:gap-2.5 sm:px-7 sm:text-sm lg:px-9 lg:py-4 lg:text-base"
               >
                 <span className="relative z-10 h-1.5 w-1.5 bg-lime-accent transition-transform duration-300 group-hover:rotate-45" />
                 <span className="relative z-10">Onze diensten</span>

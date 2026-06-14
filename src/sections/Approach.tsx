@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
@@ -71,13 +72,20 @@ export function Approach() {
         <Reveal className="flex items-center gap-3">
           <span className="h-px w-10 bg-mint/50" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/70">
-            Onze aanpak
+            Jouw groeiplan
           </span>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-8 max-w-3xl text-balance font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight text-cream">
             De <Accent>klim</Accent>, in vier stappen.
           </h2>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="mt-7 max-w-2xl font-sans text-lg leading-relaxed text-cream/65">
+            Geen losse opdrachten, maar een plan dat opbouwt. Elke stap koppelt de
+            juiste diensten aan jouw doel, zodat groei een route wordt in plaats
+            van toeval.
+          </p>
         </Reveal>
 
         <div ref={ref} className="relative mt-20 md:mt-28">
@@ -124,6 +132,18 @@ export function Approach() {
             ))}
           </div>
         </div>
+
+        {/* Opstap naar de diensten — the growth plan leads into the services. */}
+        <Reveal delay={0.05} className="mt-16 flex justify-center md:mt-24">
+          <Link
+            to="/diensten"
+            className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
+          >
+            <span className="relative z-10">Ontdek jouw groeiplan</span>
+            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

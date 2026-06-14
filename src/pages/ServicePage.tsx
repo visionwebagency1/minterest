@@ -5,24 +5,32 @@ import { Reveal } from '@/components/Reveal'
 import { BlurReveal } from '@/components/BlurReveal'
 import { Accent } from '@/components/Accent'
 import { BorderBeam } from '@/components/BorderBeam'
+import { Logo } from '@/components/Logo'
+import { HERO_BG } from '@/components/PageHero'
+import { SUB_ICON_BY_SLUG } from '@/components/subServiceIcons'
 import { Footer } from '@/sections/Footer'
 import { M_PATH } from '@/three/mPath'
-import { SERVICE_BY_SLUG, MAIN_SERVICES, type MainService } from '@/data/services'
+import {
+  SERVICE_BY_SLUG,
+  slugifySub,
+  subPath,
+  type MainService,
+} from '@/data/services'
 import { NotFound } from './NotFound'
 
 /**
- * Shared, predominantly LIGHT template for the 6 main service landing pages.
- * Each page: a light hero · the solution promise · every sub-service explained
- * as its own section (alternating rows with a branded visual) · a living scene ·
- * how we work · a CTA. The accent gradient varies per service (within the green
- * palette) so the six pages cohere but each has its own colour.
+ * Shared template for the 6 main service landing pages. A premium dark hero
+ * (the fresh Minterest teal -> mint gradient shared with /start, brand M +
+ * wordmark inside) flows into a light body: the solution promise · every
+ * sub-service explained as its own section (icon, copy, link to its page) · a
+ * living scene · how we work (icons, no numbers) · a CTA. No numbering anywhere.
  */
 
 const STEPS = [
-  { no: '01', title: 'Kennismaken', desc: 'We brengen je doel, doelgroep en kansen scherp in beeld.' },
-  { no: '02', title: 'Plan', desc: 'Een helder plan en aanpak, volledig gebouwd rond resultaat.' },
-  { no: '03', title: 'Uitvoeren', desc: 'Wij maken het, jij blijft op de hoogte bij elke stap.' },
-  { no: '04', title: 'Groeien', desc: 'Live, meten en blijven optimaliseren wat werkt.' },
+  { title: 'Kennismaken', desc: 'We brengen je doel, doelgroep en kansen scherp in beeld.', Icon: StepTargetIcon },
+  { title: 'Plan', desc: 'Een helder plan en aanpak, volledig gebouwd rond resultaat.', Icon: StepPlanIcon },
+  { title: 'Uitvoeren', desc: 'Wij maken het, jij blijft op de hoogte bij elke stap.', Icon: StepBuildIcon },
+  { title: 'Groeien', desc: 'Live, meten en blijven optimaliseren wat werkt.', Icon: StepGrowIcon },
 ]
 
 /** Route wrapper: reads the :slug param for /diensten/:slug. */
@@ -94,27 +102,39 @@ export function ServicePage({ slug }: { slug: string }) {
             </Reveal>
 
             <div className="mt-20 flex flex-col gap-20 md:gap-28">
-              {s.subs.map((sub, i) => (
-                <div
-                  key={sub.name}
-                  className={`grid items-center gap-8 md:grid-cols-2 md:gap-16 ${
-                    i % 2 === 1 ? 'md:[&>*:first-child]:order-2' : ''
-                  }`}
-                >
-                  <Reveal>
-                    <SubVisual accent={s.accent} index={i} />
-                  </Reveal>
-                  <Reveal delay={0.08}>
-                    <span className="font-accent text-3xl italic text-emerald">0{i + 1}</span>
-                    <h3 className="mt-3 font-display text-3xl font-semibold leading-tight md:text-4xl">
-                      {sub.name}
-                    </h3>
-                    <p className="mt-4 max-w-md font-sans text-lg leading-relaxed text-near-black/65">
-                      {sub.desc}
-                    </p>
-                  </Reveal>
-                </div>
-              ))}
+              {s.subs.map((sub, i) => {
+                const Icon = SUB_ICON_BY_SLUG[slugifySub(sub.name)]
+                return (
+                  <div
+                    key={sub.name}
+                    className={`grid items-center gap-8 md:grid-cols-2 md:gap-16 ${
+                      i % 2 === 1 ? 'md:[&>*:first-child]:order-2' : ''
+                    }`}
+                  >
+                    <Reveal>
+                      <SubVisual accent={s.accent} />
+                    </Reveal>
+                    <Reveal delay={0.08}>
+                      <span className="grid h-14 w-14 place-items-center rounded-2xl bg-emerald/10 text-emerald">
+                        {Icon ? <Icon /> : null}
+                      </span>
+                      <h3 className="mt-5 font-display text-3xl font-semibold leading-tight md:text-4xl">
+                        {sub.name}
+                      </h3>
+                      <p className="mt-4 max-w-md font-sans text-lg leading-relaxed text-near-black/65">
+                        {sub.desc}
+                      </p>
+                      <Link
+                        to={subPath(s.slug, sub.name)}
+                        className="group mt-6 inline-flex items-center gap-2 font-sans text-sm font-semibold text-emerald-deep transition-colors duration-300 hover:text-emerald"
+                      >
+                        Meer over {sub.name.toLowerCase()}
+                        <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                      </Link>
+                    </Reveal>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -153,9 +173,11 @@ export function ServicePage({ slug }: { slug: string }) {
           </Reveal>
           <div className="mt-12 grid grid-cols-2 gap-8 lg:grid-cols-4">
             {STEPS.map((st, i) => (
-              <Reveal key={st.no} delay={i * 0.06} className="relative">
-                <span className="font-accent text-3xl italic text-emerald/70">{st.no}</span>
-                <h3 className="mt-3 font-display text-lg font-semibold">{st.title}</h3>
+              <Reveal key={st.title} delay={i * 0.06} className="relative">
+                <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald/10 text-emerald">
+                  <st.Icon />
+                </span>
+                <h3 className="mt-4 font-display text-lg font-semibold">{st.title}</h3>
                 <p className="mt-2 font-sans text-sm leading-relaxed text-near-black/55">{st.desc}</p>
               </Reveal>
             ))}
@@ -196,22 +218,21 @@ export function ServicePage({ slug }: { slug: string }) {
 /* ───────────────────────── Light service hero ───────────────────────── */
 
 function ServiceHero({ service: s }: { service: MainService }) {
-  const idx = MAIN_SERVICES.findIndex((m) => m.slug === s.slug)
   return (
-    <section className="relative overflow-hidden bg-cream pt-36 pb-20 text-near-black md:pt-48 md:pb-28">
-      {/* soft accent glow */}
+    <section
+      className="relative overflow-hidden bg-near-black pt-36 pb-24 text-cream md:pt-48 md:pb-32"
+      style={{ backgroundImage: HERO_BG }}
+    >
+      {/* per-service accent glow (kept subtle on the dark teal base) */}
       <div
-        className={`pointer-events-none absolute -right-32 -top-20 h-[36rem] w-[36rem] rounded-full bg-gradient-to-br ${s.accent} opacity-25 blur-[120px]`}
+        className={`pointer-events-none absolute -right-32 -top-24 h-[34rem] w-[34rem] rounded-full bg-gradient-to-br ${s.accent} opacity-20 blur-[130px]`}
         aria-hidden="true"
       />
-      {/* faint M watermark */}
-      <svg
-        viewBox="-1.75 -1 3.5 2"
-        className="pointer-events-none absolute -right-12 top-1/2 h-[80%] -translate-y-1/2 opacity-[0.05] md:-right-10 md:h-[120%]"
-        aria-hidden="true"
-      >
-        <path d={M_PATH} transform="scale(1,-1)" fill="#013F40" />
-      </svg>
+      {/* brand M + wordmark, recognizable but quiet, lower-right */}
+      <Logo
+        wordmark="rgba(244,244,244,0.5)"
+        className="pointer-events-none absolute bottom-6 right-5 h-12 w-auto opacity-80 md:bottom-10 md:right-12 md:h-16"
+      />
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <motion.div
@@ -220,9 +241,8 @@ function ServiceHero({ service: s }: { service: MainService }) {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="flex items-center gap-3"
         >
-          <span className="font-mono text-sm text-emerald">0{idx + 1}</span>
-          <span className="h-px w-10 bg-emerald/40" />
-          <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
+          <span className="h-px w-10 bg-mint/50" />
+          <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/80">
             {s.kicker}
           </span>
         </motion.div>
@@ -231,7 +251,7 @@ function ServiceHero({ service: s }: { service: MainService }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-          className="mt-8 max-w-4xl text-balance font-display text-[clamp(2.5rem,7vw,6rem)] font-semibold leading-[1.0] tracking-tight"
+          className="mt-8 max-w-4xl text-balance font-display text-[clamp(2.5rem,7vw,6rem)] font-semibold leading-[1.0] tracking-tight text-cream"
         >
           {s.label}
         </motion.h1>
@@ -240,7 +260,7 @@ function ServiceHero({ service: s }: { service: MainService }) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.16 }}
-          className="mt-7 max-w-2xl font-sans text-lg leading-relaxed text-near-black/65"
+          className="mt-7 max-w-2xl font-sans text-lg leading-relaxed text-cream/65"
         >
           {s.tagline}
         </motion.p>
@@ -254,8 +274,8 @@ function ServiceHero({ service: s }: { service: MainService }) {
         >
           {s.subs.map((sub) => (
             <li key={sub.name}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-deep/15 bg-white px-4 py-2 font-sans text-sm font-medium text-emerald-deep shadow-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald" aria-hidden="true" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-sans text-sm font-medium text-cream backdrop-blur-md">
+                <span className="h-1.5 w-1.5 rounded-full bg-lime-accent" aria-hidden="true" />
                 {sub.name}
               </span>
             </li>
@@ -278,9 +298,9 @@ function ServiceHero({ service: s }: { service: MainService }) {
           </Link>
           <Link
             to="/diensten"
-            className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-emerald-deep/15 bg-white px-8 py-4 font-sans text-base font-medium text-emerald-deep transition-colors duration-300 hover:border-emerald/50"
+            className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-sans text-base font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40"
           >
-            <span className="h-1.5 w-1.5 bg-emerald" />
+            <span className="h-1.5 w-1.5 bg-lime-accent" />
             Alle diensten
           </Link>
         </motion.div>
@@ -292,7 +312,7 @@ function ServiceHero({ service: s }: { service: MainService }) {
 /* ───────────────────────── Visual helpers ───────────────────────── */
 
 /** Branded gradient tile for a sub-service (no stock photos). */
-function SubVisual({ accent, index }: { accent: string; index: number }) {
+function SubVisual({ accent }: { accent: string }) {
   return (
     <div
       className={`relative aspect-[5/4] overflow-hidden rounded-3xl bg-gradient-to-br ${accent} shadow-[0_30px_70px_rgba(1,63,64,0.22)]`}
@@ -304,9 +324,6 @@ function SubVisual({ accent, index }: { accent: string; index: number }) {
       >
         <path d={M_PATH} transform="scale(1,-1)" fill="#0A1512" />
       </svg>
-      <span className="absolute bottom-2 left-6 font-display text-[7rem] font-semibold leading-none text-cream/20">
-        0{index + 1}
-      </span>
       <motion.div
         className="pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-cream/15 to-transparent"
         animate={{ x: ['-130%', '130%'] }}
@@ -350,5 +367,40 @@ function ServiceScene({ service: s }: { service: MainService }) {
       </div>
       <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/10" />
     </div>
+  )
+}
+
+/* ───────────────────────── "Zo werken we" step icons ───────────────────────── */
+
+function StepTargetIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="8.5" />
+      <circle cx="12" cy="12" r="4.5" />
+      <circle cx="12" cy="12" r="1" fill="currentColor" />
+    </svg>
+  )
+}
+function StepPlanIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 3h8l4 4v14H6V3Z" />
+      <path d="M14 3v4h4M9 12h6M9 16h4" />
+    </svg>
+  )
+}
+function StepBuildIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 7 4 12l5 5M15 7l5 5-5 5" />
+    </svg>
+  )
+}
+function StepGrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 18 10 12l3.5 3.5L20 9" />
+      <path d="M15 9h5v5" />
+    </svg>
   )
 }

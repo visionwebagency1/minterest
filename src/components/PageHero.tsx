@@ -1,14 +1,20 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { M_PATH } from '@/three/mPath'
+import { Logo } from './Logo'
 
 /**
- * Dark, gradient inner-page hero (same emerald vibe as the homepage hero) with
- * a kicker, big title, tagline, and two CTAs. A faint M watermark sits behind.
+ * Dark, gradient inner-page hero (fresh Minterest teal -> mint) with a kicker,
+ * big title, tagline, and two CTAs. The brand M + wordmark sit in it, premium
+ * and recognizable. This is the reference look shared by /start and every other
+ * inner page (see ServicePage's hero).
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const
+
+/** Shared fresh teal -> mint hero gradient (greener than the old near-black). */
+export const HERO_BG =
+  'radial-gradient(75% 70% at 82% 0%, rgba(66,194,140,0.5), transparent 62%), radial-gradient(62% 65% at 0% 100%, rgba(0,128,129,0.5), transparent 60%), linear-gradient(150deg, #0B3A37 0%, #08221F 55%, #061814 100%)'
 
 type Cta = { label: string; to: string }
 
@@ -28,19 +34,14 @@ export function PageHero({
   return (
     <section
       className="relative overflow-hidden bg-near-black pt-36 pb-24 text-cream md:pt-48 md:pb-32"
-      style={{
-        backgroundImage:
-          'radial-gradient(65% 60% at 78% 8%, rgba(0,128,129,0.4), transparent 60%), radial-gradient(55% 55% at 8% 100%, rgba(1,63,64,0.5), transparent 60%), linear-gradient(160deg, #071311 0%, #08201E 100%)',
-      }}
+      style={{ backgroundImage: HERO_BG }}
     >
-      {/* faint M watermark */}
-      <svg
-        viewBox="-1.75 -1 3.5 2"
-        className="pointer-events-none absolute -right-12 top-1/2 h-[80%] -translate-y-1/2 opacity-[0.08] md:-right-10 md:h-[120%] md:opacity-[0.06]"
-        aria-hidden="true"
-      >
-        <path d={M_PATH} transform="scale(1,-1)" fill="#42C28C" />
-      </svg>
+      {/* Brand M + wordmark, recognizable but quiet, lower-right. Small and
+          crisp, not the old enlarged blob. */}
+      <Logo
+        wordmark="rgba(244,244,244,0.5)"
+        className="pointer-events-none absolute bottom-6 right-5 h-12 w-auto opacity-80 md:bottom-10 md:right-12 md:h-16"
+      />
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <motion.div

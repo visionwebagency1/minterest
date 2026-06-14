@@ -55,6 +55,17 @@ export function SeoIcon() {
   )
 }
 
+/** Globe — used for "Extra diensten" (alles eromheen, wereldwijd geregeld). */
+export function GlobeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3c2.5 2.5 3.8 5.7 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.7-3.8-9S9.5 5.5 12 3Z" />
+    </svg>
+  )
+}
+
 /** Lead-form service options — the 6 main services (keys = landing-page slugs). */
 export const SERVICE_OPTIONS = [
   { key: 'design-branding', label: 'Design & Branding', Icon: BrandIcon },
@@ -64,3 +75,13 @@ export const SERVICE_OPTIONS = [
   { key: 'seo-sea', label: 'SEO & SEA', Icon: SeoIcon },
   { key: 'extra', label: 'Extra diensten', Icon: AiVideoIcon },
 ]
+
+/** Icon per main-service slug (used by the homepage services accordion/grid). */
+export const SERVICE_ICON_BY_SLUG: Record<string, () => JSX.Element> = {
+  'design-branding': BrandIcon,
+  'web-development': WebIcon,
+  'video-fotografie': VideoIcon,
+  'social-media': NetworkIcon,
+  'seo-sea': SeoIcon,
+  extra: GlobeIcon,
+}

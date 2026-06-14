@@ -5,9 +5,7 @@ import { ServicesIntro } from './ServicesIntro'
 import { ServicesShowcase } from './ServicesShowcase'
 import { Showcase } from './Showcase'
 import { Approach } from './Approach'
-import { Stats } from './Stats'
 import { Testimonials } from './Testimonials'
-import { Pricing } from './Pricing'
 import { Faq } from './Faq'
 import { CtaBand } from './CtaBand'
 import { Footer } from './Footer'
@@ -26,9 +24,7 @@ export function Home() {
       <ServicesShowcase />
       <Showcase />
       <Approach />
-      <Stats />
       <Testimonials />
-      <Pricing />
       <Faq />
       <CtaBand />
       <Footer />

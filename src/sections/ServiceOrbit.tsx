@@ -14,9 +14,6 @@ import { MAIN_SERVICES, focusService } from '@/data/services'
  * under the ring tells visitors the pills are clickable.
  */
 
-// Shorter labels on mobile so every pill fits within the screen width.
-const MOBILE_LABELS = ['Branding', 'Web', 'Video', 'Social', 'SEO', 'Extra']
-
 // Each pill drifts in its own direction for a livelier, less mechanical feel.
 const FLOATS = [
   { y: [0, -9, 0] },
@@ -45,16 +42,17 @@ function useIsDesktop() {
 export function ServiceOrbit() {
   const desktop = useIsDesktop()
 
-  // Mobile gets a wider ring so the six pills spread out and the M keeps room
-  // in the centre; desktop is unchanged.
-  const radius = desktop ? 205 : 132
-  const ry = radius * 0.92
+  // Mobile uses a TALLER-than-wide ellipse: narrower horizontally so the full
+  // service names never run off-screen, but more vertical spread so the six
+  // pills breathe and the M keeps room in the centre. Desktop is unchanged.
+  const rx = desktop ? 205 : 108
+  const ry = desktop ? 188 : 142
   const pad = 80
 
   // 6 fixed pill positions on the ellipse (start at top, clockwise).
   const positions = MAIN_SERVICES.map((_, i) => {
     const angle = (i / MAIN_SERVICES.length) * Math.PI * 2 - Math.PI / 2
-    return { x: Math.cos(angle) * radius, y: Math.sin(angle) * ry }
+    return { x: Math.cos(angle) * rx, y: Math.sin(angle) * ry }
   })
 
   // Subtle pointer parallax for the whole ring (desktop only).
@@ -77,9 +75,9 @@ export function ServiceOrbit() {
       <motion.div className="relative" style={{ x, y }}>
         {/* Dashed orbit path (decorative) */}
         <motion.svg
-          width={radius * 2 + pad * 2}
+          width={rx * 2 + pad * 2}
           height={ry * 2 + pad * 2}
-          viewBox={`0 0 ${radius * 2 + pad * 2} ${ry * 2 + pad * 2}`}
+          viewBox={`0 0 ${rx * 2 + pad * 2} ${ry * 2 + pad * 2}`}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -87,9 +85,9 @@ export function ServiceOrbit() {
           aria-hidden="true"
         >
           <ellipse
-            cx={radius + pad}
+            cx={rx + pad}
             cy={ry + pad}
-            rx={radius}
+            rx={rx}
             ry={ry}
             fill="none"
             stroke="rgba(144,238,144,0.18)"
@@ -111,36 +109,41 @@ export function ServiceOrbit() {
               type="button"
               onClick={() => focusService(i)}
               aria-label={`Bekijk ${s.label}`}
-              className="group pointer-events-auto flex items-center gap-2 whitespace-nowrap rounded-full border border-white/60 bg-white/90 px-3.5 py-1.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 outline-none transition-[box-shadow,background-color] duration-300 hover:bg-white hover:shadow-[0_18px_50px_rgba(0,128,129,0.45)] focus-visible:ring-2 focus-visible:ring-emerald md:gap-2.5 md:px-6 md:py-3"
+              className="group pointer-events-auto flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/60 bg-white/90 px-2.5 py-1.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 outline-none transition-[box-shadow,background-color] duration-300 hover:bg-white hover:shadow-[0_18px_50px_rgba(0,128,129,0.45)] focus-visible:ring-2 focus-visible:ring-emerald md:gap-2.5 md:px-6 md:py-3"
               animate={FLOATS[i]}
               transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: 'easeInOut' }}
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald shadow-[0_0_8px_rgba(0,128,129,0.8)] transition-colors duration-300 group-hover:bg-mint md:h-2 md:w-2" />
-              <span className="font-sans text-[12px] font-semibold text-emerald-deep md:text-base">
-                {desktop ? s.short : MOBILE_LABELS[i]}
+              <span className="font-sans text-[10.5px] font-semibold leading-none text-emerald-deep md:text-base">
+                {s.label}
               </span>
             </motion.button>
           </div>
         ))}
 
-        {/* Quiet "these are clickable" hint, parked top-right between the
-            "Design & Branding" (top) and "Web Development" (top-right) pills. */}
+        {/* "These are clickable" hint. Desktop: parked top-right between the
+            "Design & Branding" (top) and "Web Development" (top-right) pills.
+            Mobile: larger and centred BELOW the M and the pills. */}
         <motion.div
           className="pointer-events-none absolute"
-          style={{
-            left: (positions[0].x + positions[1].x) / 2,
-            top: (positions[0].y + positions[1].y) / 2,
-            transform: 'translate(-50%, -50%)',
-          }}
+          style={
+            desktop
+              ? {
+                  left: (positions[0].x + positions[1].x) / 2,
+                  top: (positions[0].y + positions[1].y) / 2,
+                  transform: 'translate(-50%, -50%)',
+                }
+              : { left: 0, top: ry + 52, transform: 'translate(-50%, 0)' }
+          }
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0.35, 0.75, 0.35] }}
+          animate={{ opacity: [0.45, 0.85, 0.45] }}
           transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           aria-hidden="true"
         >
-          <span className="flex items-center gap-1.5 whitespace-nowrap rounded-full bg-near-black/35 px-2.5 py-1 font-sans text-[10px] uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm md:text-[11px]">
-            <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <span className="flex items-center gap-2 whitespace-nowrap rounded-full bg-near-black/40 px-3.5 py-2 font-sans text-xs uppercase tracking-[0.18em] text-white/85 backdrop-blur-sm md:gap-1.5 md:bg-near-black/35 md:px-2.5 md:py-1 md:text-[11px]">
+            <svg viewBox="0 0 24 24" className="h-4 w-4 md:h-3 md:w-3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 11V6a2 2 0 1 1 4 0v5" />
               <path d="M13 7a2 2 0 1 1 4 0v6a6 6 0 0 1-6 6h-1.5a4 4 0 0 1-3-1.4L3 14a1.6 1.6 0 0 1 2.4-2L7 13.5V8a2 2 0 1 1 4 0" />
             </svg>

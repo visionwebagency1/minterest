@@ -24,6 +24,32 @@ const WORDMARK_GLYPHS = [
   { t: '129.96869, 25.46356', d: 'M 11.109375 0 L 7.75 0 C 6.164062 0 4.914062 -0.378906 4 -1.140625 C 3.082031 -1.898438 2.625 -3.175781 2.625 -4.96875 L 2.625 -12.03125 L 0.140625 -12.03125 L 0.140625 -14.6875 L 2.625 -14.6875 L 2.625 -17.921875 L 5.796875 -17.921875 L 5.796875 -14.6875 L 11.109375 -14.6875 L 11.109375 -12.03125 L 5.796875 -12.03125 L 5.796875 -5.140625 C 5.796875 -4.234375 6.007812 -3.628906 6.4375 -3.328125 C 6.875 -3.023438 7.546875 -2.875 8.453125 -2.875 L 11.109375 -2.875 Z M 11.109375 0 ' },
 ]
 
+/**
+ * Just the brand M mark (gradient), framed tight. Used as a recognizable,
+ * premium watermark in page heroes — small and crisp, not an enlarged blob.
+ */
+export function LogoMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="6.5 6.5 56 31" className={className} aria-hidden="true">
+      <defs>
+        <linearGradient
+          id="minterest-mark-gradient"
+          x1="67.159981"
+          y1="407.35999"
+          x2="355.119954"
+          y2="407.35999"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="matrix(0.186239, 0, 0, 0.18666, -4.66151, -53.535236)"
+        >
+          <stop offset="0" stopColor="#008081" />
+          <stop offset="1" stopColor="#90EE90" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#minterest-mark-gradient)" d={M_LOGO_PATH} />
+    </svg>
+  )
+}
+
 export function Logo({
   className,
   wordmark = '#ffffff',

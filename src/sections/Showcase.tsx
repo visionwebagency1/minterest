@@ -86,12 +86,12 @@ export function Showcase() {
             <Reveal className="flex items-center gap-3">
               <span className="h-px w-10 bg-emerald/50" />
               <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
-                Geselecteerd werk
+                Portfolio
               </span>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-8 max-w-2xl text-balance font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight">
-                Werk dat <Accent>groeit.</Accent>
+                Onze <Accent>projecten.</Accent>
               </h2>
             </Reveal>
           </div>

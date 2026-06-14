@@ -92,7 +92,7 @@ export function MShapes({ lowPower = false }: { lowPower?: boolean }) {
 
   const introStart = useRef<number | null>(null)
   const idleSpin = useRef(0)
-  const smMouse = useRef(new THREE.Vector2())
+  // const smMouse = useRef(new THREE.Vector2()) // see disabled interaction below
 
   const ctrl = useControls('M-shapes', {
     scale: { value: 0.55, min: 0.4, max: 2.5, step: 0.01 },
@@ -105,7 +105,7 @@ export function MShapes({ lowPower = false }: { lowPower?: boolean }) {
     tiltAmount: { value: 0.7, min: 0, max: 1.5, step: 0.01 }, // pointer/touch reactivity
     // entrance / motion
     introDuration: { value: 2.2, min: 0.5, max: 5, step: 0.1 },
-    idleSpin: { value: 0.22, min: 0, max: 1, step: 0.01 }, // rad/s, continuous turn
+    idleSpin: { value: 0.45, min: 0, max: 1, step: 0.01 }, // rad/s, continuous orbit
     // material — glassy but light; the colour comes from the vertex gradient
     transmission: { value: 0.38, min: 0, max: 1, step: 0.01 },
     roughness: { value: 0.2, min: 0, max: 1, step: 0.01 },
@@ -146,21 +146,26 @@ export function MShapes({ lowPower = false }: { lowPower?: boolean }) {
     const eOut = easeOutCubic(p)
     const eBack = p <= 0 ? 0 : easeOutBack(p) // scale pop with slight overshoot
 
-    // snappy pointer follow — the M tracks the cursor almost directly (mouse on
-    // desktop, touch-drag on mobile) so it feels responsive, not floaty.
-    smMouse.current.lerp(state.pointer, 0.2)
+    // DISABLED: user interaction (cursor / touch-drag rotating the M). A
+    // user-controllable M was confusing, so the M now orbits purely on its own.
+    // Kept here, commented out, so we can bring it back later:
+    //   smMouse.current.lerp(state.pointer, 0.2)
+    //   const mouseRotY = smMouse.current.x * 1.0 * ctrl.tiltAmount      // add to ti.rotation.y
+    //   const mouseRotX = -smMouse.current.y * 0.85 * ctrl.tiltAmount    // add to ti.rotation.x
 
     // idle spin ramps in only after the intro has landed
     idleSpin.current += delta * ctrl.idleSpin * eOut
 
-    // ---- rotation (tilt group) ----
+    // ---- rotation (tilt group): pure automatic orbit, no user input ----
     const introRotY = (1 - eOut) * Math.PI * 2 // one full turn settling to 0
-    const mouseRotY = smMouse.current.x * 1.0 * ctrl.tiltAmount
-    ti.rotation.y = baseRotY + introRotY + idleSpin.current + mouseRotY
+    ti.rotation.y = baseRotY + introRotY + idleSpin.current
 
     const introRotX = (1 - eOut) * 0.5 // start tipped forward, settle
-    const mouseRotX = -smMouse.current.y * 0.85 * ctrl.tiltAmount
-    ti.rotation.x = baseRotX + introRotX + mouseRotX
+    // gentle orbital sway on X + Z so it flows like an orbit, not a flat spin
+    const swayX = eOut * 0.12 * Math.sin(t * 0.6)
+    const swayZ = eOut * 0.05 * Math.sin(t * 0.45)
+    ti.rotation.x = baseRotX + introRotX + swayX
+    ti.rotation.z = swayZ
 
     // ---- position + scale (outer group) ----
     // The M stays put on scroll (the hero background parallaxes instead, see

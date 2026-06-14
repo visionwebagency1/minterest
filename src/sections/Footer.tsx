@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { M_PATH } from '@/three/mPath'
+import { Logo } from '@/components/Logo'
 import { MAIN_SERVICES } from '@/data/services'
 
 /**
@@ -40,13 +40,8 @@ export function Footer() {
         <div className="flex flex-col justify-between gap-14 lg:flex-row">
           {/* Brand */}
           <div className="max-w-sm">
-            <Link to="/" className="flex items-center gap-2.5">
-              <svg viewBox="-1.75 -1 3.5 2" className="h-7 w-auto" aria-hidden="true">
-                <path d={M_PATH} transform="scale(1,-1)" fill="#42C28C" />
-              </svg>
-              <span className="font-display text-xl font-bold tracking-[-0.01em] text-white">
-                Minterest
-              </span>
+            <Link to="/" aria-label="Minterest home" className="inline-flex">
+              <Logo className="h-8 w-auto" />
             </Link>
             <p className="mt-6 font-accent text-lg italic text-white/70">
               Where interest becomes your growth.
