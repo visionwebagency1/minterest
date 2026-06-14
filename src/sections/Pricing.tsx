@@ -60,7 +60,7 @@ export function Pricing() {
   const plans = CATEGORIES[tab].plans
 
   return (
-    <section className="relative bg-[#EEF1E7] py-28 text-near-black md:py-36">
+    <section className="relative bg-[#EAF4EC] py-28 text-near-black md:py-36">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <Reveal className="flex items-center justify-center gap-3 text-center md:justify-start md:text-left">
           <span className="h-px w-10 bg-emerald/50" />
@@ -108,8 +108,8 @@ export function Pricing() {
                 key={p.name}
                 className={`relative flex flex-col rounded-3xl border p-8 transition-transform duration-300 hover:-translate-y-1 md:p-9 ${
                   p.popular
-                    ? 'border-emerald bg-emerald-deep text-cream shadow-[0_30px_80px_rgba(15,92,77,0.3)]'
-                    : 'border-emerald-deep/10 bg-white text-near-black shadow-[0_18px_50px_rgba(15,92,77,0.08)]'
+                    ? 'border-emerald bg-emerald-deep text-cream shadow-[0_30px_80px_rgba(1,63,64,0.3)]'
+                    : 'border-emerald-deep/10 bg-white text-near-black shadow-[0_18px_50px_rgba(1,63,64,0.08)]'
                 }`}
               >
                 {p.popular && (

@@ -49,13 +49,13 @@ export function RouteWipe() {
         >
           <motion.svg
             viewBox="-1.75 -1 3.5 2"
-            className="w-[34vw] max-w-[180px] drop-shadow-[0_10px_40px_rgba(79,216,155,0.3)]"
+            className="w-[34vw] max-w-[180px] drop-shadow-[0_10px_40px_rgba(66,194,140,0.3)]"
             initial={{ opacity: 0, scale: 0.88 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.14, ease: EASE }}
             aria-hidden="true"
           >
-            <path d={M_PATH} transform="scale(1,-1)" fill="#F4F1EA" />
+            <path d={M_PATH} transform="scale(1,-1)" fill="#F4F4F4" />
           </motion.svg>
         </motion.div>
       )}

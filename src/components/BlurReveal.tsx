@@ -9,7 +9,7 @@ import { motion, useReducedMotion } from 'motion/react'
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const
-const ACCENT = 'text-emerald [text-shadow:0_0_16px_rgba(79,216,155,0.7)]'
+const ACCENT = 'text-emerald [text-shadow:0_0_16px_rgba(66,194,140,0.7)]'
 
 export function BlurReveal({
   text,

@@ -56,7 +56,7 @@ function MIcon() {
       animate={{ rotate: [-5, 5, -5], y: [0, -1.5, 0] }}
       transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
     >
-      <path d={M_PATH} transform="scale(1,-1)" fill="#F4F1EA" strokeLinejoin="round" />
+      <path d={M_PATH} transform="scale(1,-1)" fill="#F4F4F4" strokeLinejoin="round" />
     </motion.svg>
   )
 }
@@ -79,7 +79,7 @@ export function Header() {
             onClick={close}
             className="group relative z-10 flex shrink-0 items-center gap-2 pr-1 transition-transform duration-300 hover:scale-[1.03] sm:gap-2.5"
           >
-            <span className="drop-shadow-[0_0_10px_rgba(127,227,168,0.35)]">
+            <span className="drop-shadow-[0_0_10px_rgba(144,238,144,0.35)]">
               <MIcon />
             </span>
             <span className="font-sans text-lg font-bold tracking-[-0.01em] text-white sm:text-xl">Minterest</span>

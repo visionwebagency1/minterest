@@ -19,9 +19,9 @@ const RANGE = {
 }
 
 const PALETTE = [
-  new THREE.Color('#4FD89B'), // mint
-  new THREE.Color('#7FE3A8'), // lime-accent
-  new THREE.Color('#1FA67A'), // emerald
+  new THREE.Color('#42C28C'), // mint
+  new THREE.Color('#90EE90'), // lime-accent
+  new THREE.Color('#008081'), // emerald
 ]
 
 /** Soft round sprite (radial gradient) so points read as glowing dots. */

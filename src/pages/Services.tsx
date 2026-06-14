@@ -25,7 +25,7 @@ export function Services() {
           className="pointer-events-none absolute -right-12 top-1/2 h-[90%] -translate-y-1/2 opacity-[0.05]"
           aria-hidden="true"
         >
-          <path d={M_PATH} transform="scale(1,-1)" fill="#0F5C4D" />
+          <path d={M_PATH} transform="scale(1,-1)" fill="#013F40" />
         </svg>
 
         <div className="relative mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
@@ -67,7 +67,7 @@ export function Services() {
             <Reveal key={s.slug} delay={(i % 2) * 0.06}>
               <Link
                 to={`/diensten/${s.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-emerald-deep/10 bg-white p-8 shadow-[0_18px_50px_rgba(15,92,77,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 hover:shadow-[0_30px_80px_rgba(15,92,77,0.16)] md:p-10"
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-emerald-deep/10 bg-white p-8 shadow-[0_18px_50px_rgba(1,63,64,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 hover:shadow-[0_30px_80px_rgba(1,63,64,0.16)] md:p-10"
               >
                 {/* accent strip */}
                 <span className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${s.accent}`} aria-hidden="true" />
@@ -89,7 +89,7 @@ export function Services() {
                 <ul className="mt-6 flex flex-wrap gap-2">
                   {s.subs.map((sub) => (
                     <li key={sub.name}>
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-deep/10 bg-[#EEF1E7] px-3 py-1.5 font-sans text-[13px] font-medium text-emerald-deep">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-deep/10 bg-[#EAF4EC] px-3 py-1.5 font-sans text-[13px] font-medium text-emerald-deep">
                         <span className="h-1 w-1 rounded-full bg-emerald" aria-hidden="true" />
                         {sub.name}
                       </span>

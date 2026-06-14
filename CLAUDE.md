@@ -8,7 +8,7 @@ Dit bestand is blijvende context voor dit project. Lees het bij elke sessie.
 ## Brand identity
 De volledige brand identity staat in `assets/MINTEREST_-_CONCEPT_5.pdf`. Bekijk die voor de exacte M-vorm, het kleurverloop en de visuele toon, en gebruik die als leidraad.
 
-Het logo is een abstracte **M uit drie voorwaarts-leunende vormen** (drie "bergen" die oplopen naar rechtsboven) — uitdrukking van groei en momentum. Het kleurverloop gaat van diep smaragd naar fris mint = "groei over tijd".
+Het logo is een abstracte **M uit drie voorwaarts-leunende vormen** (drie "bergen" die oplopen naar rechtsboven) — uitdrukking van groei en momentum. Het kleurverloop gaat van **teal (#008081) naar licht groen (#90EE90)** = "groei over tijd".
 
 ## Centraal concept — "de opwaartse klim"
 Eén idee door de hele site: je beweegt **omhoog en vooruit**. Alle motion leunt naar rechtsboven, alles bouwt op.
@@ -17,15 +17,23 @@ Eén idee door de hele site: je beweegt **omhoog en vooruit**. Alle motion leunt
 - **Diensten als treden:** de vier takken worden als oplopende niveaus getoond, niet als platte grid.
 
 ## Design-systeem
-Kleuren — **GEEN neutraal grijs**, alleen getinte donkergroenen voor schaduw/diepte:
+Kleuren — **echte brand-palette uit de identity-PDF: teal-klim** (primary teal naar
+accent-groen). GEEN neutraal grijs; donkere tinten zijn teal-getint. De token-namen
+blijven stabiel (emerald/mint/lime) zodat de hele site vanuit `tailwind.config.js`
++ `globals.css` herthemed wordt, maar de waarden zijn nu teal->groen:
 ```
---emerald-deep:  #0F5C4D
---emerald:       #1FA67A
---mint:          #4FD89B
---lime-accent:   #7FE3A8
---cream:         #F4F1EA
---near-black:    #0A1512   (groen-getint zwart)
+--emerald-deep:  #013F40   (diep teal — schaduw/dark sections)
+--emerald:       #008081   (PRIMARY teal)
+--mint:          #42C28C   (teal->groen brug, levendig accent)
+--lime-accent:   #90EE90   (ACCENT groen)
+--lime-bright:   #B6F5B6   (lichtste groen)
+--cream:         #F4F4F4   (brand light)
+--near-black:    #0A1512   (teal-getint zwart — de "mooie" dark)
+--ink:           #071311   (diepste teal-zwart)
 ```
+Brand-gradient (logo + hero + scroll-timeline): **#008081 -> #90EE90** (teal naar
+licht groen). Dark gradients lopen teal -> #1C1C1C-achtig diep. Alle hardcoded
+kleuren in componenten volgen deze palette (geen losse emerald/lime hexes meer).
 Typografie — **GEEN Inter/Roboto/Arial/system fonts**. Laad via Fontshare CDN:
 - Display/headings: **Clash Display**
 - Body: **Satoshi**

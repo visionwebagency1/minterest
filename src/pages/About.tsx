@@ -60,7 +60,7 @@ export function About() {
               <Reveal key={b.title} delay={i * 0.06}>
                 <Link
                   to={b.to}
-                  className="group flex h-full flex-col rounded-2xl border border-emerald-deep/10 bg-white p-8 shadow-[0_18px_50px_rgba(15,92,77,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 md:p-10"
+                  className="group flex h-full flex-col rounded-2xl border border-emerald-deep/10 bg-white p-8 shadow-[0_18px_50px_rgba(1,63,64,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 md:p-10"
                 >
                   <span className="font-accent text-2xl italic text-emerald">0{i + 1}</span>
                   <h3 className="mt-3 font-display text-xl font-semibold md:text-2xl">{b.title}</h3>
@@ -80,7 +80,7 @@ export function About() {
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {SUPPORT.map((b, i) => (
-              <Reveal key={b.title} delay={i * 0.06} className="rounded-2xl border border-emerald-deep/10 bg-[#EEF1E7] p-8 md:p-10">
+              <Reveal key={b.title} delay={i * 0.06} className="rounded-2xl border border-emerald-deep/10 bg-[#EAF4EC] p-8 md:p-10">
                 <h3 className="font-display text-xl font-semibold md:text-2xl">{b.title}</h3>
                 <p className="mt-3 font-sans text-base leading-relaxed text-near-black/60">{b.desc}</p>
               </Reveal>

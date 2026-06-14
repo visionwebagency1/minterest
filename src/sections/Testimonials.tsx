@@ -42,7 +42,7 @@ export function Testimonials() {
       className="relative overflow-hidden py-28 text-cream md:py-40"
       style={{
         backgroundImage:
-          'radial-gradient(60% 60% at 20% 0%, rgba(79,216,155,0.28), transparent 60%), radial-gradient(55% 55% at 90% 100%, rgba(31,166,122,0.3), transparent 60%), linear-gradient(160deg, #0F5C4D 0%, #0A3329 60%, #08120F 100%)',
+          'radial-gradient(60% 60% at 20% 0%, rgba(66,194,140,0.28), transparent 60%), radial-gradient(55% 55% at 90% 100%, rgba(0,128,129,0.3), transparent 60%), linear-gradient(160deg, #013F40 0%, #0A3A38 60%, #071311 100%)',
       }}
     >
       <div className="mx-auto max-w-5xl px-6 text-center md:px-10">

@@ -57,7 +57,7 @@ function MiniScreen({ kind, accent }: { kind: string; accent: string }) {
         </div>
       )}
       {kind === 'lux' && (
-        <div className="grid h-[4.5rem] place-items-center rounded-lg bg-[#15130E]">
+        <div className="grid h-[4.5rem] place-items-center rounded-lg bg-[#121A18]">
           <span className="font-accent text-lg italic text-[#C9A84C]">DYOTA</span>
         </div>
       )}
@@ -79,7 +79,7 @@ function MiniScreen({ kind, accent }: { kind: string; accent: string }) {
 
 export function Showcase() {
   return (
-    <section id="work" className="relative bg-[#EEF1E7] py-28 text-near-black md:py-36">
+    <section id="work" className="relative bg-[#EAF4EC] py-28 text-near-black md:py-36">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -118,7 +118,7 @@ export function Showcase() {
             >
               <Link to="/work" className="group block">
                 <motion.div
-                  className="overflow-hidden rounded-2xl border border-emerald-deep/10 bg-white shadow-[0_30px_70px_rgba(15,92,77,0.14)] [transform-style:preserve-3d]"
+                  className="overflow-hidden rounded-2xl border border-emerald-deep/10 bg-white shadow-[0_30px_70px_rgba(1,63,64,0.14)] [transform-style:preserve-3d]"
                   style={{ rotateY: i % 2 === 0 ? 9 : -9, rotateX: 5 }}
                   whileHover={{ rotateY: 0, rotateX: 0, y: -6 }}
                   transition={{ duration: 0.5, ease: EASE }}

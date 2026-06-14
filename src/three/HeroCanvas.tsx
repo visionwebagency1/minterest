@@ -32,15 +32,15 @@ export default function HeroCanvas({ active = true }: { active?: boolean }) {
       {/* Lighting for the glass / jewel M — brighter so the white reads white. */}
       <ambientLight intensity={0.7} />
       <directionalLight position={[3, 4, 3]} intensity={1.7} color="#ffffff" />
-      <directionalLight position={[-4, 2, 2]} intensity={0.6} color="#7FE3A8" />
+      <directionalLight position={[-4, 2, 2]} intensity={0.6} color="#90EE90" />
 
       {/* Brand-coloured environment so the glass reflects emerald/mint/lime.
           Baked once (frames={1}); background stays the gradient. */}
       <Environment resolution={256} frames={1} background={false}>
-        <Lightformer intensity={2.2} color="#4FD89B" position={[2, 2, 2]} scale={[6, 6, 1]} />
-        <Lightformer intensity={1.4} color="#1FA67A" position={[-3, 1, 1]} scale={[6, 6, 1]} />
-        <Lightformer intensity={1.6} color="#7FE3A8" position={[2, 3, -2]} scale={[5, 5, 1]} />
-        <Lightformer intensity={0.7} color="#0F5C4D" position={[-2, -2, 2]} scale={[8, 8, 1]} />
+        <Lightformer intensity={2.2} color="#42C28C" position={[2, 2, 2]} scale={[6, 6, 1]} />
+        <Lightformer intensity={1.4} color="#008081" position={[-3, 1, 1]} scale={[6, 6, 1]} />
+        <Lightformer intensity={1.6} color="#90EE90" position={[2, 3, -2]} scale={[5, 5, 1]} />
+        <Lightformer intensity={0.7} color="#013F40" position={[-2, -2, 2]} scale={[8, 8, 1]} />
       </Environment>
 
       <Suspense fallback={null}>

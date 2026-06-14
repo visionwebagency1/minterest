@@ -14,7 +14,7 @@ export function CtaBand() {
       className="relative overflow-hidden bg-ink py-28 text-cream md:py-40"
       style={{
         backgroundImage:
-          'radial-gradient(60% 60% at 50% 0%, rgba(31,166,122,0.28), transparent 60%), radial-gradient(50% 50% at 85% 100%, rgba(79,216,155,0.18), transparent 60%)',
+          'radial-gradient(60% 60% at 50% 0%, rgba(0,128,129,0.28), transparent 60%), radial-gradient(50% 50% at 85% 100%, rgba(66,194,140,0.18), transparent 60%)',
       }}
     >
       <div className="mx-auto max-w-5xl px-6 text-center md:px-10">

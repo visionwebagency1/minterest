@@ -52,7 +52,7 @@ export function Audit() {
           <Reveal>
             <form
               onSubmit={handleSubmit}
-              className="rounded-3xl border border-emerald-deep/10 bg-white p-8 shadow-[0_24px_60px_rgba(15,92,77,0.1)] md:p-10"
+              className="rounded-3xl border border-emerald-deep/10 bg-white p-8 shadow-[0_24px_60px_rgba(1,63,64,0.1)] md:p-10"
             >
               {isSuccess ? (
                 <div className="flex min-h-[14rem] flex-col items-center justify-center text-center">
@@ -95,7 +95,7 @@ export function Audit() {
         </section>
 
         {/* what you get */}
-        <section className="bg-[#EEF1E7] py-24 md:py-32">
+        <section className="bg-[#EAF4EC] py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal className="flex items-center gap-3">
               <span className="h-px w-10 bg-emerald/50" />
@@ -111,7 +111,7 @@ export function Audit() {
                 <Reveal
                   key={c.title}
                   delay={(i % 3) * 0.06}
-                  className="rounded-2xl border border-emerald-deep/10 bg-white p-7 shadow-[0_18px_50px_rgba(15,92,77,0.08)]"
+                  className="rounded-2xl border border-emerald-deep/10 bg-white p-7 shadow-[0_18px_50px_rgba(1,63,64,0.08)]"
                 >
                   <span className="grid h-10 w-10 place-items-center rounded-xl bg-emerald/10 text-emerald">
                     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12.5 10 17 19 7" /></svg>
@@ -145,7 +145,7 @@ export function Audit() {
           <Reveal>
             <div
               className="flex flex-col items-center gap-7 rounded-3xl p-10 text-center text-cream md:p-16"
-              style={{ backgroundImage: 'radial-gradient(70% 90% at 50% 0%, rgba(79,216,155,0.32), transparent 60%), linear-gradient(160deg, #0F5C4D 0%, #0A3329 100%)' }}
+              style={{ backgroundImage: 'radial-gradient(70% 90% at 50% 0%, rgba(66,194,140,0.32), transparent 60%), linear-gradient(160deg, #013F40 0%, #0A3A38 100%)' }}
             >
               <h2 className="max-w-xl text-balance font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold">
                 Klaar voor de <Accent>klim?</Accent>

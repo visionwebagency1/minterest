@@ -4,14 +4,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        'emerald-deep': '#0F5C4D',
-        emerald: '#1FA67A',
-        mint: '#4FD89B',
-        'lime-accent': '#7FE3A8',
-        'lime-bright': '#9BF5BE',
-        cream: '#F4F1EA',
-        'near-black': '#0A1512',
-        ink: '#08120F',
+        // Brand palette (teal climb): primary teal #008081 -> accent green #90EE90.
+        // Token names kept stable so the whole site re-themes from here.
+        'emerald-deep': '#013F40', // deep teal (shadow / dark sections base)
+        emerald: '#008081', // PRIMARY teal
+        mint: '#42C28C', // teal-green bridge (vivid accent)
+        'lime-accent': '#90EE90', // ACCENT green
+        'lime-bright': '#B6F5B6', // lightest green
+        cream: '#F4F4F4', // brand light
+        'near-black': '#0A1512', // teal-tinted dark (the "nice" dark)
+        ink: '#071311', // deepest teal-black
       },
       fontFamily: {
         // Body

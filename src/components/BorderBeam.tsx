@@ -27,7 +27,7 @@ export function BorderBeam({ rx = 12, duration = 4.5 }: { rx?: number; duration?
         </defs>
         <motion.rect
           x="0" y="0" width="100%" height="100%" rx={rx} ry={rx} pathLength={100}
-          fill="none" stroke="#7FE3A8" strokeWidth={4} strokeLinecap="round"
+          fill="none" stroke="#90EE90" strokeWidth={4} strokeLinecap="round"
           strokeDasharray="16 84" opacity={0.75} filter={`url(#${id})`}
           {...spin}
         />

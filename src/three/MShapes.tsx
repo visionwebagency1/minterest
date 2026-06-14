@@ -36,10 +36,10 @@ const INTRO_DELAY = 0.25
 // matching the brand logomark. The glass material tints over these colours so
 // the mark stays liquid-glass but reads in the gradient instead of white.
 const GRADIENT_STOPS: [number, string][] = [
-  [0.0, '#8FE3C0'],
-  [0.4, '#B6EED6'],
-  [0.7, '#DAF7E8'],
-  [1.0, '#FBFEFC'],
+  [0.0, '#2FB89C'], // teal-green (bottom-left)
+  [0.4, '#5FD09A'],
+  [0.7, '#9CEE98'],
+  [1.0, '#E6FCE6'], // light green / near-white (top-right)
 ]
 
 function applyBrandGradient(geo: THREE.BufferGeometry) {
@@ -202,7 +202,7 @@ export function MShapes({ lowPower = false }: { lowPower?: boolean }) {
                 // + environment reflections preserve the glassy sheen.
                 vertexColors
                 color="#ffffff"
-                attenuationColor="#D8F7E6"
+                attenuationColor="#CFF7DA"
                 attenuationDistance={4}
                 envMapIntensity={1.8}
                 // Kept deliberately light: low samples/resolution.

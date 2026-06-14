@@ -157,7 +157,7 @@ export function BrandingRender() {
         transition={FLOAT(8)}
       >
         {/* logo tile — animated gold mark on charcoal */}
-        <div className="relative grid aspect-square place-items-center overflow-hidden rounded-2xl bg-[#15130E] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+        <div className="relative grid aspect-square place-items-center overflow-hidden rounded-2xl bg-[#121A18] shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           <motion.svg
             viewBox="0 0 100 100"
             className="w-3/5"
@@ -188,7 +188,7 @@ export function BrandingRender() {
           />
         </div>
         {/* wordmark tile */}
-        <div className="flex aspect-square flex-col items-center justify-center gap-1 rounded-2xl border border-white/10 bg-[#15130E]">
+        <div className="flex aspect-square flex-col items-center justify-center gap-1 rounded-2xl border border-white/10 bg-[#121A18]">
           <span className="font-accent text-3xl italic tracking-wide" style={{ color: GOLD }}>
             Aurum
           </span>
@@ -198,7 +198,7 @@ export function BrandingRender() {
         </div>
         {/* gold/white palette */}
         <div className="col-span-2 grid grid-cols-4 gap-2">
-          {[GOLD, '#E8D9A8', '#FFFFFF', '#15130E'].map((c) => (
+          {[GOLD, '#E8D9A8', '#FFFFFF', '#121A18'].map((c) => (
             <div
               key={c}
               className="h-10 rounded-lg border border-white/10 shadow-sm"
@@ -224,8 +224,8 @@ export function VideoRender() {
     <div className="relative grid h-full w-full place-items-center overflow-hidden p-6">
       <div className="relative w-full overflow-hidden">
         {/* edge fades */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#082019] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#082019] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#062320] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#062320] to-transparent" />
         <motion.div
           className="flex w-max gap-3"
           animate={{ x: ['0%', '-50%'] }}
@@ -320,10 +320,10 @@ export function NetworkRender() {
 
   const center = { x: 50, y: 50, r: 13 }
   const profiles = [
-    { x: 16, y: 24, r: 7.5, c: '#F4F1EA', label: 'JK', icon: '♥', val: 312 },
-    { x: 84, y: 26, r: 8, c: '#4FD89B', label: 'AM', icon: '✦', val: 89 },
-    { x: 22, y: 78, r: 7.5, c: '#7FE3A8', label: 'TS', icon: '↑', val: 1200 },
-    { x: 82, y: 74, r: 8, c: '#F4F1EA', label: 'LD', icon: '♥', val: 540 },
+    { x: 16, y: 24, r: 7.5, c: '#F4F4F4', label: 'JK', icon: '♥', val: 312 },
+    { x: 84, y: 26, r: 8, c: '#42C28C', label: 'AM', icon: '✦', val: 89 },
+    { x: 22, y: 78, r: 7.5, c: '#90EE90', label: 'TS', icon: '↑', val: 1200 },
+    { x: 82, y: 74, r: 8, c: '#F4F4F4', label: 'LD', icon: '♥', val: 540 },
   ]
 
   return (
@@ -334,7 +334,7 @@ export function NetworkRender() {
             <motion.line
               key={i}
               x1={center.x} y1={center.y} x2={n.x} y2={n.y}
-              stroke="rgba(127,227,168,0.5)" strokeWidth={0.7}
+              stroke="rgba(144,238,144,0.5)" strokeWidth={0.7}
               animate={{ opacity: [0.25, 0.7, 0.25] }}
               transition={{ duration: 2.4 + i * 0.4, repeat: Infinity, ease: 'easeInOut' }}
             />
@@ -345,8 +345,8 @@ export function NetworkRender() {
             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             style={{ transformOrigin: `${center.x}px ${center.y}px` }}
           >
-            <circle cx={center.x} cy={center.y} r={center.r} fill="#9BF5BE" style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))' }} />
-            <path d={M_PATH} transform={`translate(${center.x} ${center.y}) scale(2.7,-2.7)`} fill="#0F5C4D" />
+            <circle cx={center.x} cy={center.y} r={center.r} fill="#B6F5B6" style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.4))' }} />
+            <path d={M_PATH} transform={`translate(${center.x} ${center.y}) scale(2.7,-2.7)`} fill="#013F40" />
           </motion.g>
           {/* profile nodes */}
           {profiles.map((n, i) => (
@@ -357,7 +357,7 @@ export function NetworkRender() {
               style={{ transformOrigin: `${n.x}px ${n.y}px` }}
             >
               <circle cx={n.x} cy={n.y} r={n.r} fill={n.c} style={{ filter: 'drop-shadow(0 1px 4px rgba(0,0,0,0.35))' }} />
-              <text x={n.x} y={n.y + 1.5} textAnchor="middle" fontSize="4" fontWeight="700" fill="#0F5C4D" fontFamily="Satoshi, sans-serif">
+              <text x={n.x} y={n.y + 1.5} textAnchor="middle" fontSize="4" fontWeight="700" fill="#013F40" fontFamily="Satoshi, sans-serif">
                 {n.label}
               </text>
             </motion.g>
@@ -392,7 +392,7 @@ export function AiVideoRender() {
     <div className="grid h-full w-full place-items-center p-7">
       <motion.div className="w-full max-w-sm" animate={{ y: [0, -9, 0] }} transition={FLOAT(7.5)}>
         {/* prompt bar */}
-        <div className="mb-3 flex items-center gap-2 rounded-xl border border-mint/30 bg-[#0c241d] px-3 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]">
+        <div className="mb-3 flex items-center gap-2 rounded-xl border border-mint/30 bg-[#0A2725] px-3 py-2.5 shadow-[0_10px_30px_rgba(0,0,0,0.4)]">
           <motion.span
             className="text-lime-bright"
             animate={{ rotate: [0, 90, 0], scale: [1, 1.2, 1] }}
@@ -490,7 +490,7 @@ export function SeoRender() {
                 transition={{ type: 'spring', stiffness: 420, damping: 34 }}
                 className={`flex items-center gap-2 rounded-lg px-2.5 py-2 ${
                   row.brand
-                    ? 'bg-gradient-to-r from-emerald to-mint shadow-[0_8px_20px_rgba(31,166,122,0.4)]'
+                    ? 'bg-gradient-to-r from-emerald to-mint shadow-[0_8px_20px_rgba(0,128,129,0.4)]'
                     : 'bg-black/[0.03]'
                 }`}
               >

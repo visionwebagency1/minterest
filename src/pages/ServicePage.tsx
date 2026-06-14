@@ -41,7 +41,7 @@ export function ServicePage({ slug }: { slug: string }) {
 
       <div className="bg-cream text-near-black">
         {/* De oplossing — solution promise with blur word-reveal */}
-        <section className="bg-[#EEF1E7] py-24 md:py-32">
+        <section className="bg-[#EAF4EC] py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal className="flex items-center gap-3">
               <span className="h-px w-10 bg-emerald/50" />
@@ -59,7 +59,7 @@ export function ServicePage({ slug }: { slug: string }) {
         {slug === 'web-development' && (
           <section className="mx-auto max-w-7xl px-6 pt-24 md:px-10 lg:px-16">
             <Reveal>
-              <div className="flex flex-col items-start gap-5 rounded-3xl border border-emerald/30 bg-white p-8 shadow-[0_18px_50px_rgba(15,92,77,0.1)] md:flex-row md:items-center md:justify-between md:p-10">
+              <div className="flex flex-col items-start gap-5 rounded-3xl border border-emerald/30 bg-white p-8 shadow-[0_18px_50px_rgba(1,63,64,0.1)] md:flex-row md:items-center md:justify-between md:p-10">
                 <div>
                   <h3 className="font-display text-xl font-semibold md:text-2xl">Benieuwd hoe jouw site nu scoort?</h3>
                   <p className="mt-2 font-sans text-near-black/60">Ontvang gratis een audit met concrete groeikansen, binnen 24 uur.</p>
@@ -120,7 +120,7 @@ export function ServicePage({ slug }: { slug: string }) {
         </section>
 
         {/* Living scene — the animated render in a framed card on light bg */}
-        <section className="bg-[#EEF1E7] py-24 md:py-32">
+        <section className="bg-[#EAF4EC] py-24 md:py-32">
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 md:grid-cols-2 md:gap-16 md:px-10 lg:px-16">
             <div>
               <Reveal className="flex items-center gap-3">
@@ -166,14 +166,18 @@ export function ServicePage({ slug }: { slug: string }) {
         <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 lg:px-16">
           <Reveal>
             <div
-              className={`flex flex-col items-center gap-7 rounded-3xl bg-gradient-to-br ${s.accent} p-10 text-center text-near-black md:p-16`}
+              className="relative flex flex-col items-center gap-7 overflow-hidden rounded-3xl p-10 text-center text-cream md:p-16"
+              style={{
+                backgroundImage:
+                  'radial-gradient(70% 90% at 50% 0%, rgba(66,194,140,0.32), transparent 60%), linear-gradient(160deg, #008081 0%, #013F40 55%, #06140F 100%)',
+              }}
             >
               <h2 className="max-w-xl text-balance font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold">
                 Klaar om hiermee te klimmen?
               </h2>
               <Link
                 to="/start"
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-near-black px-8 py-4 font-sans text-base font-semibold text-cream shadow-lg shadow-emerald-deep/30 transition-transform duration-300 hover:scale-[1.03]"
+                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-mint to-lime-accent px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
               >
                 <span className="relative z-10">Start jouw project</span>
                 <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
@@ -206,7 +210,7 @@ function ServiceHero({ service: s }: { service: MainService }) {
         className="pointer-events-none absolute -right-12 top-1/2 h-[80%] -translate-y-1/2 opacity-[0.05] md:-right-10 md:h-[120%]"
         aria-hidden="true"
       >
-        <path d={M_PATH} transform="scale(1,-1)" fill="#0F5C4D" />
+        <path d={M_PATH} transform="scale(1,-1)" fill="#013F40" />
       </svg>
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
@@ -291,7 +295,7 @@ function ServiceHero({ service: s }: { service: MainService }) {
 function SubVisual({ accent, index }: { accent: string; index: number }) {
   return (
     <div
-      className={`relative aspect-[5/4] overflow-hidden rounded-3xl bg-gradient-to-br ${accent} shadow-[0_30px_70px_rgba(15,92,77,0.22)]`}
+      className={`relative aspect-[5/4] overflow-hidden rounded-3xl bg-gradient-to-br ${accent} shadow-[0_30px_70px_rgba(1,63,64,0.22)]`}
     >
       <svg
         viewBox="-1.75 -1 3.5 2"
@@ -333,9 +337,9 @@ function ServiceScene({ service: s }: { service: MainService }) {
   return (
     <div
       ref={ref}
-      className="relative aspect-square w-full overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_40px_120px_rgba(15,92,77,0.25)] ring-1 ring-mint/10 lg:aspect-[4/3.5]"
+      className="relative aspect-square w-full overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_40px_120px_rgba(1,63,64,0.25)] ring-1 ring-mint/10 lg:aspect-[4/3.5]"
     >
-      <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(155deg, #0F5C4D 0%, #0A1F19 52%, #06120F 100%)' }} />
+      <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(155deg, #013F40 0%, #082321 52%, #05110F 100%)' }} />
       <motion.div
         className="pointer-events-none absolute left-[18%] top-[8%] h-[64%] w-[64%] rounded-full bg-mint/20 blur-[90px]"
         animate={reduce ? undefined : { opacity: [0.32, 0.6, 0.32], scale: [0.9, 1.06, 0.9] }}

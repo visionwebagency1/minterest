@@ -71,12 +71,12 @@ export const fragmentShader = /* glsl */ `
     return 42.0 * dot(m * m, vec4(dot(p0,x0), dot(p1,x1), dot(p2,x2), dot(p3,x3)));
   }
 
-  // ---- brand palette (sRGB, 0..1) -------------------------------------
-  const vec3 EMERALD_DEEP = vec3(0.059, 0.361, 0.302); // #0F5C4D
-  const vec3 EMERALD      = vec3(0.122, 0.651, 0.478); // #1FA67A
-  const vec3 MINT         = vec3(0.310, 0.847, 0.608); // #4FD89B
-  const vec3 LIME         = vec3(0.498, 0.890, 0.659); // #7FE3A8
-  const vec3 NEAR_BLACK   = vec3(0.039, 0.082, 0.071); // #0A1512
+  // ---- brand palette (sRGB, 0..1) — teal climb -----------------------
+  const vec3 EMERALD_DEEP = vec3(0.004, 0.247, 0.251); // #013F40 deep teal
+  const vec3 EMERALD      = vec3(0.000, 0.502, 0.506); // #008081 PRIMARY teal
+  const vec3 MINT         = vec3(0.259, 0.761, 0.549); // #42C28C bridge
+  const vec3 LIME         = vec3(0.565, 0.933, 0.565); // #90EE90 ACCENT green
+  const vec3 NEAR_BLACK   = vec3(0.039, 0.082, 0.071); // #0A1512 dark
 
   void main(){
     vec2 uv = vUv;

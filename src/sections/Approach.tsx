@@ -42,7 +42,7 @@ function FloatingIcon({ Icon }: { Icon: () => JSX.Element }) {
   const reduce = useReducedMotion()
   return (
     <motion.div
-      className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl border border-emerald/20 bg-white text-emerald shadow-[0_18px_50px_rgba(15,92,77,0.18)]"
+      className="grid h-20 w-20 shrink-0 place-items-center rounded-2xl border border-emerald/20 bg-white text-emerald shadow-[0_18px_50px_rgba(1,63,64,0.18)]"
       animate={reduce ? undefined : { y: [0, -9, 0] }}
       transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
     >
@@ -64,7 +64,7 @@ export function Approach() {
       className="relative overflow-hidden py-28 text-cream md:py-40"
       style={{
         backgroundImage:
-          'radial-gradient(60% 50% at 80% 8%, rgba(31,166,122,0.28), transparent 60%), radial-gradient(50% 45% at 10% 95%, rgba(15,92,77,0.4), transparent 60%), linear-gradient(170deg, #0A1B16 0%, #08120F 100%)',
+          'radial-gradient(60% 50% at 80% 8%, rgba(0,128,129,0.28), transparent 60%), radial-gradient(50% 45% at 10% 95%, rgba(1,63,64,0.4), transparent 60%), linear-gradient(170deg, #08201E 0%, #071311 100%)',
       }}
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
@@ -119,7 +119,7 @@ export function Approach() {
                   </motion.div>
                 </div>
                 {/* node on the centre line (desktop) */}
-                <span className="absolute left-[35px] top-9 h-2.5 w-2.5 rounded-full bg-lime-bright ring-4 ring-[#0a1b16] md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2" />
+                <span className="absolute left-[35px] top-9 h-2.5 w-2.5 rounded-full bg-lime-bright ring-4 ring-[#08201E] md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2" />
               </div>
             ))}
           </div>

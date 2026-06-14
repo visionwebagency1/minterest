@@ -7,11 +7,12 @@
 /*  No neutral grey: only green-tinted darks for shadow/depth.         */
 /* ------------------------------------------------------------------ */
 :root {
-  --emerald-deep: #0f5c4d;
-  --emerald: #1fa67a;
-  --mint: #4fd89b;
-  --lime-accent: #7fe3a8;
-  --cream: #f4f1ea;
+  /* Brand palette (teal climb): primary teal -> accent green. */
+  --emerald-deep: #013f40;
+  --emerald: #008081;
+  --mint: #42c28c;
+  --lime-accent: #90ee90;
+  --cream: #f4f4f4;
   --near-black: #0a1512;
 
   --font-display: 'Clash Display', system-ui, sans-serif;

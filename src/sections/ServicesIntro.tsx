@@ -18,7 +18,7 @@ export function ServicesIntro() {
       className="relative overflow-hidden bg-ink py-24 md:py-32"
       style={{
         backgroundImage:
-          'radial-gradient(110% 80% at 50% 0%, rgba(31,166,122,0.16), transparent 60%), linear-gradient(180deg, #08120F 0%, #0A1B16 100%)',
+          'radial-gradient(110% 80% at 50% 0%, rgba(0,128,129,0.16), transparent 60%), linear-gradient(180deg, #071311 0%, #08201E 100%)',
       }}
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">

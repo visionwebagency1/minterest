@@ -57,7 +57,7 @@ export function Start() {
           <Reveal>
             <form
               onSubmit={handleSubmit}
-              className="rounded-3xl border border-emerald-deep/10 bg-white p-8 shadow-[0_24px_60px_rgba(15,92,77,0.1)] md:p-12"
+              className="rounded-3xl border border-emerald-deep/10 bg-white p-8 shadow-[0_24px_60px_rgba(1,63,64,0.1)] md:p-12"
             >
               {isSuccess ? (
                 <div className="flex min-h-[24rem] flex-col items-center justify-center text-center">
@@ -82,7 +82,7 @@ export function Start() {
                           onClick={() => toggle(s.key)}
                           className={`flex items-center gap-3 rounded-2xl border p-4 text-left transition-all duration-200 ${
                             active
-                              ? 'border-emerald bg-emerald/10 shadow-[0_0_0_1px_rgba(31,166,122,0.4)]'
+                              ? 'border-emerald bg-emerald/10 shadow-[0_0_0_1px_rgba(0,128,129,0.4)]'
                               : 'border-emerald-deep/12 bg-white hover:border-emerald/40'
                           }`}
                         >
@@ -137,7 +137,7 @@ export function Start() {
         </div>
 
         {/* trust */}
-        <section className="bg-[#EEF1E7] py-24 md:py-28">
+        <section className="bg-[#EAF4EC] py-24 md:py-28">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal delay={0.05}>
               <h2 className="text-balance font-display text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-tight">
@@ -159,7 +159,7 @@ export function Start() {
         {/* review */}
         <section
           className="relative overflow-hidden py-24 text-cream md:py-28"
-          style={{ backgroundImage: 'radial-gradient(60% 60% at 25% 0%, rgba(79,216,155,0.25), transparent 60%), linear-gradient(160deg, #0F5C4D 0%, #08120F 100%)' }}
+          style={{ backgroundImage: 'radial-gradient(60% 60% at 25% 0%, rgba(66,194,140,0.25), transparent 60%), linear-gradient(160deg, #013F40 0%, #071311 100%)' }}
         >
           <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
             <Reveal>

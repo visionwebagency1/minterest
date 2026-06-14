@@ -15,15 +15,16 @@ export function ScrollGradient() {
       className="pointer-events-none absolute inset-0 -z-10"
       style={{
         background:
-          'linear-gradient(180deg,' +
-          ' #0A1512 0%,' + // hero handoff — near-black green
-          ' #0F5C4D 16%,' + // emerald-deep
-          ' #14745F 30%,' +
-          ' #1FA67A 46%,' + // emerald
-          ' #37BE8A 60%,' +
-          ' #4FD89B 74%,' + // mint
-          ' #7FE3A8 88%,' + // lime-accent
-          ' #9BF5BE 100%)', // light mint — "einde"
+          'linear-gradient(174deg,' +
+          ' #0A1512 0%,' + // hero handoff — teal-tinted near-black
+          ' #013F40 12%,' + // deep teal
+          ' #015E5F 25%,' +
+          ' #008081 42%,' + // PRIMARY teal
+          ' #1FA88B 56%,' +
+          ' #42C28C 70%,' + // mint bridge
+          ' #6FD98F 83%,' +
+          ' #90EE90 93%,' + // ACCENT green
+          ' #B6F5B6 100%)', // light green — "einde"
       }}
     />
   )

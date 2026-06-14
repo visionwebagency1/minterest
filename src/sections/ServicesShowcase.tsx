@@ -14,7 +14,7 @@ import { lenisScrollTo } from '@/lib/useLenis'
 gsap.registerPlugin(ScrollTrigger)
 
 const SECTION_BG =
-  'radial-gradient(55% 50% at 12% 18%, rgba(79,216,155,0.18), transparent 60%), radial-gradient(50% 45% at 88% 82%, rgba(31,166,122,0.16), transparent 60%), linear-gradient(180deg, #0A1B16 0%, #EFF1E7 11%, #EFF1E7 100%)'
+  'radial-gradient(55% 50% at 12% 18%, rgba(66,194,140,0.18), transparent 60%), radial-gradient(50% 45% at 88% 82%, rgba(0,128,129,0.16), transparent 60%), linear-gradient(180deg, #08201E 0%, #EAF4EC 11%, #EAF4EC 100%)'
 
 const TOTAL = MAIN_SERVICES.length
 
@@ -138,7 +138,7 @@ function DesktopCard({ service: s, index }: { service: MainService; index: numbe
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Render half (SVG animation untouched). */}
-      <div className="relative h-[36vh] min-h-[300px] w-full shrink-0 overflow-hidden border-b border-white/10 bg-[#082019] md:h-auto md:min-h-0 md:border-b-0 md:border-r">
+      <div className="relative h-[36vh] min-h-[300px] w-full shrink-0 overflow-hidden border-b border-white/10 bg-[#062320] md:h-auto md:min-h-0 md:border-b-0 md:border-r">
         <Render />
       </div>
 
@@ -269,7 +269,7 @@ function ServicesCarouselMobile() {
                 className="block h-1.5 rounded-full"
                 animate={{
                   width: i === active ? 26 : 8,
-                  backgroundColor: i === active ? '#1FA67A' : 'rgba(15,92,77,0.25)',
+                  backgroundColor: i === active ? '#008081' : 'rgba(1,63,64,0.25)',
                 }}
                 transition={{ type: 'spring', stiffness: 320, damping: 30 }}
               />
@@ -286,7 +286,7 @@ function MobileCard({ service: s, index }: { service: MainService; index: number
   return (
     <div className="flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-emerald-deep shadow-[0_30px_80px_rgba(0,0,0,0.45)]">
       {/* compact render (smaller than desktop) */}
-      <div className="relative h-[190px] w-full shrink-0 overflow-hidden border-b border-white/10 bg-[#082019]">
+      <div className="relative h-[190px] w-full shrink-0 overflow-hidden border-b border-white/10 bg-[#062320]">
         <Render />
       </div>
 

@@ -30,7 +30,7 @@ export function PageHero({
       className="relative overflow-hidden bg-near-black pt-36 pb-24 text-cream md:pt-48 md:pb-32"
       style={{
         backgroundImage:
-          'radial-gradient(65% 60% at 78% 8%, rgba(31,166,122,0.4), transparent 60%), radial-gradient(55% 55% at 8% 100%, rgba(15,92,77,0.5), transparent 60%), linear-gradient(160deg, #08120F 0%, #0A1B16 100%)',
+          'radial-gradient(65% 60% at 78% 8%, rgba(0,128,129,0.4), transparent 60%), radial-gradient(55% 55% at 8% 100%, rgba(1,63,64,0.5), transparent 60%), linear-gradient(160deg, #071311 0%, #08201E 100%)',
       }}
     >
       {/* faint M watermark */}
@@ -39,7 +39,7 @@ export function PageHero({
         className="pointer-events-none absolute -right-12 top-1/2 h-[80%] -translate-y-1/2 opacity-[0.08] md:-right-10 md:h-[120%] md:opacity-[0.06]"
         aria-hidden="true"
       >
-        <path d={M_PATH} transform="scale(1,-1)" fill="#4FD89B" />
+        <path d={M_PATH} transform="scale(1,-1)" fill="#42C28C" />
       </svg>
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
