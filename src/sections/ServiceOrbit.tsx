@@ -109,11 +109,11 @@ export function ServiceOrbit() {
               type="button"
               onClick={() => focusService(i)}
               aria-label={`Bekijk ${s.label}`}
-              className="group pointer-events-auto flex items-center gap-2 whitespace-nowrap rounded-full border border-white/60 bg-white/90 px-3.5 py-1.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 outline-none transition-[transform,box-shadow,background-color] duration-300 hover:scale-[1.07] hover:bg-white hover:shadow-[0_18px_50px_rgba(31,166,122,0.45)] focus-visible:ring-2 focus-visible:ring-emerald md:gap-2.5 md:px-6 md:py-3"
+              className="group pointer-events-auto flex items-center gap-2 whitespace-nowrap rounded-full border border-white/60 bg-white/90 px-3.5 py-1.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 outline-none transition-[box-shadow,background-color] duration-300 hover:bg-white hover:shadow-[0_18px_50px_rgba(31,166,122,0.45)] focus-visible:ring-2 focus-visible:ring-emerald md:gap-2.5 md:px-6 md:py-3"
               animate={FLOATS[i]}
               transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: 'easeInOut' }}
-              initial={{ opacity: 0, scale: 0.85 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald shadow-[0_0_8px_rgba(31,166,122,0.8)] transition-colors duration-300 group-hover:bg-mint md:h-2 md:w-2" />
               <span className="font-sans text-[12px] font-semibold text-emerald-deep md:text-base">
