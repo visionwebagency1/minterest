@@ -82,7 +82,7 @@ export function Hero() {
 
       {/* Mobile only: reserve the lower zone where the M + orbit sit, so the copy
           never overlaps them. Desktop centres the M in the viewport instead. */}
-      <div className="h-[450px] md:hidden" aria-hidden="true" />
+      <div className="h-[500px] md:hidden" aria-hidden="true" />
     </section>
   )
 }

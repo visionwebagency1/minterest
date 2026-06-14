@@ -14,7 +14,7 @@ import { lenisScrollTo } from '@/lib/useLenis'
 gsap.registerPlugin(ScrollTrigger)
 
 const SECTION_BG =
-  'radial-gradient(55% 50% at 12% 18%, rgba(66,194,140,0.18), transparent 60%), radial-gradient(50% 45% at 88% 82%, rgba(0,128,129,0.16), transparent 60%), linear-gradient(180deg, #08201E 0%, #EAF4EC 11%, #EAF4EC 100%)'
+  'radial-gradient(55% 50% at 12% 18%, rgba(66,194,140,0.18), transparent 60%), radial-gradient(50% 45% at 88% 82%, rgba(0,128,129,0.16), transparent 60%), linear-gradient(180deg, #F4F4F4 0%, #EAF4EC 12%, #EAF4EC 100%)'
 
 const TOTAL = MAIN_SERVICES.length
 

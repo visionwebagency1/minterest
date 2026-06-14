@@ -44,7 +44,7 @@ export function Footer() {
               <svg viewBox="-1.75 -1 3.5 2" className="h-7 w-auto" aria-hidden="true">
                 <path d={M_PATH} transform="scale(1,-1)" fill="#42C28C" />
               </svg>
-              <span className="font-sans text-xl font-bold tracking-[-0.01em] text-white">
+              <span className="font-display text-xl font-bold tracking-[-0.01em] text-white">
                 Minterest
               </span>
             </Link>

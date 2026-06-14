@@ -1,8 +1,8 @@
 import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
-import { M_PATH } from '@/three/mPath'
 import { BorderBeam } from './BorderBeam'
+import { Logo } from './Logo'
 
 /**
  * Floating glass header + a slide-down navigation panel:
@@ -12,7 +12,6 @@ import { BorderBeam } from './BorderBeam'
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const
-const ICON_VB = '-1.75 -1 3.5 2'
 
 const PRIMARY = [
   { no: '01', label: 'Home', to: '/' },
@@ -46,21 +45,6 @@ const SOCIALS = [
   },
 ]
 
-/** The Minterest M as a small icon (path flipped from Three.js y-up space). */
-function MIcon() {
-  return (
-    <motion.svg
-      viewBox={ICON_VB}
-      className="h-6 w-auto"
-      aria-hidden="true"
-      animate={{ rotate: [-5, 5, -5], y: [0, -1.5, 0] }}
-      transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-    >
-      <path d={M_PATH} transform="scale(1,-1)" fill="#F4F4F4" strokeLinejoin="round" />
-    </motion.svg>
-  )
-}
-
 export function Header() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
@@ -77,12 +61,10 @@ export function Header() {
           <Link
             to="/"
             onClick={close}
-            className="group relative z-10 flex shrink-0 items-center gap-2 pr-1 transition-transform duration-300 hover:scale-[1.03] sm:gap-2.5"
+            aria-label="Minterest home"
+            className="group relative z-10 flex shrink-0 items-center pr-1 transition-transform duration-300 hover:scale-[1.03]"
           >
-            <span className="drop-shadow-[0_0_10px_rgba(144,238,144,0.35)]">
-              <MIcon />
-            </span>
-            <span className="font-sans text-lg font-bold tracking-[-0.01em] text-white sm:text-xl">Minterest</span>
+            <Logo className="h-7 w-auto sm:h-8" />
           </Link>
 
           <span className="relative z-10 mx-1 hidden h-7 w-px bg-white/12 sm:block" />

@@ -36,10 +36,10 @@ const INTRO_DELAY = 0.25
 // matching the brand logomark. The glass material tints over these colours so
 // the mark stays liquid-glass but reads in the gradient instead of white.
 const GRADIENT_STOPS: [number, string][] = [
-  [0.0, '#2FB89C'], // teal-green (bottom-left)
-  [0.4, '#5FD09A'],
-  [0.7, '#9CEE98'],
-  [1.0, '#E6FCE6'], // light green / near-white (top-right)
+  [0.0, '#B6F5B6'], // light green (bottom-left) - brand lime-bright
+  [0.4, '#CCF9C6'],
+  [0.7, '#E1FCDC'],
+  [1.0, '#F6FFF6'], // near-white (top-right)
 ]
 
 function applyBrandGradient(geo: THREE.BufferGeometry) {

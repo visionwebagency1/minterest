@@ -45,7 +45,9 @@ function useIsDesktop() {
 export function ServiceOrbit() {
   const desktop = useIsDesktop()
 
-  const radius = desktop ? 205 : 96
+  // Mobile gets a wider ring so the six pills spread out and the M keeps room
+  // in the centre; desktop is unchanged.
+  const radius = desktop ? 205 : 132
   const ry = radius * 0.92
   const pad = 80
 
@@ -123,10 +125,15 @@ export function ServiceOrbit() {
           </div>
         ))}
 
-        {/* Quiet "these are clickable" hint, centred under the ring */}
+        {/* Quiet "these are clickable" hint, parked top-right between the
+            "Design & Branding" (top) and "Web Development" (top-right) pills. */}
         <motion.div
-          className="pointer-events-none absolute left-1/2 -translate-x-1/2"
-          style={{ top: ry + 22 }}
+          className="pointer-events-none absolute"
+          style={{
+            left: (positions[0].x + positions[1].x) / 2,
+            top: (positions[0].y + positions[1].y) / 2,
+            transform: 'translate(-50%, -50%)',
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: [0.35, 0.75, 0.35] }}
           transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
