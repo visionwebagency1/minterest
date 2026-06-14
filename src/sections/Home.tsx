@@ -1,8 +1,8 @@
+import { ScrollGradient } from '@/components/ScrollGradient'
 import { Hero } from './Hero'
 import { LogoMarquee } from './LogoMarquee'
-import { IntroStatement } from './IntroStatement'
 import { ServicesIntro } from './ServicesIntro'
-import { ServicesPinned } from './ServicesPinned'
+import { ServicesShowcase } from './ServicesShowcase'
 import { Showcase } from './Showcase'
 import { Approach } from './Approach'
 import { Stats } from './Stats'
@@ -18,12 +18,12 @@ import { Footer } from './Footer'
  */
 export function Home() {
   return (
-    <main className="relative w-full">
+    <main className="relative w-full bg-near-black">
+      <ScrollGradient />
       <Hero />
       <LogoMarquee />
-      <IntroStatement />
       <ServicesIntro />
-      <ServicesPinned />
+      <ServicesShowcase />
       <Showcase />
       <Approach />
       <Stats />

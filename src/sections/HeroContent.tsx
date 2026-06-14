@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
+import { lenisScrollTo } from '@/lib/useLenis'
 
 /**
  * Hero HTML overlay above the WebGL canvas — editorial split layout:
@@ -35,11 +36,11 @@ function Accent({ children }: { children: string }) {
   )
 }
 
-// Social-proof figures (placeholders — swap for real numbers).
+// Social-proof figures.
 const STATS = [
-  { value: '5.0★', label: 'Beoordeling' },
-  { value: '50+', label: 'Projecten' },
-  { value: '1.5M+', label: 'Bereik' },
+  { value: '150+', label: 'Projecten' },
+  { value: '300M+', label: 'Weergaven' },
+  { value: '4.9★', label: 'ster' },
 ]
 
 export function HeroContent() {
@@ -59,21 +60,10 @@ export function HeroContent() {
             animate="show"
             className="text-center md:text-left"
           >
-            {/* Indexed eyebrow */}
-            <motion.div
-              variants={rise}
-              className="flex items-center justify-center gap-3 md:justify-start"
-            >
-              <span className="h-px w-10 bg-mint/50" />
-              <span className="font-sans text-xs uppercase tracking-[0.28em] text-white/55">
-                [01] Digitaal groeibureau
-              </span>
-            </motion.div>
-
             {/* Headline */}
             <motion.h1
               variants={rise}
-              className="mt-6 font-display text-[2.3rem] font-semibold leading-[1.04] tracking-tight text-white text-balance sm:text-5xl md:text-6xl lg:text-[4.75rem]"
+              className="font-display text-[2.3rem] font-semibold leading-[1.04] tracking-tight text-white text-balance sm:text-5xl md:text-6xl lg:text-[4.75rem]"
             >
               Where <Accent>interest</Accent>
               <br />
@@ -117,14 +107,15 @@ export function HeroContent() {
               </Link>
 
               {/* Secondary: dark glass (matches the header CTA) */}
-              <a
-                href="#diensten"
+              <button
+                type="button"
+                onClick={() => lenisScrollTo('#diensten', { offset: -80 })}
                 className="group pointer-events-auto relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl border border-white/10 bg-white/5 px-7 py-3.5 font-sans text-sm font-medium text-white backdrop-blur-md transition-colors duration-300 hover:border-mint/40 lg:px-9 lg:py-4 lg:text-base"
               >
                 <span className="relative z-10 h-1.5 w-1.5 bg-lime-accent transition-transform duration-300 group-hover:rotate-45" />
                 <span className="relative z-10">Onze diensten</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-mint/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
-              </a>
+              </button>
             </motion.div>
 
             {/* Trust / stats row — compact, always on one line (stacked on

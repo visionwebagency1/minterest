@@ -1,13 +1,11 @@
-import { useState } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AnimatePresence } from 'motion/react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useScrollSetup } from '@/lib/useLenis'
 import { GrainOverlay } from '@/components/GrainOverlay'
-import { Preloader } from '@/components/Preloader'
 import { Header } from '@/components/Header'
 import { RouteWipe, ScrollToTop } from '@/components/RouteTransition'
 import { Home } from '@/sections/Home'
-import { ServicePage } from '@/pages/ServicePage'
+import { Services } from '@/pages/Services'
+import { ServiceRoute } from '@/pages/ServicePage'
 import { Work } from '@/pages/Work'
 import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
@@ -16,17 +14,12 @@ import { Audit } from '@/pages/Audit'
 import { NotFound } from '@/pages/NotFound'
 
 export default function App() {
-  // Native scroll + ScrollTrigger refresh on font/asset load.
+  // Lenis smooth scroll + ScrollTrigger refresh on font/asset load.
   useScrollSetup()
-
-  const [loaded, setLoaded] = useState(false)
 
   return (
     <BrowserRouter>
-      <AnimatePresence>
-        {!loaded && <Preloader onComplete={() => setLoaded(true)} />}
-      </AnimatePresence>
-
+      {/* No preloader: the site loads straight into the hero. */}
       <GrainOverlay />
       <Header />
       <ScrollToTop />
@@ -34,12 +27,19 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/websites" element={<ServicePage slug="websites" />} />
-        <Route path="/branding" element={<ServicePage slug="branding" />} />
-        <Route path="/video" element={<ServicePage slug="video" />} />
-        <Route path="/ai-video" element={<ServicePage slug="aivideo" />} />
-        <Route path="/seo" element={<ServicePage slug="seo" />} />
-        <Route path="/influencer" element={<ServicePage slug="influencer" />} />
+
+        {/* Services: overview hub + the 6 main-service landing pages. */}
+        <Route path="/diensten" element={<Services />} />
+        <Route path="/diensten/:slug" element={<ServiceRoute />} />
+
+        {/* Redirects from the old per-service routes to the new structure. */}
+        <Route path="/websites" element={<Navigate to="/diensten/web-development" replace />} />
+        <Route path="/branding" element={<Navigate to="/diensten/design-branding" replace />} />
+        <Route path="/video" element={<Navigate to="/diensten/video-fotografie" replace />} />
+        <Route path="/ai-video" element={<Navigate to="/diensten/video-fotografie" replace />} />
+        <Route path="/seo" element={<Navigate to="/diensten/seo-sea" replace />} />
+        <Route path="/influencer" element={<Navigate to="/diensten/social-media" replace />} />
+
         <Route path="/work" element={<Work />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

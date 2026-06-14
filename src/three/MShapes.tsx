@@ -168,11 +168,10 @@ export function MShapes({ lowPower = false }: { lowPower?: boolean }) {
     const wide = size.width >= 768
     // Smaller on desktop for balance; bigger on mobile to read on the dark bg.
     const base = ctrl.scale * responsiveScale * (wide ? 0.78 : 1.7)
-    // Park the M in the right column of the centred (max ~1400px) hero grid,
-    // converting a pixel offset to world units so it tracks every breakpoint.
-    const containerPx = Math.min(size.width * 0.9, 1400)
-    const restX =
-      ctrl.posX + (wide ? containerPx * 0.24 * (viewport.width / size.width) : 0)
+    // Centre the M inside the orbit ring (which sits at ~70% of the viewport
+    // width on desktop). Worked out from the M's depth (z=1.4) so it lands under
+    // the ring at every breakpoint, instead of hanging off to the right.
+    const restX = ctrl.posX + (wide ? viewport.width * 0.145 : 0)
     const restY = (wide ? 0 : MOBILE_REST_Y) + ctrl.posY
     const introY = THREE.MathUtils.lerp(restY - 1.4, restY, eOut)
     o.position.set(restX, introY, ctrl.posZ)
@@ -187,7 +186,7 @@ export function MShapes({ lowPower = false }: { lowPower?: boolean }) {
       scale={0}
     >
       <group ref={tilt}>
-        <Float speed={2} rotationIntensity={0.4} floatIntensity={1.05}>
+        <Float speed={1.6} rotationIntensity={0.3} floatIntensity={0.55}>
           <mesh geometry={geometry}>
             {lowPower ? (
               <meshStandardMaterial

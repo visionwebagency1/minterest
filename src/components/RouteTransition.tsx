@@ -3,11 +3,13 @@ import { useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { M_PATH } from '@/three/mPath'
 
-/** Jump to the top whenever the route changes (native scroll). */
+/** Jump to the top whenever the route changes (resets Lenis too). */
 export function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0)
+    const lenis = window.__lenis
+    if (lenis) lenis.scrollTo(0, { immediate: true })
+    else window.scrollTo(0, 0)
   }, [pathname])
   return null
 }
