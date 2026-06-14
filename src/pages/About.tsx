@@ -1,14 +1,15 @@
+import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
 import { PageHero } from '@/components/PageHero'
 import { Footer } from '@/sections/Footer'
+import { MAIN_SERVICES } from '@/data/services'
 
-const BRANCHES = [
-  { title: 'Website & webshops', desc: 'Digitale producten die laden, converteren en meegroeien.' },
-  { title: 'Design & branding', desc: 'Identiteiten met karakter die vertrouwen wekken.' },
-  { title: 'Short video content', desc: 'Scroll-stoppende video voor elk platform.' },
-  { title: 'Influencer marketing', desc: 'Authentiek bereik via stemmen die je publiek vertrouwt.' },
-]
+const BRANCHES = MAIN_SERVICES.map((s) => ({
+  title: s.label,
+  desc: s.cardDesc,
+  to: `/diensten/${s.slug}`,
+}))
 
 const SUPPORT = [
   { title: 'Administratie', desc: 'We ontzorgen partners op de achtergrond, zodat de focus op groei blijft.' },
@@ -32,7 +33,7 @@ export function About() {
             Eén partner voor de hele <Accent>klim.</Accent>
           </>
         }
-        tagline="Minterest is een digitaal groeibureau waar interesse je groei wordt. Vier disciplines onder één dak, plus alles eromheen geregeld."
+        tagline="Bij Minterest wordt interesse je groei. Zes diensten onder één dak, van merk en website tot social en vindbaarheid, plus alles eromheen geregeld."
         primary={{ label: 'Werk met ons', to: '/start' }}
         secondary={{ label: 'Bekijk werk', to: '/work' }}
       />
@@ -50,20 +51,25 @@ export function About() {
             ))}
           </div>
 
-          {/* four branches */}
+          {/* the six services */}
           <Reveal delay={0.05}>
-            <h2 className="mt-28 font-display text-2xl font-semibold md:text-3xl">De vier takken</h2>
+            <h2 className="mt-28 font-display text-2xl font-semibold md:text-3xl">De zes diensten</h2>
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {BRANCHES.map((b, i) => (
-              <Reveal
-                key={b.title}
-                delay={i * 0.06}
-                className="rounded-2xl border border-emerald-deep/10 bg-white p-8 shadow-[0_18px_50px_rgba(15,92,77,0.08)] md:p-10"
-              >
-                <span className="font-accent text-2xl italic text-emerald">0{i + 1}</span>
-                <h3 className="mt-3 font-display text-xl font-semibold md:text-2xl">{b.title}</h3>
-                <p className="mt-3 font-sans text-base leading-relaxed text-near-black/60">{b.desc}</p>
+              <Reveal key={b.title} delay={i * 0.06}>
+                <Link
+                  to={b.to}
+                  className="group flex h-full flex-col rounded-2xl border border-emerald-deep/10 bg-white p-8 shadow-[0_18px_50px_rgba(15,92,77,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-emerald/40 md:p-10"
+                >
+                  <span className="font-accent text-2xl italic text-emerald">0{i + 1}</span>
+                  <h3 className="mt-3 font-display text-xl font-semibold md:text-2xl">{b.title}</h3>
+                  <p className="mt-3 font-sans text-base leading-relaxed text-near-black/60">{b.desc}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 font-sans text-sm font-semibold text-emerald-deep">
+                    Ontdek
+                    <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                  </span>
+                </Link>
               </Reveal>
             ))}
           </div>
