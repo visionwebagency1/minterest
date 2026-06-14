@@ -43,16 +43,53 @@ Sfeer: donkere basis, subtiele grain/noise overlay over de hele site (~1.5% opac
 
 ## Sitestructuur (hybride)
 ```
-/            Homepage (volledige scroll-experience)
-/work        Showcase / portfolio
-/websites    Websites & applicaties
-/branding    Design & branding
-/video       Short video content
-/influencer  Influencer marketing
-/about       Over Minterest + de 4 takken + administratie/sourcing
-/contact     Contact + website-audit tool (de conversie-hook)
+/                       Homepage (volledige scroll-experience)
+/work                   Showcase / portfolio
+/diensten               Diensten-overzicht (alle 6 hoofddiensten)
+/diensten/:slug         6 aparte hoofddienst-landingspagina's
+/about                  Over Minterest
+/contact                Contact + website-audit tool (de conversie-hook)
+/start                  Start jouw project (lead-funnel)
+/website-audit          Gratis website-audit tool
 ```
-De vier diensten van Minterest: **Websites & applicaties, Design & branding, Short video content, Influencer marketing**. Op de achtergrond ook: administratie (partners) en sourcing/inkoop.
+
+## Dienstenstructuur (DEFINITIEF — ronde 2)
+Er zijn **6 hoofddiensten**, elk met sub-diensten. De flow: eerst een
+**diensten-overzichtspagina** (`/diensten`), daarvandaan klik je door naar 6
+aparte **hoofddienst-landingspagina's** (`/diensten/:slug`). De sub-diensten
+staan als **secties BINNEN** die hoofddienst-pagina, niet als losse pagina's.
+**GEEN dropdown in het navigatiemenu** — het menu verwijst naar het
+diensten-overzicht; losse hoofddiensten bereik je via het overzicht, de
+homepage-cards en de klikbare hero-pills.
+
+De 6 hoofddiensten (slug) en hun sub-diensten:
+1. **Design & Branding** (`design-branding`) — Visuele identiteit (incl. logo), Packaging, Social Media Visual System, Complete Branding
+2. **Web Development** (`web-development`) — Websites, Webshops, Applicaties, Software
+3. **Video & Fotografie** (`video-fotografie`) — Short video content, AI Video content, Fotoshoots (bedrijfs- of websitefoto's)
+4. **Social Media Beheer** (`social-media`) — Influencer Marketing, Meta Ads, TikTok Ads
+5. **SEO & SEA** (`seo-sea`) — SEO, Google Ads
+6. **Extra diensten** (`extra`) — AI Agents, Administratie, Sourcing, Detachering
+
+De bron-of-truth voor deze structuur staat in `src/data/services.ts`; hero-pills,
+homepage-cards/carousel, overzichtspagina, landingspagina's en footer lezen daar
+allemaal uit.
+
+## Vaste keuzes ronde 2 (permanent)
+- **GEEN loading screen / preloader meer.** De site laadt direct in de hero.
+- De term **"Digitaal Groeibureau"** wordt nergens meer gebruikt.
+- **Hero-stats** zijn exact, in deze volgorde: `150+ Projecten`, `300M+ Weergaven`, `4.9 ster`.
+- De zwevende **hero-pills zijn klikbaar**: ze scrollen naar de diensten-sectie en
+  zetten de juiste dienst actief (desktop: juiste card; mobiel: carousel-index).
+- **Geen woord-voor-woord scroll-reveal tekstsectie** tussen hero en diensten.
+- **Smooth scroll:** Lenis is officieel gekoppeld aan GSAP ScrollTrigger (één RAF
+  via `gsap.ticker`, `lenis.on('scroll', ScrollTrigger.update)`, geen dubbele
+  loops, `ScrollTrigger.refresh()` na load + font-load). Zie `src/lib/useLenis.ts`.
+- **Diensten-sectie:** desktop houdt de stapelende scroll-cards met SVG-animaties
+  (niet aanraken); sub-diensten als 2x2 grid van pills. Mobiel is een compacte
+  **horizontale carousel** (swipe + arrow-knop + dots), geen lange scroll-cards.
+- **Landingspagina's** delen één template, overwegend **licht en premium** (niet
+  donker), met per hoofddienst een eigen accent binnen het groene palet.
+- **Geen em-dashes** in de hele codebase/content.
 
 ## Folderstructuur
 ```
@@ -70,12 +107,18 @@ src/lib          utils, hooks (o.a. lenis setup)
 - 3D-logica hoort in `src/three`. Schrijf leesbare, nette componenten.
 - Bij twijfel over een visuele keuze: leun op de brand identity-PDF en het concept hierboven.
 
-## Fasering
-- **Fase 0:** fundament (Vite/React/TS/Tailwind/fonts/Lenis/router/grain/folderstructuur).
-- **Fase 1:** WebGL-hero in 3 stappen — (1.1) gradient-mesh, (1.2) 3D glas-M's, (1.3) particle-sluier. Plus hero-tekst (Motion staggered reveal), Bloom postprocessing, fallback.
-- **Fase 2:** homepage-secties (intro, vier takken als treden, showcase, proces, cijfers, CTA/audit, footer).
-- **Fase 3:** page-transitions (M-mask) + dienst-pagina's op gedeeld template.
-- **Fase 4:** audit-tool + contact.
-- **Fase 5:** polish & performance (preloader, micro-interacties, mobiel, Lighthouse).
+## Onthouden voor latere ronde (nu NIET bouwen, wel ruimte voor laten)
+Groeiplan-funnel met knop, marquee klikbaar maken, "bekijk ons portfolio"-knop bij
+iedere kaart, WRBC-koppeling (kopje naar WRBC voor financieel advies/leads, vice
+versa), en het invullen van alle inner-page content uit de klant-feedback.
 
-Huidige status: begin bij Fase 0 + 1.
+## Fasering
+- **Fase 0:** fundament (Vite/React/TS/Tailwind/fonts/router/grain/folderstructuur).
+- **Fase 1:** WebGL-hero (gradient-mesh, 3D glas-M, particles, bloom, fallback).
+- **Fase 2:** homepage-secties (hero, diensten, showcase, proces, cijfers, CTA/audit, footer).
+- **Fase 3:** page-transitions (M-mask) + diensten-overzicht en 6 landingspagina's op gedeeld template.
+- **Fase 4:** audit-tool + contact.
+- **Fase 5:** polish & performance (micro-interacties, mobiel, Lighthouse).
+
+Huidige status: ronde 2 doorgevoerd (nieuwe dienstenstructuur, geen preloader,
+smooth scroll via Lenis+ScrollTrigger, klikbare hero-pills, mobiele diensten-carousel).
