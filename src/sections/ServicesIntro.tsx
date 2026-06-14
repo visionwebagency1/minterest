@@ -1,21 +1,15 @@
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
+import { MAIN_SERVICES } from '@/data/services'
 
 /**
- * Intro header right before the pinned services: a clear, premium text box
- * (kicker + heading + short subline + a preview list of the six services) that
- * sets up what's coming. Dark, so it flows from the IntroStatement into the
- * dark top of the services section.
+ * Intro header right before the services section: a clear, premium text box
+ * (kicker + heading + short subline + a preview list of the six main services)
+ * that sets up what's coming. Dark, so it flows into the top of the services
+ * section. This is the #diensten scroll target from the hero.
  */
 
-const SERVICES = [
-  'Websites & webshops',
-  'Design & branding',
-  'Short video',
-  'AI video',
-  'SEO',
-  'Influencer marketing',
-]
+const SERVICES = MAIN_SERVICES.map((s) => s.label)
 
 export function ServicesIntro() {
   return (
