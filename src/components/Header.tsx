@@ -1,8 +1,9 @@
-import { useState, type ReactNode } from 'react'
+import { Fragment, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { BorderBeam } from './BorderBeam'
-import { Logo } from './Logo'
+import { Logo, LogoMark } from './Logo'
+import { MAIN_SERVICES } from '@/data/services'
 
 /**
  * Floating glass header + a slide-down navigation panel:
@@ -117,14 +118,28 @@ export function Header() {
             >
               <div className="mx-auto max-w-5xl">
                 <ul className="flex flex-col">
-                  {PRIMARY.map((item, i) => (
-                    <NavRow key={item.to} no={item.no} delay={0.1 + i * 0.05}>
-                      <Link to={item.to} onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
-                        <BigLabel>{item.label}</BigLabel>
-                        <Arrow />
-                      </Link>
-                    </NavRow>
-                  ))}
+                  {PRIMARY.map((item, i) =>
+                    item.to === '/diensten' ? (
+                      <Fragment key={item.to}>
+                        {/* desktop: single "Onze diensten" link (unchanged) */}
+                        <NavRow no={item.no} delay={0.1 + i * 0.05} className="hidden md:block">
+                          <Link to={item.to} onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
+                            <BigLabel>{item.label}</BigLabel>
+                            <Arrow />
+                          </Link>
+                        </NavRow>
+                        {/* mobile: expanded diensten dropdown */}
+                        <MobileServicesNav close={close} baseDelay={0.1 + i * 0.05} />
+                      </Fragment>
+                    ) : (
+                      <NavRow key={item.to} no={item.no} delay={0.1 + i * 0.05}>
+                        <Link to={item.to} onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
+                          <BigLabel>{item.label}</BigLabel>
+                          <Arrow />
+                        </Link>
+                      </NavRow>
+                    ),
+                  )}
                 </ul>
 
                 {/* CTA + socials */}
@@ -171,14 +186,73 @@ export function Header() {
   )
 }
 
+/* ---- mobile-only expanded "Onze diensten" dropdown ---- */
+function MobileServicesNav({ close, baseDelay }: { close: () => void; baseDelay: number }) {
+  return (
+    <motion.li
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: EASE, delay: baseDelay }}
+      className="border-b border-white/5 md:hidden"
+    >
+      <Link to="/diensten" onClick={close} className="group flex items-baseline gap-4 py-3">
+        <BigLabel>Onze diensten</BigLabel>
+        <Arrow />
+      </Link>
+
+      <ul className="mb-3 flex flex-col gap-1.5">
+        {MAIN_SERVICES.map((s, i) => (
+          <motion.li
+            key={s.slug}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, ease: EASE, delay: baseDelay + 0.12 + i * 0.07 }}
+          >
+            <Link
+              to={`/diensten/${s.slug}`}
+              onClick={close}
+              className="group/svc relative flex items-center gap-3 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 transition-colors duration-300 hover:border-mint/40 hover:bg-white/[0.06]"
+            >
+              <LogoMark className="h-5 w-9 shrink-0" />
+              <span className="font-sans text-sm font-medium text-white/80 transition-colors duration-300 group-hover/svc:text-white">
+                {s.label}
+              </span>
+              <span className="ml-auto text-mint opacity-0 transition-all duration-300 group-hover/svc:translate-x-0.5 group-hover/svc:opacity-100" aria-hidden="true">
+                &rarr;
+              </span>
+              {/* line that draws across the button, one after another (staggered) */}
+              <motion.span
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-emerald via-mint to-lime-accent"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.55, ease: EASE, delay: baseDelay + 0.22 + i * 0.1 }}
+              />
+            </Link>
+          </motion.li>
+        ))}
+      </ul>
+    </motion.li>
+  )
+}
+
 /* ---- small menu helpers ---- */
-function NavRow({ no, delay, children }: { no: string; delay: number; children: ReactNode }) {
+function NavRow({
+  no,
+  delay,
+  children,
+  className = '',
+}: {
+  no: string
+  delay: number
+  children: ReactNode
+  className?: string
+}) {
   return (
     <motion.li
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: EASE, delay }}
-      className="border-b border-white/5"
+      className={`border-b border-white/5 ${className}`}
     >
       <span className="sr-only">{no}</span>
       {children}
