@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { LogoMark } from './Logo'
 
 /**
@@ -19,23 +19,72 @@ export const HERO_BG =
 /**
  * Subtle transparent brand-M watermark for inner-page heroes. Left-aligned and
  * vertically centered so the full M reads as a quiet brand motif, with a gentle
- * scroll parallax (it drifts down a little as you scroll). The outer wrapper
- * handles the centering transform; the inner motion layer owns the parallax y,
- * so the two transforms never fight (no glitch). Shared by the service heroes
- * and any sub-page built on PageHero.
+ * scroll parallax (it drifts down a little as you scroll).
+ *
+ * The parallax is driven straight off Lenis's scroll tick (the same single rAF
+ * that renders the page), and applied as a translate3d on its own GPU layer.
+ * That keeps the M in perfect lockstep with the content, instead of running on
+ * Framer's separate scroll loop which lagged a frame behind and caused the
+ * stutter. The outer wrapper holds the static centering transform; the inner
+ * layer holds only the dynamic y, so the two never fight.
  */
+const M_PARALLAX_FACTOR = 130 / 700 // matches the previous 0..700 -> 0..130 map
+const M_PARALLAX_MAX = 130
+
 export function HeroMWatermark() {
   const reduce = useReducedMotion()
-  const { scrollY } = useScroll()
-  const y = useTransform(scrollY, [0, 700], [0, 130])
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (reduce) return
+    const el = ref.current
+    if (!el) return
+
+    const apply = (scroll: number) => {
+      const y = Math.min(Math.max(scroll, 0) * M_PARALLAX_FACTOR, M_PARALLAX_MAX)
+      el.style.transform = `translate3d(0, ${y}px, 0)`
+    }
+
+    let cleanup = () => {}
+    let tries = 0
+
+    const attach = () => {
+      const lenis = window.__lenis
+      if (lenis) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const onScroll = (e: any) => apply(e?.scroll ?? lenis.scroll ?? 0)
+        lenis.on('scroll', onScroll)
+        apply(lenis.scroll ?? 0)
+        cleanup = () => lenis.off('scroll', onScroll)
+      } else if (tries++ < 8) {
+        // Lenis is created in App's effect, which runs after this child effect;
+        // retry for a few frames until it's ready.
+        const id = requestAnimationFrame(attach)
+        cleanup = () => cancelAnimationFrame(id)
+      } else {
+        // Fallback if Lenis never initializes: plain passive scroll.
+        const onScroll = () => apply(window.scrollY)
+        window.addEventListener('scroll', onScroll, { passive: true })
+        apply(window.scrollY)
+        cleanup = () => window.removeEventListener('scroll', onScroll)
+      }
+    }
+    attach()
+    return () => cleanup()
+  }, [reduce])
+
   return (
     <div
       aria-hidden="true"
       className="pointer-events-none absolute -left-10 top-[42%] -translate-y-1/2 md:-left-16"
     >
-      <motion.div style={reduce ? undefined : { y }} className="will-change-transform">
+      <div
+        ref={ref}
+        className="will-change-transform [backface-visibility:hidden]"
+        style={{ transform: 'translate3d(0,0,0)' }}
+      >
         <LogoMark className="h-[clamp(14rem,56vw,26rem)] w-auto opacity-[0.08]" />
-      </motion.div>
+      </div>
     </div>
   )
 }

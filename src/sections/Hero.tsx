@@ -57,7 +57,7 @@ export function Hero() {
       <Leva collapsed hidden={!import.meta.env.DEV} />
 
       {/* ONE full-bleed background behind the copy AND the M (no seam). */}
-      <motion.div style={desktop ? { y: bgY } : undefined} className="absolute inset-0">
+      <motion.div style={desktop ? { y: bgY } : undefined} className="absolute inset-0 will-change-transform [backface-visibility:hidden]">
         <div className="absolute inset-0">
           <Suspense fallback={<div className="h-full w-full bg-near-black" />}>
             <HeroCanvas active={active} />
