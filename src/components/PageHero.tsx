@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { LogoMark } from './Logo'
 
 /**
@@ -17,16 +17,26 @@ export const HERO_BG =
   'radial-gradient(75% 70% at 82% 0%, rgba(66,194,140,0.5), transparent 62%), radial-gradient(62% 65% at 0% 100%, rgba(0,128,129,0.5), transparent 60%), linear-gradient(150deg, #0B3A37 0%, #08221F 55%, #061814 100%)'
 
 /**
- * Subtle transparent brand-M watermark for inner-page heroes. Recognizable as
- * our M (not an enlarged blob), kept low-opacity and fully inside the hero so it
- * reads as a quiet brand motif. Shared by the service heroes and any sub-page.
+ * Subtle transparent brand-M watermark for inner-page heroes. Left-aligned and
+ * vertically centered so the full M reads as a quiet brand motif, with a gentle
+ * scroll parallax (it drifts down a little as you scroll). The outer wrapper
+ * handles the centering transform; the inner motion layer owns the parallax y,
+ * so the two transforms never fight (no glitch). Shared by the service heroes
+ * and any sub-page built on PageHero.
  */
 export function HeroMWatermark() {
+  const reduce = useReducedMotion()
+  const { scrollY } = useScroll()
+  const y = useTransform(scrollY, [0, 700], [0, 130])
   return (
-    <LogoMark
+    <div
       aria-hidden="true"
-      className="pointer-events-none absolute -bottom-3 right-4 h-[clamp(12rem,48vw,22rem)] w-auto opacity-[0.08] md:right-10"
-    />
+      className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2"
+    >
+      <motion.div style={reduce ? undefined : { y }} className="will-change-transform">
+        <LogoMark className="h-[clamp(12rem,50vw,22rem)] w-auto opacity-[0.08]" />
+      </motion.div>
+    </div>
   )
 }
 
