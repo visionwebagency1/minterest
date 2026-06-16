@@ -6,6 +6,7 @@ import { RouteTransition } from '@/components/RouteTransition'
 import { Home } from '@/sections/Home'
 import { Services } from '@/pages/Services'
 import { ServiceRoute } from '@/pages/ServicePage'
+import { SubServiceRoute } from '@/pages/SubServicePage'
 import { Work } from '@/pages/Work'
 import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
@@ -31,6 +32,7 @@ export default function App() {
             {/* Services: overview hub + the 6 main-service landing pages. */}
             <Route path="/diensten" element={<Services />} />
             <Route path="/diensten/:slug" element={<ServiceRoute />} />
+            <Route path="/diensten/:slug/:subslug" element={<SubServiceRoute />} />
 
             {/* Redirects from the old per-service routes to the new structure. */}
             <Route path="/websites" element={<Navigate to="/diensten/web-development" replace />} />
