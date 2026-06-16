@@ -2,7 +2,8 @@ import { Fragment, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { BorderBeam } from './BorderBeam'
-import { Logo, LogoMark } from './Logo'
+import { Logo } from './Logo'
+import { SERVICE_ICON_BY_SLUG } from './serviceIcons'
 import { MAIN_SERVICES } from '@/data/services'
 
 /**
@@ -200,36 +201,38 @@ function MobileServicesNav({ close, baseDelay }: { close: () => void; baseDelay:
         <Arrow />
       </Link>
 
-      <ul className="mb-3 flex flex-col gap-1.5">
-        {MAIN_SERVICES.map((s, i) => (
-          <motion.li
-            key={s.slug}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, ease: EASE, delay: baseDelay + 0.12 + i * 0.07 }}
-          >
-            <Link
-              to={`/diensten/${s.slug}`}
-              onClick={close}
-              className="group/svc relative flex items-center gap-3 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 transition-colors duration-300 hover:border-mint/40 hover:bg-white/[0.06]"
+      <ul className="mb-3 grid grid-cols-2 gap-2">
+        {MAIN_SERVICES.map((s, i) => {
+          const Icon = SERVICE_ICON_BY_SLUG[s.slug]
+          return (
+            <motion.li
+              key={s.slug}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, ease: EASE, delay: baseDelay + 0.12 + i * 0.07 }}
             >
-              <LogoMark className="h-5 w-9 shrink-0" />
-              <span className="font-sans text-sm font-medium text-white/80 transition-colors duration-300 group-hover/svc:text-white">
-                {s.label}
-              </span>
-              <span className="ml-auto text-mint opacity-0 transition-all duration-300 group-hover/svc:translate-x-0.5 group-hover/svc:opacity-100" aria-hidden="true">
-                &rarr;
-              </span>
-              {/* line that draws across the button, one after another (staggered) */}
-              <motion.span
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-emerald via-mint to-lime-accent"
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ duration: 0.55, ease: EASE, delay: baseDelay + 0.22 + i * 0.1 }}
-              />
-            </Link>
-          </motion.li>
-        ))}
+              <Link
+                to={`/diensten/${s.slug}`}
+                onClick={close}
+                className="group/svc relative flex h-full items-center gap-2.5 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 transition-colors duration-300 hover:border-mint/40 hover:bg-white/[0.06]"
+              >
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-mint/10 text-mint [&>svg]:h-4 [&>svg]:w-4">
+                  <Icon />
+                </span>
+                <span className="font-sans text-[13px] font-medium leading-[1.15] text-white/80 transition-colors duration-300 group-hover/svc:text-white">
+                  {s.label}
+                </span>
+                {/* line that draws across the button, one after another (staggered) */}
+                <motion.span
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-emerald via-mint to-lime-accent"
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  transition={{ duration: 0.55, ease: EASE, delay: baseDelay + 0.22 + i * 0.1 }}
+                />
+              </Link>
+            </motion.li>
+          )
+        })}
       </ul>
     </motion.li>
   )
