@@ -25,7 +25,7 @@ export function HeroMWatermark() {
   return (
     <LogoMark
       aria-hidden="true"
-      className="pointer-events-none absolute bottom-6 right-5 h-[clamp(7rem,24vw,13rem)] w-auto opacity-[0.08] md:bottom-10 md:right-12"
+      className="pointer-events-none absolute -bottom-3 right-4 h-[clamp(12rem,48vw,22rem)] w-auto opacity-[0.08] md:right-10"
     />
   )
 }

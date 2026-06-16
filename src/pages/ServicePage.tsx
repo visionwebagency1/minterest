@@ -283,19 +283,20 @@ function ServiceHero({ service: s }: { service: MainService }) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          className="mt-10 flex flex-row flex-wrap gap-3"
+          className="mt-10 flex flex-row gap-3"
         >
           <Link
             to="/start"
-            className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03]"
+            className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl bg-gradient-to-r from-emerald to-mint px-4 py-3.5 font-sans text-sm font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] sm:px-8 sm:py-4 sm:text-base"
           >
-            <span className="relative z-10">Start jouw project</span>
+            <span className="relative z-10 sm:hidden">Start project</span>
+            <span className="relative z-10 hidden sm:inline">Start jouw project</span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
           </Link>
           <Link
             to="/diensten"
-            className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/15 bg-white/5 px-8 py-4 font-sans text-base font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40"
+            className="inline-flex flex-1 items-center justify-center gap-2.5 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 font-sans text-sm font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40 sm:px-8 sm:py-4 sm:text-base"
           >
             <span className="h-1.5 w-1.5 bg-lime-accent" />
             Alle diensten
