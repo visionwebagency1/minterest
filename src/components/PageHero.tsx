@@ -31,10 +31,10 @@ export function HeroMWatermark() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2"
+      className="pointer-events-none absolute -left-10 top-[42%] -translate-y-1/2 md:-left-16"
     >
       <motion.div style={reduce ? undefined : { y }} className="will-change-transform">
-        <LogoMark className="h-[clamp(12rem,50vw,22rem)] w-auto opacity-[0.08]" />
+        <LogoMark className="h-[clamp(14rem,56vw,26rem)] w-auto opacity-[0.08]" />
       </motion.div>
     </div>
   )
