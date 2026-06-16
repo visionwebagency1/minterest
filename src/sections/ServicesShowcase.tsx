@@ -6,6 +6,7 @@ import { SERVICE_ICON_BY_SLUG } from '@/components/serviceIcons'
 import {
   MAIN_SERVICES,
   SERVICE_FOCUS_EVENT,
+  subPath,
   type MainService,
 } from '@/data/services'
 import { lenisScrollTo } from '@/lib/useLenis'
@@ -58,7 +59,7 @@ export function ServicesShowcase() {
     <section
       ref={sectionRef}
       id="diensten-cards"
-      className="relative bg-cream py-20 text-near-black md:py-28"
+      className="relative bg-cream pb-20 pt-4 text-near-black md:py-28"
     >
       <div className="mx-auto max-w-6xl px-6 md:px-10 lg:px-16">
         {desktop ? (
@@ -165,7 +166,20 @@ function AccordionRow({
   )
 }
 
-/* ───────────────────────── MOBILE — 2x3 grid + detail panel ───────────────────────── */
+/* ───────────────────────── MOBILE — pills + card carousel ─────────────────────────
+ * The six choice-pills (3x2), the service card and the dots all share one
+ * `active` index. Tapping a pill, a dot, an arrow or swiping the card moves the
+ * carousel; the matching pill + dot light up. Autoplay advances on its own and
+ * pauses briefly after any manual interaction, then resumes. */
+
+const AUTOPLAY_MS = 5000
+const RESUME_MS = 7000
+
+const cardSlide = {
+  enter: (d: number) => ({ opacity: 0, x: d > 0 ? 36 : -36 }),
+  center: { opacity: 1, x: 0 },
+  exit: (d: number) => ({ opacity: 0, x: d > 0 ? -36 : 36 }),
+}
 
 function MobileGrid({
   active,
@@ -174,79 +188,189 @@ function MobileGrid({
   active: number
   setActive: (i: number) => void
 }) {
-  const current = MAIN_SERVICES[active] ?? MAIN_SERVICES[0]
+  const count = MAIN_SERVICES.length
+  const idx = active < 0 ? 0 : active
+  const current = MAIN_SERVICES[idx] ?? MAIN_SERVICES[0]
+  const [paused, setPaused] = useState(false)
+  const [dir, setDir] = useState(1)
+  const resumeRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Pause autoplay for a moment after any manual interaction, then resume.
+  const pause = () => {
+    setPaused(true)
+    if (resumeRef.current) clearTimeout(resumeRef.current)
+    resumeRef.current = setTimeout(() => setPaused(false), RESUME_MS)
+  }
+  useEffect(
+    () => () => {
+      if (resumeRef.current) clearTimeout(resumeRef.current)
+    },
+    [],
+  )
+
+  // Autoplay.
+  useEffect(() => {
+    if (paused) return
+    const id = setInterval(() => {
+      setDir(1)
+      setActive((idx + 1) % count)
+    }, AUTOPLAY_MS)
+    return () => clearInterval(id)
+  }, [paused, idx, count, setActive])
+
+  const goTo = (i: number) => {
+    setDir(i >= idx ? 1 : -1)
+    setActive(((i % count) + count) % count)
+    pause()
+  }
+  const next = () => {
+    setDir(1)
+    setActive((idx + 1) % count)
+    pause()
+  }
+  const prev = () => {
+    setDir(-1)
+    setActive((idx - 1 + count) % count)
+    pause()
+  }
+
   return (
     <div>
-      <div className="grid grid-cols-2 gap-3">
+      {/* B1 — six choice pills, 3x2, icon beside text */}
+      <div className="grid grid-cols-3 gap-2">
         {MAIN_SERVICES.map((s, i) => {
           const Icon = SERVICE_ICON_BY_SLUG[s.slug]
-          const on = active === i
+          const on = idx === i
           return (
             <button
               key={s.slug}
               type="button"
-              onClick={() => setActive(i)}
-              aria-expanded={on}
-              className={`flex h-full flex-col items-start gap-3 rounded-2xl border p-4 text-left transition-all duration-300 ${
+              onClick={() => goTo(i)}
+              aria-pressed={on}
+              className={`flex h-full items-center gap-1.5 rounded-xl border px-2 py-2.5 text-left transition-all duration-300 ${
                 on
-                  ? 'border-emerald bg-emerald/10 shadow-[0_0_0_1px_rgba(0,128,129,0.35)]'
+                  ? 'border-emerald bg-emerald/10 shadow-[0_0_0_1px_rgba(0,128,129,0.3)]'
                   : 'border-emerald-deep/12 bg-white'
               }`}
             >
               <span
-                className={`grid h-10 w-10 place-items-center rounded-xl transition-colors duration-300 ${
+                className={`grid h-7 w-7 shrink-0 place-items-center rounded-lg transition-colors duration-300 [&>svg]:h-4 [&>svg]:w-4 ${
                   on ? 'bg-emerald text-cream' : 'bg-emerald/10 text-emerald'
                 }`}
               >
                 <Icon />
               </span>
-              <span className="font-sans text-sm font-semibold leading-tight text-near-black">
-                {s.label}
+              <span className="font-sans text-[11px] font-semibold leading-[1.15] text-near-black">
+                {s.short}
               </span>
             </button>
           )
         })}
       </div>
 
-      {/* Detail panel for the selected service, opens smoothly below the grid. */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current.slug}
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.35, ease: EASE }}
-          className="mt-4 overflow-hidden rounded-3xl border border-emerald-deep/10 bg-white shadow-[0_24px_60px_rgba(1,63,64,0.1)]"
-        >
-          <RenderTile service={current} mobile />
-          <div className="p-5">
-            <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight text-near-black">
-              {current.label}
-            </h3>
-            <p className="mt-2 font-sans text-sm leading-relaxed text-near-black/65">
-              {current.cardDesc}
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {current.subs.map((sub) => (
-                <li key={sub.name}>
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald/25 bg-emerald/[0.06] px-2.5 py-1 font-sans text-[11px] font-medium text-emerald-deep">
-                    <span className="h-1 w-1 rounded-full bg-emerald" aria-hidden="true" />
-                    {sub.name}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <Link
-              to={`/diensten/${current.slug}`}
-              className="mt-5 inline-flex w-fit items-center gap-2 rounded-xl bg-gradient-to-r from-emerald to-mint px-5 py-2.5 font-sans text-sm font-semibold text-near-black shadow-lg shadow-mint/25"
-            >
-              Ontdek {current.label}
-              <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+      {/* B2 — service card, swipeable */}
+      <motion.div
+        className="mt-4 touch-pan-y"
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.16}
+        onDragEnd={(_, info) => {
+          if (info.offset.x < -60) next()
+          else if (info.offset.x > 60) prev()
+        }}
+      >
+        <AnimatePresence mode="wait" custom={dir}>
+          <motion.div
+            key={current.slug}
+            custom={dir}
+            variants={cardSlide}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.35, ease: EASE }}
+            className="overflow-hidden rounded-3xl border border-emerald-deep/10 bg-white shadow-[0_24px_60px_rgba(1,63,64,0.1)]"
+          >
+            <RenderTile service={current} mobile />
+            <div className="p-5">
+              <h3 className="font-display text-2xl font-semibold leading-tight tracking-tight text-near-black">
+                {current.label}
+              </h3>
+              <p className="mt-2 font-sans text-sm leading-relaxed text-near-black/65">
+                {current.cardDesc}
+              </p>
+              {/* B6 — clickable sub-pills with a glare on tap */}
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {current.subs.map((sub) => (
+                  <li key={sub.name}>
+                    <Link
+                      to={subPath(current.slug, sub.name)}
+                      className="group/sub relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-emerald/30 bg-emerald/[0.06] px-2.5 py-1.5 font-sans text-[11px] font-medium text-emerald-deep transition-colors duration-200 active:bg-emerald/20"
+                    >
+                      <span className="h-1 w-1 rounded-full bg-emerald" aria-hidden="true" />
+                      {sub.name}
+                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/55 to-transparent transition-transform duration-700 ease-out group-hover/sub:translate-x-full group-active/sub:translate-x-full" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                to={`/diensten/${current.slug}`}
+                className="group relative mt-5 inline-flex w-fit items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-5 py-2.5 font-sans text-sm font-semibold text-near-black shadow-lg shadow-mint/25"
+              >
+                <span className="relative z-10">Ontdek {current.label}</span>
+                <span className="relative z-10" aria-hidden="true">&rarr;</span>
+                <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-active:translate-x-full" />
+              </Link>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+
+      {/* B2 — navigation: left arrow · dots · right arrow, on one line */}
+      <div className="mt-5 flex items-center justify-between">
+        <ArrowBtn dir="left" onClick={prev} />
+        <div className="flex items-center gap-1.5">
+          {MAIN_SERVICES.map((s, i) => {
+            const on = idx === i
+            return (
+              <button
+                key={s.slug}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Ga naar ${s.label}`}
+                aria-current={on}
+                className="grid place-items-center py-1"
+              >
+                <motion.span
+                  className="block h-1.5 rounded-full"
+                  animate={{
+                    width: on ? 20 : 6,
+                    backgroundColor: on ? '#008081' : 'rgba(1,63,64,0.22)',
+                  }}
+                  transition={{ duration: 0.3, ease: EASE }}
+                />
+              </button>
+            )
+          })}
+        </div>
+        <ArrowBtn dir="right" onClick={next} />
+      </div>
     </div>
+  )
+}
+
+function ArrowBtn({ dir, onClick }: { dir: 'left' | 'right'; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={dir === 'left' ? 'Vorige dienst' : 'Volgende dienst'}
+      className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-r from-emerald to-mint text-near-black shadow-lg shadow-mint/25 transition-transform duration-200 active:scale-90"
+    >
+      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+        {dir === 'left' ? <path d="M15 6l-6 6 6 6" /> : <path d="M9 6l6 6-6 6" />}
+      </svg>
+    </button>
   )
 }
 
@@ -257,7 +381,7 @@ function RenderTile({ service: s, mobile = false }: { service: MainService; mobi
   return (
     <div
       className={`relative w-full overflow-hidden border-white/10 ${
-        mobile ? 'h-[260px] border-b' : 'aspect-[4/3] rounded-2xl border'
+        mobile ? 'h-[340px] border-b' : 'aspect-[4/3] rounded-2xl border'
       }`}
       style={{ backgroundImage: 'linear-gradient(155deg, #013F40 0%, #082321 55%, #05110F 100%)' }}
     >

@@ -11,7 +11,7 @@ export function ServicesIntro() {
   return (
     <section
       id="diensten"
-      className="relative overflow-hidden bg-cream py-24 md:py-32"
+      className="relative overflow-hidden bg-cream pb-8 pt-24 md:py-32"
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <Reveal className="flex items-center gap-3">
