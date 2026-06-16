@@ -3,7 +3,7 @@ import {
   BrowserRender,
   BrandingRender,
   VideoRender,
-  AiVideoRender,
+  SourcingRender,
   SeoRender,
   NetworkRender,
 } from '@/sections/serviceRenders'
@@ -161,7 +161,7 @@ export const MAIN_SERVICES: MainService[] = [
       { name: 'Detachering', desc: 'Het juiste talent op de juiste plek, precies wanneer je het nodig hebt. Flexibel opschalen zonder gedoe.' },
     ],
     accent: 'from-emerald to-lime-bright',
-    Render: AiVideoRender,
+    Render: SourcingRender,
   },
 ]
 

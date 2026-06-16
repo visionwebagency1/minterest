@@ -452,6 +452,119 @@ export function AiVideoRender() {
   )
 }
 
+/** 07 — Sourcing: a magnifying glass scans a catalog of products from different
+ *  suppliers and "finds" the right one on a loop (it lights up green with a
+ *  check + price), while incoming items keep arriving. */
+export function SourcingRender() {
+  const [found, setFound] = useState(0)
+  useEffect(() => {
+    const id = setInterval(() => setFound((f) => (f + 1) % 4), 1700)
+    return () => clearInterval(id)
+  }, [])
+
+  const items = [
+    { g: 'from-emerald-deep to-emerald', price: '€ 12' },
+    { g: 'from-emerald to-mint', price: '€ 24' },
+    { g: 'from-mint to-lime-accent', price: '€ 9' },
+    { g: 'from-emerald-deep to-mint', price: '€ 18' },
+  ]
+  // magnifier target (in % of the catalog panel) per tile.
+  const pos = [
+    { x: 30, y: 38 },
+    { x: 72, y: 38 },
+    { x: 30, y: 76 },
+    { x: 72, y: 76 },
+  ]
+
+  return (
+    <div className="grid h-full w-full place-items-center p-8">
+      <motion.div
+        className="w-full max-w-[18rem]"
+        animate={{ y: [0, -9, 0] }}
+        transition={FLOAT(7.5)}
+      >
+        <div className="relative rounded-2xl border border-white/10 bg-[#0A2725] p-3 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+          {/* header — supplier feed */}
+          <div className="mb-2.5 flex items-center gap-1.5">
+            <motion.span
+              className="h-2 w-2 rounded-full bg-lime-accent"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            />
+            <span className="font-mono text-[8px] uppercase tracking-[0.22em] text-cream/60">
+              sourcing
+            </span>
+            <span className="ml-auto font-mono text-[8px] text-cream/40">4 leveranciers</span>
+          </div>
+
+          {/* product grid */}
+          <div className="grid grid-cols-2 gap-2.5">
+            {items.map((it, i) => {
+              const on = found === i
+              return (
+                <motion.div
+                  key={i}
+                  className={`relative overflow-hidden rounded-lg border bg-gradient-to-br ${it.g}`}
+                  animate={{
+                    borderColor: on ? 'rgba(144,238,144,0.9)' : 'rgba(255,255,255,0.1)',
+                    scale: on ? 1.05 : 1,
+                  }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                >
+                  {/* incoming item drops in on a loop */}
+                  <motion.div
+                    className="grid aspect-[4/3] place-items-center"
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <span className="h-6 w-6 rounded-md bg-cream/85 shadow-sm" />
+                  </motion.div>
+                  {/* found check */}
+                  <motion.span
+                    className="absolute right-1 top-1 grid h-4 w-4 place-items-center rounded-full bg-lime-accent text-emerald-deep"
+                    animate={{ opacity: on ? 1 : 0, scale: on ? 1 : 0.4 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                  >
+                    <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 13l4 4L19 7" />
+                    </svg>
+                  </motion.span>
+                  {/* price tag when found */}
+                  <motion.span
+                    className="absolute bottom-1 left-1 rounded bg-ink/85 px-1 py-px font-mono text-[7px] font-bold text-lime-bright"
+                    animate={{ opacity: on ? 1 : 0, y: on ? 0 : 5 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                  >
+                    {it.price}
+                  </motion.span>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {/* magnifying glass scans to the found tile */}
+          <motion.div
+            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-1/2"
+            animate={{ left: `${pos[found].x}%`, top: `${pos[found].y}%` }}
+            transition={{ type: 'spring', stiffness: 110, damping: 15 }}
+          >
+            <motion.svg
+              viewBox="0 0 40 40"
+              className="h-12 w-12 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
+              animate={{ scale: [1, 1.09, 1] }}
+              transition={{ duration: 1.7, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <circle cx="17" cy="17" r="11" fill="rgba(182,245,182,0.12)" stroke="#B6F5B6" strokeWidth="2.6" />
+              <line x1="25" y1="25" x2="34" y2="34" stroke="#B6F5B6" strokeWidth="3.2" strokeLinecap="round" />
+            </motion.svg>
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
 /** 06 — SEO: a search result for "jouwmerk.nl" climbs from #5 to #1 on a loop
  *  (real list reorder), the rest of the results easing aside. */
 export function SeoRender() {
