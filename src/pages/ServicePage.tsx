@@ -5,8 +5,7 @@ import { Reveal } from '@/components/Reveal'
 import { BlurReveal } from '@/components/BlurReveal'
 import { Accent } from '@/components/Accent'
 import { BorderBeam } from '@/components/BorderBeam'
-import { Logo } from '@/components/Logo'
-import { HERO_BG } from '@/components/PageHero'
+import { HERO_BG, HeroMWatermark } from '@/components/PageHero'
 import { SUB_ICON_BY_SLUG } from '@/components/subServiceIcons'
 import { Footer } from '@/sections/Footer'
 import { M_PATH } from '@/three/mPath'
@@ -101,7 +100,7 @@ export function ServicePage({ slug }: { slug: string }) {
               </h2>
             </Reveal>
 
-            <div className="mt-20 flex flex-col gap-20 md:gap-28">
+            <div className="mt-14 flex flex-col gap-16 md:mt-20 md:gap-28">
               {s.subs.map((sub, i) => {
                 const Icon = SUB_ICON_BY_SLUG[slugifySub(sub.name)]
                 return (
@@ -115,10 +114,10 @@ export function ServicePage({ slug }: { slug: string }) {
                       <SubVisual accent={s.accent} />
                     </Reveal>
                     <Reveal delay={0.08}>
-                      <span className="grid h-14 w-14 place-items-center rounded-2xl bg-emerald/10 text-emerald">
+                      <span className="grid h-16 w-16 place-items-center rounded-2xl bg-emerald/10 p-4 text-emerald ring-1 ring-emerald/15 [&>svg]:h-full [&>svg]:w-full">
                         {Icon ? <Icon /> : null}
                       </span>
-                      <h3 className="mt-5 font-display text-3xl font-semibold leading-tight md:text-4xl">
+                      <h3 className="mt-6 font-display text-3xl font-semibold leading-tight md:text-4xl">
                         {sub.name}
                       </h3>
                       <p className="mt-4 max-w-md font-sans text-lg leading-relaxed text-near-black/65">
@@ -126,10 +125,11 @@ export function ServicePage({ slug }: { slug: string }) {
                       </p>
                       <Link
                         to={subPath(s.slug, sub.name)}
-                        className="group mt-6 inline-flex items-center gap-2 font-sans text-sm font-semibold text-emerald-deep transition-colors duration-300 hover:text-emerald"
+                        className="group relative mt-7 inline-flex w-fit items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-6 py-3 font-sans text-sm font-semibold text-near-black shadow-lg shadow-mint/25 transition-transform duration-300 hover:scale-[1.03]"
                       >
-                        Meer over {sub.name.toLowerCase()}
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                        <span className="relative z-10">Meer over {sub.name.toLowerCase()}</span>
+                        <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+                        <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
                       </Link>
                     </Reveal>
                   </div>
@@ -228,11 +228,8 @@ function ServiceHero({ service: s }: { service: MainService }) {
         className={`pointer-events-none absolute -right-32 -top-24 h-[34rem] w-[34rem] rounded-full bg-gradient-to-br ${s.accent} opacity-20 blur-[130px]`}
         aria-hidden="true"
       />
-      {/* brand M + wordmark, recognizable but quiet, lower-right */}
-      <Logo
-        wordmark="rgba(244,244,244,0.5)"
-        className="pointer-events-none absolute bottom-6 right-5 h-12 w-auto opacity-80 md:bottom-10 md:right-12 md:h-16"
-      />
+      {/* quiet transparent brand-M motif (the header already carries the logo) */}
+      <HeroMWatermark />
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <motion.div

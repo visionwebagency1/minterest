@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
-import { Logo } from './Logo'
+import { LogoMark } from './Logo'
 
 /**
  * Dark, gradient inner-page hero (fresh Minterest teal -> mint) with a kicker,
@@ -15,6 +15,20 @@ const EASE = [0.22, 1, 0.36, 1] as const
 /** Shared fresh teal -> mint hero gradient (greener than the old near-black). */
 export const HERO_BG =
   'radial-gradient(75% 70% at 82% 0%, rgba(66,194,140,0.5), transparent 62%), radial-gradient(62% 65% at 0% 100%, rgba(0,128,129,0.5), transparent 60%), linear-gradient(150deg, #0B3A37 0%, #08221F 55%, #061814 100%)'
+
+/**
+ * Subtle transparent brand-M watermark for inner-page heroes. Recognizable as
+ * our M (not an enlarged blob), kept low-opacity and fully inside the hero so it
+ * reads as a quiet brand motif. Shared by the service heroes and any sub-page.
+ */
+export function HeroMWatermark() {
+  return (
+    <LogoMark
+      aria-hidden="true"
+      className="pointer-events-none absolute bottom-6 right-5 h-[clamp(7rem,24vw,13rem)] w-auto opacity-[0.08] md:bottom-10 md:right-12"
+    />
+  )
+}
 
 type Cta = { label: string; to: string }
 
@@ -36,12 +50,8 @@ export function PageHero({
       className="relative overflow-hidden bg-near-black pt-36 pb-24 text-cream md:pt-48 md:pb-32"
       style={{ backgroundImage: HERO_BG }}
     >
-      {/* Brand M + wordmark, recognizable but quiet, lower-right. Small and
-          crisp, not the old enlarged blob. */}
-      <Logo
-        wordmark="rgba(244,244,244,0.5)"
-        className="pointer-events-none absolute bottom-6 right-5 h-12 w-auto opacity-80 md:bottom-10 md:right-12 md:h-16"
-      />
+      {/* Quiet transparent brand-M motif (no redundant logo: the header has it) */}
+      <HeroMWatermark />
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <motion.div
