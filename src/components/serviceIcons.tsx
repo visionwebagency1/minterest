@@ -69,7 +69,7 @@ export function GlobeIcon() {
 /** Lead-form service options — the 6 main services (keys = landing-page slugs). */
 export const SERVICE_OPTIONS = [
   { key: 'design-branding', label: 'Branding voor groei', Icon: BrandIcon },
-  { key: 'web-development', label: 'Websites die converteren', Icon: WebIcon },
+  { key: 'web-development', label: 'Web Development', Icon: WebIcon },
   { key: 'video-fotografie', label: 'Video & Fotografie', Icon: VideoIcon },
   { key: 'social-media', label: 'Social Media Groei', Icon: NetworkIcon },
   { key: 'seo-sea', label: 'SEO & SEA', Icon: SeoIcon },

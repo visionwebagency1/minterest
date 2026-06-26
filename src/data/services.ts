@@ -17,8 +17,8 @@ import {
  * updates everywhere.
  *
  * Structure (ronde 2, definitief):
- *   1. Branding voor groei   2. Websites die converteren   3. Video & Fotografie
- *   4. Social Media Groei    5. SEO & SEA                  6. Extra groeidiensten
+ *   1. Branding voor groei   2. Web Development   3. Video & Fotografie
+ *   4. Social Media Groei    5. SEO & SEA         6. Extra groeidiensten
  */
 
 export type Sub = { name: string; desc: string }
@@ -69,8 +69,8 @@ export const MAIN_SERVICES: MainService[] = [
   },
   {
     slug: 'web-development',
-    label: 'Websites die converteren',
-    short: 'Websites die converteren',
+    label: 'Web Development',
+    short: 'Web Development',
     kicker: 'Web & commerce',
     tagline:
       'Snelle, converterende websites, webshops en software, gebouwd om te verkopen en mee te groeien.',
