@@ -67,7 +67,7 @@ export function ServicesShowcase() {
     <section
       ref={sectionRef}
       id="diensten-cards"
-      className="relative bg-cream pb-20 pt-4 text-near-black md:py-28"
+      className="relative bg-cream pb-20 pt-2 text-near-black md:pb-28 md:pt-4"
     >
       <div className="mx-auto max-w-6xl px-6 md:px-10 lg:px-16">
         {desktop ? (
@@ -149,8 +149,8 @@ function DesktopCarousel({
 
   return (
     <div>
-      {/* choice pills, one row */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5">
+      {/* choice pills, 3-column grid (two rows of three) */}
+      <div className="mx-auto grid max-w-3xl grid-cols-3 gap-2.5">
         {MAIN_SERVICES.map((s, i) => {
           const Icon = SERVICE_ICON_BY_SLUG[s.slug]
           const on = idx === i
@@ -160,14 +160,14 @@ function DesktopCarousel({
               type="button"
               onClick={() => goTo(i)}
               aria-pressed={on}
-              className={`inline-flex items-center gap-2.5 rounded-full border px-5 py-3 font-sans text-sm font-semibold transition-all duration-300 ${
+              className={`flex w-full items-center justify-center gap-2.5 rounded-full border px-5 py-3 font-sans text-sm font-semibold transition-all duration-300 ${
                 on
                   ? 'border-emerald bg-emerald text-cream shadow-lg shadow-emerald/20'
                   : 'border-emerald-deep/15 bg-white text-near-black/70 hover:border-emerald/40'
               }`}
             >
               <span
-                className={`grid h-6 w-6 place-items-center [&>svg]:h-4 [&>svg]:w-4 ${
+                className={`grid h-6 w-6 shrink-0 place-items-center [&>svg]:h-4 [&>svg]:w-4 ${
                   on ? 'text-cream' : 'text-emerald'
                 }`}
               >
@@ -180,7 +180,7 @@ function DesktopCarousel({
       </div>
 
       {/* service card */}
-      <div className="relative mt-10">
+      <div className="relative mt-7">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={current.slug}
@@ -285,8 +285,8 @@ function MobileGrid({
 
   return (
     <div>
-      {/* B1 — six choice pills, 3x2, icon beside text */}
-      <div className="grid grid-cols-3 gap-2">
+      {/* B1 — six choice pills: two visible, horizontally scrollable with snap */}
+      <div className="-mx-6 flex snap-x snap-mandatory gap-2 overflow-x-auto px-6 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {MAIN_SERVICES.map((s, i) => {
           const Icon = SERVICE_ICON_BY_SLUG[s.slug]
           const on = idx === i
@@ -296,7 +296,7 @@ function MobileGrid({
               type="button"
               onClick={() => goTo(i)}
               aria-pressed={on}
-              className={`flex h-full items-center gap-1.5 rounded-xl border px-2 py-2.5 text-left transition-all duration-300 ${
+              className={`flex min-w-[44%] shrink-0 snap-start items-center gap-2 rounded-xl border px-3 py-2.5 text-left transition-all duration-300 ${
                 on
                   ? 'border-emerald bg-emerald/10 shadow-[0_0_0_1px_rgba(0,128,129,0.3)]'
                   : 'border-emerald-deep/12 bg-white'
