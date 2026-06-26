@@ -52,6 +52,8 @@ export type SubService = {
   ctaTitle?: string
   /** Closing-CTA paragraph. */
   ctaText?: string
+  /** Primary CTA button label (hero + closing CTA). Falls back to the parent traject. */
+  ctaButton?: string
 }
 
 const S = (serviceSlug: string, name: string, rest: Omit<SubService, 'serviceSlug' | 'slug' | 'name'>): SubService => ({
@@ -154,6 +156,7 @@ export const SUB_SERVICES: SubService[] = [
     ctaTitle: 'Klaar voor packaging die opvalt?',
     ctaText:
       'Vertel ons over je product. Wij helpen je met verpakking die professioneel oogt, vertrouwen wekt en klaar is voor verkoop.',
+    ctaButton: 'Start jouw packagingtraject',
   }),
   S('design-branding', 'Social Media Visual System', {
     tagline:
@@ -251,163 +254,191 @@ export const SUB_SERVICES: SubService[] = [
   /* ───────────────────────── Web Development ───────────────────────── */
   S('web-development', 'Websites', {
     tagline:
-      'Snelle, converterende websites die er strak uitzien en gebouwd zijn om te verkopen.',
+      'Een website die niet alleen mooi oogt, maar duidelijk uitlegt wat je doet, vertrouwen wekt en bezoekers omzet in aanvragen.',
+    whatTitle: 'Websites die converteren.',
     story: [
-      'Je website is je hardst werkende verkoper: hij staat dag en nacht aan en is vaak het eerste echte beeld dat iemand van je krijgt. Toch laten veel sites kansen liggen, omdat ze traag zijn, onduidelijk of niet gebouwd op conversie. Wij maken websites die er niet alleen strak uitzien, maar ook echt werken.',
-      'We ontwerpen op maat, gebouwd rond jouw doel en je bezoeker. Snelheid staat voorop, want elke seconde laadtijd kost bezoekers. We bouwen op een moderne, schaalbare stack, richten een CMS in zodat je zelf kunt bijwerken, en leggen een stevige SEO-basis zodat je gevonden wordt.',
-      'Het resultaat is een site die laadt in een oogwenk, soepel werkt op elk scherm en bezoekers omzet in klanten. En omdat alles netjes is opgebouwd, kun je makkelijk uitbreiden als je groeit.',
+      'Je website is vaak het eerste moment waarop iemand beslist of jouw bedrijf professioneel en betrouwbaar voelt. Daarom bouwen wij geen losse pagina\'s, maar een digitale basis die past bij je aanbod, doelgroep en doelen. We zorgen voor een website die snel, duidelijk en professioneel is ingericht. Van structuur en design tot techniek en vindbaarheid: alles werkt samen om bezoekers richting actie te bewegen.',
     ],
+    actionTitle: 'Zo ziet een website die werkt eruit.',
+    actionText:
+      'Een professionele website die overzicht geeft, vertrouwen opbouwt en bezoekers helpt de juiste stap te zetten.',
     deliverables: [
-      { title: 'Maatwerk ontwerp', desc: 'Een uniek ontwerp afgestemd op je merk en je doel, geen template-gevoel.' },
-      { title: 'Responsive build', desc: 'Een snelle, soepele site die perfect werkt op mobiel, tablet en desktop.' },
-      { title: 'CMS', desc: 'Een eenvoudig content-systeem zodat je zelf teksten en pagina’s beheert.' },
-      { title: 'SEO-basis', desc: 'Een technische SEO-basis zodat je vindbaar bent vanaf de lancering.' },
+      { title: 'Maatwerk ontwerp', desc: 'Een uniek ontwerp dat past bij je merk, doelgroep en gewenste uitstraling.' },
+      { title: 'Responsive build', desc: 'Een website die goed werkt op mobiel, tablet en desktop.' },
+      { title: 'CMS', desc: 'Een eenvoudig systeem waarmee je zelf teksten en afbeeldingen kunt aanpassen.' },
+      { title: 'SEO-basis', desc: 'Een technische basis die helpt om beter gevonden te worden in Google.' },
     ],
     audience:
-      'Voor ondernemers en merken die hun website serieus nemen als groeikanaal. Of je nu een verouderde site vervangt of voor het eerst echt online gaat, je krijgt een fundament dat presteert.',
+      'Voor ondernemers en merken die hun website serieus nemen als commerciele basis. Ideaal als je huidige website verouderd is, niet genoeg vertrouwen wekt of te weinig aanvragen oplevert.',
     why: [
-      { title: 'Gebouwd op snelheid', desc: 'We optimaliseren tot in de details, want snelheid bepaalt conversie en vindbaarheid.' },
-      { title: 'Conversiegericht', desc: 'Elke pagina is opgebouwd rond een doel, niet alleen rond mooie plaatjes.' },
-      { title: 'Zelf te beheren', desc: 'Met een helder CMS houd je zelf grip op je content, zonder ons nodig te hebben.' },
+      { title: 'Gebouwd op resultaat', desc: 'We ontwerpen niet alleen mooi, maar denken na over vertrouwen, structuur en conversie.' },
+      { title: 'Conversiegericht', desc: 'Elke pagina heeft een doel: informeren, overtuigen en bezoekers richting actie sturen.' },
+      { title: 'Zelf te beheren', desc: 'Je krijgt een website die professioneel staat en praktisch te gebruiken blijft.' },
     ],
+    approachTitle: 'Van idee naar website die werkt.',
     approach: [
-      { title: 'Kennismaken', desc: 'We brengen doel, doelgroep en wensen scherp in beeld.' },
-      { title: 'Ontwerp', desc: 'We ontwerpen de structuur en de pagina’s op maat.' },
-      { title: 'Bouwen', desc: 'We bouwen snel, schoon en volledig responsive.' },
-      { title: 'Live', desc: 'We lanceren, meten en optimaliseren waar nodig.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je bedrijf, doelgroep en doelen.' },
+      { title: 'Ontwerp', desc: 'We maken een duidelijke structuur en visuele richting.' },
+      { title: 'Bouwen', desc: 'We bouwen een snelle, professionele en gebruiksvriendelijke website.' },
+      { title: 'Live', desc: 'We zetten alles live en zorgen dat je website klaar is om resultaat te leveren.' },
     ],
     case: {
       name: 'Atelier Mauve',
       sector: 'Interieurontwerp',
       summary:
-        'Een interieurstudio met prachtig werk maar een trage, gedateerde site die bezoekers liet afhaken. We bouwden een snelle, beeldende website met een helder contactpad.',
+        'Een interieurstudio met prachtig werk, maar een website die onvoldoende vertrouwen en overzicht gaf. We bouwden een rustige, professionele website met een heldere structuur en duidelijke presentatie van het aanbod.',
       outcome:
-        'Een site die het werk recht doet, vliegensvlug laadt en bezoekers veel makkelijker naar een aanvraag leidt.',
+        'Een website die sterker aanvoelt, beter aansluit bij de kwaliteit van het merk en bezoekers makkelijker richting aanvraag brengt.',
     },
     faq: [
-      { q: 'Kan ik de site zelf aanpassen?', a: 'Ja. We richten een gebruiksvriendelijk CMS in en leggen kort uit hoe je teksten en pagina’s beheert.' },
-      { q: 'Verzorgen jullie ook hosting?', a: 'Dat kan. We adviseren of regelen snelle, betrouwbare hosting en onderhoud zodat je nergens omkijken naar hebt.' },
+      { q: 'Kan ik de site zelf aanpassen?', a: 'Ja. We bouwen met een gebruiksvriendelijk CMS, zodat je zelf teksten en afbeeldingen kunt aanpassen.' },
+      { q: 'Verzorgen jullie ook hosting?', a: 'Ja. We kunnen hosting en onderhoud verzorgen, zodat je website veilig, snel en up-to-date blijft.' },
     ],
+    ctaTitle: 'Klaar voor een website die aanvragen oplevert?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met een website die professioneel oogt, vertrouwen wekt en gericht is op resultaat.',
+    ctaButton: 'Start jouw webtraject',
   }),
   S('web-development', 'Webshops', {
     tagline:
-      'Webshops in Shopify of WooCommerce, volledig op maat gebouwd rond hoe jouw klanten kopen.',
+      'Een webshop die niet alleen mooi oogt, maar vertrouwen wekt, overzicht creeert en bezoekers soepel laat bestellen.',
+    whatTitle: 'Webshops die verkopen.',
     story: [
-      'Een webshop is meer dan een catalogus met een afrekenknop. Het is een verkoopmachine die alleen werkt als elk detail klopt: van een productpagina die overtuigt tot een checkout die niemand laat afhaken. Wij bouwen shops die gericht zijn op verkopen, niet alleen op tonen.',
-      'We werken met Shopify of WooCommerce, afhankelijk van wat bij jou past, en richten alles in rond hoe jouw klanten kopen. Snelle productpagina’s, een soepele checkout, de juiste betaalmethodes en koppelingen met je voorraad of boekhouding. Alles wat de verkoop in de weg zit, halen we weg.',
-      'Het resultaat is een shop die converteert, makkelijk te beheren is en meegroeit met je assortiment. Of je nu tien producten verkoopt of duizend, de basis is gebouwd om op te schalen.',
+      'Een webshop is meer dan een online winkel. Het is een verkoopomgeving die duidelijk moet zijn, professioneel moet aanvoelen en klanten zonder twijfel naar aankoop moet begeleiden. Wij bouwen webshops die passen bij je merk, producten en groeiplannen. Van structuur en design tot checkout, betaalmethodes en productpagina\'s: alles wordt ingericht om vertrouwen te wekken en verkoop makkelijker te maken.',
     ],
+    actionTitle: 'Zo ziet een webshop die werkt eruit.',
+    actionText:
+      'Een webshop die overzicht geeft, vertrouwen opbouwt en klanten soepel door het aankoopproces begeleidt.',
     deliverables: [
-      { title: 'Shop-inrichting', desc: 'Een complete inrichting in Shopify of WooCommerce, afgestemd op jouw assortiment.' },
-      { title: 'Productpagina’s', desc: 'Overtuigende productpagina’s die twijfel wegnemen en aanzetten tot kopen.' },
-      { title: 'Checkout', desc: 'Een soepele, vertrouwde checkout die het aantal afhakers minimaliseert.' },
-      { title: 'Betaalmethodes', desc: 'De juiste betaalmethodes voor jouw markt, veilig en compleet ingericht.' },
+      { title: 'Shop-inrichting', desc: 'Een complete webshopstructuur ingericht voor jouw producten en categorieen.' },
+      { title: "Productpagina's", desc: "Duidelijke productpagina's die jouw aanbod professioneel presenteren." },
+      { title: 'Checkout', desc: 'Een soepel aankoopproces dat klanten helpt sneller af te rekenen.' },
+      { title: 'Betaalmethodes', desc: 'Betalingsopties die passen bij jouw klant en verkoopproces.' },
     ],
     audience:
-      'Voor merken die online verkopen en hun shop willen laten presteren. Ideaal als je start met e-commerce of als je huidige shop te traag, te rommelig of te beperkt is.',
+      'Voor merken en ondernemers die online willen verkopen en hun webshop serieus willen laten bijdragen aan omzet. Ideaal als je huidige shop traag, rommelig of beperkt is.',
     why: [
-      { title: 'Gebouwd op conversie', desc: 'Elke stap, van productpagina tot checkout, is ingericht om de verkoop af te ronden.' },
-      { title: 'Klaar om te schalen', desc: 'Een opzet die meegroeit met je assortiment, je verkeer en je ambitie.' },
-      { title: 'Koppelingen die kloppen', desc: 'We verbinden je shop met voorraad, betaling en boekhouding zodat alles soepel loopt.' },
+      { title: 'Gebouwd op verkoop', desc: 'We richten je webshop in met focus op vertrouwen, overzicht en conversie.' },
+      { title: 'Klaar om te beheren', desc: 'Je krijgt een webshop die praktisch werkt en eenvoudig aan te passen is.' },
+      { title: 'Meegroeibaar', desc: 'Je webshop wordt gebouwd met ruimte voor nieuwe producten, acties en uitbreiding.' },
     ],
+    approachTitle: 'Van product naar verkoopomgeving.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bekijken je producten, je klant en je verkoopproces.' },
-      { title: 'Inrichten', desc: 'We bouwen de shop en de productstructuur op maat.' },
-      { title: 'Koppelen', desc: 'We verbinden betaling, voorraad en verzending.' },
-      { title: 'Live', desc: 'We lanceren en optimaliseren op conversie.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je producten, doelgroep en verkoopdoelen.' },
+      { title: 'Inrichten', desc: 'We bepalen de structuur, categorieen en klantreis.' },
+      { title: 'Koppelen', desc: 'We zetten producten, betalingen en belangrijke koppelingen goed klaar.' },
+      { title: 'Live', desc: 'We testen alles en zetten je webshop klaar voor verkoop.' },
     ],
     case: {
       name: 'Forma Goods',
       sector: 'Design accessoires',
       summary:
-        'Een merk met sterke producten maar een verwarrende shop waar veel klanten afhaakten in de checkout. We herbouwden de shop met heldere productpagina’s en een vlotte checkout.',
+        'Een merk met sterke producten, maar een webshop die te weinig overzicht en vertrouwen gaf. We bouwden een duidelijke shopstructuur met heldere productpagina\'s en een soepeler bestelproces.',
       outcome:
-        'Een shop die rust en vertrouwen uitstraalt, waarin klanten makkelijker hun aankoop afronden en het team eenvoudig producten beheert.',
+        'Een webshop die professioneler aanvoelt en klanten makkelijker van interesse naar aankoop begeleidt.',
     },
     faq: [
-      { q: 'Shopify of WooCommerce?', a: 'We adviseren op basis van jouw situatie. Shopify is sneller op te zetten, WooCommerce geeft meer maatwerk binnen WordPress.' },
-      { q: 'Kunnen jullie een bestaande shop overzetten?', a: 'Ja. We migreren je producten en data zorgvuldig zodat je niets verliest bij de overstap.' },
+      { q: 'Shopify of WooCommerce?', a: 'Dat hangt af van je producten, wensen en toekomstplannen. We adviseren wat het beste past bij jouw situatie.' },
+      { q: 'Kunnen jullie ook bestaande shops verbeteren?', a: 'Ja. We kunnen een bestaande webshop optimaliseren of volledig opnieuw inrichten.' },
     ],
+    ctaTitle: 'Klaar voor een webshop die verkoopt?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met een webshop die vertrouwen wekt, overzicht biedt en gericht is op verkoop.',
+    ctaButton: 'Start jouw webshoptraject',
   }),
   S('web-development', 'Applicaties', {
     tagline:
-      'Web-applicaties en portals die je proces slimmer en sneller maken, op maat van je workflow.',
+      'Webapplicaties en portals die processen eenvoudiger maken, tijd besparen en je bedrijf schaalbaar laten werken.',
+    whatTitle: 'Applicaties die processen versnellen.',
     story: [
-      'Soms is een website niet genoeg en heb je echt gereedschap nodig: een portal, een dashboard of een interne tool die je werk vereenvoudigt. Web-applicaties draaien om functie. Ze nemen handwerk weg, geven overzicht en maken processen die nu in spreadsheets leven eindelijk schaalbaar.',
-      'Wij bouwen applicaties op maat van jouw workflow. We beginnen bij wat je gebruikers echt nodig hebben, ontwerpen een interface die intuïtief werkt, en bouwen een stabiele frontend en backend eronder. Waar het kan koppelen we met systemen die je al gebruikt, zodat alles op één plek samenkomt.',
-      'Het resultaat is een applicatie die je team dagelijks gebruikt omdat hij het werk echt makkelijker maakt. Snel, betrouwbaar en gebouwd om uit te breiden naarmate je behoeften groeien.',
+      'Soms groeit je bedrijf sneller dan je systemen. Je werkt met losse spreadsheets, handmatige stappen of tools die niet goed op elkaar aansluiten. Wij bouwen webapplicaties, portals en dashboards die jouw processen slimmer maken. Van klantportalen en interne systemen tot planningen, formulieren en koppelingen: alles wordt gebouwd rondom hoe jouw bedrijf echt werkt.',
     ],
+    actionTitle: 'Zo ziet een slimme applicatie eruit.',
+    actionText:
+      'Een digitale oplossing die overzicht geeft, handwerk vermindert en processen makkelijker maakt.',
     deliverables: [
-      { title: 'UX', desc: 'Een doordacht interface-ontwerp dat aansluit op hoe je gebruikers werken.' },
-      { title: 'Frontend', desc: 'Een snelle, prettige frontend die soepel werkt op elk apparaat.' },
-      { title: 'Backend', desc: 'Een stabiele, veilige backend die je data en logica betrouwbaar verwerkt.' },
-      { title: 'Integraties', desc: 'Koppelingen met de systemen en API’s die je al gebruikt.' },
+      { title: 'UX', desc: 'Een duidelijke structuur die logisch werkt voor jouw gebruikers.' },
+      { title: 'Frontend', desc: 'Een moderne interface die professioneel oogt en prettig werkt.' },
+      { title: 'Backend', desc: 'Een stabiele technische basis achter je applicatie.' },
+      { title: 'Integraties', desc: "Koppelingen met systemen zoals CRM, formulieren, agenda's of andere tools." },
     ],
     audience:
-      'Voor bedrijven die een proces willen digitaliseren of een tool nodig hebben die niet als standaardpakket bestaat. Ideaal als je nu vastloopt in losse spreadsheets en handwerk.',
+      'Voor bedrijven die een proces willen digitaliseren of een tool nodig hebben die niet standaard bestaat. Ideaal als je nu vastloopt in losse spreadsheets, handwerk of onduidelijke workflows.',
     why: [
-      { title: 'Rond je workflow', desc: 'We bouwen rond hoe jij werkt, niet andersom, zodat de tool echt past.' },
-      { title: 'Stabiel en veilig', desc: 'Een solide technische basis die betrouwbaar draait en je data beschermt.' },
-      { title: 'Klaar om uit te breiden', desc: 'Een schone architectuur waarop je later eenvoudig kunt doorbouwen.' },
+      { title: 'Procesgericht', desc: 'We bouwen rondom je werkwijze, niet rondom losse functies.' },
+      { title: 'Stabiel en veilig', desc: 'Je applicatie wordt gebouwd met oog voor betrouwbaarheid en gebruiksgemak.' },
+      { title: 'Klaar om uit te breiden', desc: 'We zorgen dat je applicatie kan meegroeien met je bedrijf.' },
     ],
+    approachTitle: 'Van proces naar slimme oplossing.',
     approach: [
-      { title: 'Kennismaken', desc: 'We brengen je proces en je gebruikers in kaart.' },
-      { title: 'Ontwerp', desc: 'We ontwerpen de flows en de interface.' },
-      { title: 'Bouwen', desc: 'We bouwen frontend, backend en koppelingen.' },
-      { title: 'Doorontwikkelen', desc: 'We lanceren en bouwen door op basis van gebruik.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je proces, knelpunten en doelen.' },
+      { title: 'Ontwerpen', desc: 'We maken een duidelijke structuur en gebruikersflow.' },
+      { title: 'Bouwen', desc: 'We ontwikkelen de applicatie en testen de belangrijkste functies.' },
+      { title: 'Doorontwikkelen', desc: 'We verbeteren en breiden uit wanneer je bedrijf verder groeit.' },
     ],
     case: {
       name: 'Logiflow',
       sector: 'Logistiek',
       summary:
-        'Een logistiek bedrijf dat planning en orders bijhield in een wirwar van spreadsheets. We bouwden een overzichtelijk portal waarin planning, orders en status op één plek samenkomen.',
+        'Een logistiek bedrijf dat planning en orders beheerde via losse spreadsheets. We bouwden een overzichtelijk portaal waarin planning, orders en statusupdates op een plek samenkomen.',
       outcome:
-        'Veel minder handwerk en fouten, een team dat in één oogopslag overzicht heeft en een systeem dat meegroeit met het bedrijf.',
+        'Minder handwerk, meer overzicht en een proces dat makkelijker schaalbaar is.',
     },
     faq: [
-      { q: 'Kunnen jullie koppelen met ons huidige systeem?', a: 'Vrijwel altijd. Als er een API of export beschikbaar is, bouwen we de koppeling die je nodig hebt.' },
-      { q: 'Verzorgen jullie ook onderhoud?', a: 'Ja. We bieden onderhoud en doorontwikkeling zodat de applicatie up-to-date en veilig blijft.' },
+      { q: 'Kunnen jullie koppelen met bestaande systemen?', a: "Ja. We kunnen koppelingen maken met bijvoorbeeld CRM-systemen, formulieren, agenda's of andere tools." },
+      { q: 'Verzorgen jullie ook onderhoud?', a: 'Ja. We kunnen onderhoud en doorontwikkeling verzorgen zodat de applicatie veilig en up-to-date blijft.' },
     ],
+    ctaTitle: 'Klaar voor een applicatie die tijd bespaart?',
+    ctaText:
+      'Vertel ons welk proces slimmer kan. Wij helpen je met een applicatie die overzicht geeft, handwerk vermindert en meegroeit met je bedrijf.',
+    ctaButton: 'Start jouw applicatietraject',
   }),
   S('web-development', 'Software', {
     tagline:
-      'Maatwerk software die met je bedrijf meegroeit, stabiel en gebouwd om jaren mee te gaan.',
+      'Maatwerk software die jouw proces slimmer maakt, losse systemen koppelt en meegroeit met je bedrijf.',
+    whatTitle: 'Software die processen versterkt.',
     story: [
-      'Als standaardpakketten niet meer passen, wordt maatwerk software de slimste investering. Het is software die exact doet wat jouw bedrijf nodig heeft, zonder de ballast van functies die je nooit gebruikt en zonder de beperkingen van een one-size-fits-all systeem.',
-      'Wij bouwen software vanuit een helder technisch ontwerp, met een architectuur die schaalt en onderhoudbaar blijft. We denken in modules, zodat het systeem kan meegroeien en je later onderdelen kunt toevoegen zonder alles om te gooien. Koppelingen met bestaande systemen horen er vanzelfsprekend bij.',
-      'Het resultaat is een stabiel systeem dat je processen ondersteunt en jaren meegaat. En omdat we onderhoud en doorontwikkeling erbij leveren, blijft het meebewegen met je bedrijf.',
+      'Standaardtools passen niet altijd bij hoe je bedrijf echt werkt. Soms heb je software nodig die aansluit op jouw proces, jouw team en jouw manier van werken. Wij bouwen maatwerk software die handwerk vermindert, systemen koppelt en je bedrijf overzichtelijker laat draaien.',
     ],
+    actionTitle: 'Zo ziet slimme software eruit.',
+    actionText:
+      'Software die processen verbindt, werk versnelt en klaar is om mee te groeien.',
     deliverables: [
-      { title: 'Technisch ontwerp', desc: 'Een doordachte architectuur die schaalbaar en onderhoudbaar is.' },
-      { title: 'Ontwikkeling', desc: 'Schone, geteste ontwikkeling van het complete systeem.' },
-      { title: 'Koppelingen', desc: 'Integraties met je bestaande systemen en data.' },
-      { title: 'Onderhoud', desc: 'Doorlopend onderhoud en doorontwikkeling zodat het systeem actueel blijft.' },
+      { title: 'Technische structuur', desc: 'Een duidelijke basis waarop je software stabiel gebouwd wordt.' },
+      { title: 'Ontwikkeling', desc: 'Maatwerk functies die aansluiten op jouw proces.' },
+      { title: 'Koppelingen', desc: 'Integraties met systemen, tools of databronnen.' },
+      { title: 'Onderhoud', desc: 'Doorontwikkeling en support zodat je software blijft werken.' },
     ],
     audience:
-      'Voor bedrijven met een specifiek proces dat geen standaardpakket goed bedient. Ideaal als je uit je huidige systeem groeit of een uniek aanbod hebt dat eigen software vraagt.',
+      'Voor bedrijven met een specifiek proces dat niet goed wordt ondersteund door standaardsoftware. Ideaal als je huidige systeem te veel handwerk vraagt, beperkt meegroeit of niet aansluit op je workflow.',
     why: [
-      { title: 'Precies wat je nodig hebt', desc: 'Geen overbodige functies of beperkingen, alleen wat jouw proces echt vraagt.' },
-      { title: 'Schaalbaar gebouwd', desc: 'Een modulaire architectuur die meegroeit zonder dat je opnieuw moet beginnen.' },
-      { title: 'Voor de lange termijn', desc: 'Stabiel, onderhouden en doorontwikkeld zodat het jaren meegaat.' },
+      { title: 'Procesgericht gebouwd', desc: 'We bouwen rondom hoe je bedrijf werkt, niet rondom losse functies.' },
+      { title: 'Schaalbaar opgezet', desc: 'Je software kan meegroeien met nieuwe wensen, gebruikers en processen.' },
+      { title: 'Voor de lange termijn', desc: 'We denken mee over stabiliteit, onderhoud en doorontwikkeling.' },
     ],
+    approachTitle: 'Van proces naar maatwerk software.',
     approach: [
-      { title: 'Kennismaken', desc: 'We doorgronden je proces en je technische context.' },
-      { title: 'Ontwerp', desc: 'We maken het technisch ontwerp en de architectuur.' },
-      { title: 'Bouwen', desc: 'We ontwikkelen in modules met vaste oplevermomenten.' },
-      { title: 'Onderhouden', desc: 'We beheren en bouwen door op basis van je behoeften.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je proces, knelpunten en doelen.' },
+      { title: 'Ontwerp', desc: 'We bepalen de structuur, functies en technische richting.' },
+      { title: 'Bouwen', desc: 'We ontwikkelen de software en testen de belangrijkste onderdelen.' },
+      { title: 'Onderhouden', desc: 'We blijven verbeteren, uitbreiden en optimaliseren waar nodig.' },
     ],
     case: {
       name: 'Verdi Systems',
       sector: 'Productie',
       summary:
-        'Een producent die zijn unieke productieproces niet in een standaardpakket gepropt kreeg. We bouwden maatwerk software die het proces van order tot oplevering ondersteunt.',
+        'Een productiebedrijf werkte met losse tools en veel handmatige stappen. We bouwden maatwerk software die planning, data en processen beter met elkaar verbindt.',
       outcome:
-        'Een systeem dat naadloos op het proces aansluit, fouten terugdringt en moeiteloos meegroeit met nieuwe productlijnen.',
+        'Meer overzicht, minder handwerk en een systeem dat beter aansluit op de dagelijkse operatie.',
     },
     faq: [
-      { q: 'Wat als onze behoeften veranderen?', a: 'Daar is de modulaire opzet op gebouwd. We breiden uit of passen aan zonder het hele systeem om te gooien.' },
-      { q: 'Van wie is de software?', a: 'Van jou. Je krijgt de code en eigenaarschap zodat je nooit vastzit aan één leverancier.' },
+      { q: 'Wat is maatwerk software?', a: 'Software die speciaal wordt gebouwd voor jouw proces, in plaats van een standaardtool die je moet aanpassen aan je werkwijze.' },
+      { q: 'Van wie is de software?', a: 'Dat spreken we vooraf duidelijk af. Je weet altijd wat van jou is en hoe het beheer geregeld wordt.' },
     ],
+    ctaTitle: 'Klaar voor software die je proces versterkt?',
+    ctaText:
+      'Vertel ons waar je nu tegenaan loopt. Wij helpen je met software die overzicht geeft, werk versnelt en meegroeit met je bedrijf.',
+    ctaButton: 'Start jouw softwaretraject',
   }),
 
   /* ───────────────────────── Video & Fotografie ───────────────────────── */

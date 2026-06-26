@@ -36,7 +36,7 @@ function SubServicePage({ sub }: { sub: SubService }) {
 
   return (
     <>
-      <SubHero sub={sub} parentLabel={parent?.label ?? 'Diensten'} parentCta={parent?.heroCta} />
+      <SubHero sub={sub} parentLabel={parent?.label ?? 'Diensten'} parentCta={sub.ctaButton ?? parent?.heroCta} />
 
       <div className="bg-cream text-near-black">
         {/* Wat het is — het verhaal */}
@@ -324,7 +324,7 @@ function SubServicePage({ sub }: { sub: SubService }) {
                 to="/start"
                 className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-mint to-lime-accent px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
               >
-                <span className="relative z-10">{parent?.heroCta ?? 'Start jouw project'}</span>
+                <span className="relative z-10">{sub.ctaButton ?? parent?.heroCta ?? 'Start jouw project'}</span>
                 <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
                 <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
               </Link>
