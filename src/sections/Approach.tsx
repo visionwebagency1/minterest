@@ -84,46 +84,42 @@ export function Approach() {
           </p>
         </Reveal>
 
-        <div ref={ref} className="relative mt-20 md:mt-28">
-          {/* track */}
-          <div className="absolute left-[39px] top-2 h-[calc(100%-1rem)] w-px bg-white/10 md:left-1/2 md:-translate-x-1/2" />
-          {/* fill */}
+        <div ref={ref} className="relative mt-16 md:mt-24">
+          {/* MOBILE: vertical track + scroll-fill (connects the stacked steps) */}
+          <div className="absolute left-[39px] top-2 h-[calc(100%-1rem)] w-px bg-white/10 md:hidden" />
           <motion.div
-            className="absolute left-[39px] top-2 h-[calc(100%-1rem)] w-px origin-top bg-gradient-to-b from-emerald to-lime-bright md:left-1/2 md:-translate-x-1/2"
+            className="absolute left-[39px] top-2 h-[calc(100%-1rem)] w-px origin-top bg-gradient-to-b from-emerald to-lime-bright md:hidden"
             style={{ scaleY: lineScale }}
           />
+          {/* DESKTOP: horizontal track + scroll-fill (runs behind the icon row) */}
+          <div className="absolute left-[12.5%] right-[12.5%] top-10 hidden h-px bg-white/12 md:block" />
+          <motion.div
+            className="absolute left-[12.5%] top-10 hidden h-px w-3/4 origin-left bg-gradient-to-r from-emerald to-lime-bright md:block"
+            style={{ scaleX: lineScale }}
+          />
 
-          <div className="flex flex-col gap-16 md:gap-24">
-            {STEPS.map((s, i) => (
-              <div
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-4 md:gap-8">
+            {STEPS.map((s) => (
+              <motion.div
                 key={s.title}
-                className={`relative flex items-center gap-6 md:gap-10 ${
-                  i % 2 === 1 ? 'md:flex-row-reverse md:text-right' : ''
-                }`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.7, ease: EASE }}
+                className="relative flex items-start gap-6 md:flex-col md:items-center md:gap-0 md:text-center"
               >
-                <div className="flex w-full items-start gap-6 md:w-1/2 md:items-center">
-                  <div
-                    className={`relative z-10 ${i % 2 === 1 ? 'md:order-2' : ''}`}
-                  >
-                    <FloatingIcon Icon={s.Icon} />
-                  </div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-80px' }}
-                    transition={{ duration: 0.7, ease: EASE }}
-                  >
-                    <h3 className="font-display text-2xl font-semibold text-cream md:text-3xl">
-                      {s.title}
-                    </h3>
-                    <p className="mt-2 max-w-sm font-sans text-base leading-relaxed text-cream/60">
-                      {s.desc}
-                    </p>
-                  </motion.div>
+                <div className="relative z-10 md:mb-8">
+                  <FloatingIcon Icon={s.Icon} />
                 </div>
-                {/* node on the centre line (desktop) */}
-                <span className="absolute left-[35px] top-9 h-2.5 w-2.5 rounded-full bg-lime-bright ring-4 ring-[#08201E] md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2" />
-              </div>
+                <div className="pt-2 md:pt-0">
+                  <h3 className="font-display text-2xl font-semibold text-cream">
+                    {s.title}
+                  </h3>
+                  <p className="mt-2 max-w-sm font-sans text-base leading-relaxed text-cream/60 md:mx-auto md:max-w-[15rem]">
+                    {s.desc}
+                  </p>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>

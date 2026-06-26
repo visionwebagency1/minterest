@@ -92,9 +92,14 @@ allemaal uit.
 - **Smooth scroll:** Lenis is officieel gekoppeld aan GSAP ScrollTrigger (één RAF
   via `gsap.ticker`, `lenis.on('scroll', ScrollTrigger.update)`, geen dubbele
   loops, `ScrollTrigger.refresh()` na load + font-load). Zie `src/lib/useLenis.ts`.
-- **Diensten-sectie:** desktop houdt de stapelende scroll-cards met SVG-animaties
-  (niet aanraken); sub-diensten als 2x2 grid van pills. Mobiel is een compacte
-  **horizontale carousel** (swipe + arrow-knop + dots), geen lange scroll-cards.
+- **Diensten-sectie:** zowel desktop als mobiel is een **carousel** met dezelfde
+  opzet (keuze-pills boven, één dienstkaart met SVG-render, pijlen + dots,
+  autoplay die pauzeert na interactie). Desktop toont de pills in een rij en de
+  kaart in twee kolommen; mobiel toont de pills als 3x2 grid en is swipebaar.
+  Eén gedeelde state-machine (`useServiceCarousel` in `ServicesShowcase.tsx`).
+- **Onze aanpak ("Jouw groeiplan"):** desktop toont de vier stappen **horizontaal**
+  naast elkaar met een horizontale scroll-fill-lijn; mobiel is een verticale
+  stapel met een verticale fill-lijn.
 - **Landingspagina's** delen één template, overwegend **licht en premium** (niet
   donker), met per hoofddienst een eigen accent binnen het groene palet.
 - **Geen em-dashes** in de hele codebase/content.
