@@ -584,123 +584,141 @@ export const SUB_SERVICES: SubService[] = [
   /* ───────────────────────── Social Media Beheer ───────────────────────── */
   S('social-media', 'Influencer Marketing', {
     tagline:
-      'De juiste creators aan je merk koppelen voor echt bereik, van selectie tot meetbare resultaten.',
+      'Samenwerkingen met de juiste creators om vertrouwen op te bouwen, bereik te vergroten en je merk geloofwaardig onder de aandacht te brengen.',
+    whatTitle: 'Influencer marketing die vertrouwen opbouwt.',
     story: [
-      'Mensen vertrouwen mensen. Een aanbeveling van een creator die je doelgroep volgt, doet vaak meer dan welke advertentie ook. Maar influencer marketing werkt alleen als de match klopt: de juiste creator, de juiste boodschap en een aanpak die op echt bereik stuurt in plaats van op holle volgersaantallen.',
-      'Wij koppelen je merk aan creators die echt passen, op basis van hun publiek en hun toon. We verzorgen de strategie, de briefing en de samenwerking, en houden bij wat het oplevert. Zo weet je niet alleen dat je gezien bent, maar ook wat het heeft gedaan.',
-      'Het resultaat is geloofwaardig bereik bij de mensen die ertoe doen, en samenwerkingen die je merk versterken in plaats van alleen even zichtbaar maken.',
+      'Mensen vertrouwen mensen. Daarom draait influencer marketing niet om zomaar bereik inkopen, maar om de juiste match tussen merk, creator en doelgroep. Wij helpen met creatorselectie, strategie, briefing en begeleiding, zodat samenwerkingen geloofwaardig voelen en bijdragen aan zichtbaarheid, vertrouwen en resultaat.',
     ],
+    actionTitle: 'Zo ziet influencer marketing eruit.',
+    actionText:
+      'De juiste creators brengen je merk onder de aandacht bij een doelgroep die past bij jouw product of dienst.',
     deliverables: [
-      { title: 'Creator-matching', desc: 'Een selectie van creators die echt bij je merk en doelgroep passen.' },
-      { title: 'Strategie', desc: 'Een heldere aanpak met doelen, boodschap en kanalen.' },
-      { title: 'Content', desc: 'Begeleiding van de content zodat hij klopt met je merk en werkt op het platform.' },
-      { title: 'Rapportage', desc: 'Inzicht in bereik en resultaat zodat je weet wat de samenwerking deed.' },
+      { title: 'Creator-matching', desc: 'We zoeken creators die passen bij je merk, doelgroep en campagne.' },
+      { title: 'Strategie', desc: 'We bepalen de juiste aanpak, boodschap en kanalen.' },
+      { title: 'Content', desc: 'Creators maken content die natuurlijk voelt en aansluit bij je merk.' },
+      { title: 'Rapportage', desc: 'Je krijgt inzicht in bereik, prestaties en resultaten.' },
     ],
     audience:
-      'Voor merken die geloofwaardig bereik willen opbouwen bij een specifieke doelgroep. Ideaal als je producten of diensten verkoopt waar aanbeveling en vertrouwen het verschil maken.',
+      'Voor merken die geloofwaardig bereik willen opbouwen bij een specifieke doelgroep. Ideaal als je product of dienst beter verkoopt wanneer mensen het via vertrouwen, ervaring of aanbeveling leren kennen.',
     why: [
-      { title: 'Match boven volgers', desc: 'We kiezen op aansluiting en echt publiek, niet op opgeblazen volgersaantallen.' },
-      { title: 'Volledig begeleid', desc: 'Van selectie en briefing tot uitvoering, wij regelen de samenwerking.' },
-      { title: 'Meetbaar', desc: 'We rapporteren op resultaat zodat je weet wat het heeft opgeleverd.' },
+      { title: 'Netwerk boven volgers', desc: 'We kijken niet alleen naar aantallen, maar naar doelgroep, vertrouwen en relevantie.' },
+      { title: 'Volledig begeleid', desc: 'Van selectie en briefing tot afstemming, plaatsing en opvolging.' },
+      { title: 'Meetbaar', desc: 'We maken resultaten inzichtelijk zodat je weet wat de samenwerking oplevert.' },
     ],
+    approachTitle: 'Van match naar meetbaar resultaat.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bepalen je doel en je doelgroep.' },
-      { title: 'Selecteren', desc: 'We matchen de creators die echt passen.' },
-      { title: 'Uitvoeren', desc: 'We briefen, begeleiden en lanceren de samenwerking.' },
-      { title: 'Meten', desc: 'We rapporteren en sturen bij voor de volgende ronde.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je merk, doelgroep en campagne.' },
+      { title: 'Selecteren', desc: 'We zoeken creators die passen bij je merk en doel.' },
+      { title: 'Uitvoeren', desc: 'We begeleiden briefing, content en samenwerking.' },
+      { title: 'Meten', desc: 'We bekijken de resultaten en sturen bij waar nodig.' },
     ],
     case: {
       name: 'Wildroot',
-      sector: 'Natuurlijke voeding',
+      sector: 'Verzorging',
       summary:
-        'Een voedingsmerk dat moeilijk doordrong tot een jongere doelgroep. We koppelden het aan creators met een betrokken, passend publiek en begeleidden de content.',
+        'Een verzorgingsmerk dat moeilijk doordrong tot een jongere doelgroep. We koppelden het merk aan creators met een betrokken publiek en geloofwaardige contentstijl.',
       outcome:
-        'Geloofwaardige zichtbaarheid bij precies de juiste mensen en samenwerkingen die het merk een gezicht gaven in plaats van alleen een advertentie.',
+        'Meer zichtbaarheid bij de juiste doelgroep en content die betrouwbaarder voelde dan standaard advertenties.',
     },
     faq: [
-      { q: 'Werken jullie met micro-influencers?', a: 'Vaak juist wel. Micro-creators hebben doorgaans een betrokken publiek en leveren geloofwaardiger bereik per euro.' },
-      { q: 'Regelen jullie de afspraken met creators?', a: 'Ja. We verzorgen de selectie, de briefing en de afstemming zodat jij er geen omkijken naar hebt.' },
+      { q: 'Werken jullie met micro-influencers?', a: 'Ja. Vaak zijn micro-influencers juist sterk, omdat ze dichter bij hun doelgroep staan en geloofwaardig overkomen.' },
+      { q: 'Regelen jullie de afspraken met creators?', a: 'Ja. We begeleiden selectie, briefing en afstemming, zodat de samenwerking professioneel verloopt.' },
     ],
+    ctaTitle: 'Klaar voor influencer marketing die vertrouwen opbouwt?',
+    ctaText:
+      'Vertel ons wie je wilt bereiken. Wij helpen je met creators die passen bij je merk, doelgroep en doelen.',
   }),
   S('social-media', 'Meta Ads', {
     tagline:
-      'Advertenties op Facebook en Instagram die converteren, scherp ingericht en doorlopend geoptimaliseerd.',
+      'Advertenties op Facebook en Instagram die de juiste mensen bereiken en gericht zijn op aanvragen, verkoop of groei.',
+    whatTitle: 'Meta Ads die resultaat opleveren.',
     story: [
-      'Meta blijft een van de krachtigste kanalen om de juiste mensen te bereiken, mits je weet wat je doet. Het verschil tussen geld verbranden en winstgevend adverteren zit in de targeting, de creatives en de optimalisatie. Wij richten campagnes in die renderen en blijven sturen op resultaat.',
-      'We beginnen bij een heldere campagnestructuur en scherpe targeting, gevoed door creatives die opvallen in de feed en aanzetten tot actie. Daarna is het werk niet klaar: we meten, testen en optimaliseren continu, zodat je budget steeds efficiënter wordt ingezet.',
-      'Het resultaat is een advertentiekanaal dat voorspelbaar bijdraagt aan je groei, met grip op je kosten per resultaat en ruimte om op te schalen wat werkt.',
+      'Meta Ads zijn krachtig wanneer strategie, targeting en creatie goed samenkomen. Daarom zetten wij geen losse advertenties live, maar bouwen we campagnes met een duidelijk doel. We richten campagnes in voor bereik, leads, aanvragen of verkoop. Van campagne-opzet en targeting tot creatives en optimalisatie: alles wordt ingericht om je budget slimmer te gebruiken.',
     ],
+    actionTitle: 'Zo zien Meta Ads eruit.',
+    actionText:
+      'Advertenties op Facebook en Instagram die opvallen, vertrouwen wekken en gericht zijn op conversie.',
     deliverables: [
-      { title: 'Campagne-opzet', desc: 'Een doordachte campagnestructuur die past bij je doel en je budget.' },
-      { title: 'Targeting', desc: 'Scherpe doelgroepen die je advertenties bij de juiste mensen brengen.' },
-      { title: 'Creatives', desc: 'Advertenties die opvallen in de feed en aanzetten tot actie.' },
-      { title: 'Optimalisatie', desc: 'Doorlopend testen en bijsturen op kosten per resultaat.' },
+      { title: 'Campagne-opzet', desc: 'Een duidelijke campagnestructuur gericht op jouw doel.' },
+      { title: 'Targeting', desc: 'Doelgroepen ingesteld op basis van locatie, interesse, gedrag of remarketing.' },
+      { title: 'Creatives', desc: 'Advertentiebeelden en teksten die passen bij je merk en aanbod.' },
+      { title: 'Optimalisatie', desc: 'We meten prestaties en sturen bij op resultaat.' },
     ],
     audience:
-      'Voor merken die met advertenties willen groeien en hun budget rendabel willen inzetten. Ideaal voor webshops en dienstverleners die meer aanvragen of verkopen willen.',
+      'Voor merken en bedrijven die willen groeien met betaalde zichtbaarheid en hun advertentiebudget slimmer willen inzetten. Ideaal als je meer aanvragen, leads of verkopen wilt halen uit Facebook en Instagram.',
     why: [
-      { title: 'Resultaatgericht', desc: 'We sturen op kosten per klant en rendement, niet op vanity-cijfers.' },
-      { title: 'Sterke creatives', desc: 'Goede targeting werkt alleen met advertenties die opvallen en overtuigen.' },
-      { title: 'Continu optimaliseren', desc: 'We blijven testen en bijsturen zodat je budget steeds beter werkt.' },
+      { title: 'Resultaatgericht', desc: 'We sturen niet alleen op bereik, maar op aanvragen, leads en verkoop.' },
+      { title: 'Sterkere creatives', desc: 'Goede advertenties beginnen bij beelden en teksten die opvallen en vertrouwen wekken.' },
+      { title: 'Continu optimaliseren', desc: 'We blijven testen, meten en verbeteren zodat campagnes beter presteren.' },
     ],
+    approachTitle: 'Van campagne naar resultaat.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bepalen je doel, doelgroep en budget.' },
-      { title: 'Opzetten', desc: 'We bouwen de campagnestructuur en creatives.' },
-      { title: 'Lanceren', desc: 'We zetten de campagnes live en meten vanaf dag één.' },
-      { title: 'Optimaliseren', desc: 'We testen en sturen door op resultaat.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je aanbod, doelgroep en doelen.' },
+      { title: 'Opzetten', desc: 'We bouwen de campagnestructuur, targeting en creatives.' },
+      { title: 'Lanceren', desc: 'We zetten de campagnes live en zorgen dat alles goed meetbaar is.' },
+      { title: 'Optimaliseren', desc: 'We analyseren de resultaten en sturen bij waar nodig.' },
     ],
     case: {
       name: 'Lumen Home',
       sector: 'Woonaccessoires',
       summary:
-        'Een webshop die wel adverteerde maar zonder grip op het rendement. We herstructureerden de campagnes en vernieuwden de creatives met een duidelijke testaanpak.',
+        'Een webshop die meer grip wilde op het advertentierendement. We herstructureerden de campagnes en verbeterden de creatives, targeting en meetbaarheid.',
       outcome:
-        'Een advertentiekanaal met grip en richting, waarin duidelijk werd wat werkt en het budget gericht naar de winnende campagnes ging.',
+        'Een duidelijkere campagnestructuur en beter inzicht in welke advertenties aanvragen en verkoop opleveren.',
     },
     faq: [
-      { q: 'Wat is een goed startbudget?', a: 'Dat hangt af van je doel en marge. We adviseren een realistisch budget waarmee we kunnen testen en leren voordat we opschalen.' },
-      { q: 'Maken jullie ook de advertentiebeelden?', a: 'Ja. We maken creatives die werken op het platform, of het nu beeld of video is.' },
+      { q: 'Wat is een goed startbudget?', a: 'Dat hangt af van je doel, doelgroep en markt. We adviseren een budget dat past bij je fase en groeidoel.' },
+      { q: 'Maken jullie ook de advertentiebeelden?', a: 'Ja. We kunnen visuals, teksten en varianten maken die passen bij je merk en campagne.' },
     ],
+    ctaTitle: 'Klaar voor Meta Ads die resultaat opleveren?',
+    ctaText:
+      'Vertel ons wat je wilt bereiken. Wij helpen je met campagnes die gericht zijn op bereik, aanvragen en verkoop.',
   }),
   S('social-media', 'TikTok Ads', {
     tagline:
-      'Advertenties op TikTok die aansluiten bij de feed, native content die voelt als TikTok, niet als reclame.',
+      'Advertenties die snel aandacht pakken, native aanvoelen en jouw merk zichtbaar maken bij de juiste doelgroep.',
+    whatTitle: 'TikTok Ads die aandacht vasthouden.',
     story: [
-      'Op TikTok werkt reclame die niet als reclame voelt. De gebruiker scrollt door een stroom native content, en advertenties die daar tussen passen presteren, terwijl klassieke commercials worden weggeswipet. Het draait om het juiste ritme, de juiste toon en een hook die meteen pakt.',
-      'Wij maken TikTok-campagnes met creatives die thuishoren in de feed. We bedenken concepten die native aanvoelen, richten de campagne en targeting scherp in, en optimaliseren op wat aanslaat bij jouw doelgroep. Zo zet je het bereik van TikTok om in resultaat.',
-      'Het resultaat zijn advertenties die opvallen zonder te storen, een merk dat geloofwaardig overkomt op het platform, en een kanaal dat bijdraagt aan je groei.',
+      'Op TikTok win je niet met standaard advertenties. Je wint met content die direct opvalt, natuurlijk aanvoelt en past bij hoe mensen het platform gebruiken. Wij maken en beheren TikTok-campagnes met sterke hooks, passende creatives en duidelijke targeting. Zo wordt je advertentie geen storende onderbreking, maar content die mensen willen bekijken.',
     ],
+    actionTitle: 'Zo zien TikTok Ads eruit.',
+    actionText:
+      'Advertenties die voelen als TikTok-content, snel aandacht pakken en geschikt zijn voor bereik, verkeer of conversie.',
     deliverables: [
-      { title: 'Campagne-opzet', desc: 'Een campagnestructuur afgestemd op hoe TikTok werkt.' },
-      { title: 'Creatives', desc: 'Native content die aanvoelt als TikTok en meteen pakt.' },
-      { title: 'Targeting', desc: 'Scherpe targeting die je advertenties bij de juiste kijkers brengt.' },
-      { title: 'Optimalisatie', desc: 'Doorlopend testen en bijsturen op wat aanslaat.' },
+      { title: 'Campagne-opzet', desc: 'Een duidelijke campagnestructuur gericht op jouw doel.' },
+      { title: 'Creatives', desc: 'Advertenties die passen bij TikTok en je doelgroep.' },
+      { title: 'Targeting', desc: 'Doelgroepen ingesteld op basis van interesse, gedrag en campagnefase.' },
+      { title: 'Optimalisatie', desc: 'We testen, meten en verbeteren op basis van resultaat.' },
     ],
     audience:
-      'Voor merken die een jongere of trend-gevoelige doelgroep willen bereiken. Ideaal als je product of dienst zich leent voor beeld en beweging.',
+      'Voor merken die een jongere of trendgevoelige doelgroep willen bereiken met content die beweegt. Ideaal als je product of dienst visueel sterk is en past bij korte, snelle advertentieformats.',
     why: [
-      { title: 'Native eerst', desc: 'We maken content die in de feed past, want dat is wat op TikTok werkt.' },
-      { title: 'Hook-gedreven', desc: 'De eerste seconde bepaalt alles, daar bouwen we de creatives omheen.' },
-      { title: 'Doorlopend scherp', desc: 'We testen en optimaliseren continu op wat aanslaat bij je doelgroep.' },
+      { title: 'Native content', desc: 'We maken advertenties die passen bij het platform, niet voelen als standaard reclame.' },
+      { title: 'Hook-gedreven', desc: 'De eerste seconden zijn bepalend. Daarom starten we met sterke invalshoeken.' },
+      { title: 'Doorlopend scherper', desc: 'We testen verschillende hooks, visuals en doelgroepen om campagnes te verbeteren.' },
     ],
+    approachTitle: 'Van idee naar TikTok-campagne die werkt.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bepalen je doel en doelgroep op TikTok.' },
-      { title: 'Concept', desc: 'We bedenken native creatives die pakken.' },
-      { title: 'Lanceren', desc: 'We zetten de campagne op en live.' },
-      { title: 'Optimaliseren', desc: 'We sturen door op de best presterende content.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je merk, doelgroep en aanbod.' },
+      { title: 'Concept', desc: 'We bepalen hooks, formats en creatieve invalshoeken.' },
+      { title: 'Lanceren', desc: 'We zetten de campagne live en zorgen dat alles goed staat.' },
+      { title: 'Optimaliseren', desc: 'We analyseren prestaties en sturen bij waar nodig.' },
     ],
     case: {
       name: 'Drift Apparel',
       sector: 'Streetwear',
       summary:
-        'Een streetwear-merk dat op TikTok wilde groeien maar met te gelikte advertenties bleef hangen. We ontwikkelden native creatives die in de feed thuishoorden.',
+        'Een streetwear-merk dat op TikTok wilde groeien met content die niet voelde als standaard reclame. We ontwikkelden TikTok-creatives met snelle hooks, native formats en duidelijke productfocus.',
       outcome:
-        'Advertenties die niet weggeswipet werden, een merk dat geloofwaardig op het platform stond en zichtbaar meer betrokkenheid kreeg.',
+        'Advertenties die natuurlijker aanvoelen op het platform en zorgen voor meer zichtbaarheid bij de juiste doelgroep.',
     },
     faq: [
-      { q: 'Hebben we al een TikTok-account nodig?', a: 'Handig, maar niet verplicht. We helpen je op weg en kunnen ook adverteren met content die los van een groot account werkt.' },
-      { q: 'Werkt TikTok voor mijn doelgroep?', a: 'TikTok bereikt allang niet meer alleen tieners. We bekijken samen of jouw doelgroep er actief is voordat we starten.' },
+      { q: 'Hebben we al een TikTok-account nodig?', a: 'Niet per se. We kunnen adviseren wat nodig is en helpen met de juiste opzet.' },
+      { q: 'Werkt TikTok voor mijn doelgroep?', a: 'Dat hangt af van je aanbod en doelgroep. We kijken eerst of TikTok past bij je merk, product en groeidoel.' },
     ],
+    ctaTitle: 'Klaar voor TikTok Ads die aandacht pakken?',
+    ctaText:
+      'Vertel ons wie je wilt bereiken. Wij helpen je met TikTok-campagnes die opvallen, natuurlijk aanvoelen en gericht zijn op resultaat.',
   }),
 
   /* ───────────────────────── SEO & SEA ───────────────────────── */
