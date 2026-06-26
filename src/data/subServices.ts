@@ -40,6 +40,18 @@ export type SubService = {
   approach: ApproachStep[]
   case: CaseStudy
   faq: Faq[]
+  /** "Wat het is" section heading. Falls back to a generic heading. */
+  whatTitle?: string
+  /** "In actie" section heading. Falls back to a generic heading. */
+  actionTitle?: string
+  /** "In actie" supporting line. Falls back to the hero tagline. */
+  actionText?: string
+  /** "Hoe we het aanpakken" section heading. Falls back to a generic heading. */
+  approachTitle?: string
+  /** Closing-CTA heading. */
+  ctaTitle?: string
+  /** Closing-CTA paragraph. */
+  ctaText?: string
 }
 
 const S = (serviceSlug: string, name: string, rest: Omit<SubService, 'serviceSlug' | 'slug' | 'name'>): SubService => ({
@@ -53,163 +65,187 @@ export const SUB_SERVICES: SubService[] = [
   /* ───────────────────────── Design & Branding ───────────────────────── */
   S('design-branding', 'Visuele identiteit', {
     tagline:
-      'Een visuele taal die je merk in één oogopslag herkenbaar maakt, op elk kanaal even sterk.',
+      'Een herkenbare stijl die jouw merk in een oogopslag professioneel, consistent en sterk maakt.',
+    whatTitle: 'Visuele identiteit die klopt.',
     story: [
-      'Een visuele identiteit is veel meer dan een mooi logo. Het is het complete systeem waarmee jouw merk er overal hetzelfde, doordacht en betrouwbaar uitziet, van je website en social media tot je facturen en je gevelbord. Wij bouwen dat systeem van de grond af op, gebaseerd op wie je bent, wat je belooft en aan wie je het vertelt.',
-      'We beginnen bij de kern: waar staat je merk voor en wat moet iemand voelen bij het eerste contact. Vanuit die strategische basis ontwerpen we een logo en woordmerk, kiezen we een kleurpalet met betekenis, stellen we een typografisch systeem samen en leggen we vast hoe alles samenwerkt. Het resultaat is geen losse verzameling bestanden, maar een levend systeem dat met je meegroeit.',
-      'Consistentie is waar het verschil zit. Een merk dat overal klopt voelt groter, professioneler en betrouwbaarder dan een merk dat per kanaal anders oogt. Daarom leveren we niet alleen het ontwerp, maar ook de richtlijnen zodat iedereen, intern en extern, je merk correct toepast.',
+      'Een visuele identiteit is meer dan een mooi logo. Het is de basis van hoe jouw merk eruitziet, voelt en herkend wordt op elk kanaal. Wij zorgen voor een stijl die past bij je bedrijf, je doelgroep en je ambities. Van logo en kleuren tot typografie en gebruiksregels: alles wordt zo ontworpen dat je merk professioneel, herkenbaar en consistent naar buiten komt.',
     ],
+    actionTitle: 'Zo ziet herkenbaarheid eruit.',
+    actionText:
+      'Een visuele stijl die jouw merk direct herkenbaar maakt en op elk kanaal sterk blijft.',
     deliverables: [
-      { title: 'Logo en woordmerk', desc: 'Een primair logo plus varianten voor elk formaat en elke achtergrond, scherp op print en scherm.' },
-      { title: 'Kleurpalet', desc: 'Een doordacht palet met primaire en secundaire kleuren, inclusief codes voor web, druk en RGB.' },
-      { title: 'Typografie', desc: 'Een typografisch systeem met koppen, body en accenten dat overal leesbaar en herkenbaar blijft.' },
-      { title: 'Merk-gebruiksboek', desc: 'Heldere richtlijnen voor logo-gebruik, kleur, type en toepassingen zodat het merk consistent blijft.' },
+      { title: 'Logo en woordmerk', desc: 'Een herkenbaar logo dat past bij je merk en professioneel inzetbaar is.' },
+      { title: 'Kleurpalet', desc: 'Kleuren die je uitstraling versterken en zorgen voor herkenning.' },
+      { title: 'Typografie', desc: 'Lettertypes die passen bij de uitstraling en leesbaarheid van je merk.' },
+      { title: 'Merk-gebruiksboek', desc: 'Heldere richtlijnen voor logo, kleur, typografie en visuele toepassing.' },
     ],
     audience:
-      'Voor merken die er nu inconsistent uitzien of die net starten en meteen serieus genomen willen worden. Of je nu herpositioneert of voor het eerst echt vorm geeft aan je merk, je krijgt een fundament dat jaren meegaat.',
+      'Voor ondernemers en bedrijven die professioneler willen overkomen, consistenter zichtbaar willen zijn en een merk willen bouwen dat vertrouwen wekt. Ideaal als je huidige uitstraling niet meer past bij waar je bedrijf naartoe groeit.',
     why: [
-      { title: 'Strategie eerst', desc: 'We ontwerpen niet zomaar mooi, maar vanuit positionering en doel zodat elke keuze klopt.' },
-      { title: 'Een systeem, geen plaatje', desc: 'Je krijgt een schaalbaar systeem dat op elk kanaal werkt, niet alleen een logo.' },
-      { title: 'Klaar voor uitrol', desc: 'Compleet met richtlijnen en bestanden zodat je merk meteen overal correct staat.' },
+      { title: 'Strategisch gestart', desc: 'We kijken eerst naar je bedrijf, doelgroep en positionering voordat we ontwerpen.' },
+      { title: 'Toepasbaar op elk kanaal', desc: 'Je stijl werkt op je website, social media, drukwerk en andere uitingen.' },
+      { title: 'Klaar voor de toekomst', desc: 'We bouwen een merkbasis die meegroeit met je bedrijf.' },
     ],
+    approachTitle: 'Van uitstraling naar herkenning.',
     approach: [
-      { title: 'Kennismaken', desc: 'We duiken in je merk, je markt en je doelgroep om de kern scherp te krijgen.' },
-      { title: 'Richting', desc: 'We verkennen visuele routes en kiezen samen een richting met karakter.' },
-      { title: 'Ontwerp', desc: 'We werken de identiteit volledig uit, van logo tot het complete systeem.' },
-      { title: 'Uitrol', desc: 'We leveren bestanden en richtlijnen en helpen je merk live te brengen.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je bedrijf, doelgroep en gewenste uitstraling.' },
+      { title: 'Richting bepalen', desc: 'We bepalen de stijl, sfeer en visuele basis van je merk.' },
+      { title: 'Ontwerpen', desc: 'We werken logo, kleuren, typografie en visuele elementen uit.' },
+      { title: 'Opleveren', desc: 'Je ontvangt een duidelijke merkbasis die je direct kunt gebruiken.' },
     ],
     case: {
       name: 'Nordveld',
       sector: 'Duurzame interieurmerk',
       summary:
-        'Een ambitieus interieurmerk zonder samenhang: het logo, de socials en de verpakking leken van drie verschillende bedrijven. We bouwden één visuele taal met een rustig, natuurlijk karakter.',
+        'Een herkenbare merkbasis ontwikkeld voor een bedrijf dat professioneler en consistenter zichtbaar wilde worden.',
       outcome:
-        'Een herkenbaar merk dat op elk kanaal hetzelfde voelt, van de webshop tot de winkelpui, en een team dat eindelijk weet hoe het merk toegepast hoort te worden.',
+        'Met een duidelijke stijl, sterke kleuren en praktische richtlijnen staat het merk nu sterker op elk kanaal.',
     },
     faq: [
-      { q: 'Krijg ik ook de bronbestanden?', a: 'Ja. Je ontvangt alle bronbestanden en exports zodat je merk van jou is en je er overal mee verder kunt.' },
-      { q: 'Kan een bestaand logo blijven?', a: 'Zeker. Als je logo nog sterk staat bouwen we het systeem daaromheen en frissen we alleen op waar nodig.' },
+      { q: 'Krijg ik ook de bronbestanden?', a: 'Ja, je ontvangt de belangrijkste bestanden die nodig zijn om je merk professioneel te gebruiken.' },
+      { q: 'Kan mijn bestaande logo blijven?', a: 'Ja, als het logo sterk genoeg is kunnen we daarop voortbouwen en de stijl verder professionaliseren.' },
     ],
+    ctaTitle: 'Klaar voor een merk dat blijft hangen?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met een visuele identiteit die vertrouwen wekt en meegroeit met je bedrijf.',
   }),
   S('design-branding', 'Packaging', {
     tagline:
-      'Verpakkingsontwerp dat opvalt in het schap en je merk voelbaar maakt, van eerste concept tot drukklaar.',
+      'Verpakking die jouw product laat opvallen, professioneel presenteert en klaar maakt voor verkoop.',
+    whatTitle: 'Packaging die opvalt.',
     story: [
-      'Verpakking is het moment waarop je merk fysiek wordt. Het is vaak het eerste echte contact tussen je product en je klant, en die paar seconden in het schap of bij het uitpakken bepalen of iemand je onthoudt. Goede packaging verkoopt niet alleen, het maakt je merk tastbaar.',
-      'Wij ontwerpen verpakkingen die opvallen tussen de concurrentie en kloppen met je identiteit. We werken vanuit de dieline, denken mee over materiaal en afwerking, en leveren bestanden die zonder gedoe door de drukker gaan. Van het concept tot de mockup waarmee je het kunt presenteren, alles is doordacht.',
-      'We houden rekening met de praktijk: hoe het product in de hand ligt, hoe het opvalt op een schap, hoe het overkomt op een productfoto en hoe het de unboxing-ervaring versterkt. Mooi én productieklaar, dat is het uitgangspunt.',
+      'Goede packaging doet meer dan je product verpakken. Het is vaak het eerste contactmoment met je klant. Wij ontwerpen verpakkingen die passen bij je merk, doelgroep en verkoopkanaal. Van concept tot drukklare bestanden: alles wordt ontworpen om je product sterker, professioneler en herkenbaarder neer te zetten.',
     ],
+    actionTitle: 'Zo ziet sterke packaging eruit.',
+    actionText:
+      'Verpakkingsontwerp dat je product zichtbaar maakt, vertrouwen wekt en klaar is voor presentatie of verkoop.',
     deliverables: [
-      { title: 'Dieline', desc: 'Een technisch correcte stansvorm op maat van je product en je drukker.' },
-      { title: 'Verpakkingsontwerp', desc: 'Het complete ontwerp dat opvalt en klopt met je merk, klaar voor alle zijdes.' },
-      { title: 'Drukklare bestanden', desc: 'Productieklare bestanden met de juiste kleuren, marges en afwerkingen.' },
-      { title: 'Mockups', desc: 'Realistische mockups om je verpakking te presenteren en te testen voor productie.' },
+      { title: 'Design', desc: 'Een sterk verpakkingsontwerp dat past bij je merk en product.' },
+      { title: 'Verpakkingsontwerp', desc: 'Het complete ontwerp voor doos, label, wikkel of andere verpakking.' },
+      { title: 'Drukklare bestanden', desc: 'Bestanden die technisch klaar zijn voor productie bij de drukker.' },
+      { title: 'Mockups', desc: 'Realistische presentaties om je verpakking professioneel te tonen.' },
     ],
     audience:
-      'Voor merken met een fysiek product die willen opvallen: van food en cosmetica tot e-commerce die de unboxing serieus neemt. Ideaal als je opschaalt en je verpakking mee moet groeien met je ambitie.',
+      'Voor merken en ondernemers die hun product sterker willen presenteren en professioneler willen verkopen. Ideaal voor food, cosmetics, e-commerce en merken waarbij uitstraling en unboxing belangrijk zijn.',
     why: [
-      { title: 'Schapklaar denken', desc: 'We ontwerpen voor de werkelijkheid van het schap en de online productfoto, niet alleen voor het scherm.' },
-      { title: 'Drukklaar opgeleverd', desc: 'Geen verrassingen bij de drukker: bestanden kloppen technisch tot in de details.' },
-      { title: 'Merk voelbaar', desc: 'De verpakking versterkt je identiteit en maakt de unboxing onderdeel van je merk.' },
+      { title: 'Schapklaar denken', desc: 'We ontwerpen niet alleen mooi, maar ook praktisch en verkoopgericht.' },
+      { title: 'Drukklaar opgeleverd', desc: 'Je ontvangt bestanden die klaar zijn voor productie.' },
+      { title: 'Merk voelbaar', desc: 'Je verpakking sluit aan op je identiteit en versterkt je merkbeleving.' },
     ],
+    approachTitle: 'Van concept naar verpakking.',
     approach: [
-      { title: 'Kennismaken', desc: 'We brengen product, doelgroep en schapcontext in beeld.' },
-      { title: 'Concept', desc: 'We ontwikkelen een verpakkingsconcept met karakter en onderscheid.' },
-      { title: 'Uitwerken', desc: 'We werken de dieline en het ontwerp drukklaar uit.' },
-      { title: 'Productie', desc: 'We begeleiden de overdracht naar de drukker tot het in productie gaat.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je product, doelgroep en verkoopkanaal.' },
+      { title: 'Concept', desc: 'We bepalen de visuele richting en uitstraling van de verpakking.' },
+      { title: 'Uitwerken', desc: 'We werken het ontwerp uit tot een professioneel eindresultaat.' },
+      { title: 'Productie', desc: 'We leveren alles drukklaar aan voor productie.' },
     ],
     case: {
       name: 'Botanic Brew',
       sector: 'Dranken',
       summary:
-        'Een nieuwe lijn koude thee die tussen grote merken moest opvallen. We ontwierpen een verpakking met een eigen, natuurlijk handschrift en een herkenbaar kleurensysteem per smaak.',
+        'Een nieuwe lijn koud-thee producten die fris, natuurlijk en professioneel moest aanvoelen.',
       outcome:
-        'Een lijn die als familie aanvoelt, direct opvalt in het schap en moeiteloos uitbreidbaar is naar nieuwe smaken.',
+        'We ontwikkelden een verpakking die opvalt, past bij het merk en makkelijk uitbreidbaar is naar nieuwe smaken.',
     },
     faq: [
-      { q: 'Werken jullie samen met onze drukker?', a: 'Ja, we stemmen graag direct af met je drukker zodat de specificaties van het begin af aan kloppen.' },
-      { q: 'Kunnen jullie meerdere varianten leveren?', a: 'Zeker. We bouwen een systeem zodat nieuwe smaken of varianten later eenvoudig toe te voegen zijn.' },
+      { q: 'Werken jullie samen met onze drukker?', a: 'Ja, we stemmen waar nodig af met de drukker zodat de bestanden goed aangeleverd worden.' },
+      { q: 'Kunnen jullie meerdere varianten leveren?', a: 'Ja, we kunnen een systeem ontwikkelen waarmee smaken of varianten makkelijk toegevoegd kunnen worden.' },
     ],
+    ctaTitle: 'Klaar voor packaging die opvalt?',
+    ctaText:
+      'Vertel ons over je product. Wij helpen je met verpakking die professioneel oogt, vertrouwen wekt en klaar is voor verkoop.',
   }),
   S('design-branding', 'Social Media Visual System', {
     tagline:
-      'Een vast visueel systeem voor social content die altijd consistent en direct herkenbaar is.',
+      'Een herkenbaar social media systeem waarmee je merk consistent zichtbaar blijft, zonder elke post opnieuw vanaf nul te ontwerpen.',
+    whatTitle: 'Social media stijl die klopt.',
     story: [
-      'De meeste merken posten content die los zand is: elke post ziet er net even anders uit, en daardoor blijft niets hangen. Een social media visual system lost dat op. Het is een vast ritme van formats, kleuren en typografie waarmee elke post vanzelf klopt en je merk meteen herkenbaar is, ook zonder logo.',
-      'We ontwerpen een set templates en richtlijnen die afgestemd zijn op hoe jij content maakt. Van feed-posts en carrousels tot stories en reels-covers, alles past binnen één visueel systeem maar blijft genoeg variëren om vers te blijven. Of je nu zelf post of een team hebt, iedereen kan ermee uit de voeten.',
-      'Het resultaat is consistentie zonder dat het saai wordt, en snelheid omdat je niet meer per post hoeft na te denken over vormgeving. Je merk wordt herkenbaar in de feed, en dat bouwt vertrouwen op.',
+      'Een sterke feed ontstaat niet door losse posts, maar door een herkenbaar systeem. Wij ontwikkelen templates, formats en richtlijnen waarmee je content professioneel, consistent en herkenbaar blijft. Zo wordt social media makkelijker te beheren en sterker voor je merk.',
     ],
+    actionTitle: 'Zo ziet een consistente feed eruit.',
+    actionText:
+      'Een social media systeem dat je merk herkenbaar maakt en zorgt voor rust, structuur en vertrouwen in je uitstraling.',
     deliverables: [
-      { title: 'Templates', desc: 'Bewerkbare sjablonen voor je terugkerende post-types, klaar voor dagelijks gebruik.' },
-      { title: 'Post-formats', desc: 'Een set feed-formats die varieert maar altijd binnen je merk blijft.' },
-      { title: 'Story-formats', desc: 'Story- en reels-covers die je content herkenbaar en samenhangend maken.' },
-      { title: 'Richtlijnen', desc: 'Duidelijke afspraken over kleur, type en gebruik zodat het systeem houdbaar blijft.' },
+      { title: 'Templates', desc: 'Herbruikbare ontwerpen voor terugkerende posts.' },
+      { title: 'Post-formats', desc: 'Vaste formats die passen bij je merk en content.' },
+      { title: 'Story-formats', desc: 'Story- en reel-covers die je kanaal herkenbaar maken.' },
+      { title: 'Richtlijnen', desc: 'Duidelijke afspraken voor kleur, typografie en gebruik.' },
     ],
     audience:
-      'Voor merken die structureel posten en willen dat hun feed als een geheel voelt. Perfect als je content uit handen geeft of opschaalt en grip wilt houden op de uitstraling.',
+      'Voor merken die structureel posten en willen dat hun feed professioneel, herkenbaar en consistent aanvoelt. Ideaal als je content maakt, maar nog geen duidelijke visuele lijn hebt.',
     why: [
-      { title: 'Herkenbaar zonder logo', desc: 'Je content valt op in de feed omdat de stijl direct als die van jou leest.' },
-      { title: 'Sneller posten', desc: 'Met vaste formats maak je content in een fractie van de tijd, zonder kwaliteitsverlies.' },
-      { title: 'Houdbaar systeem', desc: 'Richtlijnen zorgen dat het consistent blijft, ook als er meerdere mensen aan werken.' },
+      { title: 'Herkenbaar zonder logo', desc: 'Je content voelt als je merk, nog voordat iemand je naam ziet.' },
+      { title: 'Sneller content maken', desc: 'Met vaste formats werk je sneller en consistenter.' },
+      { title: 'Houdbaar systeem', desc: 'Richtlijnen zorgen dat je stijl blijft kloppen, ook als meerdere mensen eraan werken.' },
     ],
+    approachTitle: 'Van losse posts naar een herkenbaar systeem.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bekijken je huidige content en je manier van werken.' },
-      { title: 'Systeem', desc: 'We ontwerpen het visuele systeem en de eerste templates.' },
-      { title: 'Uitwerken', desc: 'We bouwen alle formats uit en testen ze op echte content.' },
-      { title: 'Overdragen', desc: 'We leveren templates en richtlijnen en zetten je team op weg.' },
+      { title: 'Kennismaken', desc: 'We bekijken je merk, doelgroep en huidige content.' },
+      { title: 'Systeem bepalen', desc: 'We bepalen welke formats en templates je nodig hebt.' },
+      { title: 'Uitwerken', desc: 'We ontwerpen de templates en visuele richtlijnen.' },
+      { title: 'Overdragen', desc: 'Je ontvangt een bruikbaar systeem waarmee je team direct verder kan.' },
     ],
     case: {
       name: 'Studio Vesper',
       sector: 'Lifestyle',
       summary:
-        'Een groeiend lifestyle-merk waarvan de feed rommelig oogde door wisselende stijlen. We bouwden een visueel systeem met vaste formats en een rustig kleurritme.',
+        'Een lifestylemerk waarvan de feed rommelig oogde door wisselende stijlen.',
       outcome:
-        'Een feed die als één verhaal voelt, content die sneller te maken is en een merk dat direct herkenbaar werd in de tijdlijn.',
+        'We ontwikkelden een visueel systeem met vaste formats, waardoor de content direct herkenbaarder, rustiger en professioneler werd.',
     },
     faq: [
-      { q: 'In welk programma lever je de templates?', a: 'We leveren bewerkbare templates in de tool die jij gebruikt, van Canva tot Figma of Adobe.' },
-      { q: 'Maken jullie ook de content zelf?', a: 'Dat kan. Wil je het beheer uit handen geven, dan pakt ons social-team het volledig op.' },
+      { q: 'In welk programma leveren jullie de templates?', a: 'We leveren de templates in een programma dat past bij jouw werkwijze, zoals Canva, Figma of Adobe.' },
+      { q: 'Maken jullie ook de content zelf?', a: 'Ja, dat kan. We kunnen het systeem opleveren, maar ook helpen met contentcreatie en beheer.' },
     ],
+    ctaTitle: 'Klaar voor een feed die klopt?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met een social media systeem dat herkenbaar, professioneel en makkelijk toepasbaar is.',
   }),
   S('design-branding', 'Complete Branding', {
     tagline:
-      'Het hele merk van strategie tot uitrol, alles in een keer goed en overal even sterk.',
+      'Een volledig merktraject waarin strategie, uitstraling en toepassing samenkomen tot een sterk geheel.',
+    whatTitle: 'Branding van strategie tot uitvoering.',
     story: [
-      'Complete branding is het volledige traject: van de strategische basis tot een uitgerold merk dat overal klopt. In plaats van losse stukken bouwen we het geheel, zodat elke keuze in lijn is met je positionering en je merk als een eenheid voelt.',
-      'We starten bij de strategie: waar sta je voor, wat onderscheidt je, en welke belofte maak je. Vanuit daar ontwerpen we de volledige identiteit en bouwen we een designsysteem dat schaalt. Daarna helpen we met de uitrol, zodat je merk niet alleen op papier mooi is maar ook in de praktijk consistent landt.',
-      'Dit is de keuze voor merken die het in één keer goed willen doen. Je krijgt een fundament dat houvast geeft bij elke toekomstige beslissing, van een nieuwe campagne tot een nieuwe productlijn.',
+      'Complete branding is voor bedrijven die hun merk professioneel willen neerzetten of opnieuw willen opbouwen. We starten bij de basis: wie je bent, voor wie je er bent en hoe je herkend wilt worden. Daarna vertalen we dit naar een sterke visuele identiteit, duidelijke richtlijnen en toepassingen die je merk overal consistent maken. Zo ontstaat geen losse huisstijl, maar een merk dat klopt in uitstraling, verhaal en uitvoering.',
     ],
+    actionTitle: 'Zo ziet complete branding eruit.',
+    actionText:
+      'Een complete merkbasis waarin strategie, identiteit en visuele stijl samenkomen tot een herkenbaar geheel.',
     deliverables: [
-      { title: 'Merkstrategie', desc: 'Positionering, kernwaarden en merkbelofte als fundament voor alle keuzes.' },
-      { title: 'Identiteit', desc: 'Logo, kleur en typografie die je strategie visueel maken.' },
-      { title: 'Designsysteem', desc: 'Een schaalbaar systeem met componenten en regels voor elk kanaal.' },
-      { title: 'Uitrol', desc: 'Begeleiding bij het toepassen van je merk over je belangrijkste touchpoints.' },
+      { title: 'Merkstrategie', desc: 'Een duidelijke basis voor je positionering, doelgroep en merkverhaal.' },
+      { title: 'Identiteit', desc: 'Logo, kleuren, typografie en visuele richting die je merk herkenbaar maken.' },
+      { title: 'Designsysteem', desc: 'Een schaalbaar systeem met onderdelen en richtlijnen voor elk kanaal.' },
+      { title: 'Uitrol', desc: 'Toepassing van je merkstijl op de belangrijkste touchpoints.' },
     ],
     audience:
-      'Voor ondernemers die serieus willen bouwen en hun merk als strategisch kapitaal zien. Ideaal bij een herpositionering, een fusie of een nieuwe fase waarin alles op orde moet.',
+      'Voor ondernemers en bedrijven die serieus willen bouwen aan een merk dat professioneel, herkenbaar en toekomstbestendig is. Ideaal bij een herpositionering, nieuwe fase of wanneer je huidige uitstraling niet meer past bij je ambities.',
     why: [
-      { title: 'Eén partner', desc: 'Strategie, ontwerp en uitrol uit één hand, zonder gaten tussen de stappen.' },
-      { title: 'Strategisch fundament', desc: 'Elke keuze is terug te voeren op je positionering, zodat het merk klopt en standhoudt.' },
-      { title: 'Klaar om te groeien', desc: 'Een systeem dat meebeweegt met nieuwe producten, kanalen en campagnes.' },
+      { title: 'Een geheel', desc: 'Strategie, uitstraling en uitvoering sluiten op elkaar aan.' },
+      { title: 'Strategisch fundament', desc: 'Elke keuze komt voort uit je positionering, doelgroep en groeirichting.' },
+      { title: 'Klaar om door te groeien', desc: 'Je krijgt een merkbasis die je kunt gebruiken voor websites, content, campagnes en verdere uitbreiding.' },
     ],
+    approachTitle: 'Van strategie naar een merk dat klopt.',
     approach: [
-      { title: 'Strategie', desc: 'We leggen positionering, waarden en belofte vast.' },
-      { title: 'Identiteit', desc: 'We ontwerpen de volledige visuele identiteit.' },
-      { title: 'Systeem', desc: 'We bouwen het designsysteem en de richtlijnen.' },
-      { title: 'Uitrol', desc: 'We brengen het merk live over je belangrijkste kanalen.' },
+      { title: 'Strategie', desc: 'We bepalen je positionering, doelgroep en merkverhaal.' },
+      { title: 'Identiteit', desc: 'We ontwikkelen de visuele richting van je merk.' },
+      { title: 'Systeem', desc: 'We bouwen een herkenbaar designsysteem met duidelijke richtlijnen.' },
+      { title: 'Uitrol', desc: 'We passen je merk toe op de belangrijkste kanalen en middelen.' },
     ],
     case: {
       name: 'Kessler & Co',
       sector: 'Zakelijke dienstverlening',
       summary:
-        'Een gevestigd kantoor dat verouderd oogde en jong talent niet meer aansprak. We herpositioneerden het merk en bouwden een complete identiteit met designsysteem.',
+        'Een zakelijk dienstverlener waarvan de uitstraling niet meer paste bij de kwaliteit van het werk.',
       outcome:
-        'Een merk dat weer past bij de kwaliteit van het werk, intern gedragen wordt en consistent uitgerold is over elk contactmoment.',
+        'We herpositioneerden het merk en ontwikkelden een compleet identiteitssysteem dat zorgt voor meer vertrouwen, consistentie en professionele herkenbaarheid.',
     },
     faq: [
-      { q: 'Hoe lang duurt een compleet traject?', a: 'Dat hangt af van de scope, maar reken op een traject van enkele weken tot maanden, in heldere fases met vaste momenten.' },
-      { q: 'Kunnen we gefaseerd starten?', a: 'Ja. We kunnen beginnen bij strategie en identiteit en de uitrol later oppakken wanneer jij er klaar voor bent.' },
+      { q: 'Hoe lang duurt een compleet traject?', a: 'Dat hangt af van de scope. Meestal duurt een compleet brandingtraject enkele weken tot enkele maanden.' },
+      { q: 'Kunnen we gefaseerd starten?', a: 'Ja. We kunnen starten met strategie en identiteit, en daarna uitbreiden naar website, content of andere toepassingen.' },
     ],
+    ctaTitle: 'Klaar voor een merk dat klopt?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met een complete merkbasis die vertrouwen wekt, herkenbaar is en klaarstaat voor de volgende stap.',
   }),
 
   /* ───────────────────────── Web Development ───────────────────────── */

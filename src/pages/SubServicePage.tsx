@@ -36,7 +36,7 @@ function SubServicePage({ sub }: { sub: SubService }) {
 
   return (
     <>
-      <SubHero sub={sub} parentLabel={parent?.label ?? 'Diensten'} />
+      <SubHero sub={sub} parentLabel={parent?.label ?? 'Diensten'} parentCta={parent?.heroCta} />
 
       <div className="bg-cream text-near-black">
         {/* Wat het is — het verhaal */}
@@ -51,7 +51,11 @@ function SubServicePage({ sub }: { sub: SubService }) {
                   </span>
                 </div>
                 <h2 className="mt-6 text-balance font-display text-[clamp(1.8rem,4vw,3rem)] font-semibold leading-[1.06] tracking-tight">
-                  {sub.name}, <Accent>goed gedaan</Accent>.
+                  {sub.whatTitle ?? (
+                    <>
+                      {sub.name}, <Accent>goed gedaan</Accent>.
+                    </>
+                  )}
                 </h2>
               </Reveal>
               <Reveal delay={0.08} className="space-y-5">
@@ -81,10 +85,14 @@ function SubServicePage({ sub }: { sub: SubService }) {
                 </span>
               </div>
               <h2 className="mt-6 max-w-md text-balance font-display text-[clamp(1.8rem,4vw,3rem)] font-semibold leading-[1.06] tracking-tight">
-                Zo ziet <Accent>{sub.name.toLowerCase()}</Accent> eruit.
+                {sub.actionTitle ?? (
+                  <>
+                    Zo ziet <Accent>{sub.name.toLowerCase()}</Accent> eruit.
+                  </>
+                )}
               </h2>
               <p className="mt-5 max-w-md font-sans text-lg leading-relaxed text-near-black/65">
-                {sub.tagline}
+                {sub.actionText ?? sub.tagline}
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -171,7 +179,11 @@ function SubServicePage({ sub }: { sub: SubService }) {
                 </span>
               </div>
               <h2 className="mt-6 max-w-2xl text-balance font-display text-[clamp(1.8rem,4.5vw,3.25rem)] font-semibold leading-[1.05] tracking-tight">
-                Een heldere <Accent>aanpak</Accent>, van start tot resultaat.
+                {sub.approachTitle ?? (
+                  <>
+                    Een heldere <Accent>aanpak</Accent>, van start tot resultaat.
+                  </>
+                )}
               </h2>
             </Reveal>
             <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -303,16 +315,16 @@ function SubServicePage({ sub }: { sub: SubService }) {
               }}
             >
               <h2 className="max-w-xl text-balance font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold">
-                Klaar voor {sub.name.toLowerCase()}?
+                {sub.ctaTitle ?? `Klaar voor ${sub.name.toLowerCase()}?`}
               </h2>
               <p className="max-w-md font-sans text-cream/70">
-                Vertel ons over je merk en je doel. We denken vrijblijvend met je mee.
+                {sub.ctaText ?? 'Vertel ons over je merk en je doel. We denken vrijblijvend met je mee.'}
               </p>
               <Link
                 to="/start"
                 className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-mint to-lime-accent px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
               >
-                <span className="relative z-10">Start jouw project</span>
+                <span className="relative z-10">{parent?.heroCta ?? 'Start jouw project'}</span>
                 <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
                 <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
               </Link>
@@ -328,7 +340,7 @@ function SubServicePage({ sub }: { sub: SubService }) {
 
 /* ───────────────────────── Hero ───────────────────────── */
 
-function SubHero({ sub, parentLabel }: { sub: SubService; parentLabel: string }) {
+function SubHero({ sub, parentLabel, parentCta }: { sub: SubService; parentLabel: string; parentCta?: string }) {
   const ParentIcon = SERVICE_ICON_BY_SLUG[sub.serviceSlug]
   return (
     <section
@@ -378,20 +390,19 @@ function SubHero({ sub, parentLabel }: { sub: SubService; parentLabel: string })
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
-          className="mt-10 flex flex-row gap-3"
+          className="mt-10 flex flex-col gap-3 sm:flex-row"
         >
           <Link
             to="/start"
-            className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl bg-gradient-to-r from-emerald to-mint px-4 py-3.5 font-sans text-sm font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] sm:px-8 sm:py-4 sm:text-base"
+            className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl bg-gradient-to-r from-emerald to-mint px-4 py-3.5 font-sans text-sm font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] sm:flex-1 sm:px-8 sm:py-4 sm:text-base"
           >
-            <span className="relative z-10 sm:hidden">Start project</span>
-            <span className="relative z-10 hidden sm:inline">Start jouw project</span>
+            <span className="relative z-10">{parentCta ?? 'Start jouw project'}</span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
           </Link>
           <Link
             to={`/diensten/${sub.serviceSlug}`}
-            className="inline-flex flex-1 items-center justify-center gap-2.5 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 font-sans text-sm font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40 sm:px-8 sm:py-4 sm:text-base"
+            className="inline-flex w-full items-center justify-center gap-2.5 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 font-sans text-sm font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40 sm:flex-1 sm:px-8 sm:py-4 sm:text-base"
           >
             <span className="h-1.5 w-1.5 bg-lime-accent" />
             {parentLabel}
