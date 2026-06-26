@@ -4,22 +4,22 @@ import { PageHero } from '@/components/PageHero'
 import { Showcase } from '@/sections/Showcase'
 import { Footer } from '@/sections/Footer'
 
-const CATS = ['Alles', 'Websites', 'Webshops', 'Branding', 'Video']
+const CATS = ['Alle', 'Websites', 'Webshops', 'Branding', 'Video & Fotografie', 'Social Media', 'SEO & SEA']
 
 /** Portfolio overview: dark hero + category chips + the showcase grid. */
 export function Work() {
   return (
     <>
       <PageHero
-        kicker="Geselecteerd werk"
+        kicker="Uitgelicht werk"
         title={
           <>
-            Merken die zijn gaan <Accent>klimmen.</Accent>
+            Werk dat bedrijven <Accent>vooruitbrengt.</Accent>
           </>
         }
-        tagline="Een greep uit het werk waarmee we interesse in groei veranderden, van strakke webshops tot complete merken."
-        primary={{ label: 'Start jouw project', to: '/start' }}
-        secondary={{ label: 'Onze diensten', to: '/diensten' }}
+        tagline="Een selectie van websites, branding, content en campagnes die bedrijven sterker zichtbaar maken, vertrouwen opbouwen en meer resultaat opleveren."
+        primary={{ label: 'Start jouw groeitraject', to: '/start' }}
+        secondary={{ label: 'Bekijk diensten', to: '/diensten' }}
       />
 
       <div className="bg-cream text-near-black">

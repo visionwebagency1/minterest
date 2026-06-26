@@ -5,37 +5,79 @@ import { PageHero } from '@/components/PageHero'
 import { Footer } from '@/sections/Footer'
 import { MAIN_SERVICES } from '@/data/services'
 
+/** About-page omschrijving per hoofddienst (uit het contentbestand). */
+const ABOUT_DESC: Record<string, string> = {
+  'design-branding':
+    'Een sterke merkbasis die vertrouwen opbouwt, herkenning vergroot en jouw bedrijf professioneel neerzet.',
+  'web-development':
+    'Websites en webshops die duidelijk communiceren, vertrouwen wekken en bezoekers omzetten in klanten.',
+  'video-fotografie':
+    'Beeldmateriaal dat aandacht pakt, vertrouwen opbouwt en jouw merk professioneel zichtbaar maakt.',
+  'social-media':
+    'Content, influencers en advertenties die bereik omzetten in zichtbaarheid, vertrouwen en nieuwe aanvragen.',
+  'seo-sea':
+    'Beter gevonden worden door de juiste doelgroep en meer gerichte bezoekers omzetten in aanvragen.',
+  extra:
+    'Aanvullende oplossingen zoals AI-agents, administratie, sourcing en detachering om slimmer en schaalbaarder te werken.',
+}
+
 const BRANCHES = MAIN_SERVICES.map((s) => ({
   title: s.label,
-  desc: s.cardDesc,
+  desc: ABOUT_DESC[s.slug] ?? s.cardDesc,
   to: `/diensten/${s.slug}`,
 }))
 
 const SUPPORT = [
-  { title: 'Administratie', desc: 'We ontzorgen partners op de achtergrond, zodat de focus op groei blijft.' },
-  { title: 'Sourcing & inkoop', desc: 'De juiste mensen en middelen, slim ingekocht en geregeld.' },
+  { title: 'Administratie', desc: 'We koppelen ondernemers aan overzichtelijke administratieve ondersteuning, zodat er meer rust en structuur ontstaat.' },
+  { title: 'Sourcing & inkoop', desc: 'We helpen met het vinden en vergelijken van producten, leveranciers en inkoopmogelijkheden.' },
 ]
 
 const VALUES = [
-  { title: 'Eén team, geen overdrachten', desc: 'Strategie, design, build en groei zitten aan dezelfde tafel.' },
-  { title: 'Resultaat boven ruis', desc: 'We maken keuzes die je merk laten groeien, niet alleen mooi ogen.' },
-  { title: 'Altijd omhoog', desc: 'We blijven meten en verbeteren, lang nadat het live staat.' },
+  { title: 'Een team, geen losse schakels', desc: 'Strategie, design, development, content en marketing komen samen in een duidelijke aanpak.', Icon: TeamIcon },
+  { title: 'Oplossing boven uitvoering', desc: 'We leveren niet zomaar een website, video of campagne. We kijken eerst wat jouw bedrijf nodig heeft.', Icon: SolutionIcon },
+  { title: 'Gebouwd om door te groeien', desc: 'Alles wat we maken moet professioneel staan, praktisch werken en klaar zijn voor de volgende stap.', Icon: GrowIcon },
 ]
+
+function TeamIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3 20c0-3 2.7-5 6-5s6 2 6 5" />
+      <path d="M16 5.5a3 3 0 0 1 0 5.5M18 20c0-2.4-1-4.2-2.6-5" />
+    </svg>
+  )
+}
+function SolutionIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 18h6M10 21h4" />
+      <path d="M12 3a6 6 0 0 0-3.5 10.9c.5.4.8 1 .8 1.6v.5h5.4v-.5c0-.6.3-1.2.8-1.6A6 6 0 0 0 12 3Z" />
+    </svg>
+  )
+}
+function GrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 18 10 12l3.5 3.5L20 8" />
+      <path d="M15 8h5v5" />
+    </svg>
+  )
+}
 
 /** About / studio page: dark hero + light story (values, branches, support). */
 export function About() {
   return (
     <>
       <PageHero
-        kicker="De studio"
+        kicker="Over Minterest"
         title={
           <>
-            Eén partner voor de hele <Accent>klim.</Accent>
+            Een partner voor je volgende <Accent>groeistap.</Accent>
           </>
         }
-        tagline="Bij Minterest wordt interesse je groei. Zes diensten onder één dak, van merk en website tot social en vindbaarheid, plus alles eromheen geregeld."
+        tagline="Bij Minterest starten we niet bij een losse dienst, maar bij wat jouw bedrijf nodig heeft om sterker zichtbaar te worden, vertrouwen op te bouwen en meer resultaat te halen. Van branding en websites tot content, vindbaarheid en extra ondersteuning: we bouwen oplossingen die met je bedrijf meegroeien."
         primary={{ label: 'Werk met ons', to: '/start' }}
-        secondary={{ label: 'Bekijk werk', to: '/work' }}
+        secondary={{ label: 'Bekijk ons werk', to: '/work' }}
       />
 
       <div className="bg-cream text-near-black">
@@ -44,8 +86,10 @@ export function About() {
           <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
             {VALUES.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.08}>
-                <span className="font-accent text-3xl italic text-emerald">{`0${i + 1}`}</span>
-                <h3 className="mt-3 font-display text-2xl font-semibold">{v.title}</h3>
+                <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald/10 text-emerald ring-1 ring-emerald/15">
+                  <v.Icon />
+                </span>
+                <h3 className="mt-4 font-display text-2xl font-semibold">{v.title}</h3>
                 <p className="mt-3 font-sans text-base leading-relaxed text-near-black/60">{v.desc}</p>
               </Reveal>
             ))}
@@ -53,7 +97,7 @@ export function About() {
 
           {/* the six services */}
           <Reveal delay={0.05}>
-            <h2 className="mt-28 font-display text-2xl font-semibold md:text-3xl">De zes diensten</h2>
+            <h2 className="mt-28 font-display text-2xl font-semibold md:text-3xl">Onze zes diensten</h2>
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {BRANCHES.map((b, i) => (
@@ -76,7 +120,7 @@ export function About() {
 
           {/* support */}
           <Reveal delay={0.05}>
-            <h2 className="mt-24 font-display text-2xl font-semibold md:text-3xl">Op de achtergrond</h2>
+            <h2 className="mt-24 font-display text-2xl font-semibold md:text-3xl">Achter de schermen</h2>
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {SUPPORT.map((b, i) => (

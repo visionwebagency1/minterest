@@ -39,7 +39,7 @@ export function Contact() {
             Even <Accent>kennismaken?</Accent>
           </>
         }
-        tagline="Bel, app of mail. Een kort gesprek is vaak genoeg om te zien waar de groei zit. We reageren snel."
+        tagline="Vertel ons waar je nu staat en waar je naartoe wilt. We kijken graag mee welke oplossing past om jouw bedrijf sterker zichtbaar te maken, meer vertrouwen op te bouwen en verder te groeien."
       />
 
       <div className="bg-cream text-near-black">
@@ -53,7 +53,7 @@ export function Contact() {
             </Reveal>
             <Reveal delay={0.05}>
               <p className="mt-6 max-w-md font-sans text-lg leading-relaxed text-near-black/65">
-                We zitten in Amsterdam en werken door heel Nederland. Kies wat jou het beste uitkomt.
+                Stuur ons een bericht via WhatsApp of mail. We reageren snel en denken direct met je mee.
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -67,7 +67,7 @@ export function Contact() {
                 <a href="mailto:hello@minterest.nl" className="font-sans text-lg text-near-black transition-colors hover:text-emerald">
                   hello@minterest.nl
                 </a>
-                <span className="font-sans text-sm text-near-black/50">Amsterdam · Ma t/m vr, 09:00 tot 18:00</span>
+                <span className="font-sans text-sm text-near-black/50">Nederland · ma t/m vr, 09:00 tot 18:00</span>
               </div>
             </Reveal>
           </div>
@@ -88,7 +88,7 @@ export function Contact() {
               ) : (
                 <div className="flex flex-col gap-4">
                   <div>
-                    <label className="font-sans text-sm font-semibold text-near-black">Waar ben je in geïnteresseerd?</label>
+                    <label className="font-sans text-sm font-semibold text-near-black">Waar ben je in geinteresseerd?</label>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {SERVICE_OPTIONS.map((s) => {
                         const active = interest.includes(s.key)
@@ -122,7 +122,7 @@ export function Contact() {
                     className="group relative mt-2 inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                   >
                     <BorderBeam rx={12} />
-                    <span className="relative z-10">{isSubmitting ? 'Versturen…' : 'Verstuur bericht'}</span>
+                    <span className="relative z-10">{isSubmitting ? 'Versturen…' : 'Verstuur je groeivraag'}</span>
                     {!isSubmitting && <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>}
                     <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
                   </button>

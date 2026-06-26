@@ -13,8 +13,8 @@ const EASE = [0.22, 1, 0.36, 1] as const
 const PROJECTS = [
   { name: 'Luna Light', cat: 'Webshop · Shopify', kind: 'shop', accent: 'from-emerald-deep to-emerald' },
   { name: 'Ascend Labs', cat: 'SaaS · Development', kind: 'dash', accent: 'from-emerald to-mint' },
-  { name: 'DYOTA', cat: 'Branding · Landing', kind: 'lux', accent: 'from-mint to-lime-accent' },
-  { name: 'Bloom & Co', cat: 'Webshop · Food', kind: 'food', accent: 'from-emerald-deep to-mint' },
+  { name: 'DYOTA', cat: 'Branding · Landingpage', kind: 'lux', accent: 'from-mint to-lime-accent' },
+  { name: 'Bloom & Co', cat: 'Website · Merk', kind: 'food', accent: 'from-emerald-deep to-mint' },
 ]
 
 /** A coded mini-screen, distinct per project kind. */
@@ -91,7 +91,7 @@ export function Showcase() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-8 max-w-2xl text-balance font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight">
-                Onze <Accent>projecten.</Accent>
+                Ons <Accent>werk.</Accent>
               </h2>
             </Reveal>
           </div>
@@ -100,7 +100,7 @@ export function Showcase() {
               to="/work"
               className="group inline-flex items-center gap-2 rounded-xl bg-emerald-deep px-6 py-3.5 font-sans text-sm font-semibold text-cream transition-transform duration-300 hover:scale-[1.03]"
             >
-              Bekijk alles
+              Bekijk alle cases
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             </Link>
           </Reveal>
@@ -140,7 +140,7 @@ export function Showcase() {
                   <h3 className="font-display text-base font-semibold md:text-2xl">{p.name}</h3>
                   <p className="mt-1 font-sans text-xs text-near-black/50 md:text-sm">{p.cat}</p>
                 </div>
-                <span className="hidden font-sans text-sm text-emerald-deep sm:inline">Bekijk project &nearr;</span>
+                <span className="hidden font-sans text-sm text-emerald-deep sm:inline">Bekijk case &rarr;</span>
               </div>
             </motion.div>
           ))}
