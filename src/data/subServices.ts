@@ -724,83 +724,95 @@ export const SUB_SERVICES: SubService[] = [
   /* ───────────────────────── SEO & SEA ───────────────────────── */
   S('seo-sea', 'SEO', {
     tagline:
-      'Structureel bovenaan in Google met techniek, content en autoriteit, vindbaarheid die blijft staan.',
+      'Duurzaam beter gevonden worden door mensen die actief zoeken naar jouw product, dienst of oplossing.',
+    whatTitle: 'SEO die vindbaarheid opbouwt.',
     story: [
-      'SEO is geen trucje maar een doorlopende investering die zich blijft uitbetalen. Wie structureel bovenaan staat voor de zoektermen die ertoe doen, krijgt een stroom bezoekers die actief op zoek zijn naar wat jij biedt, zonder dat je per klik betaalt. Maar bovenaan komen en blijven vraagt een aanpak op meerdere fronten.',
-      'Wij werken aan de drie pijlers tegelijk: een technisch gezonde website die snel en vindbaar is, content die antwoord geeft op wat je doelgroep zoekt, en autoriteit die je gezag opbouwt in de ogen van Google. Voor lokale bedrijven zorgen we bovendien dat je goed gevonden wordt in je eigen regio.',
-      'Het resultaat is vindbaarheid die blijft staan en klanten blijft opleveren, ook als je niet betaalt voor advertenties. Het is werk van de lange adem, maar het bouwt een fundament dat steeds meer waard wordt.',
+      'SEO is geen snelle truc, maar een duurzame manier om zichtbaar te worden in Google. Wij verbeteren je website technisch, inhoudelijk en strategisch, zodat zoekmachines en bezoekers beter begrijpen wat je aanbiedt. Zo bouw je aan meer relevant verkeer, vertrouwen en aanvragen op de lange termijn.',
     ],
+    actionTitle: 'Zo ziet SEO eruit.',
+    actionText:
+      'Structureel beter zichtbaar worden in Google met techniek, content en optimalisatie die samenwerken.',
     deliverables: [
-      { title: 'Techniek', desc: 'Een technisch gezonde, snelle site die Google moeiteloos kan lezen.' },
-      { title: 'Content', desc: 'Content die aansluit op wat je doelgroep zoekt en waarde toevoegt.' },
-      { title: 'Linkbuilding', desc: 'Het opbouwen van autoriteit met relevante, betrouwbare verwijzingen.' },
-      { title: 'Lokale vindbaarheid', desc: 'Optimalisatie zodat je gevonden wordt door zoekers in je regio.' },
+      { title: 'Techniek', desc: 'We verbeteren de technische basis van je website.' },
+      { title: 'Content', desc: "We optimaliseren pagina's en teksten voor relevante zoekwoorden." },
+      { title: 'Linkbuilding', desc: 'We versterken je autoriteit met relevante verwijzingen.' },
+      { title: 'Lokale vindbaarheid', desc: 'We helpen je beter zichtbaar worden in je regio.' },
     ],
     audience:
-      'Voor bedrijven die op de lange termijn willen groeien zonder afhankelijk te zijn van betaalde advertenties. Ideaal als je een markt bedient waarin mensen actief zoeken naar je aanbod.',
+      'Voor bedrijven die op de lange termijn beter gevonden willen worden zonder volledig afhankelijk te zijn van advertenties. Ideaal als je klanten actief zoeken naar jouw dienst, product of expertise.',
     why: [
-      { title: 'Alle pijlers samen', desc: 'Techniek, content en autoriteit in samenhang, want los werkt het maar half.' },
-      { title: 'Blijvend resultaat', desc: 'Vindbaarheid die standhoudt en klanten blijft opleveren, ook zonder advertentiebudget.' },
-      { title: 'Transparant', desc: 'Heldere rapportage zodat je ziet hoe je posities en verkeer zich ontwikkelen.' },
+      { title: 'Altijd passend', desc: 'We richten SEO in op jouw markt, doelgroep en aanbod.' },
+      { title: 'Blijvend resultaat', desc: 'We bouwen aan vindbaarheid die op lange termijn waarde blijft leveren.' },
+      { title: 'Transparant', desc: 'Je krijgt inzicht in wat we doen en waar de kansen liggen.' },
     ],
+    approachTitle: 'Van zoekvraag naar zichtbaarheid.',
     approach: [
-      { title: 'Analyse', desc: 'We brengen je site, je markt en je zoektermen in kaart.' },
-      { title: 'Techniek', desc: 'We maken de technische basis gezond.' },
-      { title: 'Content', desc: 'We bouwen content rond wat je doelgroep zoekt.' },
-      { title: 'Groeien', desc: 'We bouwen autoriteit op en blijven optimaliseren.' },
+      { title: 'Analyse', desc: 'We bekijken je website, zoekmarkt en kansen.' },
+      { title: 'Techniek', desc: 'We verbeteren de technische basis van je website.' },
+      { title: 'Content', desc: 'We optimaliseren bestaande pagina\'s en creeren waar nodig nieuwe content.' },
+      { title: 'Groeien', desc: 'We meten, verbeteren en bouwen verder aan je online vindbaarheid.' },
     ],
     case: {
       name: 'Brightwork',
       sector: 'Zakelijke dienstverlening',
       summary:
-        'Een dienstverlener die nauwelijks organisch gevonden werd en volledig leunde op advertenties. We pakten techniek, content en autoriteit gestructureerd aan.',
+        'Een dienstverlener die online nauwelijks zichtbaar was voor relevante zoekopdrachten. We verbeterden de website, structuur en content zodat Google en bezoekers beter begrepen wat het bedrijf aanbiedt.',
       outcome:
-        'Een groeiende stroom organische bezoekers die actief zoeken, en steeds minder afhankelijkheid van betaald verkeer.',
+        'Een sterkere online basis en betere vindbaarheid op zoektermen die aansluiten bij hun aanbod.',
     },
     faq: [
-      { q: 'Hoe snel zie ik resultaat?', a: 'SEO is werk van de lange adem. De eerste verschuivingen zie je vaak binnen enkele maanden, het echte fundament bouwt zich daarna verder op.' },
-      { q: 'Schrijven jullie ook de content?', a: 'Ja. We kunnen de volledige content verzorgen of samenwerken met jouw team, afhankelijk van wat past.' },
+      { q: 'Hoe snel zie ik resultaat met SEO?', a: 'SEO kost tijd. Vaak zie je de eerste verbeteringen na enkele maanden, afhankelijk van je markt en concurrentie.' },
+      { q: 'Schrijven jullie ook de content?', a: 'Ja. We kunnen bestaande teksten optimaliseren of nieuwe SEO-content schrijven voor je website.' },
     ],
+    ctaTitle: 'Klaar voor SEO die blijft werken?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met duurzame vindbaarheid die zorgt voor meer relevant verkeer en aanvragen.',
   }),
   S('seo-sea', 'Google Ads', {
     tagline:
-      'Direct zichtbaar bovenaan voor wie nu zoekt naar wat jij biedt, strak gestuurd op rendement.',
+      'Direct zichtbaar worden bij mensen die zoeken naar jouw product, dienst of oplossing.',
+    whatTitle: 'Google Ads die aanvragen opleveren.',
     story: [
-      'Waar SEO de lange termijn bouwt, levert Google Ads direct resultaat. Je verschijnt bovenaan op het moment dat iemand actief zoekt naar wat jij aanbiedt, precies wanneer de koopintentie het hoogst is. Mits goed ingericht, is dat een van de meest directe manieren om klanten binnen te halen.',
-      'Wij richten campagnes in rond de zoekwoorden die er voor jou toe doen, schrijven advertenties die opvallen en aanzetten tot klikken, en sturen strak op de kosten per klant. We voorkomen dat budget weglekt naar verkeer dat niet converteert, en blijven optimaliseren tot de campagne efficiënt draait.',
-      'Het resultaat is een kanaal dat snel zichtbaar maakt wat werkt, voorspelbaar leads of verkopen oplevert, en zich laat opschalen zodra het rendeert.',
+      'Met Google Ads sta je direct bovenaan op zoekmomenten die ertoe doen. Ideaal wanneer je snel zichtbaar wilt worden en gericht aanvragen, leads of verkopen wilt binnenhalen. Wij richten campagnes in rondom je aanbod, doelgroep en zoekwoorden. Zo wordt je advertentiebudget ingezet op mensen die actief zoeken naar wat jij biedt.',
     ],
+    actionTitle: 'Zo ziet Google Ads eruit.',
+    actionText:
+      'Gerichte advertenties in Google die zichtbaar zijn op het moment dat klanten zoeken.',
     deliverables: [
-      { title: 'Campagne-opzet', desc: 'Een heldere campagnestructuur gericht op koopintentie.' },
-      { title: 'Zoekwoorden', desc: 'De juiste zoekwoorden, met uitsluiting van wat alleen budget kost.' },
-      { title: 'Advertenties', desc: 'Advertenties die opvallen en de klik waard zijn.' },
-      { title: 'Optimalisatie', desc: 'Doorlopend sturen op kosten per klant en rendement.' },
+      { title: 'Campagne-opzet', desc: 'Een duidelijke campagnestructuur rondom je doelen en aanbod.' },
+      { title: 'Zoekwoorden', desc: 'Zoekwoorden gekozen op basis van relevantie en koopintentie.' },
+      { title: 'Advertenties', desc: 'Sterke advertentieteksten die aansluiten op je doelgroep.' },
+      { title: 'Optimalisatie', desc: 'We meten, verbeteren en sturen bij op resultaat.' },
     ],
     audience:
-      'Voor bedrijven die snel zichtbaar willen zijn bij zoekers met koopintentie. Ideaal als je direct aanvragen of verkopen wilt en bereid bent te sturen op rendement.',
+      'Voor bedrijven die snel zichtbaar willen zijn bij zoekende klanten. Ideaal als je direct aanvragen of verkopen wilt binnenhalen en gericht wilt sturen op rendement.',
     why: [
-      { title: 'Direct zichtbaar', desc: 'Je staat bovenaan op het moment dat iemand zoekt naar jouw aanbod.' },
-      { title: 'Geen budgetlek', desc: 'We sluiten irrelevant verkeer uit zodat je budget naar echte kansen gaat.' },
-      { title: 'Gestuurd op rendement', desc: 'We optimaliseren op kosten per klant, niet op kliks alleen.' },
+      { title: 'Direct zichtbaar', desc: 'Je advertenties verschijnen op het moment dat klanten actief zoeken.' },
+      { title: 'Geen budgetlek', desc: 'We richten campagnes slim in, zodat je budget niet verdwijnt aan irrelevante klikken.' },
+      { title: 'Gestuurd op aanvragen', desc: 'We sturen niet alleen op klikken, maar op aanvragen, leads of verkoop.' },
     ],
+    approachTitle: 'Van zoekwoord naar aanvraag.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bepalen je doel, markt en budget.' },
-      { title: 'Opzetten', desc: 'We bouwen de campagnes en zoekwoorden.' },
-      { title: 'Lanceren', desc: 'We gaan live en meten vanaf de eerste klik.' },
-      { title: 'Optimaliseren', desc: 'We sturen door op kosten per klant.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je aanbod, doelgroep en doelen.' },
+      { title: 'Opzetten', desc: 'We bouwen campagnes, zoekwoorden en advertenties.' },
+      { title: 'Lanceren', desc: 'We zetten alles live en zorgen dat de metingen goed staan.' },
+      { title: 'Optimaliseren', desc: 'We verbeteren campagnes op basis van prestaties.' },
     ],
     case: {
       name: 'Vesta Klimaat',
       sector: 'Installatietechniek',
       summary:
-        'Een installatiebedrijf dat advertenties draaide maar veel budget verloor aan irrelevante kliks. We herstructureerden de campagnes en scherpten zoekwoorden en advertenties aan.',
+        'Een installatiebedrijf wilde meer aanvragen uit Google halen zonder budget te verspillen. We herstructureerden de campagnes en richtten advertenties scherper in op relevante zoekopdrachten.',
       outcome:
-        'Een campagne die gericht zoekers met echte intentie binnenhaalt en het budget veel efficiënter omzet in aanvragen.',
+        'Een duidelijkere campagnestructuur en beter inzicht in welke zoekwoorden aanvragen opleveren.',
     },
     faq: [
-      { q: 'Werkt Google Ads naast SEO?', a: 'Juist samen sterk. Ads leveren direct resultaat terwijl SEO de lange termijn bouwt, en ze versterken elkaar.' },
-      { q: 'Kan ik snel stoppen of bijsturen?', a: 'Ja. Het mooie van Ads is de flexibiliteit: we kunnen budget en richting snel aanpassen op basis van resultaat.' },
+      { q: 'Werkt Google Ads naast SEO?', a: 'Ja. SEO bouwt aan duurzame vindbaarheid, terwijl Google Ads zorgt voor directe zichtbaarheid.' },
+      { q: 'Kan ik klein starten met budget?', a: 'Ja. We adviseren een passend startbudget en sturen bij op basis van prestaties.' },
     ],
+    ctaTitle: 'Klaar voor Google Ads die aanvragen opleveren?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met campagnes die gericht zijn op zichtbaarheid, relevante klikken en resultaat.',
   }),
 
   /* ───────────────────────── Extra diensten ───────────────────────── */
