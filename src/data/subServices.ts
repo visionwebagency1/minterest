@@ -818,163 +818,190 @@ export const SUB_SERVICES: SubService[] = [
   /* ───────────────────────── Extra diensten ───────────────────────── */
   S('extra', 'AI Agents', {
     tagline:
-      'Slimme AI-assistenten die werk uit handen nemen, dag en nacht, van klantvragen tot terugkerende taken.',
+      'Slimme AI-assistenten die terugkerende taken automatiseren, klantvragen opvangen en je team tijd besparen.',
+    whatTitle: 'AI-agents die werk uit handen nemen.',
     story: [
-      'AI-agents zijn slimme assistenten die zelfstandig taken uitvoeren. Geen simpele chatbot met standaardantwoorden, maar een assistent die je klanten te woord staat, terugkerend werk afhandelt en draait op het moment dat jij dat niet kunt. Het is alsof je team groeit zonder dat je hoeft op te schalen.',
-      'Wij bepalen samen welke use-case het meest oplevert, bouwen de agent op maat en koppelen hem aan de systemen en kennis die hij nodig heeft. Of het nu gaat om klantvragen beantwoorden, leads kwalificeren of interne processen automatiseren, we zorgen dat de agent betrouwbaar werkt en bij je merk past.',
-      'Het resultaat is meer gedaan met minder handwerk, snellere reacties voor je klanten en ruimte voor je team om te focussen op wat er echt toe doet.',
+      'AI-agents helpen je bedrijf om sneller en slimmer te werken. Ze kunnen klantvragen beantwoorden, informatie verzamelen, afspraken voorbereiden of interne processen ondersteunen. Wij bouwen geen losse chatbot, maar een oplossing die past bij jouw bedrijf, je klanten en je werkwijze.',
     ],
+    actionTitle: 'Zo ziet een AI-agent eruit.',
+    actionText:
+      'Een slimme assistent die klantvragen opvangt, taken automatiseert en altijd beschikbaar is wanneer je bedrijf dat nodig heeft.',
     deliverables: [
-      { title: 'Use-case', desc: 'We bepalen waar een AI-agent het meeste oplevert voor jouw situatie.' },
-      { title: 'Bouw', desc: 'Een op maat gebouwde agent, afgestemd op je merk en je taal.' },
-      { title: 'Integratie', desc: 'Koppeling met je kanalen, systemen en kennisbronnen.' },
-      { title: 'Onderhoud', desc: 'Doorlopend bijsturen en verbeteren op basis van gebruik.' },
+      { title: 'Use-case', desc: 'We bepalen welke taak of welk proces het meeste tijd kan besparen.' },
+      { title: 'Bouw', desc: 'We bouwen een AI-agent die past bij jouw bedrijf en doel.' },
+      { title: 'Integratie', desc: 'We koppelen de agent waar mogelijk aan je website, systemen of workflows.' },
+      { title: 'Onderhoud', desc: 'We blijven verbeteren, testen en aanpassen waar nodig.' },
     ],
     audience:
-      'Voor bedrijven die veel terugkerend werk of klantvragen hebben en willen opschalen zonder evenredig meer mensen. Ideaal als reactiesnelheid en beschikbaarheid belangrijk zijn.',
+      'Voor bedrijven die veel terugkerende vragen, klantcontact of handmatige taken hebben. Ideaal als je sneller wilt reageren, tijd wilt besparen en je team meer ruimte wilt geven voor belangrijk werk.',
     why: [
-      { title: 'Dag en nacht', desc: 'Een agent die altijd aanstaat en niet wacht op kantoortijden.' },
-      { title: 'Op maat', desc: 'Gebouwd rond jouw use-case en gekoppeld aan jouw kennis, niet generiek.' },
-      { title: 'Betrouwbaar', desc: 'We bewaken kwaliteit en sturen bij zodat de agent klopt en bij je merk past.' },
+      { title: 'Doelgericht', desc: 'We bouwen AI-agents rondom een concreet probleem, niet omdat AI trendy is.' },
+      { title: 'Praktisch inzetbaar', desc: 'De agent moet direct waarde toevoegen in je dagelijkse werkproces.' },
+      { title: 'Betrouwbaar', desc: 'We richten de agent zo in dat antwoorden duidelijk, veilig en controleerbaar blijven.' },
     ],
+    approachTitle: 'Van taak naar slimme assistent.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bepalen de meest waardevolle use-case.' },
-      { title: 'Bouwen', desc: 'We bouwen de agent en voeden hem met je kennis.' },
-      { title: 'Koppelen', desc: 'We integreren met je kanalen en systemen.' },
-      { title: 'Verbeteren', desc: 'We meten, onderhouden en bouwen door.' },
+      { title: 'Kennismaken', desc: 'We bekijken welke taken veel tijd kosten.' },
+      { title: 'Bouwen', desc: 'We ontwikkelen de AI-agent rondom jouw doel en werkwijze.' },
+      { title: 'Koppelen', desc: 'We plaatsen de agent op je website of koppelen hem aan je proces.' },
+      { title: 'Verbeteren', desc: 'We testen, meten en verbeteren op basis van gebruik.' },
     ],
     case: {
       name: 'Helder Support',
       sector: 'Dienstverlening',
       summary:
-        'Een dienstverlener die werd bedolven onder dezelfde klantvragen. We bouwden een AI-agent die de meest voorkomende vragen direct beantwoordt en complexe gevallen netjes doorzet.',
+        'Een dienstverlener kreeg dagelijks dezelfde klantvragen via website en WhatsApp. We bouwden een AI-agent die veelgestelde vragen opvangt en klanten sneller naar de juiste informatie leidt.',
       outcome:
-        'Snellere antwoorden voor klanten, een team dat zich op het echte werk kan richten en bereikbaarheid die niet meer aan kantoortijden gebonden is.',
+        'Snellere reacties, minder handmatig werk en meer overzicht in klantcontact.',
     },
     faq: [
-      { q: 'Vervangt een AI-agent mijn team?', a: 'Nee, hij ontlast het. De agent neemt herhaalwerk over zodat je team tijd houdt voor wat aandacht vraagt.' },
-      { q: 'Praat de agent in onze eigen toon?', a: 'Ja. We stemmen taal en toon af op je merk en voeden de agent met jouw kennis.' },
+      { q: 'Vervangt een AI-agent mijn team?', a: 'Nee. Een AI-agent ondersteunt je team door terugkerende vragen en taken op te vangen.' },
+      { q: 'Praat de agent in onze eigen toon?', a: 'Ja. We stemmen de tone of voice af op je merk, doelgroep en manier van communiceren.' },
     ],
+    ctaTitle: 'Klaar voor een AI-agent die tijd bespaart?',
+    ctaText:
+      'Vertel ons waar je nu veel tijd aan kwijt bent. Wij helpen je met een slimme assistent die werk uit handen neemt.',
+    ctaButton: 'Start jouw AI-traject',
   }),
   S('extra', 'Administratie', {
     tagline:
-      'De zakelijke afhandeling op de achtergrond geregeld, zodat jij rust en overzicht houdt.',
+      'Administratieve ondersteuning die zorgt voor overzicht, rust en een professionele basis achter je bedrijf.',
+    whatTitle: 'Administratie die overzicht geeft.',
     story: [
-      'Administratie is zelden waar je ondernemen voor begon, maar wel iets dat moet kloppen. Slordige of achterstallige administratie kost rust, overzicht en uiteindelijk geld. Wij nemen het werk uit handen zodat jij je kunt richten op ondernemen, met de zekerheid dat de basis op orde is.',
-      'We richten je administratie helder in, verwerken de lopende zaken nauwkeurig en zorgen voor rapportage waarmee je grip houdt op je cijfers. Waar gespecialiseerd financieel advies nodig is, werken we samen met onze partner WRBC, zodat je altijd bij de juiste expertise terechtkomt.',
-      'Het resultaat is overzicht en rust: je weet waar je staat, je administratie loopt zonder dat je er constant naar hoeft om te kijken, en je hebt een vast aanspreekpunt als er vragen zijn.',
+      'Een goede administratie geeft rust en voorkomt dat je grip verliest op je bedrijf. Daarom helpen we ondernemers met overzicht, structuur en de juiste administratieve ondersteuning. We kijken wat je nodig hebt en koppelen je waar nodig aan een betrouwbare administratieve partner. Zo blijft je administratie beter georganiseerd en kun jij focussen op ondernemen.',
     ],
+    actionTitle: 'Zo ziet administratie eruit.',
+    actionText:
+      'Een overzichtelijke administratieve basis waarin documenten, verwerking en rapportage duidelijk geregeld zijn.',
     deliverables: [
-      { title: 'Inrichting', desc: 'Een heldere administratieve opzet die past bij je bedrijf.' },
-      { title: 'Verwerking', desc: 'Nauwkeurige verwerking van je lopende administratie.' },
-      { title: 'Rapportage', desc: 'Inzichtelijke rapportages zodat je grip houdt op je cijfers.' },
-      { title: 'Advies', desc: 'Financieel advies waar nodig, in samenwerking met WRBC.' },
+      { title: 'Inrichting', desc: 'Een duidelijke basis voor je administratie en documenten.' },
+      { title: 'Verwerking', desc: 'Ondersteuning bij het verwerken en organiseren van administratie.' },
+      { title: 'Rapportages', desc: 'Inzicht in cijfers, documenten en belangrijke overzichten.' },
+      { title: 'Adviesroute', desc: 'Waar nodig koppelen we je aan een geschikte administratieve partner.' },
     ],
     audience:
-      'Voor ondernemers die hun administratie willen uitbesteden om tijd en rust terug te krijgen. Ideaal als je groeit en je financiële afhandeling professioneler moet worden.',
+      'Voor ondernemers die hun administratie overzichtelijker willen inrichten en meer rust willen krijgen in hun bedrijfsvoering. Ideaal als je administratie onduidelijk, rommelig of te tijdrovend is geworden.',
     why: [
-      { title: 'Rust en overzicht', desc: 'Je administratie loopt, en je weet altijd waar je staat.' },
-      { title: 'Een aanspreekpunt', desc: 'Een vast contact voor je vragen, geen telkens wisselend loket.' },
-      { title: 'Expertise binnen handbereik', desc: 'Voor specialistisch advies schakelen we onze partner WRBC in.' },
+      { title: 'Rust en overzicht', desc: 'We helpen je administratie duidelijker en beter georganiseerd te krijgen.' },
+      { title: 'Een aanspreekpunt', desc: 'We denken met je mee en koppelen je waar nodig aan de juiste partij.' },
+      { title: 'Ondersteuning via netwerk', desc: 'Via ons netwerk kunnen we je verbinden met passende administratieve ondersteuning.' },
     ],
+    approachTitle: 'Van administratie naar overzicht.',
     approach: [
-      { title: 'Kennismaken', desc: 'We brengen je situatie en wensen in beeld.' },
-      { title: 'Inrichten', desc: 'We zetten je administratie helder op.' },
-      { title: 'Verwerken', desc: 'We houden de lopende administratie bij.' },
-      { title: 'Adviseren', desc: 'We rapporteren en adviseren waar nodig.' },
+      { title: 'Kennismaken', desc: 'We bekijken waar je nu staat en wat je nodig hebt.' },
+      { title: 'Inrichten', desc: 'We helpen structuur aanbrengen in je administratie.' },
+      { title: 'Verwerken', desc: 'Administratie wordt overzichtelijk verwerkt en georganiseerd.' },
+      { title: 'Begeleiden', desc: 'We denken mee over vervolgstappen en passende ondersteuning.' },
     ],
     case: {
       name: 'Maasveld Ondernemers',
       sector: 'MKB',
       summary:
-        'Een groeiend bedrijf waar de administratie achterliep en het overzicht zoek was. We richtten de administratie opnieuw in en namen de verwerking over, met WRBC voor het advies.',
+        'Een groeiend bedrijf had weinig overzicht in administratie en documenten. We hielpen structuur aanbrengen en koppelden het bedrijf aan passende administratieve ondersteuning.',
       outcome:
-        'Een bijgewerkte administratie, helder inzicht in de cijfers en een ondernemer die weer kon ondernemen in plaats van bonnetjes sorteren.',
+        'Meer overzicht, minder losse documenten en een duidelijkere administratieve basis.',
     },
     faq: [
-      { q: 'Wat is de rol van WRBC?', a: 'WRBC is onze partner voor financieel en fiscaal advies. Waar specialistische kennis nodig is, schakelen we hen in zodat je altijd goed zit.' },
-      { q: 'Werken jullie met ons huidige boekhoudpakket?', a: 'Doorgaans wel. We sluiten aan op wat je gebruikt of adviseren een pakket dat beter past.' },
+      { q: 'Doen jullie zelf de boekhouding?', a: 'We kijken eerst wat je nodig hebt. Waar nodig koppelen we je aan een betrouwbare administratieve partner.' },
+      { q: 'Kunnen jullie helpen als mijn administratie rommelig is?', a: 'Ja. We helpen structuur aanbrengen en zorgen dat duidelijk wordt wat er nodig is om overzicht te krijgen.' },
     ],
+    ctaTitle: 'Klaar voor meer overzicht in je administratie?',
+    ctaText:
+      'Vertel ons waar je nu tegenaan loopt. Wij helpen je met structuur, overzicht en de juiste administratieve ondersteuning.',
   }),
   S('extra', 'Sourcing', {
     tagline:
-      'Producten en middelen inkopen en regelen voor merken die opschalen, scherp en betrouwbaar.',
+      'Hulp bij het vinden van producten, leveranciers en inkoopoplossingen die passen bij jouw bedrijf.',
+    whatTitle: 'Sourcing die zekerheid geeft.',
     story: [
-      'Als je opschaalt, wordt inkoop een vak apart. De juiste producten vinden, betrouwbare leveranciers selecteren, op kwaliteit controleren en de logistiek regelen, het bepaalt je marge en je betrouwbaarheid naar klanten. Wij nemen die keten uit handen zodat jij je kunt richten op verkopen en groeien.',
-      'We zoeken en selecteren leveranciers, onderhandelen op scherpe voorwaarden en bewaken de kwaliteit zodat je krijgt wat je verwacht. Van eerste sample tot betrouwbare aanlevering regelen we het proces, met oog voor zowel kosten als kwaliteit.',
-      'Het resultaat is een inkoopketen waar je op kunt bouwen: de juiste producten, scherp ingekocht, op kwaliteit gecontroleerd en op tijd geleverd, zodat je kunt opschalen zonder dat de basis wankelt.',
+      'Goede sourcing draait niet alleen om de laagste prijs. Het gaat om de juiste producten, betrouwbare leveranciers en afspraken waar je op kunt bouwen. Wij helpen met het zoeken, vergelijken en beoordelen van leveranciers. Zo krijg je meer overzicht, betere keuzes en een sterkere basis voor inkoop of uitbreiding.',
     ],
+    actionTitle: 'Zo ziet slimme sourcing eruit.',
+    actionText:
+      'Producten en leveranciers overzichtelijk vergelijken, zodat je beter kunt inkopen en met meer vertrouwen kunt opschalen.',
     deliverables: [
-      { title: 'Leveranciers', desc: 'Het vinden en selecteren van betrouwbare leveranciers.' },
-      { title: 'Inkoop', desc: 'Onderhandeling en inkoop op scherpe voorwaarden.' },
-      { title: 'Kwaliteitscheck', desc: 'Controle op kwaliteit zodat je krijgt wat je verwacht.' },
-      { title: 'Logistiek', desc: 'Het regelen van de aanvoer tot betrouwbare aanlevering.' },
+      { title: 'Leveranciers', desc: 'Een selectie van passende leveranciers of producenten.' },
+      { title: 'Inkoop', desc: 'Ondersteuning bij prijs, voorwaarden en mogelijkheden.' },
+      { title: 'Kwaliteitscheck', desc: 'Controle op betrouwbaarheid, productinformatie en geschiktheid.' },
+      { title: 'Logistiek', desc: 'Meedenken over verzending, aantallen en praktische haalbaarheid.' },
     ],
     audience:
-      'Voor merken en ondernemers die fysieke producten verkopen en willen opschalen zonder verzanden in inkoop en logistiek. Ideaal als marge en betrouwbaarheid cruciaal zijn.',
+      'Voor ondernemers en merken die producten willen inkopen, leveranciers zoeken of hun bestaande inkoopproces willen verbeteren. Ideaal als je wilt uitbreiden, opschalen of meer zekerheid wilt voordat je bestelt.',
     why: [
-      { title: 'Scherp ingekocht', desc: 'We onderhandelen op voorwaarden die je marge en kwaliteit beschermen.' },
-      { title: 'Kwaliteit bewaakt', desc: 'We controleren zodat je niet voor verrassingen komt te staan.' },
-      { title: 'Hele keten geregeld', desc: 'Van leverancier tot levering, jij houdt overzicht zonder het zelf te doen.' },
+      { title: 'Betere keuzes', desc: 'We helpen je leveranciers en opties overzichtelijk vergelijken.' },
+      { title: 'Praktisch meedenken', desc: 'We kijken niet alleen naar prijs, maar ook naar kwaliteit, levering en haalbaarheid.' },
+      { title: 'Klaar om op te schalen', desc: 'We zoeken naar oplossingen die passen bij je huidige situatie en je volgende stap.' },
     ],
+    approachTitle: 'Van productidee naar betrouwbare inkoop.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bepalen wat je nodig hebt en je eisen.' },
-      { title: 'Zoeken', desc: 'We vinden en selecteren de juiste leveranciers.' },
-      { title: 'Inkopen', desc: 'We onderhandelen en kopen scherp in.' },
-      { title: 'Leveren', desc: 'We bewaken kwaliteit en regelen de logistiek.' },
+      { title: 'Kennismaken', desc: 'We begrijpen wat je zoekt, je budget en je doel.' },
+      { title: 'Zoeken', desc: 'We zoeken passende leveranciers of producenten.' },
+      { title: 'Vergelijken', desc: 'We vergelijken prijs, kwaliteit, voorwaarden en mogelijkheden.' },
+      { title: 'Voorbereiden', desc: 'We helpen je met de volgende stap richting bestelling of samenwerking.' },
     ],
     case: {
       name: 'Coast Supply',
       sector: 'Consumentenproducten',
       summary:
-        'Een opschalend merk dat vastliep op onbetrouwbare leveranciers en wisselende kwaliteit. We herzagen de inkoopketen en selecteerden vaste, gecontroleerde leveranciers.',
+        'Een ondernemersmerk wilde een nieuw product inkopen, maar had weinig overzicht in leveranciers en voorwaarden. We brachten geschikte opties in kaart en hielpen met het vergelijken van prijs, kwaliteit en levermogelijkheden.',
       outcome:
-        'Een stabiele inkoopketen met voorspelbare kwaliteit en levering, zodat het merk kon opschalen zonder zorgen over de basis.',
+        'Meer overzicht, betere onderhandelingspositie en een duidelijkere route richting inkoop.',
     },
     faq: [
-      { q: 'Werken jullie ook met buitenlandse leveranciers?', a: 'Ja. We zoeken waar de beste combinatie van prijs, kwaliteit en betrouwbaarheid zit, in binnen- en buitenland.' },
-      { q: 'Controleren jullie de kwaliteit echt?', a: 'Ja. Kwaliteitscontrole is onderdeel van het proces, van sample tot aanlevering, zodat je niet voor verrassingen staat.' },
+      { q: 'Werken jullie ook met buitenlandse leveranciers?', a: 'Ja, we kunnen helpen zoeken naar leveranciers in binnen- en buitenland.' },
+      { q: 'Controleren jullie de kwaliteit echt?', a: 'We helpen met het beoordelen van productinformatie, leveranciersprofielen en beschikbare documentatie. Voor fysieke controles kan een externe inspectie nodig zijn.' },
     ],
+    ctaTitle: 'Klaar voor sourcing met meer zekerheid?',
+    ctaText:
+      'Vertel ons wat je zoekt. Wij helpen je passende leveranciers vinden en betere keuzes maken.',
+    ctaButton: 'Start jouw sourcingtraject',
   }),
   S('extra', 'Detachering', {
     tagline:
-      'Het juiste talent op de juiste plek, tijdelijk of structureel, flexibel opschalen zonder gedoe.',
+      'Flexibele ondersteuning om de juiste mensen te vinden wanneer je bedrijf extra capaciteit nodig heeft.',
+    whatTitle: 'Detachering die capaciteit geeft.',
     story: [
-      'Soms heb je gewoon de juiste mensen nodig, snel en zonder een lang wervingstraject. Detachering geeft je flexibiliteit: talent dat aan de slag gaat wanneer jij het nodig hebt, voor een project of voor de lange termijn, zonder de vaste lasten en risico’s van zelf werven.',
-      'Wij matchen op meer dan een cv. We kijken naar de plek die je wilt invullen, naar je team en je manier van werken, en zoeken talent dat echt past. Daarna verzorgen we de plaatsing en blijven we betrokken met begeleiding en opvolging, zodat het ook op de lange termijn goed loopt.',
-      'Het resultaat is de juiste persoon op de juiste plek, flexibel inzetbaar, met een partner die meedenkt in plaats van alleen een naam aanleveren.',
+      'Soms heb je tijdelijk extra mensen nodig, zonder meteen iemand vast aan te nemen. Wij helpen bedrijven met het vinden van passende mensen voor tijdelijke inzet, projecten of groeiende teams. We kijken naar wat je nodig hebt, welke rol ingevuld moet worden en welke kandidaat of partner daarbij past. Zo krijg je sneller de juiste ondersteuning, zonder onnodig veel tijd kwijt te zijn aan zoeken.',
     ],
+    actionTitle: 'Zo ziet slimme detachering eruit.',
+    actionText:
+      'De juiste mensen koppelen aan de juiste rol, zodat je bedrijf flexibel kan opschalen wanneer dat nodig is.',
     deliverables: [
-      { title: 'Matching', desc: 'Een zorgvuldige match op vaardigheden én aansluiting bij je team.' },
-      { title: 'Plaatsing', desc: 'De afhandeling van de plaatsing, zodat iemand soepel kan starten.' },
-      { title: 'Begeleiding', desc: 'Begeleiding tijdens de inzet zodat het werk goed verloopt.' },
-      { title: 'Opvolging', desc: 'Opvolging en bijsturing zodat de samenwerking blijft kloppen.' },
+      { title: 'Matching', desc: 'We zoeken naar mensen die passen bij je rol, bedrijf en behoefte.' },
+      { title: 'Plaatsing', desc: 'We begeleiden de koppeling tussen bedrijf en kandidaat of partner.' },
+      { title: 'Begeleiding', desc: 'We denken mee tijdens de start en zorgen dat de samenwerking duidelijk begint.' },
+      { title: 'Opvolging', desc: 'We blijven betrokken en kijken of de inzet goed aansluit.' },
     ],
     audience:
-      'Voor bedrijven die flexibel willen opschalen of een specifieke rol tijdelijk willen invullen. Ideaal bij piekdrukte, projecten of als je talent zoekt zonder direct vast in dienst.',
+      'Voor bedrijven die tijdelijk extra capaciteit nodig hebben, flexibel willen opschalen of snel geschikte mensen zoeken. Ideaal bij drukte, projecten, groei of wanneer je nog geen vaste medewerker wilt aannemen.',
     why: [
-      { title: 'Match die past', desc: 'We kijken verder dan het cv naar aansluiting bij je team en werkwijze.' },
-      { title: 'Flexibel', desc: 'Opschalen wanneer je het nodig hebt, zonder de lasten van vast werven.' },
-      { title: 'Betrokken', desc: 'We blijven meedenken met begeleiding en opvolging, niet alleen plaatsen.' },
+      { title: 'Passende match', desc: 'We kijken verder dan alleen beschikbaarheid en letten op rol, bedrijf en samenwerking.' },
+      { title: 'Flexibel inzetbaar', desc: 'Geschikt voor tijdelijke ondersteuning, projectmatige inzet of extra capaciteit.' },
+      { title: 'Betrokken aanpak', desc: 'We denken mee voor, tijdens en na de plaatsing zodat de samenwerking beter verloopt.' },
     ],
+    approachTitle: 'Van behoefte naar juiste match.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bepalen de rol en wat echt past bij je team.' },
-      { title: 'Matchen', desc: 'We zoeken en selecteren het juiste talent.' },
-      { title: 'Plaatsen', desc: 'We regelen de plaatsing en de start.' },
-      { title: 'Opvolgen', desc: 'We begeleiden en sturen bij waar nodig.' },
+      { title: 'Kennismaken', desc: 'We begrijpen welke rol, capaciteit of ondersteuning je zoekt.' },
+      { title: 'Matchen', desc: 'We zoeken naar een geschikte kandidaat of partner.' },
+      { title: 'Plaatsen', desc: 'We begeleiden de start en zorgen voor duidelijke afspraken.' },
+      { title: 'Opvolgen', desc: 'We blijven betrokken en sturen bij waar nodig.' },
     ],
     case: {
-      name: 'Norterm Bouw',
+      name: 'Northern Bouw',
       sector: 'Bouw en techniek',
       summary:
-        'Een bedrijf met een plotselinge piek aan projecten en te weinig handen. We plaatsten op korte termijn passend talent en begeleidden de inzet.',
+        'Een bouwbedrijf had extra capaciteit nodig voor lopende projecten, maar wilde geen langdurig traject starten. We hielpen met het vinden van passende ondersteuning via ons netwerk.',
       outcome:
-        'De juiste mensen op de juiste plek precies toen het nodig was, zonder een langdurig wervingstraject en met begeleiding die de inzet liet slagen.',
+        'Een snellere match, minder zoektijd en extra capaciteit op het moment dat het nodig was.',
     },
     faq: [
-      { q: 'Tijdelijk of vast?', a: 'Allebei mogelijk. We detacheren voor een project of langere periode, en denken mee als een rol structureel blijkt te worden.' },
-      { q: 'Hoe snel kan iemand starten?', a: 'Afhankelijk van de rol vaak op korte termijn. We bewegen snel zodat je niet onnodig met onderbezetting zit.' },
+      { q: 'Is dit tijdelijk of vast?', a: 'Dat hangt af van je behoefte. We kijken mee naar tijdelijke inzet, projectmatige ondersteuning of een langere samenwerking.' },
+      { q: 'Hoe snel kan iemand starten?', a: 'Dat verschilt per functie en beschikbaarheid. We kijken wat haalbaar is en communiceren duidelijk over de mogelijkheden.' },
     ],
+    ctaTitle: 'Klaar voor de juiste versterking?',
+    ctaText:
+      'Vertel ons welke capaciteit je zoekt. Wij denken mee over een passende match of oplossing via ons netwerk.',
+    ctaButton: 'Start jouw detacheringsaanvraag',
   }),
 ]
 
