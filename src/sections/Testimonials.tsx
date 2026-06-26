@@ -1,31 +1,32 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 
 /**
- * One big quote at a time on a rich green background, auto-rotating with an
- * avatar, rating and smooth blur transitions.
+ * One review at a time on a rich green background, auto-rotating with a
+ * rating, a category tag and smooth blur transitions.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
 const QUOTES = [
   {
-    quote: 'Onze nieuwe webshop laadt sneller, oogt strakker en verkoopt meer. Minterest dacht mee als partner, niet als leverancier.',
-    name: 'Sanne de Vries',
-    role: 'Oprichter, Bloom & Co',
-    initials: 'SV',
+    quote: 'Ze keken verder dan alleen de website.',
+    detail:
+      'Minterest dacht mee over onze uitstraling, doelgroep en hoe we online meer vertrouwen konden opbouwen. Het resultaat voelt professioneel, duidelijk en veel sterker dan wat we eerst hadden.',
+    tag: 'Branding & website',
   },
   {
-    quote: 'Van merk tot site tot video, alles uit één hand en alles klopt. Eindelijk een team dat de hele klim begrijpt.',
-    name: 'Mark Jansen',
-    role: 'Marketinglead, Ascend Labs',
-    initials: 'MJ',
+    quote: 'Alles voelt nu veel consistenter.',
+    detail:
+      'Van content tot uitstraling: alles sluit beter op elkaar aan. We zijn professioneler zichtbaar en krijgen vaker reacties van mensen die ons online hebben gezien.',
+    tag: 'Social media & content',
   },
   {
-    quote: 'Ze leverden niet alleen design, maar groei. Drie maanden later staan we hoger, sneller en duidelijker dan ooit.',
-    name: 'Lisa Smit',
-    role: 'Directeur, Verdant',
-    initials: 'LS',
+    quote: 'Fijn dat alles onder een dak zit.',
+    detail:
+      'We hoefden niet met vijf verschillende partijen te schakelen. Minterest dacht mee over de juiste oplossing en hielp ons stap voor stap om ons bedrijf beter neer te zetten.',
+    tag: 'Strategie, website & marketing',
   },
 ]
 
@@ -49,9 +50,15 @@ export function Testimonials() {
         <div className="flex items-center justify-center gap-3">
           <span className="h-px w-10 bg-mint/50" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/80">
-            Wat klanten zeggen
+            Wat ondernemers over ons zeggen
           </span>
         </div>
+
+        <p className="mx-auto mt-8 max-w-2xl font-sans text-base leading-relaxed text-cream/65 md:text-lg">
+          We leveren geen losse websites, video's of campagnes. We denken mee
+          over wat jouw bedrijf nodig heeft om sterker zichtbaar te worden,
+          vertrouwen op te bouwen en meer aanvragen te krijgen.
+        </p>
 
         <div className="relative mt-12 min-h-[18rem] md:min-h-[22rem]">
           <AnimatePresence mode="wait">
@@ -74,15 +81,13 @@ export function Testimonials() {
               <blockquote className="mx-auto max-w-4xl text-balance font-display text-[clamp(1.75rem,4.4vw,3.5rem)] font-semibold leading-[1.12] tracking-tight text-cream">
                 {q.quote}
               </blockquote>
-              <div className="mt-10 flex items-center gap-4">
-                <span className="grid h-12 w-12 place-items-center rounded-full bg-mint/20 font-display text-lg font-semibold text-lime-bright ring-1 ring-mint/30">
-                  {q.initials}
-                </span>
-                <div className="text-left">
-                  <div className="font-sans font-semibold text-cream">{q.name}</div>
-                  <div className="font-sans text-sm text-cream/55">{q.role}</div>
-                </div>
-              </div>
+              <p className="mx-auto mt-6 max-w-2xl font-sans text-base leading-relaxed text-cream/65 md:text-lg">
+                {q.detail}
+              </p>
+              <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-mint/30 bg-mint/10 px-4 py-2 font-sans text-sm font-medium text-lime-bright">
+                <span className="h-1.5 w-1.5 rounded-full bg-lime-accent" aria-hidden="true" />
+                {q.tag}
+              </span>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -98,6 +103,17 @@ export function Testimonials() {
               }`}
             />
           ))}
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link
+            to="/contact"
+            className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
+          >
+            <span className="relative z-10">Start jouw groeigesprek</span>
+            <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
+          </Link>
         </div>
       </div>
     </section>

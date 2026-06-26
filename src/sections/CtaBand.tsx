@@ -20,29 +20,29 @@ export function CtaBand() {
       <div className="mx-auto max-w-5xl px-6 text-center md:px-10">
         <Reveal>
           <span className="font-sans text-xs uppercase tracking-[0.3em] text-mint">
-            Waar interesse je groei wordt
+            Waar interesse verandert in groei
           </span>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mx-auto mt-6 max-w-4xl text-balance font-display text-[clamp(2.5rem,8vw,7rem)] font-semibold leading-[0.98] tracking-tight">
-            Klaar om te <Accent>klimmen?</Accent>
+            Klaar voor je volgende <Accent>groeistap?</Accent>
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mx-auto mt-7 max-w-xl font-sans text-base leading-relaxed text-cream/60 md:text-lg">
-            Vertel ons over je project, of laat ons eerst gratis naar je huidige
-            site kijken. De eerste stap omhoog is zo gezet.
+            Vertel ons waar je bedrijf nu staat. Wij kijken mee welke oplossing
+            past om meer zichtbaarheid, vertrouwen en aanvragen te creeren.
           </p>
         </Reveal>
 
         <Reveal delay={0.15}>
           <div className="mt-10 flex flex-row flex-wrap justify-center gap-3">
             <Link
-              to="/start"
+              to="/contact"
               className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
             >
               <BorderBeam rx={12} />
-              <span className="relative z-10">Start jouw project</span>
+              <span className="relative z-10">Plan een groeigesprek</span>
               <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
               <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
             </Link>

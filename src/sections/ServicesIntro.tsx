@@ -17,16 +17,16 @@ export function ServicesIntro() {
         <Reveal className="flex items-center gap-3">
           <span className="h-px w-10 bg-emerald/40" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald">
-            Onze diensten
+            Meer voor je bedrijf
           </span>
         </Reveal>
 
         <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <Reveal delay={0.05}>
             <h2 className="max-w-3xl text-balance font-display text-[clamp(2rem,5.5vw,4.25rem)] font-semibold leading-[1.04] tracking-tight text-near-black">
-              Alles wat je merk nodig heeft,{' '}
+              Alles wat je bedrijf nodig heeft om te groeien,{' '}
               <span className="bg-gradient-to-r from-emerald via-mint to-lime-accent bg-clip-text text-transparent">
-                onder één dak
+                onder een dak
               </span>
               .
             </h2>
@@ -37,7 +37,7 @@ export function ServicesIntro() {
               to="/diensten"
               className="group inline-flex items-center gap-2 font-sans text-sm font-semibold text-near-black transition-colors duration-300 hover:text-emerald"
             >
-              Bekijk alle diensten
+              Ontdek onze groeidiensten
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 &rarr;
               </span>

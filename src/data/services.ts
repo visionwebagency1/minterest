@@ -57,7 +57,7 @@ export const MAIN_SERVICES: MainService[] = [
     intro:
       'Een sterk *merk* is herkenbaar in een oogopslag en consistent over elk kanaal. Wij bouwen een visuele taal met *karakter* die met je *meegroeit*.',
     cardDesc:
-      'Een onderscheidende visuele identiteit die vertrouwen wekt en overal even sterk staat.',
+      'Branding die vertrouwen opbouwt, herkenning vergroot en jouw bedrijf klaarzet voor groei.',
     subs: [
       { name: 'Visuele identiteit', desc: 'Logo, kleur en typografie die je merk in één oogopslag herkenbaar maken. We bouwen een visuele basis die op elk kanaal even sterk staat.' },
       { name: 'Packaging', desc: 'Verpakkingen die opvallen in het schap en je merk voelbaar maken. Van eerste concept tot drukklaar ontwerp, klaar voor productie.' },
@@ -77,7 +77,7 @@ export const MAIN_SERVICES: MainService[] = [
     intro:
       'Je website is je hardst werkende *verkoper*. Wij bouwen digitale producten die laden in een *oogwenk* en meegroeien met je *ambitie*.',
     cardDesc:
-      'Razendsnelle websites, webshops en maatwerk software die er strak uitzien en verkopen.',
+      'Websites en webshops die professioneel ogen, duidelijk converteren en jouw groei ondersteunen.',
     subs: [
       { name: 'Websites', desc: 'Snelle, converterende websites die er strak uitzien en verkopen. Gebouwd op een moderne stack en makkelijk uit te breiden.' },
       { name: 'Webshops', desc: 'Shopify en WooCommerce, volledig op maat rond hoe jouw klanten kopen. Van productpagina tot een checkout die echt converteert.' },
@@ -97,7 +97,7 @@ export const MAIN_SERVICES: MainService[] = [
     intro:
       'Beeld is het snelste pad naar *aandacht*. Wij maken *scroll-stoppende* video en fotografie die past bij je merk.',
     cardDesc:
-      'Short video, AI-video en fotografie die kijkers vasthouden en je merk professioneel neerzetten.',
+      'Video en fotografie die jouw merk professioneel neerzetten en aandacht omzetten in vertrouwen.',
     subs: [
       { name: 'Short video content', desc: 'Scroll-stoppende video die kijkers vasthoudt en aanzet tot actie. Van concept en draaiboek tot montage, klaar voor elk platform.' },
       { name: 'AI Video content', desc: 'Schaalbare videocontent met AI, snel en eindeloos variabel. Ideaal om veel varianten te testen zonder grote productie.' },
@@ -116,7 +116,7 @@ export const MAIN_SERVICES: MainService[] = [
     intro:
       'Mensen *vertrouwen* mensen en reageren op het juiste *moment*. Wij zetten *bereik* om in groei.',
     cardDesc:
-      'Influencer-marketing en advertenties op Meta en TikTok die echt bereik omzetten in resultaat.',
+      'Content, influencers en advertenties die bereik omzetten in zichtbaarheid, vertrouwen en groei.',
     subs: [
       { name: 'Influencer Marketing', desc: 'De juiste creators aan je merk koppelen, op echt bereik. Van selectie en briefing tot meten wat het oplevert.' },
       { name: 'Meta Ads', desc: 'Advertenties op Facebook en Instagram die renderen. Scherp ingericht en continu geoptimaliseerd op resultaat.' },
@@ -135,7 +135,7 @@ export const MAIN_SERVICES: MainService[] = [
     intro:
       'Wie bovenaan staat, *wint*. Wij maken je vindbaar voor de mensen die *nu* zoeken naar wat jij biedt.',
     cardDesc:
-      'Structureel bovenaan in Google, met SEO die blijft staan en Google Ads die direct leveren.',
+      'Beter gevonden worden, slimmer adverteren en meer gerichte aanvragen binnenhalen.',
     subs: [
       { name: 'SEO', desc: 'Structureel bovenaan in Google met techniek, content en autoriteit. Vindbaarheid die blijft staan en klanten blijft opleveren.' },
       { name: 'Google Ads', desc: 'Direct zichtbaar bovenaan voor wie nu zoekt naar wat jij biedt. Strak gestuurd op kosten per klant en rendement.' },
@@ -153,7 +153,7 @@ export const MAIN_SERVICES: MainService[] = [
     intro:
       'Groei vraagt meer dan marketing. Wij regelen de *randvoorwaarden* zodat jij kunt blijven *ondernemen*.',
     cardDesc:
-      'De randvoorwaarden voor groei: AI-agents, administratie, sourcing en detachering.',
+      'Aanvullende diensten die jouw bedrijf helpen slimmer, sterker en schaalbaarder te groeien.',
     subs: [
       { name: 'AI Agents', desc: 'Slimme assistenten die werk uit handen nemen, dag en nacht. Van klantvragen tot terugkerende taken, volledig geautomatiseerd.' },
       { name: 'Administratie', desc: 'Je administratie geregeld, zodat jij kunt ondernemen. Overzicht en rust, zonder dat je er naar hoeft om te kijken.' },

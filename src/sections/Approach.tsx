@@ -14,27 +14,23 @@ const EASE = [0.22, 1, 0.36, 1] as const
 
 const STEPS = [
   {
-    no: '01',
-    title: 'Kennismaken & strategie',
-    desc: 'We duiken in je merk, je doelen en je markt. Daaruit komt een helder plan waar alles op rust.',
+    title: 'Kennismaking',
+    desc: 'We ontdekken waar jouw bedrijf nu staat en waar de grootste kansen liggen.',
     Icon: TargetIcon,
   },
   {
-    no: '02',
-    title: 'Ontwerp & richting',
-    desc: 'Identiteit, interface en prototype. Hier wordt je merk zichtbaar en voelbaar.',
+    title: 'Strategie',
+    desc: 'We kiezen de juiste oplossing voor jouw doel: branding, website, content, marketing of extra ondersteuning.',
     Icon: LayersIcon,
   },
   {
-    no: '03',
-    title: 'Bouwen',
-    desc: 'Engineering op een moderne stack. Snel, schoon en gemaakt om jaren mee te gaan.',
+    title: 'Creatie',
+    desc: 'We bouwen alles wat nodig is om jouw bedrijf sterker zichtbaar en professioneler te maken.',
     Icon: CodeIcon,
   },
   {
-    no: '04',
-    title: 'Lanceren & laten groeien',
-    desc: 'Live, meten en verbeteren. Je merk groeit door, en wij groeien mee.',
+    title: 'Lancering & groei',
+    desc: 'We leveren op, optimaliseren waar nodig en helpen je verder bouwen aan resultaat.',
     Icon: RocketIcon,
   },
 ]
@@ -77,7 +73,7 @@ export function Approach() {
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-8 max-w-3xl text-balance font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight text-cream">
-            De <Accent>klim</Accent>, in vier stappen.
+            Van idee naar <Accent>groei</Accent>, in vier stappen.
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -100,7 +96,7 @@ export function Approach() {
           <div className="flex flex-col gap-16 md:gap-24">
             {STEPS.map((s, i) => (
               <div
-                key={s.no}
+                key={s.title}
                 className={`relative flex items-center gap-6 md:gap-10 ${
                   i % 2 === 1 ? 'md:flex-row-reverse md:text-right' : ''
                 }`}
@@ -117,8 +113,7 @@ export function Approach() {
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ duration: 0.7, ease: EASE }}
                   >
-                    <span className="font-accent text-2xl italic text-mint">{s.no}</span>
-                    <h3 className="mt-1 font-display text-2xl font-semibold text-cream md:text-3xl">
+                    <h3 className="font-display text-2xl font-semibold text-cream md:text-3xl">
                       {s.title}
                     </h3>
                     <p className="mt-2 max-w-sm font-sans text-base leading-relaxed text-cream/60">
@@ -139,7 +134,7 @@ export function Approach() {
             to="/diensten"
             className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
           >
-            <span className="relative z-10">Ontdek jouw groeiplan</span>
+            <span className="relative z-10">Ontdek jouw groeikansen</span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
           </Link>

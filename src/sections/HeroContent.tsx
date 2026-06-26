@@ -38,9 +38,9 @@ function Accent({ children }: { children: string }) {
 
 // Social-proof figures.
 const STATS = [
-  { value: '150+', label: 'Projecten' },
-  { value: '300M+', label: 'Weergaven' },
-  { value: '4.9★', label: 'ster' },
+  { value: '150+', label: 'groeiprojecten' },
+  { value: '300M+', label: 'bereik gerealiseerd' },
+  { value: '4.9★', label: 'klantwaardering' },
 ]
 
 export function HeroContent() {
@@ -65,9 +65,9 @@ export function HeroContent() {
               variants={rise}
               className="font-display text-[2.3rem] font-semibold leading-[1.04] tracking-tight text-white text-balance sm:text-5xl md:text-6xl lg:text-[4.75rem]"
             >
-              Where <Accent>interest</Accent>
+              Waar <Accent>aandacht</Accent>
               <br />
-              becomes your <Accent>growth</Accent>.
+              verandert in <Accent>groei</Accent>.
             </motion.h1>
 
             {/* Subline */}
@@ -75,8 +75,9 @@ export function HeroContent() {
               variants={rise}
               className="mx-auto mt-7 max-w-md font-sans text-base leading-relaxed text-white/65 md:mx-0 md:text-lg"
             >
-              Websites, branding, video en influencer marketing, gebouwd om
-              aandacht om te zetten in groei die blijft stijgen.
+              Websites, branding, video en influencer marketing gebouwd om jouw
+              bedrijf zichtbaarder te maken, vertrouwen op te bouwen en
+              structureel te groeien.
             </motion.p>
 
             {/* Two CTAs — squared (header style), always on one row (also on
@@ -90,7 +91,7 @@ export function HeroContent() {
                 to="/start"
                 className="group pointer-events-auto relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl bg-gradient-to-r from-emerald to-mint px-4 py-3.5 font-sans text-[13px] font-medium text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] sm:px-7 sm:text-sm lg:px-9 lg:py-4 lg:text-base"
               >
-                <span className="relative z-10">Start jouw project</span>
+                <span className="relative z-10">Start jouw groeiproject</span>
                 <svg
                   className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   viewBox="0 0 24 24"
@@ -114,7 +115,7 @@ export function HeroContent() {
                 className="group pointer-events-auto relative inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 font-sans text-[13px] font-medium text-white backdrop-blur-md transition-colors duration-300 hover:border-mint/40 sm:gap-2.5 sm:px-7 sm:text-sm lg:px-9 lg:py-4 lg:text-base"
               >
                 <span className="relative z-10 h-1.5 w-1.5 bg-lime-accent transition-transform duration-300 group-hover:rotate-45" />
-                <span className="relative z-10">Onze diensten</span>
+                <span className="relative z-10">Bekijk onze diensten</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-mint/25 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
               </button>
             </motion.div>

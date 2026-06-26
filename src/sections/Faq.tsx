@@ -10,28 +10,36 @@ const EASE = [0.22, 1, 0.36, 1] as const
 
 const ITEMS = [
   {
+    q: 'Wat doet Minterest precies?',
+    a: 'Minterest helpt bedrijven met branding, websites, content, social media, vindbaarheid en extra ondersteuning. We bouwen geen losse diensten, maar oplossingen die bijdragen aan zichtbaarheid, vertrouwen en resultaat.',
+  },
+  {
+    q: 'Maken jullie alleen websites?',
+    a: 'Nee. Een website is vaak onderdeel van een grotere oplossing. We kijken naar je merk, doelgroep, aanbod en doelen. Daarna bouwen we wat nodig is om meer aanvragen en groei te realiseren.',
+  },
+  {
+    q: 'Hoe weet ik welke dienst ik nodig heb?',
+    a: 'Dat hoef je niet vooraf exact te weten. Wij kijken met je mee en adviseren welke oplossing het beste past bij jouw situatie en doelen.',
+  },
+  {
     q: 'Wat kost een website of webshop?',
-    a: 'Dat hangt af van wat je nodig hebt. Een starterssite ligt rond een paar honderd euro per maand, maatwerk webshops en complete merken werken we op maat uit. In een kort gesprek geven we snel een eerlijke richtprijs.',
+    a: 'Dat hangt af van wat je nodig hebt. Na een korte kennismaking maken we een duidelijk voorstel met vaste scope, prijs en planning.',
   },
   {
-    q: 'Hoe lang duurt een project?',
-    a: 'Een strakke site staat vaak binnen twee tot vier weken live. Grotere webshops en branding-trajecten duren langer. We spreken vooraf een heldere planning af en houden je elke stap op de hoogte.',
+    q: 'Helpen jullie ook met branding?',
+    a: 'Ja. Met Branding voor groei ontwikkelen we een professionele uitstraling die past bij je bedrijf, doelgroep en ambities.',
   },
   {
-    q: 'Hoe ziet het proces eruit?',
-    a: 'Vier stappen: kennismaken en strategie, ontwerp en richting, bouwen, en lanceren en laten groeien. Je werkt steeds met hetzelfde team en weet altijd waar je staat.',
+    q: 'Doen jullie ook social media en content?',
+    a: 'Ja. Met Social Media Groei helpen we bedrijven zichtbaar blijven met content, advertenties en campagnes die passen bij hun doelgroep.',
   },
   {
-    q: 'Doen jullie ook het onderhoud?',
-    a: 'Ja. We houden je site snel, veilig en up-to-date, en blijven optimaliseren op basis van wat de cijfers laten zien. Geen omkijken naar.',
+    q: 'Wat zijn Extra groeidiensten?',
+    a: 'Extra groeidiensten zijn aanvullende oplossingen zoals AI-agents, administratie, sourcing en detachering. Hiermee helpen we ondernemers slimmer en schaalbaarder werken.',
   },
   {
-    q: 'Van wie is de website na oplevering?',
-    a: 'Van jou. Je bent eigenaar van je site, je content en je domein. Geen lock-in, geen verrassingen.',
-  },
-  {
-    q: 'Kan ik later opschalen?',
-    a: 'Zeker. We bouwen alles zo dat het meegroeit. Beginnen met een starterssite en later uitbreiden naar een volledige webshop met video en influence kan probleemloos.',
+    q: 'Hoe ziet de samenwerking eruit?',
+    a: 'We starten met een kennismaking, bepalen wat je bedrijf nodig heeft en werken daarna een duidelijke aanpak uit. Vervolgens bouwen we de oplossing, leveren we op en denken we mee over de volgende stap.',
   },
 ]
 

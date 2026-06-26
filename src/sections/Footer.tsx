@@ -16,15 +16,15 @@ const COLS = [
     ],
   },
   {
-    title: 'Studio',
+    title: 'Minterest',
     links: [
-      { label: 'Werk', to: '/work' },
+      { label: 'Ons werk', to: '/work' },
       { label: 'Over ons', to: '/about' },
       { label: 'Contact', to: '/contact' },
     ],
   },
   {
-    title: 'Volg',
+    title: 'Volg ons',
     links: [
       { label: 'Instagram', to: '#' },
       { label: 'LinkedIn', to: '#' },

@@ -7,18 +7,12 @@ import { motion, useReducedMotion } from 'motion/react'
  */
 
 const CLIENTS = [
-  'WEBSITES',
-  'WEBSHOPS',
-  'BRANDING',
-  'LOGO DESIGN',
-  'SHORT VIDEO',
-  'INFLUENCER MARKETING',
-  'SHOPIFY',
-  'WOOCOMMERCE',
-  'SEO',
-  'CONVERSIE',
-  'DESIGNSYSTEMEN',
-  'SOCIAL CONTENT',
+  'ONLINE GROEI',
+  'MEER ZICHTBAARHEID',
+  'STERKER MERK',
+  'MEER AANVRAGEN',
+  'BETERE CONVERSIE',
+  'GROEI DIE BLIJFT',
 ]
 
 export function LogoMarquee() {
