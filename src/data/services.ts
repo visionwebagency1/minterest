@@ -17,8 +17,8 @@ import {
  * updates everywhere.
  *
  * Structure (ronde 2, definitief):
- *   1. Design & Branding     2. Web Development   3. Video & Fotografie
- *   4. Social Media Beheer   5. SEO & SEA         6. Extra diensten
+ *   1. Branding voor groei   2. Websites die converteren   3. Video & Fotografie
+ *   4. Social Media Groei    5. SEO & SEA                  6. Extra groeidiensten
  */
 
 export type Sub = { name: string; desc: string }
@@ -49,8 +49,8 @@ export type MainService = {
 export const MAIN_SERVICES: MainService[] = [
   {
     slug: 'design-branding',
-    label: 'Design & Branding',
-    short: 'Design & Branding',
+    label: 'Branding voor groei',
+    short: 'Branding voor groei',
     kicker: 'Merk & identiteit',
     tagline:
       'Een merk dat blijft hangen, van logo en packaging tot een compleet designsysteem dat overal consistent werkt.',
@@ -69,8 +69,8 @@ export const MAIN_SERVICES: MainService[] = [
   },
   {
     slug: 'web-development',
-    label: 'Web Development',
-    short: 'Web Development',
+    label: 'Websites die converteren',
+    short: 'Websites die converteren',
     kicker: 'Web & commerce',
     tagline:
       'Snelle, converterende websites, webshops en software, gebouwd om te verkopen en mee te groeien.',
@@ -108,8 +108,8 @@ export const MAIN_SERVICES: MainService[] = [
   },
   {
     slug: 'social-media',
-    label: 'Social Media Beheer',
-    short: 'Social Media',
+    label: 'Social Media Groei',
+    short: 'Social Media Groei',
     kicker: 'Bereik & advertising',
     tagline:
       'Je social media van A tot Z, van influencer-campagnes tot Meta- en TikTok-advertenties die renderen.',
@@ -145,8 +145,8 @@ export const MAIN_SERVICES: MainService[] = [
   },
   {
     slug: 'extra',
-    label: 'Extra diensten',
-    short: 'Extra diensten',
+    label: 'Extra groeidiensten',
+    short: 'Extra groeidiensten',
     kicker: 'Alles eromheen',
     tagline:
       'Alles eromheen geregeld, van AI-agents en administratie tot sourcing en detachering.',
