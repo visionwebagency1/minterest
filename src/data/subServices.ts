@@ -444,123 +444,141 @@ export const SUB_SERVICES: SubService[] = [
   /* ───────────────────────── Video & Fotografie ───────────────────────── */
   S('video-fotografie', 'Short video content', {
     tagline:
-      'Scroll-stoppende korte video die kijkers vasthoudt en aanzet tot actie, klaar voor elk platform.',
+      "Korte video's die aandacht pakken, je boodschap snel overbrengen en jouw merk zichtbaar maken op social media.",
+    whatTitle: "Short video's die blijven hangen.",
     story: [
-      'Korte video is het snelste pad naar aandacht. In een feed vol prikkels heb je een paar seconden om iemand te pakken, en goede short video doet precies dat: een sterke hook, een duidelijk verhaal en een ritme dat blijft boeien tot het einde.',
-      'Wij maken video van concept tot oplevering. We bedenken het idee, schrijven het draaiboek, filmen en monteren strak, en leveren versies aan die passen bij elk platform. Verticaal voor Reels en TikTok, of breder waar nodig, altijd afgestemd op waar je doelgroep kijkt.',
-      'Het draait niet om mooie beelden alleen, maar om beelden die werken: die kijkers vasthouden, je merk versterken en aanzetten tot een volgende stap. Of dat nu een volger, een klik of een aankoop is.',
+      "Korte video's zijn vaak het eerste contactmoment met je doelgroep. Daarom maken wij geen losse clips zonder richting, maar content die past bij je merk, platform en doel. Van concept en script tot opname en montage: alles wordt gemaakt om snel aandacht te trekken en je merk professioneel neer te zetten.",
     ],
+    actionTitle: 'Zo ziet short video content eruit.',
+    actionText:
+      "Korte video's die kijkers vasthouden, je boodschap duidelijk maken en geschikt zijn voor social media.",
     deliverables: [
-      { title: 'Concept', desc: 'Een sterk videoconcept met een hook die in de feed werkt.' },
-      { title: 'Scenario', desc: 'Een uitgewerkt draaiboek zodat de opname soepel en doelgericht verloopt.' },
-      { title: 'Opname', desc: 'Professionele opname met aandacht voor beeld, licht en geluid.' },
-      { title: 'Montage', desc: 'Strakke montage met de juiste versies en formats per platform.' },
+      { title: 'Concept', desc: 'Een duidelijke invalshoek die past bij je merk en doelgroep.' },
+      { title: 'Scenario', desc: 'Een korte structuur voor de video, zodat de boodschap helder overkomt.' },
+      { title: 'Opname', desc: 'Professionele opname van de beelden die nodig zijn.' },
+      { title: 'Montage', desc: 'Een strakke edit met ondertiteling, muziek en platformgerichte afwerking.' },
     ],
     audience:
-      'Voor merken die zichtbaar willen zijn op social en weten dat video het bereik bepaalt. Ideaal als je consistent content nodig hebt die opvalt en converteert.',
+      "Voor merken die zichtbaar willen zijn op social media en content nodig hebben die snel aandacht trekt. Ideaal als je consistent wilt posten, maar geen losse video's zonder strategie wilt maken.",
     why: [
-      { title: 'Hook-gedreven', desc: 'We bouwen elke video rond de eerste seconden, want daar wordt aandacht gewonnen of verloren.' },
-      { title: 'Platform-klaar', desc: 'Je krijgt versies die passen bij elk kanaal, niet één video die overal half werkt.' },
-      { title: 'Gericht op actie', desc: 'Mooi is niet genoeg: elke video heeft een doel en stuurt naar de volgende stap.' },
+      { title: 'Hook-gedreven', desc: 'We denken eerst na over hoe je de aandacht van je doelgroep pakt.' },
+      { title: 'Platform-klaar', desc: "Video's worden afgestemd op TikTok, Instagram Reels, YouTube Shorts of advertenties." },
+      { title: 'Gericht op resultaat', desc: 'We maken content die niet alleen mooi is, maar ook duidelijk communiceert.' },
     ],
+    approachTitle: 'Van idee naar video die werkt.',
     approach: [
-      { title: 'Concept', desc: 'We bedenken het idee en de hook.' },
-      { title: 'Voorbereiden', desc: 'We schrijven het draaiboek en plannen de opname.' },
-      { title: 'Opnemen', desc: 'We filmen efficiënt en doelgericht.' },
-      { title: 'Monteren', desc: 'We monteren en leveren per platform op.' },
+      { title: 'Concept', desc: 'We bepalen de invalshoek en boodschap.' },
+      { title: 'Voorbereiden', desc: 'We werken het script, shotlist en format uit.' },
+      { title: 'Opnemen', desc: 'We filmen de beelden die nodig zijn.' },
+      { title: 'Monteren', desc: 'We leveren een strakke video op die klaar is om te plaatsen.' },
     ],
     case: {
       name: 'Pulse Athletics',
       sector: 'Sport en lifestyle',
       summary:
-        'Een sportmerk dat veel postte maar weinig bleef hangen. We ontwikkelden een serie korte video’s met sterke hooks en een herkenbaar ritme.',
+        "Een sportmerk dat meer zichtbaarheid wilde op social media. We ontwikkelden korte video's met sterke hooks, snelle montage en een duidelijke merkuitstraling.",
       outcome:
-        'Content die kijkers langer vasthoudt, het merk een eigen toon geeft en veel makkelijker doorklikt naar de webshop.',
+        'Content die sneller aandacht trekt en het merk professioneler zichtbaar maakt.',
     },
     faq: [
-      { q: 'Leveren jullie ook losse clips uit één shoot?', a: 'Ja. Uit één opnamedag halen we vaak meerdere video’s, zodat je langer vooruit kunt.' },
-      { q: 'Schrijven jullie ook de captions?', a: 'Dat kan. We leveren passende captions en on-screen tekst die de boodschap versterken.' },
+      { q: 'Leveren jullie ook losse clips uit draaidagen?', a: "Ja, we kunnen uit een draaidag meerdere korte video's halen voor social media." },
+      { q: 'Schrijven jullie ook de captions?', a: 'Ja, we kunnen ook captions, hooks en tekstvoorstellen meeleveren.' },
     ],
+    ctaTitle: "Klaar voor short video's die aandacht pakken?",
+    ctaText:
+      "Vertel ons waar je nu staat. Wij helpen je met korte video's die jouw merk zichtbaar maken en geschikt zijn voor social media.",
   }),
   S('video-fotografie', 'AI Video content', {
     tagline:
-      'Schaalbare videocontent met AI, snel en betaalbaar, ideaal om veel varianten te testen.',
+      "AI-video's waarmee je sneller content maakt, varianten test en jouw merk professioneel zichtbaar houdt.",
+    whatTitle: "AI-video's die content versnellen.",
     story: [
-      'AI maakt video toegankelijk op een schaal die met traditionele productie niet haalbaar is. Geen grote crew of dure opnamedag, maar beeld dat je snel kunt genereren, aanpassen en in tientallen varianten kunt uitrollen. Perfect om te testen wat werkt en daarna op te schalen.',
-      'Wij combineren AI-tools met een scherp creatief oog. We bedenken het concept, genereren beeld dat past bij je merk, en monteren het tot afgewerkte video. Omdat varianten goedkoop zijn, kun je verschillende hooks, stijlen en boodschappen naast elkaar testen en doorgaan met wat het beste presteert.',
-      'Het resultaat is een snelle, betaalbare contentstroom die je social en advertenties blijft voeden, zonder dat de kwaliteit of je merkgevoel eronder lijdt.',
+      'AI-video maakt het mogelijk om sneller visuele content te ontwikkelen zonder volledige productiedagen. Ideaal voor concepten, advertenties, varianten en social content. Wij combineren AI met strategie, merkgevoel en montage. Zo ontstaat content die niet alleen snel gemaakt is, maar ook past bij je uitstraling en doel.',
     ],
+    actionTitle: 'Zo ziet AI-video content eruit.',
+    actionText:
+      'Schaalbare videocontent waarmee je snel ideeen, advertenties en varianten kunt testen.',
     deliverables: [
-      { title: 'AI-concept', desc: 'Een creatief concept dat de kracht van AI-beeld benut binnen je merk.' },
-      { title: 'Generatie', desc: 'Het genereren van beeld en scènes, afgestemd op je stijl.' },
-      { title: 'Montage', desc: 'Afgewerkte montage met geluid, tekst en ritme.' },
-      { title: 'Varianten', desc: 'Meerdere versies om te testen en op te schalen wat werkt.' },
+      { title: 'AI-concept', desc: 'Een creatief concept dat past bij je merk, doelgroep en campagne.' },
+      { title: 'Generatie', desc: "AI-beelden of video's die worden gegenereerd op basis van duidelijke prompts." },
+      { title: 'Montage', desc: 'Een strakke montage met geluid, tekst en ritme.' },
+      { title: 'Varianten', desc: 'Meerdere versies om te testen voor social media of advertenties.' },
     ],
     audience:
-      'Voor merken die veel content nodig hebben en willen testen zonder grote productiebudgetten. Ideaal voor advertenties waar volume en variatie het verschil maken.',
+      'Voor merken die veel content nodig hebben zonder telkens grote productiebudgetten. Ideaal voor advertenties, social media, productconcepten en campagnes waarbij snelheid en variatie belangrijk zijn.',
     why: [
-      { title: 'Snel en schaalbaar', desc: 'Veel content en varianten in korte tijd, zonder een hele productie op te tuigen.' },
-      { title: 'Test-gedreven', desc: 'Goedkope varianten betekenen dat je echt kunt testen wat het beste presteert.' },
-      { title: 'Op merk', desc: 'AI met een creatief oog, zodat het beeld bij je merk past en niet generiek oogt.' },
+      { title: 'Snel en schaalbaar', desc: 'We creeren sneller meerdere contentvarianten zonder zware draaidagen.' },
+      { title: 'Test-gedreven', desc: 'Ideaal om hooks, beelden en invalshoeken te testen in campagnes.' },
+      { title: 'Op merk', desc: 'AI-content wordt afgestemd op je uitstraling, boodschap en doelgroep.' },
     ],
+    approachTitle: 'Van idee naar schaalbare content.',
     approach: [
-      { title: 'Concept', desc: 'We bepalen het idee en de varianten die we willen testen.' },
-      { title: 'Genereren', desc: 'We genereren beeld dat past bij je merk.' },
-      { title: 'Monteren', desc: 'We werken de video’s af met geluid en tekst.' },
-      { title: 'Opschalen', desc: 'We testen, meten en schalen op wat werkt.' },
+      { title: 'Concept', desc: 'We bepalen het idee, de boodschap en de visuele richting.' },
+      { title: 'Genereren', desc: "We maken AI-beelden of video's op basis van duidelijke prompts." },
+      { title: 'Monteren', desc: 'We werken de content af met tekst, geluid en ritme.' },
+      { title: 'Opschalen', desc: 'We maken varianten om te testen op social media of advertenties.' },
     ],
     case: {
       name: 'Nova Skincare',
       sector: 'Beauty',
       summary:
-        'Een skincare-merk dat snel veel advertentievarianten wilde testen zonder telkens een shoot te plannen. We bouwden een AI-contentstroom met tientallen varianten.',
+        'Een skincare-merk wilde snel meerdere advertentievarianten testen zonder telkens nieuwe shoots te plannen. We ontwikkelden AI-content waarmee verschillende hooks, beelden en invalshoeken getest konden worden.',
       outcome:
-        'Een continue toevoer van advertentievideo’s, de ruimte om snel te testen en een veel lagere productiedrempel per variant.',
+        'Sneller varianten testen, minder productiekosten en meer ruimte om campagnes door te ontwikkelen.',
     },
     faq: [
-      { q: 'Ziet AI-video er niet goedkoop uit?', a: 'Niet bij ons. We combineren AI met een creatieve regie en nabewerking zodat het beeld bij je merk past.' },
-      { q: 'Kunnen we AI en echte opnames mixen?', a: 'Zeker. Vaak is een mix het sterkst: echte beelden waar het telt, AI voor schaal en variatie.' },
+      { q: 'Ziet AI-video er niet goedkoop uit?', a: 'Niet als het goed wordt ingezet. Wij combineren AI met concept, merkgevoel en montage zodat het professioneel blijft.' },
+      { q: 'Kunnen we AI-video echt toepassen in campagnes?', a: 'Ja. AI-video is vooral sterk voor advertenties, social content en het testen van verschillende invalshoeken.' },
     ],
+    ctaTitle: 'Klaar voor AI-video content die sneller werkt?',
+    ctaText:
+      "Vertel ons wat je wilt testen of zichtbaar maken. Wij helpen je met AI-video's die snel, professioneel en schaalbaar inzetbaar zijn.",
   }),
   S('video-fotografie', 'Fotoshoots', {
     tagline:
-      'Bedrijfs- en websitefoto’s die je merk professioneel neerzetten, een consistente beeldbank om mee te bouwen.',
+      'Professionele fotografie die jouw merk betrouwbaar, herkenbaar en sterk zichtbaar maakt.',
+    whatTitle: 'Fotografie die vertrouwen opbouwt.',
     story: [
-      'Foto’s bepalen in een fractie van een seconde hoe professioneel je overkomt. Een sterke beeldbank tilt je website, je socials en je presentaties op, terwijl losse, ongelijke foto’s juist afbreuk doen aan een verder sterk merk.',
-      'Wij verzorgen fotoshoots van begin tot eind: we bedenken vooraf welke beelden je nodig hebt, fotograferen met aandacht voor licht en compositie, maken een scherpe selectie en retoucheren tot een consistente set. Of het nu gaat om je team, je product, je werkplek of sfeerbeeld, alles past binnen één visuele lijn.',
-      'Het resultaat is een beeldbank die je merk versterkt en waarmee je overal sterk voor de dag komt, online en offline, nu en in de maanden daarna.',
+      "Goede foto's bepalen in een paar seconden hoe professioneel je merk overkomt. Daarom maken wij geen losse beelden zonder richting, maar fotografie die past bij je merk, doelgroep en kanalen. Van websitebeelden en social content tot productfoto's en campagnebeelden: alles wordt gemaakt om je uitstraling te versterken en je merk consistenter zichtbaar te maken.",
     ],
+    actionTitle: 'Zo ziet sterke fotografie eruit.',
+    actionText:
+      'Beeldmateriaal dat jouw merk professioneel neerzet en geschikt is voor website, social media en campagnes.',
     deliverables: [
-      { title: 'Shoot', desc: 'Een professionele shoot, voorbereid op de beelden die je echt nodig hebt.' },
-      { title: 'Selectie', desc: 'Een zorgvuldige selectie van de sterkste beelden.' },
-      { title: 'Retouche', desc: 'Nabewerking tot een consistente, verzorgde set.' },
-      { title: 'Levering', desc: 'Aangeleverde beelden in de juiste formaten voor web en print.' },
+      { title: 'Shoot', desc: 'Een professionele fotoshoot afgestemd op je merk, doel en gebruik.' },
+      { title: 'Selectie', desc: 'Een sterke selectie beelden die passen bij je uitstraling.' },
+      { title: 'Retouche', desc: 'Nabewerking voor een professionele en consistente look.' },
+      { title: 'Levering', desc: 'Bestanden in de juiste formaten voor website, social media en campagnes.' },
     ],
     audience:
-      'Voor merken en bedrijven die professioneel willen ogen met eigen beeld in plaats van stockfoto’s. Ideaal bij een nieuwe website, een rebrand of gewoon een verouderde beeldbank.',
+      'Voor merken en bedrijven die professioneel willen overkomen en sterke beelden nodig hebben voor hun website, social media, advertenties of campagnes. Ideaal als je huidige beelden verouderd zijn, niet consistent voelen of niet meer passen bij je merk.',
     why: [
-      { title: 'Vooraf doordacht', desc: 'We bepalen samen welke beelden je nodig hebt zodat de shoot gericht is.' },
-      { title: 'Consistente set', desc: 'Alle beelden passen binnen één lijn, klaar om overal in te zetten.' },
-      { title: 'Klaar voor gebruik', desc: 'Geleverd in de juiste formaten zodat je meteen aan de slag kunt.' },
+      { title: 'Vooraf doordacht', desc: 'We bepalen eerst welke beelden je nodig hebt en waar ze gebruikt worden.' },
+      { title: 'Consistente uitstraling', desc: 'Je beelden sluiten aan op je merk, website en contentstijl.' },
+      { title: 'Klaar voor gebruik', desc: 'Je ontvangt beelden die direct inzetbaar zijn op de juiste kanalen.' },
     ],
+    approachTitle: 'Van beeldidee naar professionele uitstraling.',
     approach: [
-      { title: 'Kennismaken', desc: 'We bepalen de beeldbehoefte en de stijl.' },
-      { title: 'Voorbereiden', desc: 'We plannen de shoot en de shotlist.' },
-      { title: 'Fotograferen', desc: 'We fotograferen met oog voor licht en compositie.' },
-      { title: 'Opleveren', desc: 'We selecteren, retoucheren en leveren aan.' },
+      { title: 'Kennismaken', desc: 'We begrijpen je merk, doelgroep en gewenste uitstraling.' },
+      { title: 'Voorbereiden', desc: 'We bepalen shotlist, locaties, stijl en benodigde beelden.' },
+      { title: 'Fotograferen', desc: 'We maken beelden die passen bij je merk en doel.' },
+      { title: 'Opleveren', desc: 'Je ontvangt bewerkte beelden die klaar zijn voor gebruik.' },
     ],
     case: {
       name: 'Greenhouse Co',
-      sector: 'Horeca',
+      sector: 'Productmerk',
       summary:
-        'Een horecazaak met sfeer die online niet tot zijn recht kwam door wisselende telefoonfoto’s. We schoten een consistente beeldbank van interieur, gerechten en team.',
+        'Een bedrijf met sterke producten, maar verouderde beelden die niet meer pasten bij de kwaliteit van het merk. We ontwikkelden een nieuwe beeldstijl en maakten fotografie voor website, social media en campagnes.',
       outcome:
-        'Een verzorgde set beeld die de sfeer eindelijk overbrengt en overal inzetbaar is, van website tot socials en menukaart.',
+        'Een professionele beeldbank die direct inzetbaar is en zorgt voor een sterkere eerste indruk.',
     },
     faq: [
-      { q: 'Komen jullie op locatie?', a: 'Ja. We fotograferen op jouw locatie of in een studio, afhankelijk van wat het beste bij de beelden past.' },
-      { q: 'Hoeveel foto’s krijg ik?', a: 'Dat stemmen we vooraf af op je behoefte. We leveren een scherpe selectie, geen eindeloze map om zelf door te ploegen.' },
+      { q: 'Komen jullie op locatie?', a: 'Ja, we kunnen op locatie fotograferen of meedenken over een geschikte setting.' },
+      { q: "Hoeveel foto's krijg ik?", a: 'Dat hangt af van de shoot. Vooraf spreken we duidelijk af hoeveel beelden je ontvangt en waarvoor ze gebruikt worden.' },
     ],
+    ctaTitle: 'Klaar voor fotografie die je merk versterkt?',
+    ctaText:
+      'Vertel ons waar je beelden voor nodig hebt. Wij helpen je met fotografie die professioneel oogt en direct inzetbaar is.',
   }),
 
   /* ───────────────────────── Social Media Beheer ───────────────────────── */
