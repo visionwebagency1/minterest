@@ -23,6 +23,9 @@ import {
 
 export type Sub = { name: string; desc: string }
 
+/** A single "Zo werken we" step on the landing page (icon comes from the template). */
+export type ServiceStep = { title: string; desc: string }
+
 export type MainService = {
   /** URL slug → /diensten/:slug */
   slug: string
@@ -44,6 +47,20 @@ export type MainService = {
   accent: string
   /** Animated mini-UI render (homepage card + landing scene). SVGs untouched. */
   Render: ComponentType
+  /** Landing-page "Start jouw ...traject" CTA label (hero + closing CTA). */
+  heroCta?: string
+  /** "Wat we doen" section heading. */
+  whatTitle?: string
+  /** "In actie" section heading. */
+  actionTitle?: string
+  /** "In actie" supporting paragraph. */
+  actionText?: string
+  /** "Zo werken we" steps (4). Falls back to the generic template steps. */
+  steps?: ServiceStep[]
+  /** Closing-CTA heading. */
+  ctaTitle?: string
+  /** Closing-CTA paragraph. */
+  ctaText?: string
 }
 
 export const MAIN_SERVICES: MainService[] = [
@@ -53,13 +70,15 @@ export const MAIN_SERVICES: MainService[] = [
     short: 'Branding voor groei',
     kicker: 'Merk & identiteit',
     tagline:
-      'Een merk dat blijft hangen, van logo en packaging tot een compleet designsysteem dat overal consistent werkt.',
+      'Een sterk merk begint niet bij een logo, maar bij vertrouwen. Wij ontwikkelen een visuele identiteit die jouw bedrijf professioneel neerzet, herkenbaar maakt en klaarzet voor de volgende stap.',
     intro:
-      'Een sterk *merk* is herkenbaar in een oogopslag en consistent over elk kanaal. Wij bouwen een visuele taal met *karakter* die met je *meegroeit*.',
+      'Een sterk merk herken je in een *oogopslag*. Wij bouwen een visuele identiteit die *vertrouwen* wekt, consistent is op elk kanaal en *meegroeit* met je bedrijf.',
     cardDesc:
       'Branding die vertrouwen opbouwt, herkenning vergroot en jouw bedrijf klaarzet voor groei.',
+    whatTitle: 'Alles voor een merk dat vertrouwen opbouwt.',
+    heroCta: 'Start jouw brandingtraject',
     subs: [
-      { name: 'Visuele identiteit', desc: 'Logo, kleur en typografie die je merk in één oogopslag herkenbaar maken. We bouwen een visuele basis die op elk kanaal even sterk staat.' },
+      { name: 'Visuele identiteit', desc: 'Logo, kleur en typografie die jouw merk direct herkenbaar maken. We bouwen een visuele basis die professioneel oogt, vertrouwen wekt en op elk kanaal consistent blijft.' },
       { name: 'Packaging', desc: 'Verpakkingen die opvallen in het schap en je merk voelbaar maken. Van eerste concept tot drukklaar ontwerp, klaar voor productie.' },
       { name: 'Social Media Visual System', desc: 'Een vast visueel ritme voor je socials, consistent en direct herkenbaar. Templates en richtlijnen waarmee elke post vanzelf klopt.' },
       { name: 'Complete Branding', desc: 'Van strategie tot een compleet designsysteem, een merk dat overal even sterk staat. Inclusief merkrichtlijnen zodat iedereen het consistent toepast.' },
@@ -73,16 +92,30 @@ export const MAIN_SERVICES: MainService[] = [
     short: 'Web Development',
     kicker: 'Web & commerce',
     tagline:
-      'Snelle, converterende websites, webshops en software, gebouwd om te verkopen en mee te groeien.',
+      'Een website of webshop die niet alleen mooi oogt, maar vertrouwen wekt, duidelijk communiceert en bezoekers omzet in aanvragen of klanten.',
     intro:
-      'Je website is je hardst werkende *verkoper*. Wij bouwen digitale producten die laden in een *oogwenk* en meegroeien met je *ambitie*.',
+      'Je website is vaak het eerste moment waarop iemand beslist of jouw bedrijf professioneel en betrouwbaar voelt. Daarom bouwen wij geen losse *pagina\'s*, maar een digitale oplossing die past bij je aanbod, doelgroep en doelen. Snel, duidelijk en ingericht om *resultaat* op te leveren.',
     cardDesc:
       'Websites en webshops die professioneel ogen, duidelijk converteren en jouw groei ondersteunen.',
+    whatTitle: 'Alles voor een website die werkt.',
+    actionTitle: 'Zo ziet een converterende website eruit.',
+    actionText:
+      'Websites, webshops en software gebouwd om vertrouwen te wekken, duidelijk te verkopen en mee te groeien met je bedrijf.',
+    heroCta: 'Start jouw webtraject',
+    ctaTitle: 'Klaar voor een website die aanvragen oplevert?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met een website of webshop die professioneel oogt en gericht is op resultaat.',
     subs: [
-      { name: 'Websites', desc: 'Snelle, converterende websites die er strak uitzien en verkopen. Gebouwd op een moderne stack en makkelijk uit te breiden.' },
-      { name: 'Webshops', desc: 'Shopify en WooCommerce, volledig op maat rond hoe jouw klanten kopen. Van productpagina tot een checkout die echt converteert.' },
-      { name: 'Applicaties', desc: 'Web-apps en portals die je proces slimmer en sneller maken. Op maat gebouwd rond jouw workflow en je gebruikers.' },
-      { name: 'Software', desc: 'Maatwerk software die met je bedrijf meegroeit. Stabiel, schaalbaar en gebouwd om jaren mee te gaan.' },
+      { name: 'Websites', desc: 'Snelle, professionele websites die duidelijk uitleggen wat je doet en bezoekers richting actie sturen.' },
+      { name: 'Webshops', desc: 'Webshops die vertrouwen wekken, overzicht creeren en het aankoopproces soepel maken.' },
+      { name: 'Applicaties', desc: 'Digitale oplossingen op maat voor processen, klanten of interne systemen.' },
+      { name: 'Software', desc: 'Maatwerk software die je bedrijf slimmer, sneller en schaalbaarder laat werken.' },
+    ],
+    steps: [
+      { title: 'Kennismaken', desc: 'We begrijpen je bedrijf, doelgroep en doelen.' },
+      { title: 'Plan', desc: 'We bepalen welke oplossing het beste past bij jouw situatie.' },
+      { title: 'Uitvoeren', desc: 'We bouwen een snelle, duidelijke en professionele website of webshop.' },
+      { title: 'Optimaliseren', desc: 'We kijken mee hoe je website beter kan presteren en verder kan groeien.' },
     ],
     accent: 'from-emerald-deep to-mint',
     Render: BrowserRender,
@@ -93,15 +126,29 @@ export const MAIN_SERVICES: MainService[] = [
     short: 'Video & Foto',
     kicker: 'Bewegend beeld & fotografie',
     tagline:
-      'Beeld dat aandacht pakt. Van scroll-stoppende short video en AI-content tot strakke fotografie.',
+      'Beeld dat aandacht pakt, vertrouwen opbouwt en jouw merk professioneel zichtbaar maakt.',
     intro:
-      'Beeld is het snelste pad naar *aandacht*. Wij maken *scroll-stoppende* video en fotografie die past bij je merk.',
+      'Beeld is vaak het snelste pad naar *aandacht*. Daarom maken wij geen losse video\'s of foto\'s, maar *content* die past bij je merk, doelgroep en kanalen. Van short video tot AI-video en fotoshoots: alles wordt gemaakt om je uitstraling te versterken en je *zichtbaarheid* te vergroten.',
     cardDesc:
       'Video en fotografie die jouw merk professioneel neerzetten en aandacht omzetten in vertrouwen.',
+    whatTitle: 'Alles voor content die blijft hangen.',
+    actionTitle: 'Zo ziet sterke visuele content eruit.',
+    actionText:
+      'Video en fotografie die jouw merk herkenbaar maken, professioneel neerzetten en geschikt zijn voor elk kanaal.',
+    heroCta: 'Start jouw contenttraject',
+    ctaTitle: 'Klaar voor content die aandacht trekt?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met video en fotografie die jouw merk sterker zichtbaar maken.',
     subs: [
-      { name: 'Short video content', desc: 'Scroll-stoppende video die kijkers vasthoudt en aanzet tot actie. Van concept en draaiboek tot montage, klaar voor elk platform.' },
-      { name: 'AI Video content', desc: 'Schaalbare videocontent met AI, snel en eindeloos variabel. Ideaal om veel varianten te testen zonder grote productie.' },
-      { name: 'Fotoshoots', desc: "Bedrijfs- en websitefoto's die je merk professioneel neerzetten. Een consistente beeldbank waarmee je overal sterk voor de dag komt." },
+      { name: 'Short video content', desc: "Korte video's voor social media die snel aandacht pakken en je verhaal duidelijk overbrengen." },
+      { name: 'AI Video content', desc: "Slimme AI-video's waarmee je snel varianten, concepten of creatieve content kunt maken." },
+      { name: 'Fotoshoots', desc: 'Professionele fotografie voor je website, social media, advertenties en merkuitingen.' },
+    ],
+    steps: [
+      { title: 'Kennismaken', desc: 'We begrijpen je merk, doelgroep en gewenste uitstraling.' },
+      { title: 'Plan', desc: 'We bepalen welke beelden nodig zijn voor je website, social media of campagne.' },
+      { title: 'Uitvoeren', desc: "We maken video's en foto's die passen bij je merk en doelen." },
+      { title: 'Groeien', desc: 'We zorgen dat je content klaar is om ingezet te worden voor zichtbaarheid, vertrouwen en resultaat.' },
     ],
     accent: 'from-emerald via-mint to-lime-accent',
     Render: VideoRender,
@@ -112,15 +159,29 @@ export const MAIN_SERVICES: MainService[] = [
     short: 'Social Media Groei',
     kicker: 'Bereik & advertising',
     tagline:
-      'Je social media van A tot Z, van influencer-campagnes tot Meta- en TikTok-advertenties die renderen.',
+      'Social media die niet alleen zichtbaar is, maar vertrouwen opbouwt, bereik activeert en nieuwe aanvragen creeert.',
     intro:
-      'Mensen *vertrouwen* mensen en reageren op het juiste *moment*. Wij zetten *bereik* om in groei.',
+      'Mensen kopen van merken die ze *herkennen* en *vertrouwen*. Daarom zetten wij social media niet in als losse posts, maar als kanaal om zichtbaar te blijven, vertrouwen op te bouwen en *bereik* om te zetten in resultaat.',
     cardDesc:
       'Content, influencers en advertenties die bereik omzetten in zichtbaarheid, vertrouwen en groei.',
+    whatTitle: 'Alles voor social media die resultaat oplevert.',
+    actionTitle: 'Zo ziet Social Media Groei eruit.',
+    actionText:
+      'Van influencer-campagnes tot Meta- en TikTok-advertenties: we zetten bereik om in zichtbaarheid, vertrouwen en resultaat.',
+    heroCta: 'Start jouw groeitraject',
+    ctaTitle: 'Klaar om social media om te zetten in resultaat?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je met social media die zichtbaarheid vergroot en nieuwe aanvragen creeert.',
     subs: [
-      { name: 'Influencer Marketing', desc: 'De juiste creators aan je merk koppelen, op echt bereik. Van selectie en briefing tot meten wat het oplevert.' },
-      { name: 'Meta Ads', desc: 'Advertenties op Facebook en Instagram die renderen. Scherp ingericht en continu geoptimaliseerd op resultaat.' },
-      { name: 'TikTok Ads', desc: 'Opvallen op TikTok met ads die aanslaan bij je doelgroep. Native content die voelt als TikTok, niet als reclame.' },
+      { name: 'Influencer Marketing', desc: 'Samenwerkingen met de juiste gezichten om je merk onder de aandacht te brengen bij de juiste doelgroep.' },
+      { name: 'Meta Ads', desc: 'Advertenties op Facebook en Instagram die gericht zijn op bereik, aanvragen en conversie.' },
+      { name: 'TikTok Ads', desc: 'Campagnes op TikTok waarmee je snel aandacht pakt en nieuwe doelgroepen bereikt.' },
+    ],
+    steps: [
+      { title: 'Kennismaken', desc: 'We begrijpen je merk, doelgroep en doelen.' },
+      { title: 'Plan', desc: 'We bepalen welke kanalen, content of advertenties het beste passen.' },
+      { title: 'Uitvoeren', desc: 'We zetten campagnes, samenwerkingen en content professioneel neer.' },
+      { title: 'Optimaliseren', desc: 'We meten, verbeteren en sturen bij op resultaat.' },
     ],
     accent: 'from-mint to-lime-accent',
     Render: NetworkRender,
@@ -131,14 +192,28 @@ export const MAIN_SERVICES: MainService[] = [
     short: 'SEO & SEA',
     kicker: 'Vindbaarheid & groei',
     tagline:
-      'Bovenaan in Google, organisch én betaald. Vindbaarheid die klanten naar je toe brengt.',
+      'Vindbaar worden op het moment dat jouw klant zoekt, met SEO en Google Ads die gericht zijn op aanvragen en resultaat.',
     intro:
-      'Wie bovenaan staat, *wint*. Wij maken je vindbaar voor de mensen die *nu* zoeken naar wat jij biedt.',
+      'Wie bovenaan staat, krijgt de *aandacht*. Wij maken je vindbaar voor mensen die actief zoeken naar wat jij aanbiedt. Met SEO bouwen we aan duurzame *vindbaarheid*. Met SEA zorgen we voor directe zichtbaarheid via Google Ads. Samen zorgen ze voor meer relevant verkeer, betere aanvragen en een sterkere online positie.',
     cardDesc:
       'Beter gevonden worden, slimmer adverteren en meer gerichte aanvragen binnenhalen.',
+    whatTitle: 'Alles voor betere vindbaarheid.',
+    actionTitle: 'Zo ziet SEO & SEA eruit.',
+    actionText:
+      'Bovenaan zichtbaar zijn in Google, gericht verkeer aantrekken en bezoekers omzetten in aanvragen.',
+    heroCta: 'Start jouw groeitraject',
+    ctaTitle: 'Klaar om beter gevonden te worden?',
+    ctaText:
+      'Vertel ons waar je nu staat. Wij helpen je zichtbaar worden voor mensen die zoeken naar wat jij aanbiedt.',
     subs: [
-      { name: 'SEO', desc: 'Structureel bovenaan in Google met techniek, content en autoriteit. Vindbaarheid die blijft staan en klanten blijft opleveren.' },
-      { name: 'Google Ads', desc: 'Direct zichtbaar bovenaan voor wie nu zoekt naar wat jij biedt. Strak gestuurd op kosten per klant en rendement.' },
+      { name: 'SEO', desc: 'Structureel beter gevonden worden in Google met techniek, content en optimalisatie.' },
+      { name: 'Google Ads', desc: 'Direct zichtbaar worden voor klanten die nu zoeken naar jouw dienst of product.' },
+    ],
+    steps: [
+      { title: 'Kennismaken', desc: 'We begrijpen je aanbod, doelgroep en zoekmarkt.' },
+      { title: 'Plan', desc: "We bepalen welke zoekwoorden, pagina's en campagnes het meeste kunnen opleveren." },
+      { title: 'Uitvoeren', desc: 'We optimaliseren je vindbaarheid en richten campagnes professioneel in.' },
+      { title: 'Optimaliseren', desc: 'We meten, verbeteren en sturen bij op resultaat.' },
     ],
     accent: 'from-emerald-deep to-emerald',
     Render: SeoRender,
@@ -149,16 +224,30 @@ export const MAIN_SERVICES: MainService[] = [
     short: 'Extra groeidiensten',
     kicker: 'Alles eromheen',
     tagline:
-      'Alles eromheen geregeld, van AI-agents en administratie tot sourcing en detachering.',
+      'Groei vraagt meer dan marketing. Daarom helpen we ondernemers ook met de praktische kant achter hun bedrijf: automatisering, administratie, sourcing en detachering.',
     intro:
-      'Groei vraagt meer dan marketing. Wij regelen de *randvoorwaarden* zodat jij kunt blijven *ondernemen*.',
+      'Niet elke uitdaging los je op met een website of campagne. Soms heeft je bedrijf juist betere *systemen*, meer overzicht, de juiste mensen of betere leveranciers nodig. Met onze extra groeidiensten helpen we je *slimmer* werken, tijd besparen en sterker organiseren.',
     cardDesc:
       'Aanvullende diensten die jouw bedrijf helpen slimmer, sterker en schaalbaarder te groeien.',
+    whatTitle: 'Alles binnen extra groeidiensten.',
+    actionTitle: 'Zo ziet slimme ondersteuning eruit.',
+    actionText:
+      'Van AI-agents tot administratie, sourcing en detachering: extra oplossingen die jouw bedrijf overzichtelijker, sneller en schaalbaarder maken.',
+    heroCta: 'Start jouw groeitraject',
+    ctaTitle: 'Klaar om slimmer te ondernemen?',
+    ctaText:
+      'Vertel ons waar je nu tegenaan loopt. Wij kijken mee welke extra ondersteuning jouw bedrijf verder helpt.',
     subs: [
-      { name: 'AI Agents', desc: 'Slimme assistenten die werk uit handen nemen, dag en nacht. Van klantvragen tot terugkerende taken, volledig geautomatiseerd.' },
-      { name: 'Administratie', desc: 'Je administratie geregeld, zodat jij kunt ondernemen. Overzicht en rust, zonder dat je er naar hoeft om te kijken.' },
-      { name: 'Sourcing', desc: 'De juiste producten en leveranciers, scherp ingekocht. Wij regelen de keten zodat jij marge en kwaliteit houdt.' },
-      { name: 'Detachering', desc: 'Het juiste talent op de juiste plek, precies wanneer je het nodig hebt. Flexibel opschalen zonder gedoe.' },
+      { name: 'AI Agents', desc: 'Slimme assistenten die terugkerende taken automatiseren, klantvragen opvangen en tijd besparen.' },
+      { name: 'Administratie', desc: 'Ondersteuning om je administratie overzichtelijker, professioneler en beter georganiseerd te krijgen.' },
+      { name: 'Sourcing', desc: 'Hulp bij het vinden van producten, leveranciers of oplossingen die passen bij je bedrijf.' },
+      { name: 'Detachering', desc: 'Ondersteuning bij het vinden van de juiste mensen of capaciteit wanneer je bedrijf daarom vraagt.' },
+    ],
+    steps: [
+      { title: 'Kennismaken', desc: 'We bekijken waar je bedrijf nu vastloopt.' },
+      { title: 'Plan', desc: 'We bepalen welke ondersteuning het beste past bij je situatie.' },
+      { title: 'Uitvoeren', desc: 'We zetten de juiste oplossing of samenwerking in gang.' },
+      { title: 'Verbeteren', desc: 'We kijken mee hoe je slimmer, sneller en schaalbaarder kunt werken.' },
     ],
     accent: 'from-emerald to-lime-bright',
     Render: SourcingRender,

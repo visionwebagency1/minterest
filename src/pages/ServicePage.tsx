@@ -25,12 +25,16 @@ import { NotFound } from './NotFound'
  * living scene · how we work (icons, no numbers) · a CTA. No numbering anywhere.
  */
 
+/** Generic fallback steps, used when a service has no custom `steps`. */
 const STEPS = [
-  { title: 'Kennismaken', desc: 'We brengen je doel, doelgroep en kansen scherp in beeld.', Icon: StepTargetIcon },
-  { title: 'Plan', desc: 'Een helder plan en aanpak, volledig gebouwd rond resultaat.', Icon: StepPlanIcon },
-  { title: 'Uitvoeren', desc: 'Wij maken het, jij blijft op de hoogte bij elke stap.', Icon: StepBuildIcon },
-  { title: 'Groeien', desc: 'Live, meten en blijven optimaliseren wat werkt.', Icon: StepGrowIcon },
+  { title: 'Kennismaken', desc: 'We brengen je doel, doelgroep en kansen scherp in beeld.' },
+  { title: 'Plan', desc: 'Een helder plan en aanpak, volledig gebouwd rond resultaat.' },
+  { title: 'Uitvoeren', desc: 'Wij maken het, jij blijft op de hoogte bij elke stap.' },
+  { title: 'Groeien', desc: 'Live, meten en blijven optimaliseren wat werkt.' },
 ]
+
+/** Step icons paired by index (works for both generic and per-service steps). */
+const STEP_ICONS = [StepTargetIcon, StepPlanIcon, StepBuildIcon, StepGrowIcon]
 
 /** Route wrapper: reads the :slug param for /diensten/:slug. */
 export function ServiceRoute() {
@@ -69,7 +73,7 @@ export function ServicePage({ slug }: { slug: string }) {
               <div className="flex flex-col items-start gap-5 rounded-3xl border border-emerald/30 bg-white p-8 shadow-[0_18px_50px_rgba(1,63,64,0.1)] md:flex-row md:items-center md:justify-between md:p-10">
                 <div>
                   <h3 className="font-display text-xl font-semibold md:text-2xl">Benieuwd hoe jouw site nu scoort?</h3>
-                  <p className="mt-2 font-sans text-near-black/60">Ontvang gratis een audit met concrete groeikansen, binnen 24 uur.</p>
+                  <p className="mt-2 font-sans text-near-black/60">Ontvang gratis een korte website-audit met concrete groeikansen.</p>
                 </div>
                 <Link
                   to="/website-audit"
@@ -96,7 +100,11 @@ export function ServicePage({ slug }: { slug: string }) {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-8 max-w-2xl text-balance font-display text-[clamp(2rem,5vw,4rem)] font-semibold leading-[1.04] tracking-tight">
-                Alles binnen <Accent>{s.label.toLowerCase()}</Accent>.
+                {s.whatTitle ?? (
+                  <>
+                    Alles binnen <Accent>{s.label.toLowerCase()}</Accent>.
+                  </>
+                )}
               </h2>
             </Reveal>
 
@@ -151,12 +159,16 @@ export function ServicePage({ slug }: { slug: string }) {
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-8 max-w-md text-balance font-display text-[clamp(2rem,4.5vw,3.4rem)] font-semibold leading-[1.05] tracking-tight">
-                  Zo ziet <Accent>{s.label.toLowerCase()}</Accent> eruit.
+                  {s.actionTitle ?? (
+                    <>
+                      Zo ziet <Accent>{s.label.toLowerCase()}</Accent> eruit.
+                    </>
+                  )}
                 </h2>
               </Reveal>
               <Reveal delay={0.1}>
                 <p className="mt-6 max-w-md font-sans text-lg leading-relaxed text-near-black/65">
-                  {s.tagline}
+                  {s.actionText ?? s.tagline}
                 </p>
               </Reveal>
             </div>
@@ -172,15 +184,18 @@ export function ServicePage({ slug }: { slug: string }) {
             <h2 className="font-display text-2xl font-semibold md:text-3xl">Zo werken we</h2>
           </Reveal>
           <div className="mt-12 grid grid-cols-2 gap-8 lg:grid-cols-4">
-            {STEPS.map((st, i) => (
-              <Reveal key={st.title} delay={i * 0.06} className="relative">
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald/10 text-emerald">
-                  <st.Icon />
-                </span>
-                <h3 className="mt-4 font-display text-lg font-semibold">{st.title}</h3>
-                <p className="mt-2 font-sans text-sm leading-relaxed text-near-black/55">{st.desc}</p>
-              </Reveal>
-            ))}
+            {(s.steps ?? STEPS).map((st, i) => {
+              const Icon = STEP_ICONS[i] ?? StepTargetIcon
+              return (
+                <Reveal key={st.title} delay={i * 0.06} className="relative">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald/10 text-emerald">
+                    <Icon />
+                  </span>
+                  <h3 className="mt-4 font-display text-lg font-semibold">{st.title}</h3>
+                  <p className="mt-2 font-sans text-sm leading-relaxed text-near-black/55">{st.desc}</p>
+                </Reveal>
+              )
+            })}
           </div>
         </section>
 
@@ -195,13 +210,18 @@ export function ServicePage({ slug }: { slug: string }) {
               }}
             >
               <h2 className="max-w-xl text-balance font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold">
-                Klaar om hiermee te klimmen?
+                {s.ctaTitle ?? 'Klaar om hiermee te klimmen?'}
               </h2>
+              {s.ctaText && (
+                <p className="max-w-xl font-sans text-base leading-relaxed text-cream/70 md:text-lg">
+                  {s.ctaText}
+                </p>
+              )}
               <Link
                 to="/start"
                 className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-mint to-lime-accent px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
               >
-                <span className="relative z-10">Start jouw project</span>
+                <span className="relative z-10">{s.heroCta ?? 'Start jouw project'}</span>
                 <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
                 <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-mint/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
               </Link>
@@ -283,23 +303,22 @@ function ServiceHero({ service: s }: { service: MainService }) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-          className="mt-10 flex flex-row gap-3"
+          className="mt-10 flex flex-col gap-3 sm:flex-row"
         >
           <Link
             to="/start"
-            className="group relative inline-flex flex-1 items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl bg-gradient-to-r from-emerald to-mint px-4 py-3.5 font-sans text-sm font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] sm:px-8 sm:py-4 sm:text-base"
+            className="group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-xl bg-gradient-to-r from-emerald to-mint px-4 py-3.5 font-sans text-sm font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.03] sm:flex-1 sm:px-8 sm:py-4 sm:text-base"
           >
-            <span className="relative z-10 sm:hidden">Start project</span>
-            <span className="relative z-10 hidden sm:inline">Start jouw project</span>
+            <span className="relative z-10">{s.heroCta ?? 'Start jouw project'}</span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
           </Link>
           <Link
             to="/diensten"
-            className="inline-flex flex-1 items-center justify-center gap-2.5 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 font-sans text-sm font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40 sm:px-8 sm:py-4 sm:text-base"
+            className="inline-flex w-full items-center justify-center gap-2.5 whitespace-nowrap rounded-xl border border-white/15 bg-white/5 px-4 py-3.5 font-sans text-sm font-medium text-cream backdrop-blur-md transition-colors duration-300 hover:border-mint/40 sm:flex-1 sm:px-8 sm:py-4 sm:text-base"
           >
             <span className="h-1.5 w-1.5 bg-lime-accent" />
-            Alle diensten
+            Bekijk alle groeidiensten
           </Link>
         </motion.div>
       </div>
