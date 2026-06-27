@@ -14,24 +14,16 @@ const ITEMS = [
     a: 'Minterest helpt bedrijven met branding, websites, content, social media, vindbaarheid en extra ondersteuning. We bouwen geen losse diensten, maar oplossingen die bijdragen aan zichtbaarheid, vertrouwen en resultaat.',
   },
   {
-    q: 'Maken jullie alleen websites?',
-    a: 'Nee. Een website is vaak onderdeel van een grotere oplossing. We kijken naar je merk, doelgroep, aanbod en doelen. Daarna bouwen we wat nodig is om meer aanvragen en groei te realiseren.',
-  },
-  {
     q: 'Hoe weet ik welke dienst ik nodig heb?',
     a: 'Dat hoef je niet vooraf exact te weten. Wij kijken met je mee en adviseren welke oplossing het beste past bij jouw situatie en doelen.',
   },
   {
-    q: 'Wat kost een website of webshop?',
-    a: 'Dat hangt af van wat je nodig hebt. Na een korte kennismaking maken we een duidelijk voorstel met vaste scope, prijs en planning.',
+    q: 'Kunnen jullie meerdere diensten combineren?',
+    a: 'Ja. Vaak versterken diensten elkaar: een sterk merk, een converterende website en de juiste content werken samen aan meer zichtbaarheid en resultaat. We stellen een traject samen dat past bij jouw doel.',
   },
   {
-    q: 'Helpen jullie ook met branding?',
-    a: 'Ja. Met Branding voor groei ontwikkelen we een professionele uitstraling die past bij je bedrijf, doelgroep en ambities.',
-  },
-  {
-    q: 'Doen jullie ook social media en content?',
-    a: 'Ja. Met Social Media Groei helpen we bedrijven zichtbaar blijven met content, advertenties en campagnes die passen bij hun doelgroep.',
+    q: 'Werken jullie ook met bestaande websites of merken?',
+    a: 'Ja. We bouwen niet alleen vanaf nul, maar verbeteren ook bestaande websites, merken en campagnes wanneer dat meer oplevert dan opnieuw beginnen.',
   },
   {
     q: 'Wat zijn Extra groeidiensten?',

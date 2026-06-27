@@ -67,7 +67,7 @@ export function ServicesShowcase() {
     <section
       ref={sectionRef}
       id="diensten-cards"
-      className="relative bg-cream pb-20 pt-2 text-near-black md:pb-28 md:pt-4"
+      className="relative bg-cream pb-20 pt-4 text-near-black md:pb-28 md:pt-8"
     >
       <div className="mx-auto max-w-6xl px-6 md:px-10 lg:px-16">
         {desktop ? (
@@ -285,8 +285,9 @@ function MobileGrid({
 
   return (
     <div>
-      {/* B1 — six choice pills: two visible, horizontally scrollable with snap */}
-      <div className="-mx-6 flex snap-x snap-mandatory gap-2 overflow-x-auto px-6 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      {/* B1 — six choice pills: two visible, horizontally scrollable with snap.
+          No edge-bleed, so the first pill lines up exactly with the heading. */}
+      <div className="flex snap-x snap-mandatory gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {MAIN_SERVICES.map((s, i) => {
           const Icon = SERVICE_ICON_BY_SLUG[s.slug]
           const on = idx === i
