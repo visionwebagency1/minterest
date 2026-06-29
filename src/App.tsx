@@ -12,6 +12,7 @@ import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
 import { Start } from '@/pages/Start'
 import { Audit } from '@/pages/Audit'
+import { Terms } from '@/pages/Terms'
 import { NotFound } from '@/pages/NotFound'
 
 export default function App() {
@@ -47,6 +48,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/start" element={<Start />} />
             <Route path="/website-audit" element={<Audit />} />
+            <Route path="/algemene-voorwaarden" element={<Terms />} />
             {/* Dedicated 404 for anything unmatched. */}
             <Route path="*" element={<NotFound />} />
           </Routes>

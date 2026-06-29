@@ -84,7 +84,7 @@ export function Footer() {
             <Link to="#" className="transition-colors hover:text-white/70">
               Privacy
             </Link>
-            <Link to="#" className="transition-colors hover:text-white/70">
+            <Link to="/algemene-voorwaarden" className="transition-colors hover:text-white/70">
               Voorwaarden
             </Link>
           </div>
