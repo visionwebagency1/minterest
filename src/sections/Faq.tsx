@@ -11,27 +11,27 @@ const EASE = [0.22, 1, 0.36, 1] as const
 const ITEMS = [
   {
     q: 'Wat doet Minterest precies?',
-    a: 'Minterest helpt bedrijven met branding, websites, content, social media, vindbaarheid en extra ondersteuning. We bouwen geen losse diensten, maar oplossingen die bijdragen aan zichtbaarheid, vertrouwen en resultaat.',
+    a: 'Minterest helpt ondernemers met branding, websites, content, social media, vindbaarheid en slimme groeiondersteuning. We leveren geen losse diensten, maar bouwen complete oplossingen die bijdragen aan een professionele uitstraling, meer vertrouwen en betere commerciële kansen.',
   },
   {
     q: 'Hoe weet ik welke dienst ik nodig heb?',
-    a: 'Dat hoef je niet vooraf exact te weten. Wij kijken met je mee en adviseren welke oplossing het beste past bij jouw situatie en doelen.',
+    a: 'Dat hoef je niet vooraf exact te weten. Tijdens een kennismaking kijken we naar je bedrijf, doelen en huidige situatie. Daarna adviseren we welke oplossing op dat moment het meeste waarde toevoegt, van branding of website tot content, marketing of een compleet groeitraject.',
   },
   {
     q: 'Kunnen jullie meerdere diensten combineren?',
-    a: 'Ja. Vaak versterken diensten elkaar: een sterk merk, een converterende website en de juiste content werken samen aan meer zichtbaarheid en resultaat. We stellen een traject samen dat past bij jouw doel.',
+    a: 'Ja. Juist de combinatie maakt Minterest sterk. Een duidelijk merk, een converterende website, sterke content en betere vindbaarheid versterken elkaar. Daarom stellen we trajecten samen waarin meerdere onderdelen slim op elkaar aansluiten.',
   },
   {
     q: 'Werken jullie ook met bestaande websites of merken?',
-    a: 'Ja. We bouwen niet alleen vanaf nul, maar verbeteren ook bestaande websites, merken en campagnes wanneer dat meer oplevert dan opnieuw beginnen.',
+    a: 'Ja. We bouwen niet alleen vanaf nul, maar verbeteren ook bestaande websites, merken en campagnes. We kijken eerst wat al goed is, waar de grootste winst zit en of optimaliseren slimmer is dan volledig opnieuw beginnen.',
   },
   {
-    q: 'Wat zijn Extra groeidiensten?',
-    a: 'Extra groeidiensten zijn aanvullende oplossingen zoals AI-agents, administratie, sourcing en detachering. Hiermee helpen we ondernemers slimmer en schaalbaarder werken.',
+    q: 'Wat zijn extra groeidiensten?',
+    a: 'Extra groeidiensten zijn aanvullende oplossingen die ondernemers helpen slimmer, efficiënter en schaalbaarder te werken. Denk aan AI-oplossingen, automatisering, operationele ondersteuning, sourcing of administratieve processen. We zetten deze diensten alleen in wanneer ze direct bijdragen aan structuur, efficiëntie of groei.',
   },
   {
     q: 'Hoe ziet de samenwerking eruit?',
-    a: 'We starten met een kennismaking, bepalen wat je bedrijf nodig heeft en werken daarna een duidelijke aanpak uit. Vervolgens bouwen we de oplossing, leveren we op en denken we mee over de volgende stap.',
+    a: 'We starten met een kennismaking waarin we jouw bedrijf, doelen en uitdagingen bespreken. Daarna werken we een duidelijke aanpak, scope en planning uit. Vervolgens bouwen we de oplossing, leveren we professioneel op en denken we mee over de volgende stap wanneer verdere groei of optimalisatie nodig is.',
   },
 ]
 

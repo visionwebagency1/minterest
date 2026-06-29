@@ -44,7 +44,7 @@ export function Footer() {
               <Logo className="h-8 w-auto" />
             </Link>
             <p className="mt-6 font-accent text-lg italic text-white/70">
-              Where interest becomes your growth.
+              Waar aandacht verandert in groei.
             </p>
             <p className="mt-4 font-sans text-sm leading-relaxed text-white/45">
               Merk, website, video, social en vindbaarheid, gebouwd om je groei te laten klimmen.
