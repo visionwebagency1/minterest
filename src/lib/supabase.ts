@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
 /**
  * Shared Supabase client for the admin panel.
@@ -18,20 +18,30 @@ import { createClient } from '@supabase/supabase-js'
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
 
-/** True when both env vars are present. Lets the UI show a friendly setup hint. */
+/** True when both env vars are present. Lets the admin show a setup hint instead of crashing. */
 export const isSupabaseConfigured = Boolean(url && anonKey)
 
-if (!isSupabaseConfigured) {
-  // Thrown only when admin code actually loads this module, never on the public site.
-  throw new Error(
-    'Supabase is niet geconfigureerd. Zet VITE_SUPABASE_URL en VITE_SUPABASE_ANON_KEY in je .env (zie .env.example) en in de Vercel-omgeving.',
-  )
-}
+let client: SupabaseClient | null = null
 
-export const supabase = createClient(url as string, anonKey as string, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: false,
-  },
-})
+/**
+ * Returns the singleton Supabase client. Importing this module never throws; the
+ * error is only raised if admin code asks for the client while it is not yet
+ * configured (so we can show a friendly message at the admin boundary).
+ */
+export function getSupabase(): SupabaseClient {
+  if (!isSupabaseConfigured) {
+    throw new Error(
+      'Supabase is niet geconfigureerd. Zet VITE_SUPABASE_URL en VITE_SUPABASE_ANON_KEY in je .env (zie .env.example) en in de Vercel-omgeving.',
+    )
+  }
+  if (!client) {
+    client = createClient(url as string, anonKey as string, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: false,
+      },
+    })
+  }
+  return client
+}
