@@ -4,9 +4,7 @@
  * public bundle never imports the Supabase client (see CLAUDE.md).
  */
 import type { DocLine, DocParty } from '@/components/QuoteDocument'
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/env'
 
 export type PublicQuote = {
   number: string

@@ -15,11 +15,10 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
  *   VITE_SUPABASE_ANON_KEY
  */
 
-const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+import { SUPABASE_URL as url, SUPABASE_ANON_KEY as anonKey, isSupabaseConfigured } from './env'
 
-/** True when both env vars are present. Lets the admin show a setup hint instead of crashing. */
-export const isSupabaseConfigured = Boolean(url && anonKey)
+/** True when both env vars are present and valid. Lets the admin show a setup hint instead of crashing. */
+export { isSupabaseConfigured }
 
 let client: SupabaseClient | null = null
 
