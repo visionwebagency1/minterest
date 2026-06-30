@@ -20,6 +20,11 @@ import { NotFound } from '@/pages/NotFound'
 // bundles Supabase or the admin code, and rendered without the marketing chrome.
 const AdminApp = lazy(() => import('@/admin/AdminApp'))
 
+// The public online quote view (/offerte/:token): standalone, no marketing
+// chrome. Lazy-loaded; talks to Supabase only via token-keyed REST calls.
+const PublicQuote = lazy(() => import('@/pages/PublicQuote').then((m) => ({ default: m.PublicQuote })))
+const PublicInvoice = lazy(() => import('@/pages/PublicInvoice').then((m) => ({ default: m.PublicInvoice })))
+
 /** The public marketing website: smooth scroll, grain, header and page transitions. */
 function PublicSite() {
   // Lenis smooth scroll + ScrollTrigger refresh on font/asset load (public only).
@@ -71,6 +76,16 @@ function AppRoot() {
     return (
       <Suspense fallback={null}>
         <AdminApp />
+      </Suspense>
+    )
+  }
+  if (pathname.startsWith('/offerte/') || pathname.startsWith('/factuur/')) {
+    return (
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/offerte/:token" element={<PublicQuote />} />
+          <Route path="/factuur/:token" element={<PublicInvoice />} />
+        </Routes>
       </Suspense>
     )
   }

@@ -1,46 +1,30 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { isSupabaseConfigured } from '@/lib/supabase'
-import { Logo } from '@/components/Logo'
-import { AdminAuthProvider, RequireAdmin, useAdminAuth } from './AdminAuth'
+import { AdminAuthProvider, RequireAdmin } from './AdminAuth'
+import { AdminLayout } from './AdminLayout'
 import { AdminLogin } from './AdminLogin'
 import { AdminSetupNeeded } from './AdminShell'
+import { AdminDashboard } from './pages/AdminDashboard'
+import { AdminInbox } from './pages/AdminInbox'
+import { AdminLeadDetail } from './pages/AdminLeadDetail'
+import { AdminCustomers } from './pages/AdminCustomers'
+import { AdminCustomerDetail } from './pages/AdminCustomerDetail'
+import { AdminCustomerForm } from './pages/AdminCustomerForm'
+import { AdminQuotes } from './pages/AdminQuotes'
+import { AdminQuoteForm } from './pages/AdminQuoteForm'
+import { AdminQuoteDetail } from './pages/AdminQuoteDetail'
+import { AdminQuotePrint } from './pages/AdminQuotePrint'
+import { AdminInvoices } from './pages/AdminInvoices'
+import { AdminInvoiceForm } from './pages/AdminInvoiceForm'
+import { AdminInvoiceDetail } from './pages/AdminInvoiceDetail'
+import { AdminInvoicePrint } from './pages/AdminInvoicePrint'
+import { AdminSettings } from './pages/AdminSettings'
 
 /**
  * Admin panel router. Mounted (lazy) only for /admin/* paths, so the public site
- * never bundles Supabase. The full sidebar shell + dashboard arrive in step 3;
- * for now the protected landing just confirms that auth + logout work.
+ * never bundles Supabase. Login is public; everything else lives behind
+ * RequireAdmin inside the sidebar shell (AdminLayout).
  */
-
-function AdminLandingPlaceholder() {
-  const { profile, user, signOut } = useAdminAuth()
-  const name = profile?.full_name || user?.email || 'admin'
-
-  return (
-    <div className="grid min-h-screen place-items-center bg-[#f4f4f4] px-6">
-      <div className="w-full max-w-md rounded-2xl border border-emerald-deep/10 bg-white p-8 text-center shadow-[0_18px_50px_rgba(1,63,64,0.08)]">
-        <Logo className="mx-auto h-7 w-auto" wordmark="#1c1c1c" />
-        <span className="mt-5 inline-block font-sans text-xs uppercase tracking-[0.28em] text-emerald">
-          Ingelogd
-        </span>
-        <h1 className="mt-2 font-display text-2xl font-semibold tracking-tight text-near-black">
-          Hallo {name}
-        </h1>
-        <p className="mt-3 font-sans text-sm leading-relaxed text-near-black/60">
-          Je bent ingelogd in het Minterest admin panel. Het werkpaneel met
-          zijbalk en dashboard komt in de volgende stap.
-        </p>
-        <button
-          type="button"
-          onClick={() => signOut()}
-          className="mt-7 inline-flex items-center justify-center gap-2 rounded-xl border border-emerald-deep/15 bg-white px-6 py-3 font-sans text-sm font-semibold text-near-black transition-colors hover:border-emerald/40"
-        >
-          Uitloggen
-        </button>
-      </div>
-    </div>
-  )
-}
-
 export default function AdminApp() {
   // Friendly screen instead of a crash when the env vars are not set yet.
   if (!isSupabaseConfigured) return <AdminSetupNeeded />
@@ -50,7 +34,27 @@ export default function AdminApp() {
       <Routes>
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route element={<RequireAdmin />}>
-          <Route path="/admin" element={<AdminLandingPlaceholder />} />
+          {/* Print views live outside the sidebar shell so the PDF is clean. */}
+          <Route path="/admin/offertes/:id/print" element={<AdminQuotePrint />} />
+          <Route path="/admin/facturen/:id/print" element={<AdminInvoicePrint />} />
+          <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/inbox" element={<AdminInbox />} />
+            <Route path="/admin/inbox/:id" element={<AdminLeadDetail />} />
+            <Route path="/admin/klanten" element={<AdminCustomers />} />
+            <Route path="/admin/klanten/nieuw" element={<AdminCustomerForm mode="create" />} />
+            <Route path="/admin/klanten/:id" element={<AdminCustomerDetail />} />
+            <Route path="/admin/klanten/:id/bewerken" element={<AdminCustomerForm mode="edit" />} />
+            <Route path="/admin/offertes" element={<AdminQuotes />} />
+            <Route path="/admin/offertes/nieuw" element={<AdminQuoteForm mode="create" />} />
+            <Route path="/admin/offertes/:id" element={<AdminQuoteDetail />} />
+            <Route path="/admin/offertes/:id/bewerken" element={<AdminQuoteForm mode="edit" />} />
+            <Route path="/admin/instellingen" element={<AdminSettings />} />
+            <Route path="/admin/facturen" element={<AdminInvoices />} />
+            <Route path="/admin/facturen/nieuw" element={<AdminInvoiceForm mode="create" />} />
+            <Route path="/admin/facturen/:id" element={<AdminInvoiceDetail />} />
+            <Route path="/admin/facturen/:id/bewerken" element={<AdminInvoiceForm mode="edit" />} />
+          </Route>
         </Route>
         <Route path="/admin/*" element={<Navigate to="/admin" replace />} />
       </Routes>

@@ -115,3 +115,28 @@
      the WebGL canvas). A plain low-opacity overlay is far cheaper and, at this
      opacity, visually indistinguishable. */
 }
+
+/* ------------------------------------------------------------------ */
+/*  Document print (offertes / facturen) — A4 PDF via the browser     */
+/* ------------------------------------------------------------------ */
+.doc-sheet {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+@media print {
+  /* Hide everything that is not the printable document. */
+  .print-hide {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .doc-sheet {
+    max-width: none !important;
+    box-shadow: none !important;
+  }
+  @page {
+    margin: 12mm;
+  }
+}
