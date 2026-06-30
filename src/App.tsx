@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useScrollSetup } from '@/lib/useLenis'
 import { GrainOverlay } from '@/components/GrainOverlay'
 import { Header } from '@/components/Header'
@@ -15,12 +16,22 @@ import { Audit } from '@/pages/Audit'
 import { Terms } from '@/pages/Terms'
 import { NotFound } from '@/pages/NotFound'
 
-export default function App() {
-  // Lenis smooth scroll + ScrollTrigger refresh on font/asset load.
+// The admin panel is fully separated: lazy-loaded so the public site never
+// bundles Supabase or the admin code, and rendered without the marketing chrome.
+const AdminApp = lazy(() => import('@/admin/AdminApp'))
+
+// The public online quote view (/offerte/:token): standalone, no marketing
+// chrome. Lazy-loaded; talks to Supabase only via token-keyed REST calls.
+const PublicQuote = lazy(() => import('@/pages/PublicQuote').then((m) => ({ default: m.PublicQuote })))
+const PublicInvoice = lazy(() => import('@/pages/PublicInvoice').then((m) => ({ default: m.PublicInvoice })))
+
+/** The public marketing website: smooth scroll, grain, header and page transitions. */
+function PublicSite() {
+  // Lenis smooth scroll + ScrollTrigger refresh on font/asset load (public only).
   useScrollSetup()
 
   return (
-    <BrowserRouter>
+    <>
       {/* No preloader: the site loads straight into the hero. */}
       <GrainOverlay />
       <Header />
@@ -54,6 +65,37 @@ export default function App() {
           </Routes>
         )}
       </RouteTransition>
+    </>
+  )
+}
+
+/** Picks the admin panel or the public site based on the path. */
+function AppRoot() {
+  const { pathname } = useLocation()
+  if (pathname.startsWith('/admin')) {
+    return (
+      <Suspense fallback={null}>
+        <AdminApp />
+      </Suspense>
+    )
+  }
+  if (pathname.startsWith('/offerte/') || pathname.startsWith('/factuur/')) {
+    return (
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/offerte/:token" element={<PublicQuote />} />
+          <Route path="/factuur/:token" element={<PublicInvoice />} />
+        </Routes>
+      </Suspense>
+    )
+  }
+  return <PublicSite />
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppRoot />
     </BrowserRouter>
   )
 }
