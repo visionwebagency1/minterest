@@ -12,11 +12,11 @@
  * UI flow keeps working in development.
  */
 
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './env'
+
 export type LeadPayload = Record<string, unknown>
 
 const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
 
 const toArray = (value: unknown): string[] =>
   Array.isArray(value) ? value.map(String) : []
