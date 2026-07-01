@@ -5,6 +5,7 @@ import { Accent } from '@/components/Accent'
 import { Footer } from '@/sections/Footer'
 import { M_PATH } from '@/three/mPath'
 import { MAIN_SERVICES } from '@/data/services'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 /**
  * Diensten-overzicht (/diensten): the single hub that shows all 6 main services.
@@ -12,6 +13,15 @@ import { MAIN_SERVICES } from '@/data/services'
  * light and premium, matching the landing-page template.
  */
 export function Services() {
+  return (
+    <SiteContentProvider page="services">
+      <ServicesInner />
+    </SiteContentProvider>
+  )
+}
+
+function ServicesInner() {
+  const c = useContent()
   return (
     <>
       {/* Light hero */}
@@ -37,7 +47,7 @@ export function Services() {
           >
             <span className="h-px w-10 bg-emerald/40" />
             <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
-              Onze diensten
+              {c('hero.eyebrow')}
             </span>
           </motion.div>
           <motion.h1
@@ -46,7 +56,7 @@ export function Services() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
             className="mt-8 max-w-4xl text-balance font-display text-[clamp(2.5rem,7vw,5.5rem)] font-semibold leading-[1.0] tracking-tight"
           >
-            Zes diensten, één <Accent>opwaartse</Accent> beweging.
+            {c('hero.headingPre')}<Accent>{c('hero.headingAccent')}</Accent>{c('hero.headingPost')}
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -54,8 +64,7 @@ export function Services() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.16 }}
             className="mt-7 max-w-2xl font-sans text-lg leading-relaxed text-near-black/65"
           >
-            Van merk en website tot video, social, vindbaarheid en alles eromheen.
-            Elke dienst haakt in op de volgende en tilt je merk stap voor stap hoger.
+            {c('hero.intro')}
           </motion.p>
         </div>
       </section>

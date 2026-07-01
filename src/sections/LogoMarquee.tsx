@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react'
+import { useContent } from '@/content/SiteContent'
 
 /**
  * Infinite horizontal marquee of client names, separated by a mint ✦. Sits in
@@ -6,18 +7,13 @@ import { motion, useReducedMotion } from 'motion/react'
  * so the loop is seamless.
  */
 
-const CLIENTS = [
-  'ONLINE GROEI',
-  'MEER ZICHTBAARHEID',
-  'STERKER MERK',
-  'MEER AANVRAGEN',
-  'BETERE CONVERSIE',
-  'GROEI DIE BLIJFT',
-]
+const MARQUEE_COUNT = 6
 
 export function LogoMarquee() {
+  const c = useContent()
   const reduce = useReducedMotion()
-  const items = [...CLIENTS, ...CLIENTS]
+  const clients = Array.from({ length: MARQUEE_COUNT }, (_, i) => c(`marquee.${i}`))
+  const items = [...clients, ...clients]
 
   return (
     <section className="relative overflow-hidden border-y border-white/5 bg-near-black/45 py-7 backdrop-blur-sm md:py-9">

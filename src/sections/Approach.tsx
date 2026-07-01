@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
+import { useContent } from '@/content/SiteContent'
 
 /**
  * "Onze aanpak" — a light, climbing timeline. A mint line fills as you scroll;
@@ -12,28 +13,7 @@ import { Accent } from '@/components/Accent'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-const STEPS = [
-  {
-    title: 'Kennismaking',
-    desc: 'We ontdekken waar jouw bedrijf nu staat en waar de grootste kansen liggen.',
-    Icon: TargetIcon,
-  },
-  {
-    title: 'Strategie',
-    desc: 'We kiezen de juiste oplossing voor jouw doel: branding, website, content, marketing of extra ondersteuning.',
-    Icon: LayersIcon,
-  },
-  {
-    title: 'Creatie',
-    desc: 'We bouwen alles wat nodig is om jouw bedrijf sterker zichtbaar en professioneler te maken.',
-    Icon: CodeIcon,
-  },
-  {
-    title: 'Lancering & groei',
-    desc: 'We leveren op, optimaliseren waar nodig en helpen je verder bouwen aan resultaat.',
-    Icon: RocketIcon,
-  },
-]
+const STEP_ICONS = [TargetIcon, LayersIcon, CodeIcon, RocketIcon]
 
 function FloatingIcon({ Icon }: { Icon: () => JSX.Element }) {
   const reduce = useReducedMotion()
@@ -49,12 +29,18 @@ function FloatingIcon({ Icon }: { Icon: () => JSX.Element }) {
 }
 
 export function Approach() {
+  const c = useContent()
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start 0.75', 'end 0.6'],
   })
   const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
+  const steps = STEP_ICONS.map((Icon, i) => ({
+    title: c(`approach.step.${i}.title`),
+    desc: c(`approach.step.${i}.desc`),
+    Icon,
+  }))
 
   return (
     <section
@@ -68,19 +54,17 @@ export function Approach() {
         <Reveal className="flex items-center gap-3">
           <span className="h-px w-10 bg-mint/50" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/70">
-            Jouw groeiplan
+            {c('approach.eyebrow')}
           </span>
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-8 max-w-3xl text-balance font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight text-cream">
-            Van idee naar <Accent>groei</Accent>, in vier stappen.
+            {c('approach.headingPre')}<Accent>{c('approach.headingAccent')}</Accent>{c('approach.headingPost')}
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
           <p className="mt-7 max-w-2xl font-sans text-lg leading-relaxed text-cream/65">
-            Geen losse opdrachten, maar een plan dat opbouwt. Elke stap koppelt de
-            juiste diensten aan jouw doel, zodat groei een route wordt in plaats
-            van toeval.
+            {c('approach.intro')}
           </p>
         </Reveal>
 
@@ -99,7 +83,7 @@ export function Approach() {
           />
 
           <div className="grid grid-cols-1 gap-12 md:grid-cols-4 md:gap-8">
-            {STEPS.map((s) => (
+            {steps.map((s) => (
               <motion.div
                 key={s.title}
                 initial={{ opacity: 0, y: 24 }}
@@ -130,7 +114,7 @@ export function Approach() {
             to="/diensten"
             className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
           >
-            <span className="relative z-10">Ontdek jouw groeikansen</span>
+            <span className="relative z-10">{c('approach.cta')}</span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
           </Link>

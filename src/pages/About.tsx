@@ -4,6 +4,7 @@ import { Accent } from '@/components/Accent'
 import { PageHero } from '@/components/PageHero'
 import { Footer } from '@/sections/Footer'
 import { MAIN_SERVICES } from '@/data/services'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 /** About-page omschrijving per hoofddienst (uit het contentbestand). */
 const ABOUT_DESC: Record<string, string> = {
@@ -27,16 +28,7 @@ const BRANCHES = MAIN_SERVICES.map((s) => ({
   to: `/diensten/${s.slug}`,
 }))
 
-const SUPPORT = [
-  { title: 'Administratie', desc: 'We koppelen ondernemers aan overzichtelijke administratieve ondersteuning, zodat er meer rust en structuur ontstaat.' },
-  { title: 'Sourcing & inkoop', desc: 'We helpen met het vinden en vergelijken van producten, leveranciers en inkoopmogelijkheden.' },
-]
-
-const VALUES = [
-  { title: 'Een team, geen losse schakels', desc: 'Strategie, design, development, content en marketing komen samen in een duidelijke aanpak.', Icon: TeamIcon },
-  { title: 'Oplossing boven uitvoering', desc: 'We leveren niet zomaar een website, video of campagne. We kijken eerst wat jouw bedrijf nodig heeft.', Icon: SolutionIcon },
-  { title: 'Gebouwd om door te groeien', desc: 'Alles wat we maken moet professioneel staan, praktisch werken en klaar zijn voor de volgende stap.', Icon: GrowIcon },
-]
+const VALUE_ICONS = [TeamIcon, SolutionIcon, GrowIcon]
 
 function TeamIcon() {
   return (
@@ -67,24 +59,43 @@ function GrowIcon() {
 /** About / studio page: dark hero + light story (values, branches, support). */
 export function About() {
   return (
+    <SiteContentProvider page="about">
+      <AboutInner />
+    </SiteContentProvider>
+  )
+}
+
+function AboutInner() {
+  const c = useContent()
+  const values = VALUE_ICONS.map((Icon, i) => ({
+    title: c(`value.${i}.title`),
+    desc: c(`value.${i}.desc`),
+    Icon,
+  }))
+  const support = [0, 1].map((i) => ({
+    title: c(`support.${i}.title`),
+    desc: c(`support.${i}.desc`),
+  }))
+
+  return (
     <>
       <PageHero
-        kicker="Over Minterest"
+        kicker={c('hero.kicker')}
         title={
           <>
-            Een partner voor je volgende <Accent>groeistap.</Accent>
+            {c('hero.titlePre')}<Accent>{c('hero.titleAccent')}</Accent>
           </>
         }
-        tagline="Bij Minterest starten we niet bij een losse dienst, maar bij wat jouw bedrijf nodig heeft om sterker zichtbaar te worden, vertrouwen op te bouwen en meer resultaat te halen. Van branding en websites tot content, vindbaarheid en extra ondersteuning: we bouwen oplossingen die met je bedrijf meegroeien."
-        primary={{ label: 'Werk met ons', to: '/start' }}
-        secondary={{ label: 'Bekijk ons werk', to: '/work' }}
+        tagline={c('hero.tagline')}
+        primary={{ label: c('hero.primary'), to: '/start' }}
+        secondary={{ label: c('hero.secondary'), to: '/work' }}
       />
 
       <div className="bg-cream text-near-black">
         <div className="mx-auto max-w-7xl px-6 py-24 md:px-10 md:py-32 lg:px-16">
           {/* values */}
           <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-            {VALUES.map((v, i) => (
+            {values.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.08}>
                 <span className="grid h-12 w-12 place-items-center rounded-xl bg-emerald/10 text-emerald ring-1 ring-emerald/15">
                   <v.Icon />
@@ -97,7 +108,7 @@ export function About() {
 
           {/* the six services */}
           <Reveal delay={0.05}>
-            <h2 className="mt-28 font-display text-2xl font-semibold md:text-3xl">Onze zes diensten</h2>
+            <h2 className="mt-28 font-display text-2xl font-semibold md:text-3xl">{c('servicesHeading')}</h2>
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
             {BRANCHES.map((b, i) => (
@@ -120,10 +131,10 @@ export function About() {
 
           {/* support */}
           <Reveal delay={0.05}>
-            <h2 className="mt-24 font-display text-2xl font-semibold md:text-3xl">Achter de schermen</h2>
+            <h2 className="mt-24 font-display text-2xl font-semibold md:text-3xl">{c('supportHeading')}</h2>
           </Reveal>
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {SUPPORT.map((b, i) => (
+            {support.map((b, i) => (
               <Reveal key={b.title} delay={i * 0.06} className="rounded-2xl border border-emerald-deep/10 bg-[#EAF4EC] p-8 md:p-10">
                 <h3 className="font-display text-xl font-semibold md:text-2xl">{b.title}</h3>
                 <p className="mt-3 font-sans text-base leading-relaxed text-near-black/60">{b.desc}</p>

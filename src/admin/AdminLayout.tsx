@@ -48,6 +48,7 @@ const NAV: NavItem[] = [
   { to: '/admin/klanten', label: 'Klanten', icon: icon(<><circle cx="9" cy="8" r="3" /><path d="M3 20a6 6 0 0 1 12 0" /><path d="M16 5a3 3 0 0 1 0 6" /><path d="M19 20a5 5 0 0 0-3-4.6" /></>) },
   { to: '/admin/offertes', label: 'Offertes', icon: icon(<><path d="M7 3h7l5 5v13H7z" /><path d="M14 3v5h5" /><path d="M10 13h6" /><path d="M10 17h6" /></>) },
   { to: '/admin/facturen', label: 'Facturen', icon: icon(<><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" /><path d="M10 8h4" /><path d="M10 12h4" /></>) },
+  { to: '/admin/content', label: 'Website content', icon: icon(<><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18" /><path d="M8 14h8" /><path d="M8 17h5" /></>) },
 ]
 
 function Badge({ count }: { count: number }) {

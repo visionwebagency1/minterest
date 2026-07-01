@@ -1,4 +1,5 @@
 import { ScrollGradient } from '@/components/ScrollGradient'
+import { SiteContentProvider } from '@/content/SiteContent'
 import { Hero } from './Hero'
 import { LogoMarquee } from './LogoMarquee'
 import { ServicesIntro } from './ServicesIntro'
@@ -16,18 +17,20 @@ import { Footer } from './Footer'
  */
 export function Home() {
   return (
-    <main className="relative w-full bg-near-black">
-      <ScrollGradient />
-      <Hero />
-      <LogoMarquee />
-      <ServicesIntro />
-      <ServicesShowcase />
-      <Showcase />
-      <Approach />
-      <Testimonials />
-      <Faq />
-      <CtaBand />
-      <Footer />
-    </main>
+    <SiteContentProvider page="home">
+      <main className="relative w-full bg-near-black">
+        <ScrollGradient />
+        <Hero />
+        <LogoMarquee />
+        <ServicesIntro />
+        <ServicesShowcase />
+        <Showcase />
+        <Approach />
+        <Testimonials />
+        <Faq />
+        <CtaBand />
+        <Footer />
+      </main>
+    </SiteContentProvider>
   )
 }

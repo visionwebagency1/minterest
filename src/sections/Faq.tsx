@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Reveal } from '@/components/Reveal'
+import { useContent } from '@/content/SiteContent'
 
 /**
  * Clean accordion FAQ on a light background with smooth open/close.
@@ -8,35 +9,15 @@ import { Reveal } from '@/components/Reveal'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-const ITEMS = [
-  {
-    q: 'Wat doet Minterest precies?',
-    a: 'Minterest helpt ondernemers met branding, websites, content, social media, vindbaarheid en slimme groeiondersteuning. We leveren geen losse diensten, maar bouwen complete oplossingen die bijdragen aan een professionele uitstraling, meer vertrouwen en betere commerciële kansen.',
-  },
-  {
-    q: 'Hoe weet ik welke dienst ik nodig heb?',
-    a: 'Dat hoef je niet vooraf exact te weten. Tijdens een kennismaking kijken we naar je bedrijf, doelen en huidige situatie. Daarna adviseren we welke oplossing op dat moment het meeste waarde toevoegt, van branding of website tot content, marketing of een compleet groeitraject.',
-  },
-  {
-    q: 'Kunnen jullie meerdere diensten combineren?',
-    a: 'Ja. Juist de combinatie maakt Minterest sterk. Een duidelijk merk, een converterende website, sterke content en betere vindbaarheid versterken elkaar. Daarom stellen we trajecten samen waarin meerdere onderdelen slim op elkaar aansluiten.',
-  },
-  {
-    q: 'Werken jullie ook met bestaande websites of merken?',
-    a: 'Ja. We bouwen niet alleen vanaf nul, maar verbeteren ook bestaande websites, merken en campagnes. We kijken eerst wat al goed is, waar de grootste winst zit en of optimaliseren slimmer is dan volledig opnieuw beginnen.',
-  },
-  {
-    q: 'Wat zijn extra groeidiensten?',
-    a: 'Extra groeidiensten zijn aanvullende oplossingen die ondernemers helpen slimmer, efficiënter en schaalbaarder te werken. Denk aan AI-oplossingen, automatisering, operationele ondersteuning, sourcing of administratieve processen. We zetten deze diensten alleen in wanneer ze direct bijdragen aan structuur, efficiëntie of groei.',
-  },
-  {
-    q: 'Hoe ziet de samenwerking eruit?',
-    a: 'We starten met een kennismaking waarin we jouw bedrijf, doelen en uitdagingen bespreken. Daarna werken we een duidelijke aanpak, scope en planning uit. Vervolgens bouwen we de oplossing, leveren we professioneel op en denken we mee over de volgende stap wanneer verdere groei of optimalisatie nodig is.',
-  },
-]
+const FAQ_COUNT = 6
 
 export function Faq() {
+  const c = useContent()
   const [open, setOpen] = useState<number | null>(0)
+  const items = Array.from({ length: FAQ_COUNT }, (_, i) => ({
+    q: c(`faq.item.${i}.q`),
+    a: c(`faq.item.${i}.a`),
+  }))
 
   return (
     <section className="relative bg-cream py-28 text-near-black md:py-36">
@@ -45,18 +26,18 @@ export function Faq() {
           <Reveal className="flex items-center gap-3">
             <span className="h-px w-10 bg-emerald/50" />
             <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
-              Veelgestelde vragen
+              {c('faq.eyebrow')}
             </span>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-8 text-balance font-display text-[clamp(2rem,4.5vw,3.5rem)] font-semibold leading-[1.05] tracking-tight">
-              Goed om te weten.
+              {c('faq.heading')}
             </h2>
           </Reveal>
         </div>
 
         <div className="flex flex-col">
-          {ITEMS.map((item, i) => {
+          {items.map((item, i) => {
             const isOpen = open === i
             return (
               <div key={i} className="border-b border-emerald-deep/10">
