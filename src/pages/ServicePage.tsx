@@ -131,7 +131,7 @@ function ServicePageInner({ base }: { base: MainService }) {
                     }`}
                   >
                     <Reveal>
-                      <SubVisual accent={s.accent} />
+                      <SubVisual accent={s.accent} image={c(`subImage.${i}`)} />
                     </Reveal>
                     <Reveal delay={0.08}>
                       <span className="grid h-16 w-16 place-items-center rounded-2xl bg-emerald/10 p-4 text-emerald ring-1 ring-emerald/15 [&>svg]:h-full [&>svg]:w-full">
@@ -340,8 +340,15 @@ function ServiceHero({ service: s }: { service: MainService }) {
 
 /* ───────────────────────── Visual helpers ───────────────────────── */
 
-/** Branded gradient tile for a sub-service (no stock photos). */
-function SubVisual({ accent }: { accent: string }) {
+/** Branded gradient tile for a sub-service, or an uploaded photo when set. */
+function SubVisual({ accent, image }: { accent: string; image?: string }) {
+  if (image) {
+    return (
+      <div className="relative aspect-[5/4] overflow-hidden rounded-3xl shadow-[0_30px_70px_rgba(1,63,64,0.22)]">
+        <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      </div>
+    )
+  }
   return (
     <div
       className={`relative aspect-[5/4] overflow-hidden rounded-3xl bg-gradient-to-br ${accent} shadow-[0_30px_70px_rgba(1,63,64,0.22)]`}

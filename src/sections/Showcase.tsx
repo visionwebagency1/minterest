@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 /**
  * Selected work on a light background: each project is a tilted browser mockup
@@ -79,6 +80,21 @@ function MiniScreen({ kind, accent }: { kind: string; accent: string }) {
 
 export function Showcase() {
   return (
+    <SiteContentProvider page="showcase">
+      <ShowcaseInner />
+    </SiteContentProvider>
+  )
+}
+
+function ShowcaseInner() {
+  const c = useContent()
+  const projects = PROJECTS.map((p, i) => ({
+    ...p,
+    name: c(`project.${i}.name`),
+    cat: c(`project.${i}.cat`),
+    image: c(`project.${i}.image`),
+  }))
+  return (
     <section id="work" className="relative bg-[#EAF4EC] py-28 text-near-black md:py-36">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -86,12 +102,12 @@ export function Showcase() {
             <Reveal className="flex items-center gap-3">
               <span className="h-px w-10 bg-emerald/50" />
               <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
-                Portfolio
+                {c('eyebrow')}
               </span>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-8 max-w-2xl text-balance font-display text-[clamp(2.25rem,6vw,5rem)] font-semibold leading-[1.02] tracking-tight">
-                Ons <Accent>werk.</Accent>
+                {c('headingPre')}<Accent>{c('headingAccent')}</Accent>
               </h2>
             </Reveal>
           </div>
@@ -100,14 +116,14 @@ export function Showcase() {
               to="/work"
               className="group inline-flex items-center gap-2 rounded-xl bg-emerald-deep px-6 py-3.5 font-sans text-sm font-semibold text-cream transition-transform duration-300 hover:scale-[1.03]"
             >
-              Bekijk alle cases
+              {c('allButton')}
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             </Link>
           </Reveal>
         </div>
 
         <div className="mt-16 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-14">
-          {PROJECTS.map((p, i) => (
+          {projects.map((p, i) => (
             <motion.div
               key={p.name}
               className={`[perspective:1400px] ${i % 2 === 1 ? 'md:mt-16' : ''}`}
@@ -131,7 +147,11 @@ export function Showcase() {
                     <span className="ml-2 h-3.5 flex-1 rounded-full bg-black/[0.06]" />
                   </div>
                   <div className="aspect-[16/10]">
-                    <MiniScreen kind={p.kind} accent={p.accent} />
+                    {p.image ? (
+                      <img src={p.image} alt="" className="h-full w-full object-cover" />
+                    ) : (
+                      <MiniScreen kind={p.kind} accent={p.accent} />
+                    )}
                   </div>
                 </motion.div>
               </Link>
@@ -140,7 +160,7 @@ export function Showcase() {
                   <h3 className="font-display text-base font-semibold md:text-2xl">{p.name}</h3>
                   <p className="mt-1 font-sans text-xs text-near-black/50 md:text-sm">{p.cat}</p>
                 </div>
-                <span className="hidden font-sans text-sm text-emerald-deep sm:inline">Bekijk case &rarr;</span>
+                <span className="hidden font-sans text-sm text-emerald-deep sm:inline">{c('caseLabel')} &rarr;</span>
               </div>
             </motion.div>
           ))}
