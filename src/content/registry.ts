@@ -194,12 +194,65 @@ const AUDIT_FIELDS: ContentField[] = [
   t('finalCta.button', 'Slot-CTA', 'Knop', 'Vraag je audit aan'),
 ]
 
+const START_FIELDS: ContentField[] = [
+  t('hero.kicker', 'Hero', 'Eyebrow', 'Start jouw project'),
+  t('hero.titlePre', 'Hero', 'Titel', 'Laten we iets '),
+  t('hero.titleAccent', 'Hero', 'Titel (accent)', 'moois'),
+  t('hero.titlePost', 'Hero', 'Titel (slot)', ' bouwen.'),
+  m('hero.tagline', 'Hero', 'Tagline', 'Vertel ons waar je staat en waar je heen wil. Binnen twee werkdagen plannen we een vrijblijvend gesprek met een eerste plan.'),
+  t('form.pickLabel', 'Formulier', 'Kop', 'Waar kunnen we mee helpen?'),
+  t('form.pickHint', 'Formulier', 'Subkop', 'Kies één of meer diensten.'),
+  t('form.budgetLabel', 'Formulier', 'Budget-placeholder', 'Budget'),
+  t('form.timelineLabel', 'Formulier', 'Tijdlijn-placeholder', 'Tijdlijn'),
+  t('form.submit', 'Formulier', 'Knop', 'Verstuur aanvraag'),
+  t('form.successTitle', 'Formulier', 'Bedankt-titel', 'Top, bedankt!'),
+  m('form.successText', 'Formulier', 'Bedankt-tekst', 'We hebben je aanvraag binnen. Je hoort binnen twee werkdagen van ons met een eerste plan.'),
+  t('budget.0', 'Budgetopties', 'Optie 1', 'Nog niet zeker'),
+  t('budget.1', 'Budgetopties', 'Optie 2', 'Tot € 1.000'),
+  t('budget.2', 'Budgetopties', 'Optie 3', '€ 1.000 tot € 5.000'),
+  t('budget.3', 'Budgetopties', 'Optie 4', '€ 5.000 tot € 15.000'),
+  t('budget.4', 'Budgetopties', 'Optie 5', '€ 15.000+'),
+  t('timeline.0', 'Tijdlijnopties', 'Optie 1', 'Zo snel mogelijk'),
+  t('timeline.1', 'Tijdlijnopties', 'Optie 2', 'Binnen 1 maand'),
+  t('timeline.2', 'Tijdlijnopties', 'Optie 3', '1 tot 3 maanden'),
+  t('timeline.3', 'Tijdlijnopties', 'Optie 4', 'Later dit jaar'),
+  t('trust.headingPre', 'Waarom starten', 'Titel', 'Waarom met ons '),
+  t('trust.headingAccent', 'Waarom starten', 'Titel (accent)', 'starten'),
+  t('trust.headingPost', 'Waarom starten', 'Titel (slot)', '.'),
+  t('why.0.title', 'Waarom starten', 'Reden 1 titel', 'Eén team, geen overdrachten'),
+  m('why.0.desc', 'Waarom starten', 'Reden 1 tekst', 'Strategie, design, build en groei aan dezelfde tafel.'),
+  t('why.1.title', 'Waarom starten', 'Reden 2 titel', 'Heldere prijzen'),
+  m('why.1.desc', 'Waarom starten', 'Reden 2 tekst', 'Vooraf weten waar je aan toe bent. Geen verrassingen.'),
+  t('why.2.title', 'Waarom starten', 'Reden 3 titel', 'Snel van start'),
+  m('why.2.desc', 'Waarom starten', 'Reden 3 tekst', 'Binnen een week na de kennismaking liggen de eerste plannen er.'),
+  m('review.quote', 'Review', 'Quote', 'Van eerste mail tot live in vier weken. Strak geregeld en het resultaat overtrof de verwachting.'),
+  t('review.name', 'Review', 'Naam', 'Mark Jansen'),
+  t('review.company', 'Review', 'Bedrijf', 'Ascend Labs'),
+]
+
+const SERVICES_FIELDS: ContentField[] = [
+  t('hero.eyebrow', 'Hero', 'Eyebrow', 'Onze diensten'),
+  t('hero.headingPre', 'Hero', 'Titel', 'Zes diensten, één '),
+  t('hero.headingAccent', 'Hero', 'Titel (accent)', 'opwaartse'),
+  t('hero.headingPost', 'Hero', 'Titel (slot)', ' beweging.'),
+  m('hero.intro', 'Hero', 'Intro', 'Van merk en website tot video, social, vindbaarheid en alles eromheen. Elke dienst haakt in op de volgende en tilt je merk stap voor stap hoger.'),
+]
+
+const TERMS_FIELDS: ContentField[] = [
+  t('hero.kicker', 'Hero', 'Eyebrow', 'Juridisch'),
+  t('hero.title', 'Hero', 'Titel', 'Algemene Voorwaarden'),
+  m('hero.tagline', 'Hero', 'Tagline', 'De afspraken die onze samenwerking helder, professioneel en eerlijk houden. Lees ze rustig door, of vraag ons gerust om toelichting.'),
+]
+
 export const CONTENT_PAGES: PageContent[] = [
   { page: 'home', title: 'Homepage', fields: HOME_FIELDS },
+  { page: 'services', title: 'Diensten-overzicht', fields: SERVICES_FIELDS },
   { page: 'about', title: 'Over ons', fields: ABOUT_FIELDS },
-  { page: 'contact', title: 'Contact', fields: CONTACT_FIELDS },
   { page: 'work', title: 'Portfolio', fields: WORK_FIELDS },
+  { page: 'contact', title: 'Contact', fields: CONTACT_FIELDS },
+  { page: 'start', title: 'Start jouw project', fields: START_FIELDS },
   { page: 'website-audit', title: 'Website-audit', fields: AUDIT_FIELDS },
+  { page: 'terms', title: 'Algemene Voorwaarden', fields: TERMS_FIELDS },
   { page: 'global', title: 'Footer (alle pagina\'s)', fields: GLOBAL_FIELDS },
 ]
 

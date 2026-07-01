@@ -6,22 +6,26 @@ import { BorderBeam } from '@/components/BorderBeam'
 import { Footer } from '@/sections/Footer'
 import { SERVICE_OPTIONS } from '@/components/serviceIcons'
 import { useLeadForm } from '@/lib/useLeadForm'
-
-const BUDGETS = ['Nog niet zeker', 'Tot € 1.000', '€ 1.000 tot € 5.000', '€ 5.000 tot € 15.000', '€ 15.000+']
-const TIMELINES = ['Zo snel mogelijk', 'Binnen 1 maand', '1 tot 3 maanden', 'Later dit jaar']
-
-const WHY = [
-  { title: 'Eén team, geen overdrachten', desc: 'Strategie, design, build en groei aan dezelfde tafel.' },
-  { title: 'Heldere prijzen', desc: 'Vooraf weten waar je aan toe bent. Geen verrassingen.' },
-  { title: 'Snel van start', desc: 'Binnen een week na de kennismaking liggen de eerste plannen er.' },
-]
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 const field =
   'w-full rounded-xl border border-emerald-deep/15 bg-white px-4 py-3 font-sans text-sm text-near-black placeholder:text-near-black/35 outline-none transition-colors focus:border-emerald'
 
 export function Start() {
+  return (
+    <SiteContentProvider page="start">
+      <StartInner />
+    </SiteContentProvider>
+  )
+}
+
+function StartInner() {
+  const c = useContent()
   const [picked, setPicked] = useState<string[]>([])
   const { isSubmitting, isSuccess, error, submit } = useLeadForm('start')
+  const BUDGETS = Array.from({ length: 5 }, (_, i) => c(`budget.${i}`))
+  const TIMELINES = Array.from({ length: 4 }, (_, i) => c(`timeline.${i}`))
+  const WHY = Array.from({ length: 3 }, (_, i) => ({ title: c(`why.${i}.title`), desc: c(`why.${i}.desc`) }))
 
   const toggle = (key: string) =>
     setPicked((p) => (p.includes(key) ? p.filter((k) => k !== key) : [...p, key]))
@@ -43,13 +47,13 @@ export function Start() {
   return (
     <>
       <PageHero
-        kicker="Start jouw project"
+        kicker={c('hero.kicker')}
         title={
           <>
-            Laten we iets <Accent>moois</Accent> bouwen.
+            {c('hero.titlePre')}<Accent>{c('hero.titleAccent')}</Accent>{c('hero.titlePost')}
           </>
         }
-        tagline="Vertel ons waar je staat en waar je heen wil. Binnen twee werkdagen plannen we een vrijblijvend gesprek met een eerste plan."
+        tagline={c('hero.tagline')}
       />
 
       <div className="bg-cream text-near-black">
@@ -61,16 +65,16 @@ export function Start() {
             >
               {isSuccess ? (
                 <div className="flex min-h-[24rem] flex-col items-center justify-center text-center">
-                  <span className="font-accent text-4xl italic text-emerald">Top, bedankt!</span>
+                  <span className="font-accent text-4xl italic text-emerald">{c('form.successTitle')}</span>
                   <p className="mt-4 max-w-sm font-sans text-base text-near-black/60">
-                    We hebben je aanvraag binnen. Je hoort binnen twee werkdagen van ons met een eerste plan.
+                    {c('form.successText')}
                   </p>
                 </div>
               ) : (
                 <>
                   {/* service picker */}
-                  <label className="font-display text-lg font-semibold">Waar kunnen we mee helpen?</label>
-                  <p className="mt-1 font-sans text-sm text-near-black/50">Kies één of meer diensten.</p>
+                  <label className="font-display text-lg font-semibold">{c('form.pickLabel')}</label>
+                  <p className="mt-1 font-sans text-sm text-near-black/50">{c('form.pickHint')}</p>
                   <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {SERVICE_OPTIONS.map((s) => {
                       const { Icon } = s
@@ -107,12 +111,12 @@ export function Start() {
                     <input name="company" className={field} placeholder="Bedrijf of website" />
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <select name="budget" className={`${field} appearance-none`} defaultValue="">
-                        <option value="" disabled>Budget</option>
+                        <option value="" disabled>{c('form.budgetLabel')}</option>
                         {BUDGETS.map((b) => <option key={b}>{b}</option>)}
                       </select>
                       <select name="timeline" className={`${field} appearance-none`} defaultValue="">
-                        <option value="" disabled>Tijdlijn</option>
-                        {TIMELINES.map((t) => <option key={t}>{t}</option>)}
+                        <option value="" disabled>{c('form.timelineLabel')}</option>
+                        {TIMELINES.map((tl) => <option key={tl}>{tl}</option>)}
                       </select>
                     </div>
                     <textarea name="message" className={`${field} min-h-[7rem] resize-none`} placeholder="Vertel kort over je project" required />
@@ -122,7 +126,7 @@ export function Start() {
                       className="group relative mt-2 inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                     >
                       <BorderBeam rx={12} />
-                      <span className="relative z-10">{isSubmitting ? 'Versturen…' : 'Verstuur aanvraag'}</span>
+                      <span className="relative z-10">{isSubmitting ? 'Versturen…' : c('form.submit')}</span>
                       {!isSubmitting && <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>}
                       <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
                     </button>
@@ -141,7 +145,7 @@ export function Start() {
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal delay={0.05}>
               <h2 className="text-balance font-display text-[clamp(2rem,4.5vw,3.25rem)] font-semibold leading-tight">
-                Waarom met ons <Accent>starten</Accent>.
+                {c('trust.headingPre')}<Accent>{c('trust.headingAccent')}</Accent>{c('trust.headingPost')}
               </h2>
             </Reveal>
             <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3">
@@ -164,11 +168,11 @@ export function Start() {
           <div className="mx-auto max-w-4xl px-6 text-center md:px-10">
             <Reveal>
               <blockquote className="text-balance font-display text-[clamp(1.6rem,4vw,2.75rem)] font-semibold leading-[1.15] text-cream">
-                Van eerste mail tot live in vier weken. Strak geregeld en het resultaat overtrof de verwachting.
+                {c('review.quote')}
               </blockquote>
             </Reveal>
             <div className="mt-8 font-sans text-sm text-cream/60">
-              <span className="font-semibold text-cream">Mark Jansen</span> · Ascend Labs
+              <span className="font-semibold text-cream">{c('review.name')}</span> · {c('review.company')}
             </div>
           </div>
         </section>

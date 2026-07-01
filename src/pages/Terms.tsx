@@ -1,6 +1,7 @@
 import { Reveal } from '@/components/Reveal'
 import { PageHero } from '@/components/PageHero'
 import { Footer } from '@/sections/Footer'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 /**
  * Algemene Voorwaarden — a clean, readable legal page. The content lives in the
@@ -429,11 +430,20 @@ function Blocks({ blocks }: { blocks: Block[] }) {
 
 export function Terms() {
   return (
+    <SiteContentProvider page="terms">
+      <TermsInner />
+    </SiteContentProvider>
+  )
+}
+
+function TermsInner() {
+  const c = useContent()
+  return (
     <>
       <PageHero
-        kicker="Juridisch"
-        title="Algemene Voorwaarden"
-        tagline="De afspraken die onze samenwerking helder, professioneel en eerlijk houden. Lees ze rustig door, of vraag ons gerust om toelichting."
+        kicker={c('hero.kicker')}
+        title={c('hero.title')}
+        tagline={c('hero.tagline')}
       />
 
       <div className="bg-cream text-near-black">
