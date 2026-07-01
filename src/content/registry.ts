@@ -265,6 +265,7 @@ const SERVICE_PAGES: PageContent[] = MAIN_SERVICES.map((s) => ({
     m('tagline', 'Hero', 'Tagline', s.tagline),
     m('intro', 'De oplossing', 'Introtekst (*woord* = accent)', s.intro),
     img('actionImage', 'In actie', 'Foto (vervangt de animatie)'),
+    ...s.subs.map((sub, i) => img(`subImage.${i}`, 'Wat we doen', `Foto: ${sub.name}`)),
   ],
 }))
 
@@ -281,6 +282,26 @@ const SUBSERVICE_PAGES: PageContent[] = SUB_SERVICES.map((sub) => ({
   ],
 }))
 
+// Portfolio grid (Showcase), shown on the homepage and /work.
+const SHOWCASE_PROJECTS: { name: string; cat: string }[] = [
+  { name: 'Luna Light', cat: 'Webshop · Shopify' },
+  { name: 'Ascend Labs', cat: 'SaaS · Development' },
+  { name: 'DYOTA', cat: 'Branding · Landingpage' },
+  { name: 'Bloom & Co', cat: 'Website · Merk' },
+]
+const SHOWCASE_FIELDS: ContentField[] = [
+  t('eyebrow', 'Kop', 'Eyebrow', 'Portfolio'),
+  t('headingPre', 'Kop', 'Titel', 'Ons '),
+  t('headingAccent', 'Kop', 'Titel (accent)', 'werk.'),
+  t('allButton', 'Kop', 'Knop', 'Bekijk alle cases'),
+  t('caseLabel', 'Kop', 'Case-label', 'Bekijk case'),
+  ...SHOWCASE_PROJECTS.flatMap((p, i) => [
+    t(`project.${i}.name`, `Project ${i + 1}`, 'Naam', p.name),
+    t(`project.${i}.cat`, `Project ${i + 1}`, 'Categorie', p.cat),
+    img(`project.${i}.image`, `Project ${i + 1}`, 'Foto (vervangt de mockup)'),
+  ]),
+]
+
 export const CONTENT_PAGES: PageContent[] = [
   { page: 'home', title: 'Homepage', fields: HOME_FIELDS },
   { page: 'services', title: 'Diensten-overzicht', fields: SERVICES_FIELDS },
@@ -288,6 +309,7 @@ export const CONTENT_PAGES: PageContent[] = [
   ...SUBSERVICE_PAGES,
   { page: 'about', title: 'Over ons', fields: ABOUT_FIELDS },
   { page: 'work', title: 'Portfolio', fields: WORK_FIELDS },
+  { page: 'showcase', title: 'Portfolio-grid (home + werk)', fields: SHOWCASE_FIELDS },
   { page: 'contact', title: 'Contact', fields: CONTACT_FIELDS },
   { page: 'start', title: 'Start jouw project', fields: START_FIELDS },
   { page: 'website-audit', title: 'Website-audit', fields: AUDIT_FIELDS },
