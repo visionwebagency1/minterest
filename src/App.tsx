@@ -9,6 +9,7 @@ import { Services } from '@/pages/Services'
 import { ServiceRoute } from '@/pages/ServicePage'
 import { SubServiceRoute } from '@/pages/SubServicePage'
 import { Work } from '@/pages/Work'
+import { ProjectCase } from '@/pages/ProjectCase'
 import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
 import { Start } from '@/pages/Start'
@@ -55,6 +56,7 @@ function PublicSite() {
             <Route path="/influencer" element={<Navigate to="/diensten/social-media" replace />} />
 
             <Route path="/work" element={<Work />} />
+            <Route path="/work/:slug" element={<ProjectCase />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/start" element={<Start />} />

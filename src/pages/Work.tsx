@@ -51,7 +51,7 @@ function WorkInner() {
           </Reveal>
         </section>
 
-        <Showcase />
+        <Showcase variant="all" />
       </div>
 
       <Footer />
