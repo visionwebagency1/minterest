@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { lenisScrollTo } from '@/lib/useLenis'
@@ -149,48 +150,86 @@ export function HeroContent() {
         </div>
       </div>
 
-      {/* Fixed contact dock (desktop) */}
-      <motion.div
-        initial={{ opacity: 0, x: 16 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7, ease: EASE, delay: 1 }}
-        className="pointer-events-none fixed right-5 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-3 lg:flex"
-      >
-        {[
-          {
-            label: 'WhatsApp',
-            href: 'https://wa.me/',
-            path: 'M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.7.8-.9 1.7-.6 2.9.5 1.9 1.8 3.4 3.7 4.4 1.7.9 2.5.8 3.4.7.5-.1 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.1l-.4-.2Z',
-          },
-          {
-            label: 'Bel ons',
-            href: 'tel:+31',
-            path: 'M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11 11 0 0 0 3.5.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.5a1 1 0 0 1-.3 1l-2.2 2.3Z',
-          },
-          {
-            label: 'Chat',
-            href: '#contact',
-            path: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1Z',
-          },
-        ].map((c) => (
-          <a
-            key={c.label}
-            href={c.href}
-            aria-label={c.label}
-            className="pointer-events-auto grid h-11 w-11 place-items-center rounded-xl border border-white/12 bg-white/5 text-white/80 backdrop-blur-md transition-all duration-300 hover:border-mint/50 hover:bg-mint/15 hover:text-white"
-          >
-            <svg
-              className="h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d={c.path} />
-            </svg>
-          </a>
-        ))}
-      </motion.div>
-
+      {/* Fixed contact dock (desktop) — adapts to the section behind it. */}
+      <ContactDock />
     </>
+  )
+}
+
+const DOCK_LINKS = [
+  {
+    label: 'WhatsApp',
+    href: 'https://wa.me/',
+    path: 'M12 2a10 10 0 0 0-8.6 15l-1.4 5 5.1-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.7.8-.9 1.7-.6 2.9.5 1.9 1.8 3.4 3.7 4.4 1.7.9 2.5.8 3.4.7.5-.1 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.1l-.4-.2Z',
+  },
+  {
+    label: 'Bel ons',
+    href: 'tel:+31',
+    path: 'M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11 11 0 0 0 3.5.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.5a1 1 0 0 1-.3 1l-2.2 2.3Z',
+  },
+  {
+    label: 'Chat',
+    href: '#contact',
+    path: 'M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4 4V5a1 1 0 0 1 1-1Z',
+  },
+]
+
+/**
+ * Fixed contact dock on the right edge. Samples the background of whatever
+ * section sits behind it and switches style: on a LIGHT section it goes solid
+ * dark-teal (so the icons stay visible); on a DARK section it stays glassy
+ * white. Re-checks on scroll and resize.
+ */
+function ContactDock() {
+  const [onLight, setOnLight] = useState(false)
+
+  useEffect(() => {
+    const sample = () => {
+      const x = Math.max(8, window.innerWidth - 150)
+      const y = Math.round(window.innerHeight / 2)
+      for (const el of document.elementsFromPoint(x, y)) {
+        const m = getComputedStyle(el).backgroundColor.match(/rgba?\(([^)]+)\)/)
+        if (!m) continue
+        const p = m[1].split(',').map((v) => parseFloat(v))
+        if ((p[3] ?? 1) < 0.5) continue
+        const lum = (0.299 * p[0] + 0.587 * p[1] + 0.114 * p[2]) / 255
+        setOnLight(lum > 0.55)
+        return
+      }
+      setOnLight(false)
+    }
+    sample()
+    window.addEventListener('scroll', sample, { passive: true })
+    window.addEventListener('resize', sample)
+    return () => {
+      window.removeEventListener('scroll', sample)
+      window.removeEventListener('resize', sample)
+    }
+  }, [])
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 16 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.7, ease: EASE, delay: 1 }}
+      className="pointer-events-none fixed right-5 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-3 lg:flex"
+    >
+      {DOCK_LINKS.map((c) => (
+        <a
+          key={c.label}
+          href={c.href}
+          aria-label={c.label}
+          className={`pointer-events-auto grid h-11 w-11 place-items-center rounded-xl border backdrop-blur-md transition-colors duration-500 ${
+            onLight
+              ? 'border-emerald-deep/15 bg-emerald-deep text-cream shadow-[0_10px_30px_rgba(1,63,64,0.28)] hover:bg-emerald'
+              : 'border-white/12 bg-white/5 text-white/80 hover:border-mint/50 hover:bg-mint/15 hover:text-white'
+          }`}
+        >
+          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d={c.path} />
+          </svg>
+        </a>
+      ))}
+    </motion.div>
   )
 }

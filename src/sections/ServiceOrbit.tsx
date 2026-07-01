@@ -109,12 +109,17 @@ export function ServiceOrbit() {
               type="button"
               onClick={() => focusService(i)}
               aria-label={`Bekijk ${s.label}`}
-              className="group pointer-events-auto flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/60 bg-white/90 px-2.5 py-1.5 shadow-[0_14px_38px_rgba(10,21,18,0.5)] ring-1 ring-inset ring-white/50 outline-none transition-[box-shadow,background-color] duration-300 hover:bg-white hover:shadow-[0_18px_50px_rgba(0,128,129,0.45)] focus-visible:ring-2 focus-visible:ring-emerald md:gap-2.5 md:px-6 md:py-3"
+              className="group pointer-events-auto relative flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white bg-white px-2.5 py-1.5 shadow-[0_10px_30px_rgba(10,21,18,0.42)] outline-none transition-[box-shadow,transform] duration-300 hover:shadow-[0_0_0_3px_rgba(144,238,144,0.6),0_22px_55px_-6px_rgba(66,194,140,0.75)] focus-visible:ring-2 focus-visible:ring-emerald md:gap-2.5 md:px-6 md:py-3"
               animate={FLOATS[i]}
               transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: 'easeInOut' }}
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
             >
+              {/* soft pulsing green glow, only on hover */}
+              <span
+                className="pointer-events-none absolute -inset-1.5 -z-10 rounded-full bg-gradient-to-r from-emerald/50 to-mint/50 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100 group-hover:animate-pulse"
+                aria-hidden="true"
+              />
               <span className="h-1.5 w-1.5 rounded-full bg-emerald shadow-[0_0_8px_rgba(0,128,129,0.8)] transition-colors duration-300 group-hover:bg-mint md:h-2 md:w-2" />
               <span className="font-sans text-[10.5px] font-semibold leading-none text-emerald-deep md:text-base">
                 {s.label}
@@ -123,27 +128,22 @@ export function ServiceOrbit() {
           </div>
         ))}
 
-        {/* "These are clickable" hint. Desktop: parked top-right between the
-            "Design & Branding" (top) and "Web Development" (top-right) pills.
-            Mobile: larger and centred BELOW the M and the pills. */}
+        {/* "These are clickable" hint. Desktop: parked ABOVE the top pill
+            (Branding voor groei), a touch bigger. Mobile: centred BELOW the M. */}
         <motion.div
           className="pointer-events-none absolute"
           style={
             desktop
-              ? {
-                  left: (positions[0].x + positions[1].x) / 2,
-                  top: (positions[0].y + positions[1].y) / 2,
-                  transform: 'translate(-50%, -50%)',
-                }
+              ? { left: positions[0].x, top: positions[0].y - 66, transform: 'translate(-50%, -100%)' }
               : { left: 0, top: ry + 52, transform: 'translate(-50%, 0)' }
           }
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0.45, 0.85, 0.45] }}
+          animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
           aria-hidden="true"
         >
-          <span className="flex items-center gap-2 whitespace-nowrap rounded-full bg-near-black/40 px-3.5 py-2 font-sans text-xs uppercase tracking-[0.18em] text-white/85 backdrop-blur-sm md:gap-1.5 md:bg-near-black/35 md:px-2.5 md:py-1 md:text-[11px]">
-            <svg viewBox="0 0 24 24" className="h-4 w-4 md:h-3 md:w-3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <span className="flex items-center gap-2 whitespace-nowrap rounded-full bg-near-black/50 px-4 py-2 font-sans text-xs uppercase tracking-[0.18em] text-white backdrop-blur-sm md:gap-2 md:px-4 md:py-2 md:text-sm">
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 11V6a2 2 0 1 1 4 0v5" />
               <path d="M13 7a2 2 0 1 1 4 0v6a6 6 0 0 1-6 6h-1.5a4 4 0 0 1-3-1.4L3 14a1.6 1.6 0 0 1 2.4-2L7 13.5V8a2 2 0 1 1 4 0" />
             </svg>
