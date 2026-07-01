@@ -185,7 +185,7 @@ function ServicePageInner({ base }: { base: MainService }) {
               </Reveal>
             </div>
             <Reveal delay={0.1}>
-              <ServiceScene service={s} />
+              <ServiceScene service={s} image={c('actionImage')} />
             </Reveal>
           </div>
         </section>
@@ -363,7 +363,7 @@ function SubVisual({ accent }: { accent: string }) {
 }
 
 /** The service's animated render in a rich, framed scene (dark card on light bg). */
-function ServiceScene({ service: s }: { service: MainService }) {
+function ServiceScene({ service: s, image }: { service: MainService; image?: string }) {
   const { Render } = s
   const reduce = useReducedMotion()
   const ref = useRef<HTMLDivElement>(null)
@@ -391,9 +391,13 @@ function ServiceScene({ service: s }: { service: MainService }) {
         animate={reduce ? undefined : { opacity: [0.32, 0.6, 0.32], scale: [0.9, 1.06, 0.9] }}
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
       />
-      <div className="absolute inset-0 grid place-items-center [&>*]:h-full [&>*]:w-full md:[&>*]:scale-[1.06]">
-        {seen && <Render />}
-      </div>
+      {image ? (
+        <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      ) : (
+        <div className="absolute inset-0 grid place-items-center [&>*]:h-full [&>*]:w-full md:[&>*]:scale-[1.06]">
+          {seen && <Render />}
+        </div>
+      )}
       <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/10" />
     </div>
   )

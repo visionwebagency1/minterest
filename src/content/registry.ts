@@ -28,6 +28,14 @@ const m = (key: string, group: string, label: string, def: string): ContentField
   kind: 'multiline',
   default: def,
 })
+/** Image field. Defaults to empty: while empty the section keeps its placeholder. */
+const img = (key: string, group: string, label: string): ContentField => ({
+  key,
+  group,
+  label,
+  kind: 'image',
+  default: '',
+})
 
 const HOME_FIELDS: ContentField[] = [
   // ── Marquee (lopende balk onder de hero) ───────────────────────────────────
@@ -256,6 +264,7 @@ const SERVICE_PAGES: PageContent[] = MAIN_SERVICES.map((s) => ({
   fields: [
     m('tagline', 'Hero', 'Tagline', s.tagline),
     m('intro', 'De oplossing', 'Introtekst (*woord* = accent)', s.intro),
+    img('actionImage', 'In actie', 'Foto (vervangt de animatie)'),
   ],
 }))
 
@@ -267,6 +276,8 @@ const SUBSERVICE_PAGES: PageContent[] = SUB_SERVICES.map((sub) => ({
   fields: [
     m('tagline', 'Hero', 'Tagline', sub.tagline),
     ...sub.story.map((p, i) => m(`story.${i}`, 'Verhaal', `Alinea ${i + 1}`, p)),
+    img('actionImage', 'In actie', 'Foto (vervangt de animatie)'),
+    img('caseImage', 'Case', 'Foto (vervangt de tegel)'),
   ],
 }))
 
