@@ -1,5 +1,6 @@
 import type { ContentField, PageContent } from './types'
 import { MAIN_SERVICES } from '@/data/services'
+import { SUB_SERVICES } from '@/data/subServices'
 
 /**
  * Registry of every editable page. Fields are added per section as each part of
@@ -26,6 +27,14 @@ const m = (key: string, group: string, label: string, def: string): ContentField
   label,
   kind: 'multiline',
   default: def,
+})
+/** Image field. Defaults to empty: while empty the section keeps its placeholder. */
+const img = (key: string, group: string, label: string): ContentField => ({
+  key,
+  group,
+  label,
+  kind: 'image',
+  default: '',
 })
 
 const HOME_FIELDS: ContentField[] = [
@@ -255,6 +264,20 @@ const SERVICE_PAGES: PageContent[] = MAIN_SERVICES.map((s) => ({
   fields: [
     m('tagline', 'Hero', 'Tagline', s.tagline),
     m('intro', 'De oplossing', 'Introtekst (*woord* = accent)', s.intro),
+    img('actionImage', 'In actie', 'Foto (vervangt de animatie)'),
+  ],
+}))
+
+// One editor page per sub-service landing page (tagline + story paragraphs),
+// defaults auto-generated from the sub-service data.
+const SUBSERVICE_PAGES: PageContent[] = SUB_SERVICES.map((sub) => ({
+  page: `sub-${sub.serviceSlug}-${sub.slug}`,
+  title: `Sub: ${sub.name}`,
+  fields: [
+    m('tagline', 'Hero', 'Tagline', sub.tagline),
+    ...sub.story.map((p, i) => m(`story.${i}`, 'Verhaal', `Alinea ${i + 1}`, p)),
+    img('actionImage', 'In actie', 'Foto (vervangt de animatie)'),
+    img('caseImage', 'Case', 'Foto (vervangt de tegel)'),
   ],
 }))
 
@@ -262,6 +285,7 @@ export const CONTENT_PAGES: PageContent[] = [
   { page: 'home', title: 'Homepage', fields: HOME_FIELDS },
   { page: 'services', title: 'Diensten-overzicht', fields: SERVICES_FIELDS },
   ...SERVICE_PAGES,
+  ...SUBSERVICE_PAGES,
   { page: 'about', title: 'Over ons', fields: ABOUT_FIELDS },
   { page: 'work', title: 'Portfolio', fields: WORK_FIELDS },
   { page: 'contact', title: 'Contact', fields: CONTACT_FIELDS },

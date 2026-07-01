@@ -10,6 +10,7 @@ import { Footer } from '@/sections/Footer'
 import { SUB_RENDER_BY_KEY } from '@/sections/subServiceRenders'
 import { SUB_BY_KEY, parentService, subsForService, type SubService } from '@/data/subServices'
 import { subPath } from '@/data/services'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 import { NotFound } from './NotFound'
 
 /**
@@ -25,10 +26,18 @@ export function SubServiceRoute() {
   const { slug = '', subslug = '' } = useParams()
   const sub = SUB_BY_KEY[`${slug}/${subslug}`]
   if (!sub) return <NotFound />
-  return <SubServicePage sub={sub} />
+  return (
+    <SiteContentProvider page={`sub-${sub.serviceSlug}-${sub.slug}`}>
+      <SubServicePage sub={sub} />
+    </SiteContentProvider>
+  )
 }
 
-function SubServicePage({ sub }: { sub: SubService }) {
+function SubServicePage({ sub: base }: { sub: SubService }) {
+  const c = useContent()
+  // Override only the editable prose (tagline + story); the rest stays as-is.
+  const sub: SubService = { ...base, tagline: c('tagline'), story: base.story.map((_, i) => c(`story.${i}`)) }
+  const caseImage = c('caseImage')
   const parent = parentService(sub)
   const accent = parent?.accent ?? 'from-emerald to-mint'
   const Render = SUB_RENDER_BY_KEY[`${sub.serviceSlug}/${sub.slug}`] ?? parent?.Render
@@ -96,7 +105,7 @@ function SubServicePage({ sub }: { sub: SubService }) {
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <SceneTile Render={Render} />
+              <SceneTile Render={Render} image={c('actionImage')} />
             </Reveal>
           </div>
         </section>
@@ -224,8 +233,14 @@ function SubServicePage({ sub }: { sub: SubService }) {
                   <svg viewBox="6.5 6.5 56 31" className="pointer-events-none absolute -right-6 -top-8 h-3/4 opacity-[0.14]" aria-hidden="true">
                     <path d="M 61.09 25.2 C 59.24 27.59 54 34.36 52.44 36.37 C 52.19 36.7 51.8 36.89 51.38 36.89 L 45.6 36.89 C 44.48 36.89 43.84 35.6 44.53 34.71 C 47.48 30.9 53.39 23.27 55.43 20.63 C 55.8 20.14 55.8 19.46 55.43 18.98 L 54.05 17.2 C 53.52 16.5 52.46 16.5 51.92 17.2 C 48.07 22.18 40.31 32.2 37.09 36.37 C 36.83 36.7 36.44 36.89 36.02 36.89 L 28.31 36.89 C 27.19 36.89 26.55 35.59 27.25 34.71 L 34.14 25.8 C 34.52 25.31 34.52 24.63 34.14 24.14 L 32.06 21.45 C 31.52 20.75 30.46 20.75 29.93 21.45 L 18.38 36.36 C 18.12 36.7 17.73 36.89 17.31 36.89 L 9.6 36.89 C 8.48 36.89 7.85 35.59 8.54 34.7 L 25.43 12.89 C 25.97 12.19 27.02 12.19 27.56 12.89 C 29.64 15.57 32.72 19.55 34.79 22.21 C 35.32 22.91 36.38 22.91 36.92 22.21 L 47.43 8.64 C 47.97 7.94 49.02 7.94 49.56 8.64 C 53.11 13.22 57.65 19.08 61.1 23.54 C 61.48 24.02 61.48 24.71 61.1 25.2 Z" fill="#06140F" />
                   </svg>
-                  <span className="font-sans text-xs uppercase tracking-[0.28em] text-near-black/60">{sub.case.sector}</span>
-                  <span className="mt-2 font-display text-3xl font-semibold text-near-black md:text-4xl">{sub.case.name}</span>
+                  {caseImage && (
+                    <>
+                      <img src={caseImage} alt="" className="absolute inset-0 h-full w-full object-cover" />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                    </>
+                  )}
+                  <span className={`relative z-10 font-sans text-xs uppercase tracking-[0.28em] ${caseImage ? 'text-cream/80' : 'text-near-black/60'}`}>{sub.case.sector}</span>
+                  <span className={`relative z-10 mt-2 font-display text-3xl font-semibold md:text-4xl ${caseImage ? 'text-cream' : 'text-near-black'}`}>{sub.case.name}</span>
                 </div>
               </Reveal>
               <Reveal delay={0.08}>
@@ -415,18 +430,24 @@ function SubHero({ sub, parentLabel, parentCta }: { sub: SubService; parentLabel
 
 /* ───────────────────────── Scene tile ───────────────────────── */
 
-function SceneTile({ Render }: { Render?: ComponentType }) {
+function SceneTile({ Render, image }: { Render?: ComponentType; image?: string }) {
   return (
     <div className="relative aspect-square w-full overflow-hidden rounded-[1.75rem] border border-white/10 shadow-[0_40px_120px_rgba(1,63,64,0.25)] ring-1 ring-mint/10 lg:aspect-[4/3.4]">
       <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(155deg, #013F40 0%, #082321 52%, #05110F 100%)' }} />
-      <motion.div
-        className="pointer-events-none absolute left-[18%] top-[8%] h-[64%] w-[64%] rounded-full bg-mint/20 blur-[90px]"
-        animate={{ opacity: [0.32, 0.6, 0.32], scale: [0.9, 1.06, 0.9] }}
-        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <div className="absolute inset-0 grid place-items-center [&>*]:h-full [&>*]:w-full">
-        {Render ? <Render /> : null}
-      </div>
+      {image ? (
+        <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+      ) : (
+        <>
+          <motion.div
+            className="pointer-events-none absolute left-[18%] top-[8%] h-[64%] w-[64%] rounded-full bg-mint/20 blur-[90px]"
+            animate={{ opacity: [0.32, 0.6, 0.32], scale: [0.9, 1.06, 0.9] }}
+            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+          />
+          <div className="absolute inset-0 grid place-items-center [&>*]:h-full [&>*]:w-full">
+            {Render ? <Render /> : null}
+          </div>
+        </>
+      )}
       <div className="pointer-events-none absolute inset-0 rounded-[1.75rem] ring-1 ring-inset ring-white/10" />
     </div>
   )
