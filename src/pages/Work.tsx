@@ -3,39 +3,48 @@ import { Reveal } from '@/components/Reveal'
 import { PageHero } from '@/components/PageHero'
 import { Showcase } from '@/sections/Showcase'
 import { Footer } from '@/sections/Footer'
-
-const CATS = ['Alle', 'Websites', 'Webshops', 'Branding', 'Video & Fotografie', 'Social Media', 'SEO & SEA']
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 /** Portfolio overview: dark hero + category chips + the showcase grid. */
 export function Work() {
   return (
+    <SiteContentProvider page="work">
+      <WorkInner />
+    </SiteContentProvider>
+  )
+}
+
+function WorkInner() {
+  const c = useContent()
+  const CATS = Array.from({ length: 7 }, (_, i) => c(`cat.${i}`))
+  return (
     <>
       <PageHero
-        kicker="Uitgelicht werk"
+        kicker={c('hero.kicker')}
         title={
           <>
-            Werk dat bedrijven <Accent>vooruitbrengt.</Accent>
+            {c('hero.titlePre')}<Accent>{c('hero.titleAccent')}</Accent>
           </>
         }
-        tagline="Een selectie van websites, branding, content en campagnes die bedrijven sterker zichtbaar maken, vertrouwen opbouwen en meer resultaat opleveren."
-        primary={{ label: 'Start jouw groeitraject', to: '/start' }}
-        secondary={{ label: 'Bekijk diensten', to: '/diensten' }}
+        tagline={c('hero.tagline')}
+        primary={{ label: c('hero.primary'), to: '/start' }}
+        secondary={{ label: c('hero.secondary'), to: '/diensten' }}
       />
 
       <div className="bg-cream text-near-black">
         <section className="mx-auto max-w-7xl px-6 pt-20 md:px-10 lg:px-16">
           <Reveal>
             <div className="flex flex-wrap gap-2.5">
-              {CATS.map((c, i) => (
+              {CATS.map((cat, i) => (
                 <span
-                  key={c}
+                  key={cat}
                   className={`cursor-default rounded-full border px-5 py-2 font-sans text-sm font-medium transition-colors ${
                     i === 0
                       ? 'border-emerald-deep bg-emerald-deep text-cream'
                       : 'border-emerald-deep/15 text-near-black/70 hover:border-emerald/50'
                   }`}
                 >
-                  {c}
+                  {cat}
                 </span>
               ))}
             </div>
