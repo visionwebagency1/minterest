@@ -15,6 +15,7 @@ import {
   subPath,
   type MainService,
 } from '@/data/services'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 import { NotFound } from './NotFound'
 
 /**
@@ -43,8 +44,19 @@ export function ServiceRoute() {
 }
 
 export function ServicePage({ slug }: { slug: string }) {
-  const s = SERVICE_BY_SLUG[slug]
-  if (!s) return <NotFound />
+  const base = SERVICE_BY_SLUG[slug]
+  if (!base) return <NotFound />
+  return (
+    <SiteContentProvider page={`dienst-${slug}`}>
+      <ServicePageInner base={base} />
+    </SiteContentProvider>
+  )
+}
+
+function ServicePageInner({ base }: { base: MainService }) {
+  const c = useContent()
+  // Override only the two editable prose blocks; everything else stays as-is.
+  const s: MainService = { ...base, tagline: c('tagline'), intro: c('intro') }
 
   return (
     <>
@@ -67,7 +79,7 @@ export function ServicePage({ slug }: { slug: string }) {
         </section>
 
         {/* Website-audit callout (web-development only) */}
-        {slug === 'web-development' && (
+        {s.slug === 'web-development' && (
           <section className="mx-auto max-w-7xl px-6 pt-24 md:px-10 lg:px-16">
             <Reveal>
               <div className="flex flex-col items-start gap-5 rounded-3xl border border-emerald/30 bg-white p-8 shadow-[0_18px_50px_rgba(1,63,64,0.1)] md:flex-row md:items-center md:justify-between md:p-10">

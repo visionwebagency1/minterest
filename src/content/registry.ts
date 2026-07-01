@@ -1,4 +1,5 @@
 import type { ContentField, PageContent } from './types'
+import { MAIN_SERVICES } from '@/data/services'
 
 /**
  * Registry of every editable page. Fields are added per section as each part of
@@ -244,9 +245,23 @@ const TERMS_FIELDS: ContentField[] = [
   m('hero.tagline', 'Hero', 'Tagline', 'De afspraken die onze samenwerking helder, professioneel en eerlijk houden. Lees ze rustig door, of vraag ons gerust om toelichting.'),
 ]
 
+// One editor page per service landing page. Defaults come straight from the
+// service data, so no text is duplicated by hand. Only the two big prose blocks
+// (tagline + intro) are editable here; labels, sub-services and steps stay in
+// code because they are tied to routing and computed layouts.
+const SERVICE_PAGES: PageContent[] = MAIN_SERVICES.map((s) => ({
+  page: `dienst-${s.slug}`,
+  title: `Dienst: ${s.label}`,
+  fields: [
+    m('tagline', 'Hero', 'Tagline', s.tagline),
+    m('intro', 'De oplossing', 'Introtekst (*woord* = accent)', s.intro),
+  ],
+}))
+
 export const CONTENT_PAGES: PageContent[] = [
   { page: 'home', title: 'Homepage', fields: HOME_FIELDS },
   { page: 'services', title: 'Diensten-overzicht', fields: SERVICES_FIELDS },
+  ...SERVICE_PAGES,
   { page: 'about', title: 'Over ons', fields: ABOUT_FIELDS },
   { page: 'work', title: 'Portfolio', fields: WORK_FIELDS },
   { page: 'contact', title: 'Contact', fields: CONTACT_FIELDS },
