@@ -1,4 +1,5 @@
 import { Reveal } from '@/components/Reveal'
+import { useContent } from '@/content/SiteContent'
 
 /**
  * Intro header right before the services section. Light & premium (matches the
@@ -8,6 +9,7 @@ import { Reveal } from '@/components/Reveal'
  */
 
 export function ServicesIntro() {
+  const c = useContent()
   return (
     <section
       id="diensten"
@@ -17,16 +19,16 @@ export function ServicesIntro() {
         <Reveal className="flex items-center justify-center gap-3">
           <span className="h-px w-10 bg-emerald/40" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald">
-            Meer voor je bedrijf
+            {c('servicesIntro.eyebrow')}
           </span>
           <span className="h-px w-10 bg-emerald/40" />
         </Reveal>
 
         <Reveal delay={0.05}>
           <h2 className="mx-auto mt-8 max-w-4xl text-balance text-center font-display text-[clamp(2rem,5.5vw,4.25rem)] font-semibold leading-[1.04] tracking-tight text-near-black">
-            Alles wat je bedrijf nodig heeft om te groeien,{' '}
+            {c('servicesIntro.heading')}{' '}
             <span className="block bg-gradient-to-r from-emerald via-mint to-lime-accent bg-clip-text text-transparent">
-              onder één dak.
+              {c('servicesIntro.headingAccent')}
             </span>
           </h2>
         </Reveal>

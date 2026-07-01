@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
+import { useContent } from '@/content/SiteContent'
 
 /**
  * One review at a time on a rich green background, auto-rotating with a
@@ -9,33 +10,20 @@ import { AnimatePresence, motion } from 'motion/react'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-const QUOTES = [
-  {
-    quote: 'Ze keken verder dan alleen de website.',
-    detail:
-      'Minterest dacht mee over onze uitstraling, doelgroep en hoe we online meer vertrouwen konden opbouwen. Het resultaat voelt professioneel, duidelijk en veel sterker dan wat we eerst hadden.',
-    tag: 'Branding & website',
-  },
-  {
-    quote: 'Alles voelt nu veel consistenter.',
-    detail:
-      'Van content tot uitstraling: alles sluit beter op elkaar aan. We zijn professioneler zichtbaar en krijgen vaker reacties van mensen die ons online hebben gezien.',
-    tag: 'Social media & content',
-  },
-  {
-    quote: 'Fijn dat alles onder een dak zit.',
-    detail:
-      'We hoefden niet met vijf verschillende partijen te schakelen. Minterest dacht mee over de juiste oplossing en hielp ons stap voor stap om ons bedrijf beter neer te zetten.',
-    tag: 'Strategie, website & marketing',
-  },
-]
+const QUOTE_COUNT = 3
 
 export function Testimonials() {
+  const c = useContent()
   const [i, setI] = useState(0)
   useEffect(() => {
-    const t = setInterval(() => setI((p) => (p + 1) % QUOTES.length), 6000)
+    const t = setInterval(() => setI((p) => (p + 1) % QUOTE_COUNT), 6000)
     return () => clearInterval(t)
   }, [])
+  const QUOTES = Array.from({ length: QUOTE_COUNT }, (_, n) => ({
+    quote: c(`testimonials.quote.${n}.quote`),
+    detail: c(`testimonials.quote.${n}.detail`),
+    tag: c(`testimonials.quote.${n}.tag`),
+  }))
   const q = QUOTES[i]
 
   return (
@@ -50,14 +38,12 @@ export function Testimonials() {
         <div className="flex items-center justify-center gap-3">
           <span className="h-px w-10 bg-mint/50" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/80">
-            Wat ondernemers over ons zeggen
+            {c('testimonials.eyebrow')}
           </span>
         </div>
 
         <p className="mx-auto mt-8 max-w-2xl font-sans text-base leading-relaxed text-cream/65 md:text-lg">
-          We leveren geen losse websites, video's of campagnes. We denken mee
-          over wat jouw bedrijf nodig heeft om sterker zichtbaar te worden,
-          vertrouwen op te bouwen en meer aanvragen te krijgen.
+          {c('testimonials.intro')}
         </p>
 
         <div className="relative mt-12 min-h-[18rem] md:min-h-[22rem]">
@@ -110,7 +96,7 @@ export function Testimonials() {
             to="/contact"
             className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-8 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/30 transition-transform duration-300 hover:scale-[1.03]"
           >
-            <span className="relative z-10">Start jouw groeigesprek</span>
+            <span className="relative z-10">{c('testimonials.cta')}</span>
             <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
           </Link>

@@ -19,6 +19,8 @@ import { AdminInvoiceForm } from './pages/AdminInvoiceForm'
 import { AdminInvoiceDetail } from './pages/AdminInvoiceDetail'
 import { AdminInvoicePrint } from './pages/AdminInvoicePrint'
 import { AdminSettings } from './pages/AdminSettings'
+import { AdminContent } from './pages/AdminContent'
+import { AdminContentEditor } from './pages/AdminContentEditor'
 
 /**
  * Admin panel router. Mounted (lazy) only for /admin/* paths, so the public site
@@ -49,6 +51,8 @@ export default function AdminApp() {
             <Route path="/admin/offertes/nieuw" element={<AdminQuoteForm mode="create" />} />
             <Route path="/admin/offertes/:id" element={<AdminQuoteDetail />} />
             <Route path="/admin/offertes/:id/bewerken" element={<AdminQuoteForm mode="edit" />} />
+            <Route path="/admin/content" element={<AdminContent />} />
+            <Route path="/admin/content/:page" element={<AdminContentEditor />} />
             <Route path="/admin/instellingen" element={<AdminSettings />} />
             <Route path="/admin/facturen" element={<AdminInvoices />} />
             <Route path="/admin/facturen/nieuw" element={<AdminInvoiceForm mode="create" />} />
