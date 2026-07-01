@@ -1,5 +1,6 @@
 import type { ContentField, PageContent } from './types'
 import { MAIN_SERVICES } from '@/data/services'
+import { SUB_SERVICES } from '@/data/subServices'
 
 /**
  * Registry of every editable page. Fields are added per section as each part of
@@ -258,10 +259,22 @@ const SERVICE_PAGES: PageContent[] = MAIN_SERVICES.map((s) => ({
   ],
 }))
 
+// One editor page per sub-service landing page (tagline + story paragraphs),
+// defaults auto-generated from the sub-service data.
+const SUBSERVICE_PAGES: PageContent[] = SUB_SERVICES.map((sub) => ({
+  page: `sub-${sub.serviceSlug}-${sub.slug}`,
+  title: `Sub: ${sub.name}`,
+  fields: [
+    m('tagline', 'Hero', 'Tagline', sub.tagline),
+    ...sub.story.map((p, i) => m(`story.${i}`, 'Verhaal', `Alinea ${i + 1}`, p)),
+  ],
+}))
+
 export const CONTENT_PAGES: PageContent[] = [
   { page: 'home', title: 'Homepage', fields: HOME_FIELDS },
   { page: 'services', title: 'Diensten-overzicht', fields: SERVICES_FIELDS },
   ...SERVICE_PAGES,
+  ...SUBSERVICE_PAGES,
   { page: 'about', title: 'Over ons', fields: ABOUT_FIELDS },
   { page: 'work', title: 'Portfolio', fields: WORK_FIELDS },
   { page: 'contact', title: 'Contact', fields: CONTACT_FIELDS },

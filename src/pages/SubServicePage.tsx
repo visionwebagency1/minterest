@@ -10,6 +10,7 @@ import { Footer } from '@/sections/Footer'
 import { SUB_RENDER_BY_KEY } from '@/sections/subServiceRenders'
 import { SUB_BY_KEY, parentService, subsForService, type SubService } from '@/data/subServices'
 import { subPath } from '@/data/services'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 import { NotFound } from './NotFound'
 
 /**
@@ -25,10 +26,17 @@ export function SubServiceRoute() {
   const { slug = '', subslug = '' } = useParams()
   const sub = SUB_BY_KEY[`${slug}/${subslug}`]
   if (!sub) return <NotFound />
-  return <SubServicePage sub={sub} />
+  return (
+    <SiteContentProvider page={`sub-${sub.serviceSlug}-${sub.slug}`}>
+      <SubServicePage sub={sub} />
+    </SiteContentProvider>
+  )
 }
 
-function SubServicePage({ sub }: { sub: SubService }) {
+function SubServicePage({ sub: base }: { sub: SubService }) {
+  const c = useContent()
+  // Override only the editable prose (tagline + story); the rest stays as-is.
+  const sub: SubService = { ...base, tagline: c('tagline'), story: base.story.map((_, i) => c(`story.${i}`)) }
   const parent = parentService(sub)
   const accent = parent?.accent ?? 'from-emerald to-mint'
   const Render = SUB_RENDER_BY_KEY[`${sub.serviceSlug}/${sub.slug}`] ?? parent?.Render
