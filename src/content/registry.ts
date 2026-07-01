@@ -96,12 +96,55 @@ const HOME_FIELDS: ContentField[] = [
   t('cta.secondary', 'Slot-CTA', 'Knop 2', 'Gratis website-audit'),
 ]
 
+const GLOBAL_FIELDS: ContentField[] = [
+  t('footer.tagline', 'Footer', 'Slogan', 'Waar aandacht verandert in groei.'),
+  m('footer.description', 'Footer', 'Omschrijving', 'Merk, website, video, social en vindbaarheid, gebouwd om je groei te laten klimmen.'),
+  t('footer.copyright', 'Footer', 'Copyright', '© 2026 Minterest. Alle rechten voorbehouden.'),
+]
+
+const ABOUT_FIELDS: ContentField[] = [
+  // hero
+  t('hero.kicker', 'Hero', 'Eyebrow', 'Over Minterest'),
+  t('hero.titlePre', 'Hero', 'Titel', 'Een partner voor je volgende '),
+  t('hero.titleAccent', 'Hero', 'Titel (accent)', 'groeistap.'),
+  m('hero.tagline', 'Hero', 'Tagline', 'Bij Minterest starten we niet bij een losse dienst, maar bij wat jouw bedrijf nodig heeft om sterker zichtbaar te worden, vertrouwen op te bouwen en meer resultaat te halen. Van branding en websites tot content, vindbaarheid en extra ondersteuning: we bouwen oplossingen die met je bedrijf meegroeien.'),
+  t('hero.primary', 'Hero', 'Knop 1', 'Werk met ons'),
+  t('hero.secondary', 'Hero', 'Knop 2', 'Bekijk ons werk'),
+  // values
+  t('value.0.title', 'Waarden', 'Waarde 1 titel', 'Een team, geen losse schakels'),
+  m('value.0.desc', 'Waarden', 'Waarde 1 tekst', 'Strategie, design, development, content en marketing komen samen in een duidelijke aanpak.'),
+  t('value.1.title', 'Waarden', 'Waarde 2 titel', 'Oplossing boven uitvoering'),
+  m('value.1.desc', 'Waarden', 'Waarde 2 tekst', 'We leveren niet zomaar een website, video of campagne. We kijken eerst wat jouw bedrijf nodig heeft.'),
+  t('value.2.title', 'Waarden', 'Waarde 3 titel', 'Gebouwd om door te groeien'),
+  m('value.2.desc', 'Waarden', 'Waarde 3 tekst', 'Alles wat we maken moet professioneel staan, praktisch werken en klaar zijn voor de volgende stap.'),
+  // headings + support
+  t('servicesHeading', 'Secties', 'Kop diensten', 'Onze zes diensten'),
+  t('supportHeading', 'Secties', 'Kop ondersteuning', 'Achter de schermen'),
+  t('support.0.title', 'Achter de schermen', 'Blok 1 titel', 'Administratie'),
+  m('support.0.desc', 'Achter de schermen', 'Blok 1 tekst', 'We koppelen ondernemers aan overzichtelijke administratieve ondersteuning, zodat er meer rust en structuur ontstaat.'),
+  t('support.1.title', 'Achter de schermen', 'Blok 2 titel', 'Sourcing & inkoop'),
+  m('support.1.desc', 'Achter de schermen', 'Blok 2 tekst', 'We helpen met het vinden en vergelijken van producten, leveranciers en inkoopmogelijkheden.'),
+]
+
+const CONTACT_FIELDS: ContentField[] = [
+  t('hero.kicker', 'Hero', 'Eyebrow', 'Contact'),
+  t('hero.titlePre', 'Hero', 'Titel', 'Even '),
+  t('hero.titleAccent', 'Hero', 'Titel (accent)', 'kennismaken?'),
+  m('hero.tagline', 'Hero', 'Tagline', 'Vertel ons waar je nu staat en waar je naartoe wilt. We kijken graag mee welke oplossing past om jouw bedrijf sterker zichtbaar te maken, meer vertrouwen op te bouwen en verder te groeien.'),
+  t('directHeading', 'Direct contact', 'Kop', 'Liever direct contact?'),
+  m('directText', 'Direct contact', 'Tekst', 'Stuur ons een bericht via WhatsApp of mail. We reageren snel en denken direct met je mee.'),
+  t('hours', 'Direct contact', 'Bereikbaarheid', 'Nederland · ma t/m vr, 09:00 tot 18:00'),
+  t('form.interestLabel', 'Formulier', 'Interesse-label', 'Waar ben je in geinteresseerd?'),
+  t('form.submit', 'Formulier', 'Verzendknop', 'Verstuur je groeivraag'),
+  t('form.successTitle', 'Formulier', 'Bedankt-titel', 'Dank je!'),
+  m('form.successText', 'Formulier', 'Bedankt-tekst', 'We hebben je bericht ontvangen en nemen snel contact op.'),
+]
+
 export const CONTENT_PAGES: PageContent[] = [
-  {
-    page: 'home',
-    title: 'Homepage',
-    fields: HOME_FIELDS,
-  },
+  { page: 'home', title: 'Homepage', fields: HOME_FIELDS },
+  { page: 'about', title: 'Over ons', fields: ABOUT_FIELDS },
+  { page: 'contact', title: 'Contact', fields: CONTACT_FIELDS },
+  { page: 'global', title: 'Footer (alle pagina\'s)', fields: GLOBAL_FIELDS },
 ]
 
 export function getPage(page: string): PageContent | undefined {

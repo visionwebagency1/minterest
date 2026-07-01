@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Logo } from '@/components/Logo'
 import { MAIN_SERVICES } from '@/data/services'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 /**
  * Footer — the M returns one last time. Brand lockup + tagline on the left,
@@ -34,6 +35,17 @@ const COLS = [
 ]
 
 export function Footer() {
+  // Self-wrap in the global content provider so the footer shows the same
+  // (editable) texts on every page, regardless of the page's own provider.
+  return (
+    <SiteContentProvider page="global">
+      <FooterInner />
+    </SiteContentProvider>
+  )
+}
+
+function FooterInner() {
+  const c = useContent()
   return (
     <footer className="relative border-t border-white/10 bg-near-black pt-20 pb-10">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
@@ -44,10 +56,10 @@ export function Footer() {
               <Logo className="h-8 w-auto" />
             </Link>
             <p className="mt-6 font-accent text-lg italic text-white/70">
-              Waar aandacht verandert in groei.
+              {c('footer.tagline')}
             </p>
             <p className="mt-4 font-sans text-sm leading-relaxed text-white/45">
-              Merk, website, video, social en vindbaarheid, gebouwd om je groei te laten klimmen.
+              {c('footer.description')}
             </p>
           </div>
 
@@ -78,7 +90,7 @@ export function Footer() {
         {/* Legal row */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
           <p className="font-sans text-xs text-white/40">
-            &copy; {2026} Minterest. Alle rechten voorbehouden.
+            {c('footer.copyright')}
           </p>
           <div className="flex gap-6 font-sans text-xs text-white/40">
             <Link to="#" className="transition-colors hover:text-white/70">

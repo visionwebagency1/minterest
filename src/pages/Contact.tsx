@@ -6,9 +6,19 @@ import { BorderBeam } from '@/components/BorderBeam'
 import { Footer } from '@/sections/Footer'
 import { SERVICE_OPTIONS } from '@/components/serviceIcons'
 import { useLeadForm } from '@/lib/useLeadForm'
+import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 /** Contact page: dark hero + light body with an interest selector and a form. */
 export function Contact() {
+  return (
+    <SiteContentProvider page="contact">
+      <ContactInner />
+    </SiteContentProvider>
+  )
+}
+
+function ContactInner() {
+  const c = useContent()
   const { isSubmitting, isSuccess, error, submit } = useLeadForm('contact')
   const [interest, setInterest] = useState<string[]>([])
 
@@ -33,13 +43,13 @@ export function Contact() {
   return (
     <>
       <PageHero
-        kicker="Contact"
+        kicker={c('hero.kicker')}
         title={
           <>
-            Even <Accent>kennismaken?</Accent>
+            {c('hero.titlePre')}<Accent>{c('hero.titleAccent')}</Accent>
           </>
         }
-        tagline="Vertel ons waar je nu staat en waar je naartoe wilt. We kijken graag mee welke oplossing past om jouw bedrijf sterker zichtbaar te maken, meer vertrouwen op te bouwen en verder te groeien."
+        tagline={c('hero.tagline')}
       />
 
       <div className="bg-cream text-near-black">
@@ -48,12 +58,12 @@ export function Contact() {
           <div>
             <Reveal>
               <h2 className="text-balance font-display text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold leading-tight">
-                Liever direct contact?
+                {c('directHeading')}
               </h2>
             </Reveal>
             <Reveal delay={0.05}>
               <p className="mt-6 max-w-md font-sans text-lg leading-relaxed text-near-black/65">
-                Stuur ons een bericht via WhatsApp of mail. We reageren snel en denken direct met je mee.
+                {c('directText')}
               </p>
             </Reveal>
             <Reveal delay={0.1}>
@@ -67,7 +77,7 @@ export function Contact() {
                 <a href="mailto:hello@minterest.nl" className="font-sans text-lg text-near-black transition-colors hover:text-emerald">
                   hello@minterest.nl
                 </a>
-                <span className="font-sans text-sm text-near-black/50">Nederland · ma t/m vr, 09:00 tot 18:00</span>
+                <span className="font-sans text-sm text-near-black/50">{c('hours')}</span>
               </div>
             </Reveal>
           </div>
@@ -80,15 +90,15 @@ export function Contact() {
             >
               {isSuccess ? (
                 <div className="flex min-h-[22rem] flex-col items-center justify-center text-center">
-                  <span className="font-accent text-3xl italic text-emerald">Dank je!</span>
+                  <span className="font-accent text-3xl italic text-emerald">{c('form.successTitle')}</span>
                   <p className="mt-4 max-w-xs font-sans text-sm text-near-black/60">
-                    We hebben je bericht ontvangen en nemen snel contact op.
+                    {c('form.successText')}
                   </p>
                 </div>
               ) : (
                 <div className="flex flex-col gap-4">
                   <div>
-                    <label className="font-sans text-sm font-semibold text-near-black">Waar ben je in geinteresseerd?</label>
+                    <label className="font-sans text-sm font-semibold text-near-black">{c('form.interestLabel')}</label>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {SERVICE_OPTIONS.map((s) => {
                         const active = interest.includes(s.key)
@@ -122,7 +132,7 @@ export function Contact() {
                     className="group relative mt-2 inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-emerald to-mint px-7 py-4 font-sans text-base font-semibold text-near-black shadow-lg shadow-emerald/25 transition-transform duration-300 hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:scale-100"
                   >
                     <BorderBeam rx={12} />
-                    <span className="relative z-10">{isSubmitting ? 'Versturen…' : 'Verstuur je groeivraag'}</span>
+                    <span className="relative z-10">{isSubmitting ? 'Versturen…' : c('form.submit')}</span>
                     {!isSubmitting && <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>}
                     <span className="pointer-events-none absolute inset-0 z-10 -translate-x-full bg-gradient-to-r from-transparent via-white/45 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
                   </button>
