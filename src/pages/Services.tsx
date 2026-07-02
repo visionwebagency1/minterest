@@ -45,7 +45,6 @@ function ServicesInner() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="flex items-center gap-3"
           >
-            <span className="h-px w-10 bg-emerald/40" />
             <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
               {c('hero.eyebrow')}
             </span>

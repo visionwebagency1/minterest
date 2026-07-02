@@ -63,7 +63,6 @@ export function Pricing() {
     <section className="relative bg-[#EAF4EC] py-28 text-near-black md:py-36">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <Reveal className="flex items-center justify-center gap-3 text-center md:justify-start md:text-left">
-          <span className="h-px w-10 bg-emerald/50" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
             Pakketten
           </span>

@@ -46,7 +46,6 @@ export function Showcase({ variant = 'home' }: { variant?: 'home' | 'all' }) {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <Reveal className="flex items-center gap-3">
-              <span className="h-px w-10 bg-emerald/50" />
               <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">Portfolio</span>
             </Reveal>
             <Reveal delay={0.05}>

@@ -86,7 +86,6 @@ export function ProjectCase() {
             {blocks.map((b) => (
               <Reveal key={b.title}>
                 <div className="flex items-center gap-3">
-                  <span className="h-px w-10 bg-emerald/50" />
                   <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">{b.title}</span>
                 </div>
                 <p className="mt-5 whitespace-pre-wrap font-sans text-lg leading-relaxed text-near-black/70">{b.text}</p>

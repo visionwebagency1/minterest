@@ -36,7 +36,6 @@ export function Testimonials() {
     >
       <div className="mx-auto max-w-5xl px-6 text-center md:px-10">
         <div className="flex items-center justify-center gap-3">
-          <span className="h-px w-10 bg-mint/50" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/80">
             {c('testimonials.eyebrow')}
           </span>
