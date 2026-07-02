@@ -109,7 +109,7 @@ export function ServiceOrbit() {
               type="button"
               onClick={() => focusService(i)}
               aria-label={`Bekijk ${s.label}`}
-              className="group pointer-events-auto relative flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white bg-white px-2.5 py-1.5 shadow-[0_10px_30px_rgba(10,21,18,0.42)] outline-none transition-[box-shadow,transform] duration-300 hover:shadow-[0_0_0_3px_rgba(144,238,144,0.6),0_22px_55px_-6px_rgba(66,194,140,0.75)] focus-visible:ring-2 focus-visible:ring-emerald md:gap-2.5 md:px-6 md:py-3"
+              className="group pointer-events-auto relative flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white bg-white px-2.5 py-1.5 shadow-[0_10px_28px_-4px_rgba(10,21,18,0.45)] outline-none transition-[box-shadow,transform,background-color,border-color] duration-300 hover:border-emerald hover:bg-emerald hover:shadow-[0_0_0_3px_rgba(144,238,144,0.6),0_22px_55px_-6px_rgba(66,194,140,0.8)] focus-visible:ring-2 focus-visible:ring-emerald md:gap-2.5 md:px-6 md:py-3"
               animate={FLOATS[i]}
               transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: 'easeInOut' }}
               whileHover={{ scale: 1.08 }}
@@ -120,8 +120,8 @@ export function ServiceOrbit() {
                 className="pointer-events-none absolute -inset-1.5 -z-10 rounded-full bg-gradient-to-r from-emerald/50 to-mint/50 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100 group-hover:animate-pulse"
                 aria-hidden="true"
               />
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald shadow-[0_0_8px_rgba(0,128,129,0.8)] transition-colors duration-300 group-hover:bg-mint md:h-2 md:w-2" />
-              <span className="font-sans text-[10.5px] font-semibold leading-none text-emerald-deep md:text-base">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald shadow-[0_0_8px_rgba(0,128,129,0.8)] transition-colors duration-300 group-hover:bg-white group-hover:shadow-none md:h-2 md:w-2" />
+              <span className="font-sans text-[10.5px] font-semibold leading-none text-emerald-deep transition-colors duration-300 group-hover:text-white md:text-base">
                 {s.label}
               </span>
             </motion.button>
