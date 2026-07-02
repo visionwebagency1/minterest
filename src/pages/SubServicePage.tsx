@@ -54,7 +54,6 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
             <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
               <Reveal>
                 <div className="flex items-center gap-3">
-                  <span className="h-px w-10 bg-emerald/50" />
                   <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                     Wat het is
                   </span>
@@ -88,7 +87,6 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
           <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-2 md:gap-16 md:px-10 lg:px-16">
             <Reveal>
               <div className="flex items-center gap-3">
-                <span className="h-px w-10 bg-emerald/50" />
                 <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                   In actie
                 </span>
@@ -115,7 +113,6 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal>
               <div className="flex items-center gap-3">
-                <span className="h-px w-10 bg-emerald/50" />
                 <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                   Wat je krijgt
                 </span>
@@ -148,7 +145,6 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
             <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
               <Reveal>
                 <div className="flex items-center gap-3">
-                  <span className="h-px w-10 bg-emerald/50" />
                   <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                     Voor wie
                   </span>
@@ -182,7 +178,6 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal>
               <div className="flex items-center gap-3">
-                <span className="h-px w-10 bg-emerald/50" />
                 <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                   Hoe we het aanpakken
                 </span>
@@ -219,7 +214,6 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal>
               <div className="flex items-center gap-3">
-                <span className="h-px w-10 bg-emerald/50" />
                 <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                   Case
                 </span>

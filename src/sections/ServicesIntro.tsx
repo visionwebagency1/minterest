@@ -17,11 +17,9 @@ export function ServicesIntro() {
     >
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <Reveal className="flex items-center justify-center gap-3">
-          <span className="h-px w-10 bg-emerald/40" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald">
             {c('servicesIntro.eyebrow')}
           </span>
-          <span className="h-px w-10 bg-emerald/40" />
         </Reveal>
 
         <Reveal delay={0.05}>

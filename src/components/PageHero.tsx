@@ -119,7 +119,6 @@ export function PageHero({
           transition={{ duration: 0.6, ease: EASE }}
           className="flex items-center gap-3"
         >
-          <span className="h-px w-10 bg-mint/50" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/80">
             {kicker}
           </span>

@@ -97,7 +97,6 @@ function AuditInner() {
         <section className="bg-[#EAF4EC] py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal className="flex items-center gap-3">
-              <span className="h-px w-10 bg-emerald/50" />
               <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">{c('get.eyebrow')}</span>
             </Reveal>
             <Reveal delay={0.05}>

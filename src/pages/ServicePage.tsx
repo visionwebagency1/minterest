@@ -67,7 +67,6 @@ function ServicePageInner({ base }: { base: MainService }) {
         <section className="bg-[#EAF4EC] py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal className="flex items-center gap-3">
-              <span className="h-px w-10 bg-emerald/50" />
               <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                 De oplossing
               </span>
@@ -105,7 +104,6 @@ function ServicePageInner({ base }: { base: MainService }) {
         <section className="py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
             <Reveal className="flex items-center gap-3">
-              <span className="h-px w-10 bg-emerald/50" />
               <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                 Wat we doen
               </span>
@@ -164,7 +162,6 @@ function ServicePageInner({ base }: { base: MainService }) {
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 md:grid-cols-2 md:gap-16 md:px-10 lg:px-16">
             <div>
               <Reveal className="flex items-center gap-3">
-                <span className="h-px w-10 bg-emerald/50" />
                 <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
                   In actie
                 </span>
@@ -270,7 +267,6 @@ function ServiceHero({ service: s }: { service: MainService }) {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="flex items-center gap-3"
         >
-          <span className="h-px w-10 bg-mint/50" />
           <span className="font-sans text-xs uppercase tracking-[0.28em] text-mint/80">
             {s.kicker}
           </span>

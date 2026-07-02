@@ -24,7 +24,6 @@ export function Faq() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 md:px-10 lg:grid-cols-[0.8fr_1.2fr] lg:px-16">
         <div>
           <Reveal className="flex items-center gap-3">
-            <span className="h-px w-10 bg-emerald/50" />
             <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
               {c('faq.eyebrow')}
             </span>
