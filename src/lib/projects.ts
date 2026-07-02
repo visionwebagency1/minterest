@@ -17,6 +17,8 @@ export type Project = {
   client: string | null
   year: string | null
   cover_image: string | null
+  before_image: string | null
+  after_image: string | null
   summary: string | null
   intro: string | null
   challenge: string | null
