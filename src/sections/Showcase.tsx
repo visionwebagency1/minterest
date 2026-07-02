@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'motion/react'
 import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
 import { getFeaturedProjects, getPublishedProjects, type Project } from '@/lib/projects'
 
 /**
- * Selected work: real projects from the database as tilted browser cards that
- * right themselves on hover. The homepage shows the featured projects; /work
- * shows all published ones. Each card links to the project's case page.
+ * Selected work: real projects from the database in a clean 2-up grid (uniform
+ * cards, no browser mockup, so any content works — websites, socials, TikTok).
+ * The homepage shows the featured projects; /work shows all published ones.
+ * Each card links to the project's case page.
  */
-
-const EASE = [0.22, 1, 0.36, 1] as const
 
 type Card = Pick<Project, 'slug' | 'title' | 'category' | 'cover_image'>
 
@@ -70,48 +68,40 @@ export function Showcase({ variant = 'home' }: { variant?: 'home' | 'all' }) {
           )}
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-14">
+        <div className="mt-14 grid grid-cols-2 gap-5 md:mt-16 md:gap-8">
           {list.map((p, i) => {
             const to = p.slug ? `/work/${p.slug}` : '/work'
             return (
-              <motion.div
-                key={`${p.title}-${i}`}
-                className={`[perspective:1400px] ${i % 2 === 1 ? 'md:mt-16' : ''}`}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.7, ease: EASE }}
-              >
+              <Reveal key={`${p.title}-${i}`} delay={(i % 2) * 0.06}>
                 <Link to={to} className="group block">
-                  <motion.div
-                    className="overflow-hidden rounded-2xl border border-emerald-deep/10 bg-white shadow-[0_30px_70px_rgba(1,63,64,0.14)] [transform-style:preserve-3d]"
-                    style={{ rotateY: i % 2 === 0 ? 9 : -9, rotateX: 5 }}
-                    whileHover={{ rotateY: 0, rotateX: 0, y: -6 }}
-                    transition={{ duration: 0.5, ease: EASE }}
-                  >
-                    <div className="flex items-center gap-1.5 border-b border-black/5 bg-black/[0.03] px-3 py-2.5">
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald/40" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald/25" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-emerald/25" />
-                      <span className="ml-2 h-3.5 flex-1 rounded-full bg-black/[0.06]" />
-                    </div>
-                    <div className="aspect-[16/10]">
+                  <div className="overflow-hidden rounded-2xl border border-emerald-deep/10 bg-white shadow-[0_18px_50px_rgba(1,63,64,0.1)] transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_30px_70px_rgba(1,63,64,0.18)]">
+                    <div className="aspect-[4/3] overflow-hidden">
                       {p.cover_image ? (
-                        <img src={p.cover_image} alt="" className="h-full w-full object-cover" />
+                        <img
+                          src={p.cover_image}
+                          alt=""
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                        />
                       ) : (
-                        <div className={`h-full w-full bg-gradient-to-br ${ACCENTS[i % ACCENTS.length]}`} />
+                        <div className={`grid h-full w-full place-items-center bg-gradient-to-br ${ACCENTS[i % ACCENTS.length]} p-4`}>
+                          <span className="text-center font-display text-lg font-semibold text-near-black/70 md:text-xl">{p.title}</span>
+                        </div>
                       )}
                     </div>
-                  </motion.div>
-                </Link>
-                <div className="mt-4 flex items-center justify-between gap-2 md:mt-5">
-                  <div>
-                    <h3 className="font-display text-base font-semibold md:text-2xl">{p.title}</h3>
-                    {p.category && <p className="mt-1 font-sans text-xs text-near-black/50 md:text-sm">{p.category}</p>}
                   </div>
-                  {p.slug && <span className="hidden font-sans text-sm text-emerald-deep sm:inline">Bekijk case &rarr;</span>}
-                </div>
-              </motion.div>
+                  <div className="mt-4 flex items-center justify-between gap-2">
+                    <div className="min-w-0">
+                      <h3 className="truncate font-display text-base font-semibold md:text-xl">{p.title}</h3>
+                      {p.category && <p className="mt-0.5 truncate font-sans text-xs text-near-black/50 md:text-sm">{p.category}</p>}
+                    </div>
+                    {p.slug && (
+                      <span className="hidden shrink-0 font-sans text-sm font-medium text-emerald-deep transition-transform duration-300 group-hover:translate-x-0.5 sm:inline">
+                        Bekijk case &rarr;
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              </Reveal>
             )
           })}
         </div>
