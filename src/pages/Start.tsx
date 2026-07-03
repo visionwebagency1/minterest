@@ -23,8 +23,6 @@ function StartInner() {
   const c = useContent()
   const [picked, setPicked] = useState<string[]>([])
   const { isSubmitting, isSuccess, error, submit } = useLeadForm('start')
-  const BUDGETS = Array.from({ length: 5 }, (_, i) => c(`budget.${i}`))
-  const TIMELINES = Array.from({ length: 4 }, (_, i) => c(`timeline.${i}`))
   const WHY = Array.from({ length: 3 }, (_, i) => ({ title: c(`why.${i}.title`), desc: c(`why.${i}.desc`) }))
 
   const toggle = (key: string) =>
@@ -38,8 +36,6 @@ function StartInner() {
       name: fd.get('name'),
       email: fd.get('email'),
       company: fd.get('company'),
-      budget: fd.get('budget'),
-      timeline: fd.get('timeline'),
       message: fd.get('message'),
     })
   }
@@ -109,16 +105,6 @@ function StartInner() {
                       <input name="email" className={field} type="email" placeholder="E-mail" required />
                     </div>
                     <input name="company" className={field} placeholder="Bedrijf of website" />
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <select name="budget" className={`${field} appearance-none`} defaultValue="">
-                        <option value="" disabled>{c('form.budgetLabel')}</option>
-                        {BUDGETS.map((b) => <option key={b}>{b}</option>)}
-                      </select>
-                      <select name="timeline" className={`${field} appearance-none`} defaultValue="">
-                        <option value="" disabled>{c('form.timelineLabel')}</option>
-                        {TIMELINES.map((tl) => <option key={tl}>{tl}</option>)}
-                      </select>
-                    </div>
                     <textarea name="message" className={`${field} min-h-[7rem] resize-none`} placeholder="Vertel kort over je project" required />
                     <button
                       type="submit"
