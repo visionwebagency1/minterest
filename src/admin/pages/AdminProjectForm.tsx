@@ -201,6 +201,23 @@ export function AdminProjectForm({ mode }: { mode: 'create' | 'edit' }) {
                   ),
                 )
               }
+              onReplace={(i) =>
+                uploadTo((url) =>
+                  set(
+                    'gallery',
+                    form.gallery.map((entry, idx) =>
+                      idx === i ? encodeGalleryItem(url, parseGalleryItem(entry).caption) : entry,
+                    ),
+                  ),
+                )
+              }
+              onMove={(i, delta) => {
+                const j = i + delta
+                if (j < 0 || j >= form.gallery.length) return
+                const arr = [...form.gallery]
+                ;[arr[i], arr[j]] = [arr[j], arr[i]]
+                set('gallery', arr)
+              }}
             />
           </div>
         </Card>
@@ -297,19 +314,23 @@ function GalleryField({
   onAdd,
   onRemove,
   onCaption,
+  onReplace,
+  onMove,
 }: {
   images: string[]
   busy: boolean
   onAdd: (e: { target: HTMLInputElement }) => void
   onRemove: (i: number) => void
   onCaption: (i: number, caption: string) => void
+  onReplace: (i: number) => (e: { target: HTMLInputElement }) => void
+  onMove: (i: number, delta: number) => void
 }) {
   const ref = useRef<HTMLInputElement>(null)
   return (
     <div>
       <span className="mb-1 block font-sans text-sm font-semibold text-near-black">Galerij</span>
       <p className="mb-3 font-sans text-sm text-near-black/55">
-        Foto's verschijnen in een net raster op de case-pagina. Het bijschrift komt klein onderaan de foto (optioneel).
+        Foto's verschijnen in een net raster op de case-pagina, in deze volgorde. Gebruik de pijlen om te verschuiven, "Vervangen" om een foto te wisselen. Het bijschrift komt klein onderaan de foto (optioneel).
       </p>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {images.map((entry, i) => {
@@ -318,6 +339,9 @@ function GalleryField({
             <div key={i} className="rounded-xl border border-emerald-deep/10 bg-white p-2">
               <div className="group relative">
                 <img src={src} alt="" className="aspect-[4/3] w-full rounded-lg object-cover" />
+                <span className="absolute left-1.5 top-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-near-black/70 px-1 font-sans text-[11px] font-semibold text-cream">
+                  {i + 1}
+                </span>
                 <button
                   type="button"
                   onClick={() => onRemove(i)}
@@ -326,6 +350,32 @@ function GalleryField({
                 >
                   ×
                 </button>
+              </div>
+              <div className="mt-2 flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => onMove(i, -1)}
+                  disabled={i === 0}
+                  className="grid h-7 w-7 place-items-center rounded-lg border border-emerald-deep/12 text-near-black/60 transition-colors hover:border-emerald/40 hover:text-emerald-deep disabled:opacity-30"
+                  aria-label="Naar links"
+                >
+                  ←
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onMove(i, 1)}
+                  disabled={i === images.length - 1}
+                  className="grid h-7 w-7 place-items-center rounded-lg border border-emerald-deep/12 text-near-black/60 transition-colors hover:border-emerald/40 hover:text-emerald-deep disabled:opacity-30"
+                  aria-label="Naar rechts"
+                >
+                  →
+                </button>
+                <label
+                  className={`ml-auto cursor-pointer rounded-lg border border-emerald-deep/12 px-2.5 py-1 font-sans text-xs font-medium text-near-black/70 transition-colors hover:border-emerald/40 hover:text-emerald-deep ${busy ? 'pointer-events-none opacity-50' : ''}`}
+                >
+                  Vervangen
+                  <input type="file" accept="image/*" className="hidden" onChange={onReplace(i)} disabled={busy} />
+                </label>
               </div>
               <input
                 type="text"
