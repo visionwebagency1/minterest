@@ -234,6 +234,31 @@ function FieldInput({
   const cls =
     'w-full rounded-xl border border-emerald-deep/15 bg-white px-3.5 py-2.5 font-sans text-sm text-near-black outline-none transition-colors focus:border-emerald'
 
+  if (field.kind === 'toggle') {
+    const on = value === 'aan'
+    return (
+      <button
+        type="button"
+        role="switch"
+        aria-checked={on}
+        disabled={busy}
+        onClick={() => {
+          const next = on ? 'uit' : 'aan'
+          onChange(next)
+          onCommit(next)
+        }}
+        className={`inline-flex items-center gap-3 rounded-xl border px-3 py-2 font-sans text-sm font-medium transition-colors ${
+          on ? 'border-emerald/40 bg-emerald/10 text-emerald-deep' : 'border-emerald-deep/15 bg-white text-near-black/55'
+        }`}
+      >
+        <span className={`relative h-5 w-9 rounded-full transition-colors ${on ? 'bg-emerald' : 'bg-near-black/20'}`}>
+          <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${on ? 'left-[1.125rem]' : 'left-0.5'}`} />
+        </span>
+        {on ? 'Aan' : 'Uit'}
+      </button>
+    )
+  }
+
   if (field.kind === 'image') {
     return (
       <div className="flex items-center gap-4">

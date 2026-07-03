@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react'
+import { useEffect, useState, type ComponentType } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { Reveal } from '@/components/Reveal'
@@ -11,6 +11,7 @@ import { SUB_RENDER_BY_KEY } from '@/sections/subServiceRenders'
 import { SUB_BY_KEY, parentService, subsForService, type SubService } from '@/data/subServices'
 import { subPath } from '@/data/services'
 import { SiteContentProvider, useContent } from '@/content/SiteContent'
+import { getProjectBySlug, parseGallery, type Project } from '@/lib/projects'
 import { NotFound } from './NotFound'
 
 /**
@@ -37,7 +38,37 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
   const c = useContent()
   // Override only the editable prose (tagline + story); the rest stays as-is.
   const sub: SubService = { ...base, tagline: c('tagline'), story: base.story.map((_, i) => c(`story.${i}`)) }
-  const caseImage = c('caseImage')
+
+  // Case: content-driven + linked to a real project. Hidden unless "aan".
+  const caseEnabled = c('caseEnabled') === 'aan'
+  const caseProjectSlug = c('caseProject')
+  const caseImageOverride = c('caseImage')
+  const caseName = c('caseName')
+  const caseSummary = c('caseSummary')
+  const caseOutcome = c('caseOutcome')
+  const [caseProject, setCaseProject] = useState<Project | null>(null)
+  useEffect(() => {
+    if (!caseEnabled || !caseProjectSlug) {
+      setCaseProject(null)
+      return
+    }
+    let active = true
+    getProjectBySlug(caseProjectSlug)
+      .then((p) => active && setCaseProject(p))
+      .catch(() => {})
+    return () => {
+      active = false
+    }
+  }, [caseEnabled, caseProjectSlug])
+
+  const projectPhoto = caseProject
+    ? caseProject.cover_image || parseGallery(caseProject.gallery)[0]?.src || ''
+    : ''
+  const caseImage = caseImageOverride || projectPhoto
+  const caseTitle = caseName || caseProject?.title || ''
+  const caseSector = caseProject?.category || ''
+  const caseHref = caseProject ? `/work/${caseProject.slug}` : null
+
   const parent = parentService(sub)
   const accent = parent?.accent ?? 'from-emerald to-mint'
   const Render = SUB_RENDER_BY_KEY[`${sub.serviceSlug}/${sub.slug}`] ?? parent?.Render
@@ -209,46 +240,45 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
           </div>
         </section>
 
-        {/* Case */}
-        <section className="bg-[#EAF4EC] py-20 md:py-28">
-          <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
-            <Reveal>
-              <div className="flex items-center gap-3">
-                <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
-                  Case
-                </span>
-              </div>
-            </Reveal>
-            <div className="mt-8 grid items-stretch gap-8 md:grid-cols-2 md:gap-12">
+        {/* Case — only when linked to a real project */}
+        {caseEnabled && (
+          <section className="bg-[#EAF4EC] py-20 md:py-28">
+            <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
               <Reveal>
-                <div
-                  className={`relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-3xl bg-gradient-to-br ${accent} p-8 shadow-[0_30px_70px_rgba(1,63,64,0.2)]`}
-                >
-                  <svg viewBox="6.5 6.5 56 31" className="pointer-events-none absolute -right-6 -top-8 h-3/4 opacity-[0.14]" aria-hidden="true">
-                    <path d="M 61.09 25.2 C 59.24 27.59 54 34.36 52.44 36.37 C 52.19 36.7 51.8 36.89 51.38 36.89 L 45.6 36.89 C 44.48 36.89 43.84 35.6 44.53 34.71 C 47.48 30.9 53.39 23.27 55.43 20.63 C 55.8 20.14 55.8 19.46 55.43 18.98 L 54.05 17.2 C 53.52 16.5 52.46 16.5 51.92 17.2 C 48.07 22.18 40.31 32.2 37.09 36.37 C 36.83 36.7 36.44 36.89 36.02 36.89 L 28.31 36.89 C 27.19 36.89 26.55 35.59 27.25 34.71 L 34.14 25.8 C 34.52 25.31 34.52 24.63 34.14 24.14 L 32.06 21.45 C 31.52 20.75 30.46 20.75 29.93 21.45 L 18.38 36.36 C 18.12 36.7 17.73 36.89 17.31 36.89 L 9.6 36.89 C 8.48 36.89 7.85 35.59 8.54 34.7 L 25.43 12.89 C 25.97 12.19 27.02 12.19 27.56 12.89 C 29.64 15.57 32.72 19.55 34.79 22.21 C 35.32 22.91 36.38 22.91 36.92 22.21 L 47.43 8.64 C 47.97 7.94 49.02 7.94 49.56 8.64 C 53.11 13.22 57.65 19.08 61.1 23.54 C 61.48 24.02 61.48 24.71 61.1 25.2 Z" fill="#06140F" />
-                  </svg>
-                  {caseImage && (
-                    <>
-                      <img src={caseImage} alt="" className="absolute inset-0 h-full w-full object-cover" />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                    </>
-                  )}
-                  <span className={`relative z-10 font-sans text-xs uppercase tracking-[0.28em] ${caseImage ? 'text-cream/80' : 'text-near-black/60'}`}>{sub.case.sector}</span>
-                  <span className={`relative z-10 mt-2 font-display text-3xl font-semibold md:text-4xl ${caseImage ? 'text-cream' : 'text-near-black'}`}>{sub.case.name}</span>
+                <div className="flex items-center gap-3">
+                  <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">
+                    Case
+                  </span>
                 </div>
               </Reveal>
-              <Reveal delay={0.08}>
-                <div className="flex h-full flex-col justify-center">
-                  <p className="font-sans text-lg leading-relaxed text-near-black/75">{sub.case.summary}</p>
-                  <div className="mt-6 rounded-2xl border border-emerald/20 bg-white p-5">
-                    <span className="font-sans text-xs uppercase tracking-[0.24em] text-emerald">Resultaat</span>
-                    <p className="mt-2 font-sans leading-relaxed text-near-black/70">{sub.case.outcome}</p>
+              <div className="mt-8 grid items-stretch gap-8 md:grid-cols-2 md:gap-12">
+                <Reveal>
+                  <CaseCard accent={accent} image={caseImage} sector={caseSector} title={caseTitle} href={caseHref} />
+                </Reveal>
+                <Reveal delay={0.08}>
+                  <div className="flex h-full flex-col justify-center">
+                    {caseSummary && <p className="font-sans text-lg leading-relaxed text-near-black/75">{caseSummary}</p>}
+                    {caseOutcome && (
+                      <div className="mt-6 rounded-2xl border border-emerald/20 bg-white p-5">
+                        <span className="font-sans text-xs uppercase tracking-[0.24em] text-emerald">Resultaat</span>
+                        <p className="mt-2 font-sans leading-relaxed text-near-black/70">{caseOutcome}</p>
+                      </div>
+                    )}
+                    {caseHref && (
+                      <Link
+                        to={caseHref}
+                        className="group mt-6 inline-flex items-center gap-2 font-sans text-sm font-semibold text-emerald-deep transition-colors hover:text-emerald"
+                      >
+                        Bekijk het volledige project
+                        <span className="transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
+                      </Link>
+                    )}
                   </div>
-                </div>
-              </Reveal>
+                </Reveal>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* FAQ */}
         <section className="py-20 md:py-28">
@@ -419,6 +449,51 @@ function SubHero({ sub, parentLabel, parentCta }: { sub: SubService; parentLabel
         </motion.div>
       </div>
     </section>
+  )
+}
+
+/* ───────────────────────── Case card ───────────────────────── */
+
+function CaseCard({
+  accent,
+  image,
+  sector,
+  title,
+  href,
+}: {
+  accent: string
+  image?: string
+  sector?: string
+  title?: string
+  href?: string | null
+}) {
+  const inner = (
+    <div
+      className={`relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-3xl bg-gradient-to-br ${accent} p-8 shadow-[0_30px_70px_rgba(1,63,64,0.2)] ${href ? 'transition-transform duration-500 group-hover:scale-[1.01]' : ''}`}
+    >
+      <svg viewBox="6.5 6.5 56 31" className="pointer-events-none absolute -right-6 -top-8 h-3/4 opacity-[0.14]" aria-hidden="true">
+        <path d="M 61.09 25.2 C 59.24 27.59 54 34.36 52.44 36.37 C 52.19 36.7 51.8 36.89 51.38 36.89 L 45.6 36.89 C 44.48 36.89 43.84 35.6 44.53 34.71 C 47.48 30.9 53.39 23.27 55.43 20.63 C 55.8 20.14 55.8 19.46 55.43 18.98 L 54.05 17.2 C 53.52 16.5 52.46 16.5 51.92 17.2 C 48.07 22.18 40.31 32.2 37.09 36.37 C 36.83 36.7 36.44 36.89 36.02 36.89 L 28.31 36.89 C 27.19 36.89 26.55 35.59 27.25 34.71 L 34.14 25.8 C 34.52 25.31 34.52 24.63 34.14 24.14 L 32.06 21.45 C 31.52 20.75 30.46 20.75 29.93 21.45 L 18.38 36.36 C 18.12 36.7 17.73 36.89 17.31 36.89 L 9.6 36.89 C 8.48 36.89 7.85 35.59 8.54 34.7 L 25.43 12.89 C 25.97 12.19 27.02 12.19 27.56 12.89 C 29.64 15.57 32.72 19.55 34.79 22.21 C 35.32 22.91 36.38 22.91 36.92 22.21 L 47.43 8.64 C 47.97 7.94 49.02 7.94 49.56 8.64 C 53.11 13.22 57.65 19.08 61.1 23.54 C 61.48 24.02 61.48 24.71 61.1 25.2 Z" fill="#06140F" />
+      </svg>
+      {image && (
+        <>
+          <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+        </>
+      )}
+      {sector && (
+        <span className={`relative z-10 font-sans text-xs uppercase tracking-[0.28em] ${image ? 'text-cream/80' : 'text-near-black/60'}`}>{sector}</span>
+      )}
+      {title && (
+        <span className={`relative z-10 mt-2 font-display text-3xl font-semibold md:text-4xl ${image ? 'text-cream' : 'text-near-black'}`}>{title}</span>
+      )}
+    </div>
+  )
+  return href ? (
+    <Link to={href} className="group block">
+      {inner}
+    </Link>
+  ) : (
+    inner
   )
 }
 
