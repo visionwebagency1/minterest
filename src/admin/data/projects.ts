@@ -32,22 +32,43 @@ export async function fetchProject(id: string): Promise<Project | null> {
   return (data as Project) ?? null
 }
 
+/**
+ * If a write fails because a column is not in the schema (PGRST204, e.g. an
+ * optional field like before_image on a DB that has not run that migration),
+ * return the offending column name so we can drop it and retry. This keeps the
+ * admin working across schema versions instead of hard-failing the whole save.
+ */
+function missingColumn(error: unknown): string | null {
+  const e = error as { code?: string; message?: string } | null
+  if (e && e.code === 'PGRST204' && typeof e.message === 'string') {
+    const m = e.message.match(/Could not find the '([^']+)' column/)
+    if (m) return m[1]
+  }
+  return null
+}
+
 export async function createProject(input: ProjectInput): Promise<Project> {
-  const { data, error } = await getSupabase()
-    .from('projects')
-    .insert({ ...input, updated_at: new Date().toISOString() })
-    .select('*')
-    .single()
-  if (error) throw error
-  return data as Project
+  let body: Record<string, unknown> = { ...input, updated_at: new Date().toISOString() }
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const { data, error } = await getSupabase().from('projects').insert(body).select('*').single()
+    if (!error) return data as Project
+    const col = missingColumn(error)
+    if (!col || !(col in body)) throw error
+    delete body[col]
+  }
+  throw new Error('Opslaan mislukt.')
 }
 
 export async function updateProject(id: string, input: ProjectInput): Promise<void> {
-  const { error } = await getSupabase()
-    .from('projects')
-    .update({ ...input, updated_at: new Date().toISOString() })
-    .eq('id', id)
-  if (error) throw error
+  let body: Record<string, unknown> = { ...input, updated_at: new Date().toISOString() }
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const { error } = await getSupabase().from('projects').update(body).eq('id', id)
+    if (!error) return
+    const col = missingColumn(error)
+    if (!col || !(col in body)) throw error
+    delete body[col]
+  }
+  throw new Error('Opslaan mislukt.')
 }
 
 export async function deleteProject(id: string): Promise<void> {

@@ -1,4 +1,4 @@
-import { Fragment, useState, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
 import { BorderBeam } from './BorderBeam'
@@ -121,17 +121,8 @@ export function Header() {
                 <ul className="flex flex-col">
                   {PRIMARY.map((item, i) =>
                     item.to === '/diensten' ? (
-                      <Fragment key={item.to}>
-                        {/* desktop: single "Onze diensten" link (unchanged) */}
-                        <NavRow no={item.no} delay={0.1 + i * 0.05} className="hidden md:block">
-                          <Link to={item.to} onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
-                            <BigLabel>{item.label}</BigLabel>
-                            <Arrow />
-                          </Link>
-                        </NavRow>
-                        {/* mobile: expanded diensten dropdown */}
-                        <MobileServicesNav close={close} baseDelay={0.1 + i * 0.05} />
-                      </Fragment>
+                      /* diensten always expanded (desktop + mobile) */
+                      <ServicesNav key={item.to} close={close} baseDelay={0.1 + i * 0.05} />
                     ) : (
                       <NavRow key={item.to} no={item.no} delay={0.1 + i * 0.05}>
                         <Link to={item.to} onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
@@ -187,21 +178,21 @@ export function Header() {
   )
 }
 
-/* ---- mobile-only expanded "Onze diensten" dropdown ---- */
-function MobileServicesNav({ close, baseDelay }: { close: () => void; baseDelay: number }) {
+/* ---- expanded "Onze diensten" dropdown (desktop + mobile) ---- */
+function ServicesNav({ close, baseDelay }: { close: () => void; baseDelay: number }) {
   return (
     <motion.li
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: EASE, delay: baseDelay }}
-      className="border-b border-white/5 md:hidden"
+      className="border-b border-white/5"
     >
-      <Link to="/diensten" onClick={close} className="group flex items-baseline gap-4 py-3">
+      <Link to="/diensten" onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
         <BigLabel>Onze diensten</BigLabel>
         <Arrow />
       </Link>
 
-      <ul className="mb-3 grid grid-cols-2 gap-2">
+      <ul className="mb-3 grid grid-cols-2 gap-2 md:mb-5 md:grid-cols-3 md:gap-3">
         {MAIN_SERVICES.map((s, i) => {
           const Icon = SERVICE_ICON_BY_SLUG[s.slug]
           return (
@@ -214,12 +205,12 @@ function MobileServicesNav({ close, baseDelay }: { close: () => void; baseDelay:
               <Link
                 to={`/diensten/${s.slug}`}
                 onClick={close}
-                className="group/svc relative flex h-full items-center gap-2.5 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 transition-colors duration-300 hover:border-mint/40 hover:bg-white/[0.06]"
+                className="group/svc relative flex h-full items-center gap-2.5 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 transition-colors duration-300 hover:border-mint/40 hover:bg-white/[0.06] md:gap-3.5 md:px-4 md:py-3.5"
               >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-mint/10 text-mint [&>svg]:h-4 [&>svg]:w-4">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-mint/10 text-mint [&>svg]:h-4 [&>svg]:w-4 md:h-11 md:w-11 md:rounded-xl md:[&>svg]:h-5 md:[&>svg]:w-5">
                   <Icon />
                 </span>
-                <span className="font-sans text-[13px] font-medium leading-[1.15] text-white/80 transition-colors duration-300 group-hover/svc:text-white">
+                <span className="font-sans text-[13px] font-medium leading-[1.15] text-white/80 transition-colors duration-300 group-hover/svc:text-white md:text-[15px]">
                   {s.label}
                 </span>
                 {/* line that draws across the button, one after another (staggered) */}

@@ -11,6 +11,7 @@ import {
 } from '../data/projects'
 import { GhostButton, PrimaryButton, TextAreaField, TextField } from '../components/form'
 import { Card, ErrorNote, PageHeading, Spinner } from '../components/ui'
+import { encodeGalleryItem, parseGalleryItem } from '@/lib/projects'
 
 const EMPTY: ProjectInput = {
   slug: '',
@@ -192,6 +193,14 @@ export function AdminProjectForm({ mode }: { mode: 'create' | 'edit' }) {
               busy={busyImg}
               onAdd={uploadTo((url) => set('gallery', [...form.gallery, url]))}
               onRemove={(i) => set('gallery', form.gallery.filter((_, idx) => idx !== i))}
+              onCaption={(i, caption) =>
+                set(
+                  'gallery',
+                  form.gallery.map((entry, idx) =>
+                    idx === i ? encodeGalleryItem(parseGalleryItem(entry).src, caption) : entry,
+                  ),
+                )
+              }
             />
           </div>
         </Card>
@@ -287,36 +296,53 @@ function GalleryField({
   busy,
   onAdd,
   onRemove,
+  onCaption,
 }: {
   images: string[]
   busy: boolean
   onAdd: (e: { target: HTMLInputElement }) => void
   onRemove: (i: number) => void
+  onCaption: (i: number, caption: string) => void
 }) {
   const ref = useRef<HTMLInputElement>(null)
   return (
     <div>
-      <span className="mb-2 block font-sans text-sm font-semibold text-near-black">Galerij</span>
-      <div className="flex flex-wrap gap-3">
-        {images.map((src, i) => (
-          <div key={i} className="group relative">
-            <img src={src} alt="" className="h-20 w-28 rounded-lg border border-emerald-deep/10 object-cover" />
-            <button
-              type="button"
-              onClick={() => onRemove(i)}
-              className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-white text-red-500 shadow ring-1 ring-emerald-deep/10"
-              aria-label="Verwijder foto"
-            >
-              ×
-            </button>
-          </div>
-        ))}
+      <span className="mb-1 block font-sans text-sm font-semibold text-near-black">Galerij</span>
+      <p className="mb-3 font-sans text-sm text-near-black/55">
+        Foto's verschijnen in een net raster op de case-pagina. Het bijschrift komt klein onderaan de foto (optioneel).
+      </p>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+        {images.map((entry, i) => {
+          const { src, caption } = parseGalleryItem(entry)
+          return (
+            <div key={i} className="rounded-xl border border-emerald-deep/10 bg-white p-2">
+              <div className="group relative">
+                <img src={src} alt="" className="aspect-[4/3] w-full rounded-lg object-cover" />
+                <button
+                  type="button"
+                  onClick={() => onRemove(i)}
+                  className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-white text-red-500 shadow ring-1 ring-emerald-deep/10"
+                  aria-label="Verwijder foto"
+                >
+                  ×
+                </button>
+              </div>
+              <input
+                type="text"
+                value={caption}
+                onChange={(e) => onCaption(i, e.target.value)}
+                placeholder="Bijschrift (optioneel)"
+                className="mt-2 w-full rounded-lg border border-emerald-deep/12 bg-cream/40 px-2.5 py-1.5 font-sans text-xs text-near-black placeholder:text-near-black/35 focus:border-emerald/50 focus:outline-none"
+              />
+            </div>
+          )
+        })}
         <input ref={ref} type="file" accept="image/*" className="hidden" onChange={onAdd} />
         <button
           type="button"
           onClick={() => ref.current?.click()}
           disabled={busy}
-          className="grid h-20 w-28 place-items-center rounded-lg border border-dashed border-emerald-deep/25 text-2xl text-near-black/40 transition-colors hover:border-emerald/50 hover:text-emerald disabled:opacity-50"
+          className="grid aspect-[4/3] w-full place-items-center rounded-xl border border-dashed border-emerald-deep/25 text-2xl text-near-black/40 transition-colors hover:border-emerald/50 hover:text-emerald disabled:opacity-50"
         >
           +
         </button>
