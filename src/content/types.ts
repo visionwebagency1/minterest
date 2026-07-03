@@ -8,7 +8,7 @@
  * identical until something is actually changed and published.
  */
 
-export type FieldKind = 'text' | 'multiline' | 'image'
+export type FieldKind = 'text' | 'multiline' | 'image' | 'toggle'
 
 export type ContentField = {
   /** Unique within the page, e.g. 'faq.items.0.question'. */

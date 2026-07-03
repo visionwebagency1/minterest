@@ -36,6 +36,14 @@ const img = (key: string, group: string, label: string): ContentField => ({
   kind: 'image',
   default: '',
 })
+/** On/off switch. Value is the string 'aan' or 'uit'. */
+const tog = (key: string, group: string, label: string, def: 'aan' | 'uit'): ContentField => ({
+  key,
+  group,
+  label,
+  kind: 'toggle',
+  default: def,
+})
 
 const HOME_FIELDS: ContentField[] = [
   // ── Marquee (lopende balk onder de hero) ───────────────────────────────────
@@ -269,18 +277,71 @@ const SERVICE_PAGES: PageContent[] = MAIN_SERVICES.map((s) => ({
   ],
 }))
 
-// One editor page per sub-service landing page (tagline + story paragraphs),
-// defaults auto-generated from the sub-service data.
-const SUBSERVICE_PAGES: PageContent[] = SUB_SERVICES.map((sub) => ({
-  page: `sub-${sub.serviceSlug}-${sub.slug}`,
-  title: `Sub: ${sub.name}`,
-  fields: [
-    m('tagline', 'Hero', 'Tagline', sub.tagline),
-    ...sub.story.map((p, i) => m(`story.${i}`, 'Verhaal', `Alinea ${i + 1}`, p)),
-    img('actionImage', 'In actie', 'Foto (vervangt de animatie)'),
-    img('caseImage', 'Case', 'Foto (vervangt de tegel)'),
-  ],
-}))
+/**
+ * Real client cases per sub-service. A sub-page only shows a case when it maps
+ * to a real project here; everywhere else the case section is hidden by default.
+ * Keyed by `${serviceSlug}/${subSlug}`. `project` is the project slug the page
+ * links to (its real name + first photo are pulled in live).
+ */
+const SUB_CASE: Record<string, { project: string; summary: string; outcome: string }> = {
+  'web-development/websites': {
+    project: 'wrbc',
+    summary:
+      'Voor WRBC bouwden we een professionele website die vertrouwen wekt en bezoekers duidelijk naar contact begeleidt.',
+    outcome:
+      'Een sterkere online uitstraling die past bij de kwaliteit van hun dienstverlening en makkelijker aanvragen oplevert.',
+  },
+  'video-fotografie/fotoshoots': {
+    project: 'ab-secure',
+    summary:
+      "Voor AB Secure verzorgden we professionele fotografie: echte beelden van het team en de dienstverlening in plaats van stockfoto's.",
+    outcome:
+      'Authentieke beelden die de betrouwbaarheid van het beveiligingsbedrijf direct voelbaar maken op de website en social media.',
+  },
+  'design-branding/packaging': {
+    project: 'aoki',
+    summary:
+      'Voor AOKI ontwikkelden we verpakking die het matcha-merk premium, herkenbaar en schapklaar neerzet.',
+    outcome:
+      'Een verpakkingslijn die opvalt, bij het merk past en eenvoudig uitbreidbaar is naar nieuwe producten.',
+  },
+  'design-branding/visuele-identiteit': {
+    project: 'casa-fenestra',
+    summary:
+      'Voor Casa Fenestra ontwikkelden we een complete visuele identiteit: logo, kleuren en typografie die het merk professioneel en herkenbaar maken.',
+    outcome:
+      'Een consistente uitstraling die op elk kanaal sterk blijft en direct vertrouwen wekt.',
+  },
+  'design-branding/complete-branding': {
+    project: 'casa-porcellana',
+    summary:
+      'Voor Casa Porcellana bouwden we een compleet merk en digitale ervaring, net zo verfijnd als hun architecturale porseleinen oppervlakken.',
+    outcome:
+      'Een merk dat de kwaliteit van de materialen weerspiegelt en bezoekers converteert naar aanvragen.',
+  },
+}
+
+// One editor page per sub-service landing page (tagline + story + case),
+// defaults auto-generated from the sub-service data. The case only shows for
+// sub-services with a real project (SUB_CASE); the rest hide it by default.
+const SUBSERVICE_PAGES: PageContent[] = SUB_SERVICES.map((sub) => {
+  const cs = SUB_CASE[`${sub.serviceSlug}/${sub.slug}`]
+  return {
+    page: `sub-${sub.serviceSlug}-${sub.slug}`,
+    title: `Sub: ${sub.name}`,
+    fields: [
+      m('tagline', 'Hero', 'Tagline', sub.tagline),
+      ...sub.story.map((p, i) => m(`story.${i}`, 'Verhaal', `Alinea ${i + 1}`, p)),
+      img('actionImage', 'In actie', 'Foto (vervangt de animatie)'),
+      tog('caseEnabled', 'Case', 'Case tonen', cs ? 'aan' : 'uit'),
+      t('caseProject', 'Case', 'Gekoppeld project (slug)', cs?.project ?? ''),
+      t('caseName', 'Case', 'Naam (leeg = projectnaam)', ''),
+      m('caseSummary', 'Case', 'Omschrijving', cs?.summary ?? ''),
+      m('caseOutcome', 'Case', 'Resultaat', cs?.outcome ?? ''),
+      img('caseImage', 'Case', 'Foto (leeg = eerste projectfoto)'),
+    ],
+  }
+})
 
 export const CONTENT_PAGES: PageContent[] = [
   { page: 'home', title: 'Homepage', fields: HOME_FIELDS },
