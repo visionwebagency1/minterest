@@ -19,6 +19,8 @@ const EMPTY: ProjectInput = {
   client: '',
   year: '',
   cover_image: '',
+  before_image: '',
+  after_image: '',
   summary: '',
   intro: '',
   challenge: '',
@@ -110,6 +112,8 @@ export function AdminProjectForm({ mode }: { mode: 'create' | 'edit' }) {
       result: clean(form.result),
       quote: clean(form.quote),
       quote_author: clean(form.quote_author),
+      before_image: clean(form.before_image),
+      after_image: clean(form.after_image),
       sort_order: Number(form.sort_order) || 0,
     }
     setSaving(true)
@@ -189,6 +193,15 @@ export function AdminProjectForm({ mode }: { mode: 'create' | 'edit' }) {
               onAdd={uploadTo((url) => set('gallery', [...form.gallery, url]))}
               onRemove={(i) => set('gallery', form.gallery.filter((_, idx) => idx !== i))}
             />
+          </div>
+        </Card>
+
+        <Card className="p-6 md:p-8">
+          <h2 className="mb-1 font-display text-base font-semibold text-near-black">Voor / na</h2>
+          <p className="mb-4 font-sans text-sm text-near-black/55">Vul beide velden om hoog op de case-pagina een sleep-vergelijking te tonen. Laat leeg om de slider te verbergen.</p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <ImageField label="Voor" value={form.before_image ?? ''} busy={busyImg} onPick={uploadTo((url) => set('before_image', url))} onClear={() => set('before_image', '')} />
+            <ImageField label="Na" value={form.after_image ?? ''} busy={busyImg} onPick={uploadTo((url) => set('after_image', url))} onClear={() => set('after_image', '')} />
           </div>
         </Card>
 

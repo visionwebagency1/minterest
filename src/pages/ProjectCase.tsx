@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Reveal } from '@/components/Reveal'
+import { BeforeAfterSlider } from '@/components/BeforeAfterSlider'
 import { HERO_BG, HeroMWatermark } from '@/components/PageHero'
 import { Footer } from '@/sections/Footer'
 import { getProjectBySlug, type Project } from '@/lib/projects'
@@ -70,6 +71,24 @@ export function ProjectCase() {
             <div className="-mt-12 overflow-hidden rounded-3xl shadow-[0_40px_120px_rgba(1,63,64,0.25)] md:-mt-16">
               <img src={project.cover_image} alt="" className="aspect-[16/9] w-full object-cover" />
             </div>
+          </div>
+        )}
+
+        {/* Before / after */}
+        {project.before_image && project.after_image && (
+          <div className="mx-auto max-w-6xl px-6 pt-20 md:px-10 md:pt-28">
+            <Reveal className="flex items-center gap-3">
+              <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">Voor en na</span>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-6 max-w-2xl text-balance font-display text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-[1.05] tracking-tight">
+                Van oud naar nieuw.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <BeforeAfterSlider before={project.before_image} after={project.after_image} className="mt-8" />
+              <p className="mt-4 text-center font-sans text-sm text-near-black/45">Sleep de knop om te vergelijken</p>
+            </Reveal>
           </div>
         )}
 
