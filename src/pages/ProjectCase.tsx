@@ -4,7 +4,7 @@ import { Reveal } from '@/components/Reveal'
 import { BeforeAfterSlider } from '@/components/BeforeAfterSlider'
 import { HERO_BG, HeroMWatermark } from '@/components/PageHero'
 import { Footer } from '@/sections/Footer'
-import { getProjectBySlug, type Project } from '@/lib/projects'
+import { getProjectBySlug, parseGallery, type Project } from '@/lib/projects'
 import { NotFound } from './NotFound'
 
 /** Public case page for one project (/work/:slug). */
@@ -41,6 +41,8 @@ export function ProjectCase() {
     { title: 'Het resultaat', text: project.result },
   ].filter((b) => b.text)
 
+  const gallery = parseGallery(project.gallery)
+
   return (
     <>
       {/* Hero */}
@@ -65,18 +67,47 @@ export function ProjectCase() {
       </section>
 
       <div className="bg-cream text-near-black">
-        {/* Cover */}
-        {project.cover_image && (
-          <div className="mx-auto max-w-6xl px-6 md:px-10">
-            <div className="-mt-12 overflow-hidden rounded-3xl shadow-[0_40px_120px_rgba(1,63,64,0.25)] md:-mt-16">
-              <img src={project.cover_image} alt="" className="aspect-[16/9] w-full object-cover" />
+        {/* Intro: text left, cover right on desktop; cover on top, text below on mobile */}
+        <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
+          <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
+            {/* Text column */}
+            <div className="order-2 lg:order-1 lg:col-span-6">
+              {project.intro && (
+                <Reveal>
+                  <p className="font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-[1.25] tracking-tight text-near-black">
+                    {project.intro}
+                  </p>
+                </Reveal>
+              )}
+
+              <div className="mt-12 flex flex-col gap-11">
+                {blocks.map((b) => (
+                  <Reveal key={b.title}>
+                    <div className="flex items-center gap-3">
+                      <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">{b.title}</span>
+                    </div>
+                    <p className="mt-4 whitespace-pre-wrap font-sans text-lg leading-relaxed text-near-black/70">{b.text}</p>
+                  </Reveal>
+                ))}
+              </div>
             </div>
+
+            {/* Cover column (sticky on desktop) */}
+            {project.cover_image && (
+              <div className="order-1 lg:order-2 lg:col-span-6">
+                <Reveal>
+                  <div className="overflow-hidden rounded-3xl shadow-[0_40px_120px_rgba(1,63,64,0.22)] lg:sticky lg:top-28">
+                    <img src={project.cover_image} alt="" className="w-full object-cover" />
+                  </div>
+                </Reveal>
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
         {/* Before / after */}
         {project.before_image && project.after_image && (
-          <div className="mx-auto max-w-6xl px-6 pt-20 md:px-10 md:pt-28">
+          <div className="mx-auto max-w-6xl px-6 pb-4 md:px-10 md:pb-8">
             <Reveal className="flex items-center gap-3">
               <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">Voor en na</span>
             </Reveal>
@@ -92,34 +123,23 @@ export function ProjectCase() {
           </div>
         )}
 
-        <div className="mx-auto max-w-3xl px-6 py-20 md:px-10 md:py-28">
-          {project.intro && (
-            <Reveal>
-              <p className="font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-[1.25] tracking-tight text-near-black">
-                {project.intro}
-              </p>
-            </Reveal>
-          )}
-
-          <div className="mt-14 flex flex-col gap-12">
-            {blocks.map((b) => (
-              <Reveal key={b.title}>
-                <div className="flex items-center gap-3">
-                  <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">{b.title}</span>
-                </div>
-                <p className="mt-5 whitespace-pre-wrap font-sans text-lg leading-relaxed text-near-black/70">{b.text}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        {/* Gallery */}
-        {project.gallery.length > 0 && (
+        {/* Gallery: consistent proportions, minimal caption pinned to the photo */}
+        {gallery.length > 0 && (
           <div className="mx-auto max-w-6xl px-6 pb-20 md:px-10 md:pb-28">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              {project.gallery.map((src, i) => (
+            <Reveal className="mb-8 flex items-center gap-3">
+              <span className="font-sans text-xs uppercase tracking-[0.28em] text-emerald-deep/60">In beeld</span>
+            </Reveal>
+            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6">
+              {gallery.map((item, i) => (
                 <Reveal key={i}>
-                  <img src={src} alt="" className="w-full rounded-2xl object-cover shadow-[0_20px_60px_rgba(1,63,64,0.12)]" />
+                  <figure className="group relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(1,63,64,0.12)]">
+                    <img src={item.src} alt={item.caption} className="aspect-[4/3] w-full object-cover" />
+                    {item.caption && (
+                      <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-near-black/80 via-near-black/35 to-transparent px-4 pb-3.5 pt-12 font-sans text-sm font-medium text-cream md:px-5">
+                        {item.caption}
+                      </figcaption>
+                    )}
+                  </figure>
                 </Reveal>
               ))}
             </div>

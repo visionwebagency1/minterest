@@ -33,6 +33,35 @@ export type Project = {
   updated_at: string
 }
 
+/**
+ * A gallery photo + its optional caption. To keep the whole feature working
+ * against the live schema without a migration, both are packed into one
+ * `gallery` text[] entry: the URL, then a newline, then the caption. Entries
+ * without a newline are just a bare URL (no caption). URLs never contain raw
+ * newlines, so the split is unambiguous.
+ */
+export type GalleryItem = { src: string; caption: string }
+
+const GALLERY_SEP = '\n'
+
+/** Split one stored gallery entry into its URL + caption. */
+export function parseGalleryItem(entry: string): GalleryItem {
+  const i = entry.indexOf(GALLERY_SEP)
+  return i === -1
+    ? { src: entry, caption: '' }
+    : { src: entry.slice(0, i), caption: entry.slice(i + 1) }
+}
+
+/** Pack a URL + caption back into one stored gallery entry. */
+export function encodeGalleryItem(src: string, caption: string): string {
+  const c = caption.trim()
+  return c ? `${src}${GALLERY_SEP}${c}` : src
+}
+
+/** Parse a whole stored gallery array into { src, caption } items. */
+export const parseGallery = (gallery: string[]): GalleryItem[] =>
+  gallery.map(parseGalleryItem)
+
 async function restGet(query: string): Promise<Project[]> {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return []
   try {
