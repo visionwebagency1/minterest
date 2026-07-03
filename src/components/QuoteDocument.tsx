@@ -152,6 +152,24 @@ export function QuoteDocument({
           </p>
         )}
 
+        {/* Legal terms notice — always on quotes */}
+        {kind === 'Offerte' && (
+          <p className="mt-6 border-t border-emerald-deep/8 pt-5 font-sans text-[11px] leading-relaxed text-near-black/50">
+            Op al onze offertes, overeenkomsten en werkzaamheden zijn de algemene voorwaarden van Minterest van
+            toepassing. Deze zijn als bijlage meegestuurd en/of te raadplegen via{' '}
+            <a
+              href="/algemene-voorwaarden"
+              target="_blank"
+              rel="noreferrer"
+              className="underline decoration-emerald-deep/30 underline-offset-2 hover:text-emerald-deep"
+            >
+              minterest.nl/algemene-voorwaarden
+            </a>
+            . Door akkoord te gaan met deze offerte verklaart opdrachtgever kennis te hebben genomen van en akkoord te
+            gaan met deze algemene voorwaarden.
+          </p>
+        )}
+
         {/* company footer */}
         <div className="mt-8 flex flex-wrap gap-x-6 gap-y-1 border-t border-emerald-deep/8 pt-5 font-sans text-xs text-near-black/50">
           {company.company_name && <span>{company.company_name}</span>}
