@@ -55,6 +55,10 @@ export type QuoteDocumentProps = {
   total?: number | null
   /** Optional "totale waarde" shown struck through above the investment. */
   listTotal?: number | null
+  /** Customer signature (PNG data URL) + name + moment, shown once approved. */
+  signature?: string | null
+  signedName?: string | null
+  signedAt?: string | null
 }
 
 const dateFmt = new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' })
@@ -78,6 +82,9 @@ export function QuoteDocument({
   vatAmount,
   total,
   listTotal,
+  signature,
+  signedName,
+  signedAt,
 }: QuoteDocumentProps & { lines: DocLine[] }) {
   const lineTotals = computeTotals(lines as CalcLine[])
   const bundled = lineTotals.subtotal === 0
@@ -252,6 +259,26 @@ export function QuoteDocument({
                   <span className="font-display text-lg font-semibold tabular-nums text-emerald-deep">
                     {formatEUR(netTotal)}
                   </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* signature / akkoord — shown once the customer approved online */}
+        {kind === 'Offerte' && signature && (
+          <div className="doc-block mt-8">
+            <SectionLabel>Akkoord</SectionLabel>
+            <div className="mt-4 flex flex-wrap items-end gap-8">
+              <div>
+                <img
+                  src={signature}
+                  alt="Handtekening klant"
+                  className="h-24 w-auto max-w-[280px] object-contain"
+                />
+                <div className="mt-1 border-t border-emerald-deep/15 pt-1.5">
+                  <p className="font-sans text-sm font-semibold text-near-black">{signedName || 'Handtekening'}</p>
+                  {signedAt && <p className="font-sans text-xs text-near-black/50">Digitaal akkoord op {fmtDate(signedAt)}</p>}
                 </div>
               </div>
             </div>

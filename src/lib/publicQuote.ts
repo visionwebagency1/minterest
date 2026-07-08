@@ -16,6 +16,9 @@ export type PublicQuote = {
   vat_amount: number
   total: number
   list_total: number | null
+  signature: string | null
+  signed_name: string | null
+  responded_at: string | null
   customer: DocParty | null
   company: DocParty & { quote_footer?: string | null }
   lines: DocLine[]
@@ -49,5 +52,24 @@ export async function respondToQuote(token: string, decision: 'accept' | 'reject
     body: JSON.stringify({ p_token: token, p_decision: decision }),
   })
   if (!res.ok) throw new Error('Kon je keuze niet verwerken. Probeer het opnieuw.')
+  return (await res.json()) as string
+}
+
+/**
+ * Approve a quote WITH a signature. Stores the signature (PNG data URL) and the
+ * typed name, and sets the status to "geaccepteerd". Returns the new status.
+ */
+export async function signAndAcceptQuote(
+  token: string,
+  signature: string,
+  signedName: string,
+): Promise<string> {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) throw new Error('Niet beschikbaar.')
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/sign_and_accept_quote`, {
+    method: 'POST',
+    headers: headers(),
+    body: JSON.stringify({ p_token: token, p_signature: signature, p_signed_name: signedName }),
+  })
+  if (!res.ok) throw new Error('Kon je goedkeuring niet verwerken. Probeer het opnieuw.')
   return (await res.json()) as string
 }

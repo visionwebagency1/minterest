@@ -35,6 +35,9 @@ export type Quote = {
   list_total: number | null
   public_token: string
   responded_at: string | null
+  /** Customer signature (PNG data URL) + typed name, set on online approval. */
+  signature: string | null
+  signed_name: string | null
 }
 
 /** A line as edited in the form (no id needed until saved). */

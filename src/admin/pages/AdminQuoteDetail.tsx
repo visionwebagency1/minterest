@@ -171,6 +171,9 @@ export function AdminQuoteDetail() {
               vatAmount={quote.vat_amount}
               total={quote.total}
               listTotal={quote.list_total}
+              signature={quote.signature}
+              signedName={quote.signed_name}
+              signedAt={quote.responded_at}
             />
           </div>
         </Card>
