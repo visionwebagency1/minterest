@@ -82,6 +82,9 @@ export function PublicInvoice() {
             company={invoice.company}
             customer={invoice.customer}
             lines={invoice.lines}
+            subtotal={invoice.subtotal}
+            vatAmount={invoice.vat_amount}
+            total={invoice.total}
           />
         </div>
       </div>

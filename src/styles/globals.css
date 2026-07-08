@@ -124,6 +124,13 @@
   print-color-adjust: exact;
 }
 
+/* Keep hero blocks, checklist rows and the price panel intact across a page
+   break so nothing is cut in half in the PDF. */
+.doc-block {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
 @media print {
   /* Hide everything that is not the printable document. */
   .print-hide {

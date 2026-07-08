@@ -36,6 +36,7 @@ export function AdminQuoteForm({ mode }: { mode: 'create' | 'edit' }) {
   const [issueDate, setIssueDate] = useState(todayISO())
   const [validUntil, setValidUntil] = useState('')
   const [notes, setNotes] = useState('')
+  const [listTotal, setListTotal] = useState('')
   const [lines, setLines] = useState<LineDraft[]>([])
   const [catalogOpen, setCatalogOpen] = useState(false)
 
@@ -60,6 +61,7 @@ export function AdminQuoteForm({ mode }: { mode: 'create' | 'edit' }) {
           setIssueDate(quote.issue_date)
           setValidUntil(quote.valid_until ?? '')
           setNotes(quote.notes ?? '')
+          setListTotal(quote.list_total != null ? String(quote.list_total) : '')
           setLines(
             existingLines.map((l) => ({
               description: l.description,
@@ -111,6 +113,7 @@ export function AdminQuoteForm({ mode }: { mode: 'create' | 'edit' }) {
       issue_date: issueDate,
       valid_until: validUntil || null,
       notes: notes.trim() || null,
+      list_total: listTotal.trim() === '' ? null : Number(listTotal),
       lines: cleaned,
     }
     try {
@@ -320,7 +323,7 @@ export function AdminQuoteForm({ mode }: { mode: 'create' | 'edit' }) {
           </div>
         </Card>
 
-        {/* notes */}
+        {/* notes + optional anchor value */}
         <Card className="p-6">
           <TextAreaField
             label="Notitie op de offerte"
@@ -328,6 +331,22 @@ export function AdminQuoteForm({ mode }: { mode: 'create' | 'edit' }) {
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Optionele inleiding of toelichting die op de offerte komt te staan."
           />
+          <div className="mt-5 sm:max-w-xs">
+            <label className="flex flex-col gap-1.5">
+              <span className="font-sans text-sm font-semibold text-near-black">Totale waarde (optioneel)</span>
+              <input
+                type="number"
+                step="0.01"
+                value={listTotal}
+                onChange={(e) => setListTotal(e.target.value)}
+                placeholder="Bijv. 3400"
+                className="w-full rounded-xl border border-emerald-deep/15 bg-white px-3.5 py-2.5 font-sans text-sm tabular-nums text-near-black outline-none focus:border-emerald"
+              />
+              <span className="font-sans text-xs text-near-black/45">
+                Wordt doorgestreept boven de investering getoond. Leeg laten om te verbergen.
+              </span>
+            </label>
+          </div>
         </Card>
 
         {error && <ErrorNote message={error} />}

@@ -15,6 +15,7 @@ export type PublicQuote = {
   subtotal: number
   vat_amount: number
   total: number
+  list_total: number | null
   customer: DocParty | null
   company: DocParty & { quote_footer?: string | null }
   lines: DocLine[]

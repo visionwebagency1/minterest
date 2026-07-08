@@ -91,6 +91,8 @@ function FooterInner() {
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
           <p className="font-sans text-xs text-white/40">
             {c('footer.copyright')}
+            <span className="mx-2 text-white/20">|</span>
+            KvK 83955526
           </p>
           <div className="flex gap-6 font-sans text-xs text-white/40">
             <Link to="#" className="transition-colors hover:text-white/70">

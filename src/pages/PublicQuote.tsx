@@ -142,6 +142,10 @@ export function PublicQuote() {
             company={quote.company}
             customer={quote.customer}
             lines={quote.lines}
+            subtotal={quote.subtotal}
+            vatAmount={quote.vat_amount}
+            total={quote.total}
+            listTotal={quote.list_total}
           />
         </div>
       </div>

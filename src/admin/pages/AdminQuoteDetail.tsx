@@ -167,6 +167,10 @@ export function AdminQuoteDetail() {
               company={settings}
               customer={customer}
               lines={lines}
+              subtotal={quote.subtotal}
+              vatAmount={quote.vat_amount}
+              total={quote.total}
+              listTotal={quote.list_total}
             />
           </div>
         </Card>

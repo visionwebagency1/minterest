@@ -31,6 +31,8 @@ export type Quote = {
   subtotal: number
   vat_amount: number
   total: number
+  /** Optional "totale waarde" shown struck through above the investment. */
+  list_total: number | null
   public_token: string
   responded_at: string | null
 }
@@ -48,6 +50,7 @@ export type QuoteDraft = {
   issue_date: string
   valid_until: string | null
   notes: string | null
+  list_total?: number | null
   lines: LineDraft[]
 }
 
@@ -126,6 +129,7 @@ export async function createQuote(draft: QuoteDraft): Promise<Quote> {
       issue_date: draft.issue_date,
       valid_until: draft.valid_until,
       notes: draft.notes,
+      list_total: draft.list_total ?? null,
       subtotal: totals.subtotal,
       vat_amount: totals.vatAmount,
       total: totals.total,
@@ -147,6 +151,7 @@ export async function updateQuote(id: string, draft: QuoteDraft): Promise<void> 
       issue_date: draft.issue_date,
       valid_until: draft.valid_until,
       notes: draft.notes,
+      list_total: draft.list_total ?? null,
       subtotal: totals.subtotal,
       vat_amount: totals.vatAmount,
       total: totals.total,

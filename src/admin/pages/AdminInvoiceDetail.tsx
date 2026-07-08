@@ -151,6 +151,9 @@ export function AdminInvoiceDetail() {
               company={settings}
               customer={customer}
               lines={lines}
+              subtotal={invoice.subtotal}
+              vatAmount={invoice.vat_amount}
+              total={invoice.total}
             />
           </div>
         </Card>
