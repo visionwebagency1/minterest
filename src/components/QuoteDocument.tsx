@@ -129,6 +129,8 @@ export function QuoteDocument({
                 {customer.contact_name && <p>{customer.contact_name}</p>}
                 {customer.address && <p className="whitespace-pre-wrap">{customer.address}</p>}
                 {customer.email && <p>{customer.email}</p>}
+                {customer.kvk && <p>KvK {customer.kvk}</p>}
+                {customer.vat && <p>BTW {customer.vat}</p>}
               </div>
             ) : (
               <p className="mt-1.5 font-sans text-sm text-near-black/40">Geen klant gekoppeld</p>
