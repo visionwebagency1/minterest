@@ -32,6 +32,8 @@ export type Invoice = {
   subtotal: number
   vat_amount: number
   total: number
+  /** Optional "totale waarde" shown struck through above the amount. */
+  list_total: number | null
   public_token: string
   paid_at: string | null
 }
@@ -49,6 +51,7 @@ export type InvoiceDraft = {
   issue_date: string
   due_date: string | null
   notes: string | null
+  list_total?: number | null
   lines: LineDraft[]
 }
 
@@ -145,6 +148,7 @@ export async function createInvoice(draft: InvoiceDraft): Promise<Invoice> {
       issue_date: draft.issue_date,
       due_date: draft.due_date,
       notes: draft.notes,
+      list_total: draft.list_total ?? null,
       subtotal: totals.subtotal,
       vat_amount: totals.vatAmount,
       total: totals.total,
@@ -202,6 +206,7 @@ export async function createInvoiceFromQuote(quoteId: string, dueDays: number): 
     issue_date: today,
     due_date: due.toISOString().slice(0, 10),
     notes: res.quote.notes,
+    list_total: res.quote.list_total,
     lines: res.lines.map((l) => ({
       description: l.description,
       quantity: Number(l.quantity),

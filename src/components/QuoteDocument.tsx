@@ -102,6 +102,11 @@ export function QuoteDocument({
   const anchor = listTotal != null && Number(listTotal) > netSubtotal ? Number(listTotal) : null
   const showPrices = !bundled
 
+  // A line starting with "## " is a section header, not an item. When any exist,
+  // we render grouped cards per section; otherwise the hero + checklist layout.
+  const hasSections = lines.some((l) => l.description.startsWith('## '))
+  const sections = hasSections ? parseSections(lines) : []
+
   const heroCount = Math.min(HERO_MAX, lines.length)
   const heroItems = lines.slice(0, heroCount)
   const restItems = lines.slice(heroCount)
@@ -161,6 +166,20 @@ export function QuoteDocument({
           <p className="mt-8 rounded-2xl border border-dashed border-emerald-deep/15 py-8 text-center font-sans text-sm text-near-black/40">
             Nog geen regels
           </p>
+        ) : hasSections ? (
+          /* grouped cards per section (e.g. eenmalig vs maandelijks) */
+          <div className="mt-9 flex flex-col gap-8">
+            {sections.map((section, si) => (
+              <div key={si}>
+                {section.title && <SectionLabel>{section.title}</SectionLabel>}
+                <div className="mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
+                  {section.items.map((l, i) => (
+                    <ItemCard key={i} line={l} showPrices={showPrices} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         ) : (
           <div className="mt-9">
             <SectionLabel>Wat is inbegrepen</SectionLabel>
@@ -358,6 +377,68 @@ function itemDetail(desc: string): string | null {
   return m ? m[2].trim() : null
 }
 
+/** The parenthetical detail split into sub-points on the "·" separator. */
+function itemPoints(desc: string): string[] {
+  const detail = itemDetail(desc)
+  if (!detail) return []
+  return detail
+    .split('·')
+    .map((s) => s.trim())
+    .filter(Boolean)
+}
+
+type Section = { title: string | null; items: DocLine[] }
+
+/** Split the lines into sections on "## " header lines. */
+function parseSections(lines: DocLine[]): Section[] {
+  const out: Section[] = []
+  let cur: Section = { title: null, items: [] }
+  for (const l of lines) {
+    if (l.description.startsWith('## ')) {
+      if (cur.title || cur.items.length) out.push(cur)
+      cur = { title: l.description.slice(3).trim(), items: [] }
+    } else {
+      cur.items.push(l)
+    }
+  }
+  if (cur.title || cur.items.length) out.push(cur)
+  return out
+}
+
+/** A rich item card: icon, title, sub-points and price (or "Op aanvraag"). */
+function ItemCard({ line, showPrices }: { line: DocLine; showPrices: boolean }) {
+  const title = itemTitle(line.description)
+  const points = itemPoints(line.description)
+  const net = lineNet(line as CalcLine)
+  const priceLabel = showPrices ? (net > 0 ? formatEUR(net) : 'Op aanvraag') : null
+
+  return (
+    <div className="doc-block flex flex-col gap-3 rounded-2xl border border-emerald-deep/10 bg-gradient-to-br from-emerald/[0.05] to-mint/[0.03] p-5">
+      <div className="flex items-start gap-4">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-emerald to-mint text-white shadow-sm shadow-emerald/25">
+          <Icon name={iconFor(line.description)} />
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="font-display text-[15px] font-semibold leading-snug text-near-black">{title}</p>
+          {priceLabel && (
+            <p className="mt-1 font-sans text-sm font-semibold tabular-nums text-emerald-deep">{priceLabel}</p>
+          )}
+        </div>
+      </div>
+      {points.length > 0 && (
+        <ul className="flex flex-col gap-1.5">
+          {points.map((p, i) => (
+            <li key={i} className="flex items-start gap-2 font-sans text-[13px] leading-snug text-near-black/65">
+              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-mint" />
+              <span>{p}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
 // ── Icons ────────────────────────────────────────────────────────────────────
 type IconName =
   | 'globe'
@@ -370,11 +451,17 @@ type IconName =
   | 'search'
   | 'languages'
   | 'code'
+  | 'palette'
+  | 'camera'
+  | 'share'
   | 'spark'
 
-/** Pick an icon from keywords in the line description (with a safe fallback). */
+/** Pick an icon from keywords in the item title (with a safe fallback). */
 function iconFor(desc: string): IconName {
-  const d = desc.toLowerCase()
+  const d = itemTitle(desc).toLowerCase()
+  if (/(social|linkedin|instagram|facebook|tiktok|community|marketing)/.test(d)) return 'share'
+  if (/(foto|fotoshoot|video|opname|shoot|beeld|camera)/.test(d)) return 'camera'
+  if (/(branding|huisstijl|belettering|visitekaart|briefpapier|drukwerk|sticker|label|logo|design)/.test(d)) return 'palette'
   if (/(meertalig|talen|\btaal\b|nederlands|duits|engels|spaans)/.test(d)) return 'languages'
   if (/(admin|portaal|beveilig|inlog|login|dashboard)/.test(d)) return 'shield'
   if (/(cms|content)/.test(d)) return 'layers'
@@ -447,6 +534,28 @@ const ICON_PATHS: Record<IconName, ReactNode> = {
   code: (
     <>
       <path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13 5l-2 14" />
+    </>
+  ),
+  palette: (
+    <>
+      <path d="M12 3a9 9 0 000 18c1.1 0 2-.9 2-2 0-.5-.2-.9-.5-1.3-.3-.4-.5-.8-.5-1.2 0-1 .8-1.8 1.8-1.8H16a5 5 0 005-5c0-4-4-7-9-7z" />
+      <circle cx="7.5" cy="12" r="1" />
+      <circle cx="9.5" cy="8" r="1" />
+      <circle cx="14.5" cy="8" r="1" />
+    </>
+  ),
+  camera: (
+    <>
+      <path d="M3 8.5a2 2 0 012-2h1.5l1.2-2h6.6l1.2 2H19a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+      <circle cx="12" cy="12.5" r="3.2" />
+    </>
+  ),
+  share: (
+    <>
+      <circle cx="6" cy="12" r="2.4" />
+      <circle cx="17" cy="6" r="2.4" />
+      <circle cx="17" cy="18" r="2.4" />
+      <path d="M8.2 10.9l6.6-3.7M8.2 13.1l6.6 3.7" />
     </>
   ),
   spark: (
