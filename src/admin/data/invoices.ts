@@ -53,6 +53,8 @@ export type InvoiceDraft = {
   due_date: string | null
   notes: string | null
   list_total?: number | null
+  /** Manual document number. Empty leaves it to the system (Concept NNN / M-FAC). */
+  number?: string | null
   lines: LineDraft[]
 }
 
@@ -141,6 +143,7 @@ async function writeLines(invoiceId: string, lines: LineDraft[]): Promise<void> 
 
 export async function createInvoice(draft: InvoiceDraft): Promise<Invoice> {
   const totals = computeTotals(draft.lines)
+  const num = draft.number?.trim()
   const { data, error } = await getSupabase()
     .from('invoices')
     .insert({
@@ -150,6 +153,8 @@ export async function createInvoice(draft: InvoiceDraft): Promise<Invoice> {
       due_date: draft.due_date,
       notes: draft.notes,
       list_total: draft.list_total ?? null,
+      // Omit when empty so the DB trigger assigns "Concept NNN" (or a real number).
+      ...(num ? { number: num } : {}),
       subtotal: totals.subtotal,
       vat_amount: totals.vatAmount,
       total: totals.total,
@@ -164,6 +169,7 @@ export async function createInvoice(draft: InvoiceDraft): Promise<Invoice> {
 
 export async function updateInvoice(id: string, draft: InvoiceDraft): Promise<void> {
   const totals = computeTotals(draft.lines)
+  const num = draft.number?.trim()
   const { error } = await getSupabase()
     .from('invoices')
     .update({
@@ -171,6 +177,8 @@ export async function updateInvoice(id: string, draft: InvoiceDraft): Promise<vo
       issue_date: draft.issue_date,
       due_date: draft.due_date,
       notes: draft.notes,
+      // Only send when set, so clearing the field never wipes the number.
+      ...(num ? { number: num } : {}),
       subtotal: totals.subtotal,
       vat_amount: totals.vatAmount,
       total: totals.total,

@@ -68,7 +68,15 @@ export function AdminInvoiceDetail() {
     setBusy(true)
     try {
       await setInvoiceStatus(invoice.id, status)
-      setInvoice({ ...invoice, status })
+      // Leaving concept may assign a real M-FAC number (DB trigger); refetch so
+      // the number in the UI updates immediately.
+      const res = await fetchInvoice(invoice.id)
+      if (res) {
+        setInvoice(res.invoice)
+        setLines(res.lines)
+      } else {
+        setInvoice({ ...invoice, status })
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Status bijwerken mislukt.')
     } finally {

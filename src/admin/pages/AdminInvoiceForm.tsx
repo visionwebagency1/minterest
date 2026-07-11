@@ -34,6 +34,7 @@ export function AdminInvoiceForm({ mode }: { mode: 'create' | 'edit' }) {
   const [customerId, setCustomerId] = useState<string | null>(preCustomer)
   const [issueDate, setIssueDate] = useState(todayISO())
   const [dueDate, setDueDate] = useState('')
+  const [number, setNumber] = useState('')
   const [notes, setNotes] = useState('')
   const [lines, setLines] = useState<LineDraft[]>([])
   const [catalogOpen, setCatalogOpen] = useState(false)
@@ -57,6 +58,7 @@ export function AdminInvoiceForm({ mode }: { mode: 'create' | 'edit' }) {
           setCustomerId(invoice.customer_id)
           setIssueDate(invoice.issue_date)
           setDueDate(invoice.due_date ?? '')
+          setNumber(invoice.number ?? '')
           setNotes(invoice.notes ?? '')
           setLines(
             existingLines.map((l) => ({
@@ -108,6 +110,7 @@ export function AdminInvoiceForm({ mode }: { mode: 'create' | 'edit' }) {
       customer_id: customerId,
       issue_date: issueDate,
       due_date: dueDate || null,
+      number: number.trim() || null,
       notes: notes.trim() || null,
       lines: cleaned,
     }
@@ -182,6 +185,22 @@ export function AdminInvoiceForm({ mode }: { mode: 'create' | 'edit' }) {
                 />
               </label>
             </div>
+          </div>
+          <div className="mt-5 sm:max-w-xs">
+            <label className="flex flex-col gap-1.5">
+              <span className="font-sans text-sm font-semibold text-near-black">Factuurnummer</span>
+              <input
+                type="text"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                placeholder={mode === 'create' ? 'Automatisch (Concept ...)' : ''}
+                className="w-full rounded-xl border border-emerald-deep/15 bg-white px-3.5 py-2.5 font-sans text-sm text-near-black outline-none focus:border-emerald"
+              />
+              <span className="font-sans text-xs text-near-black/45">
+                Concepten krijgen automatisch een Concept-nummer. Het echte M-FAC-nummer volgt zodra de factuur
+                verstuurd wordt. Je kunt het hier ook zelf aanpassen.
+              </span>
+            </label>
           </div>
         </Card>
 
