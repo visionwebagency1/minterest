@@ -75,16 +75,38 @@ async function postToEndpoint(formType: string, data: LeadPayload): Promise<void
   }
 }
 
+/**
+ * Fire the confirmation emails (customer + Minterest) via the serverless
+ * function. Best-effort: the lead is already saved, so a mail hiccup or a local
+ * dev run without the /api function must never fail the submit.
+ */
+export async function sendLeadEmails(formType: string, data: LeadPayload): Promise<void> {
+  try {
+    await fetch('/api/lead-notify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formType,
+        data: { ...data, page: typeof window !== 'undefined' ? window.location.href : null },
+      }),
+    })
+  } catch {
+    /* email is a nice-to-have on top of the saved lead; ignore failures */
+  }
+}
+
 export async function submitLead(formType: string, data: LeadPayload): Promise<void> {
   // Primary path: store the request in the database (admin inbox reads it there).
   if (SUPABASE_URL && SUPABASE_ANON_KEY) {
     await saveToSupabase(formType, data)
+    await sendLeadEmails(formType, data)
     return
   }
 
   // Backend-agnostic fallback for setups without Supabase.
   if (ENDPOINT) {
     await postToEndpoint(formType, data)
+    await sendLeadEmails(formType, data)
     return
   }
 

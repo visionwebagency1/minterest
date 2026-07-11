@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { QuoteDocument } from '@/components/QuoteDocument'
 import { SignaturePad, type SignaturePadHandle } from '@/components/SignaturePad'
 import { getPublicQuote, respondToQuote, signAndAcceptQuote, type PublicQuote as PublicQuoteData } from '@/lib/publicQuote'
+import { sendLeadEmails } from '@/lib/submitLead'
+import { formatEUR } from '@/lib/money'
 
 /**
  * Public online quote page (/offerte/:token). The customer views the branded
@@ -79,6 +81,14 @@ export function PublicQuote() {
         responded_at: new Date().toISOString(),
       })
       setSigning(false)
+      // Confirmation emails (customer + Minterest). Best-effort, never blocks.
+      void sendLeadEmails('offerte-akkoord', {
+        name: name || quote.customer?.contact_name || null,
+        email: quote.customer?.email ?? null,
+        company: quote.customer?.company_name ?? null,
+        quoteNumber: quote.number,
+        amount: formatEUR(quote.total),
+      })
     } catch (e) {
       setActionError(e instanceof Error ? e.message : 'Er ging iets mis.')
     } finally {

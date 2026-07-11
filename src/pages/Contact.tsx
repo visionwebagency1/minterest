@@ -74,8 +74,8 @@ function ContactInner() {
                   </span>
                   WhatsApp
                 </a>
-                <a href="mailto:hello@minterest.nl" className="font-sans text-lg text-near-black transition-colors hover:text-emerald">
-                  hello@minterest.nl
+                <a href="mailto:info@minterest.nl" className="font-sans text-lg text-near-black transition-colors hover:text-emerald">
+                  info@minterest.nl
                 </a>
                 <span className="font-sans text-sm text-near-black/50">{c('hours')}</span>
               </div>
