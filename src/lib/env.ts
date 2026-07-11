@@ -40,3 +40,11 @@ export const SUPABASE_ANON_KEY = clean(import.meta.env.VITE_SUPABASE_ANON_KEY as
 
 /** True only when both values are present and the URL is valid. */
 export const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY)
+
+/**
+ * The public origin used to build shareable quote/invoice links. Defaults to the
+ * live domain so the links a customer receives are always minterest.nl, even when
+ * the admin is opened on the *.vercel.app URL. Override with VITE_PUBLIC_BASE_URL.
+ */
+export const PUBLIC_BASE_URL =
+  cleanUrl(import.meta.env.VITE_PUBLIC_BASE_URL as string | undefined) ?? 'https://minterest.nl'

@@ -1,5 +1,6 @@
 import { getSupabase } from '@/lib/supabase'
 import { computeTotals } from '@/lib/money'
+import { PUBLIC_BASE_URL } from '@/lib/env'
 
 /**
  * Data access for quotes (offertes) and their line items. Admin-only via RLS.
@@ -183,8 +184,7 @@ export async function countOpenQuotes(): Promise<number> {
   return count ?? 0
 }
 
-/** The public, non-guessable URL for a quote's online view. */
+/** The public, non-guessable URL for a quote's online view (always minterest.nl). */
 export function publicQuoteUrl(token: string): string {
-  const origin = typeof window !== 'undefined' ? window.location.origin : ''
-  return `${origin}/offerte/${token}`
+  return `${PUBLIC_BASE_URL}/offerte/${token}`
 }

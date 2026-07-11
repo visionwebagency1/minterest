@@ -1,5 +1,6 @@
 import { getSupabase } from '@/lib/supabase'
 import { computeTotals } from '@/lib/money'
+import { PUBLIC_BASE_URL } from '@/lib/env'
 import { fetchQuote } from './quotes'
 
 /**
@@ -226,6 +227,5 @@ export async function countOpenInvoices(): Promise<number> {
 }
 
 export function publicInvoiceUrl(token: string): string {
-  const origin = typeof window !== 'undefined' ? window.location.origin : ''
-  return `${origin}/factuur/${token}`
+  return `${PUBLIC_BASE_URL}/factuur/${token}`
 }

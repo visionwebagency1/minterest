@@ -12,10 +12,12 @@ import {
   type InvoiceLine,
   type InvoiceStatus,
 } from '../data/invoices'
-import { fetchCustomer, type Customer } from '../data/customers'
+import { fetchCustomer, customerName, type Customer } from '../data/customers'
 import { fetchSettings, type CompanySettings } from '../data/settings'
 import { GhostButton, PrimaryButton } from '../components/form'
 import { Card, ErrorNote, Spinner, StatusPill } from '../components/ui'
+import { SendDocument } from '../components/SendDocument'
+import { formatEUR } from '@/lib/money'
 
 /** Manage a single invoice: preview, PDF, online link, status, delete. */
 export function AdminInvoiceDetail() {
@@ -166,14 +168,17 @@ export function AdminInvoiceDetail() {
               <Link to={`/admin/facturen/${invoice.id}/print`} className="block [&>button]:w-full">
                 <PrimaryButton type="button">PDF downloaden</PrimaryButton>
               </Link>
-              <button
-                type="button"
-                disabled
-                title="Automatisch e-mailen via Resend volgt later"
-                className="cursor-not-allowed rounded-xl border border-emerald-deep/12 px-5 py-2.5 font-sans text-sm font-semibold text-near-black/40"
-              >
-                E-mailen <span className="text-[11px] uppercase tracking-wide">binnenkort</span>
-              </button>
+              <SendDocument
+                kind="factuur"
+                number={invoice.number}
+                link={link}
+                amount={formatEUR(invoice.total)}
+                defaultTo={customer?.email}
+                greetingName={customer ? customerName(customer) : null}
+                onSent={() => {
+                  if (invoice.status === 'concept') changeStatus('verstuurd')
+                }}
+              />
             </div>
 
             <div className="mt-4 border-t border-emerald-deep/8 pt-4">

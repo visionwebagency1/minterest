@@ -12,11 +12,13 @@ import {
   type QuoteLine,
   type QuoteStatus,
 } from '../data/quotes'
-import { fetchCustomer, type Customer } from '../data/customers'
+import { fetchCustomer, customerName, type Customer } from '../data/customers'
 import { fetchSettings, type CompanySettings } from '../data/settings'
 import { createInvoiceFromQuote, fetchInvoiceForQuote, type Invoice } from '../data/invoices'
 import { GhostButton, PrimaryButton } from '../components/form'
 import { Card, ErrorNote, Spinner, StatusPill } from '../components/ui'
+import { SendDocument } from '../components/SendDocument'
+import { formatEUR } from '@/lib/money'
 
 /** Manage a single quote: preview, send (online link), PDF, status, delete. */
 export function AdminQuoteDetail() {
@@ -188,20 +190,23 @@ export function AdminQuoteDetail() {
                 <PrimaryButton type="button">PDF downloaden</PrimaryButton>
               </Link>
 
+              <SendDocument
+                kind="offerte"
+                number={quote.number}
+                link={link}
+                amount={formatEUR(quote.total)}
+                defaultTo={customer?.email}
+                greetingName={customer ? customerName(customer) : null}
+                onSent={() => {
+                  if (quote.status === 'concept') changeStatus('verstuurd')
+                }}
+              />
+
               {quote.status === 'concept' ? (
                 <GhostButton type="button" onClick={send} disabled={busy}>
                   Markeer als verstuurd
                 </GhostButton>
               ) : null}
-
-              <button
-                type="button"
-                disabled
-                title="Automatisch e-mailen via Resend volgt later"
-                className="cursor-not-allowed rounded-xl border border-emerald-deep/12 px-5 py-2.5 font-sans text-sm font-semibold text-near-black/40"
-              >
-                E-mailen <span className="text-[11px] uppercase tracking-wide">binnenkort</span>
-              </button>
             </div>
 
             {/* online link */}
