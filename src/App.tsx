@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import { RouteSeo } from '@/lib/RouteSeo'
+import { Analytics } from '@/lib/Analytics'
 import { useScrollSetup } from '@/lib/useLenis'
 import { GrainOverlay } from '@/components/GrainOverlay'
 import { Header } from '@/components/Header'
@@ -36,6 +37,7 @@ function PublicSite() {
   return (
     <>
       {/* No preloader: the site loads straight into the hero. */}
+      <Analytics />
       <GrainOverlay />
       <Header />
 
