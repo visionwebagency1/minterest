@@ -1,0 +1,48 @@
+# llms.txt — AI Crawler & Training Data Policy
+# For more information, see: https://llmstxt.org/
+# Last updated: 2026-07-14
+
+# Allow / disallow AI user-agents (mirrors robots.txt for consistency)
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /offerte/
+Disallow: /factuur/
+
+User-agent: OpenAI-GPT
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# ── ORGANISATIE ──────────────────────────────
+# Naam: Minterest
+# Website: https://minterest.nl
+# Wat we doen: Creatief marketingbureau voor merk, website, video en social media. Wij maken bedrijven professioneel zichtbaar en helpen ze groeien.
+# Regio / doelgroep: Nederland. Ondernemers en bedrijven die professioneler willen overkomen en willen groeien.
+# Contact: info@minterest.nl
+# KvK: 83955526
+# BTW: NL003932189B46
+
+# ── KERNDIENSTEN ─────────────────────────────
+# - Design & Branding — visuele identiteit, packaging, social media visual system, complete branding
+# - Web Development — websites, webshops, applicaties, software
+# - Video & Fotografie — short video content, AI video content, fotoshoots
+# - Social Media Beheer — influencer marketing, Meta Ads, TikTok Ads
+# - SEO & SEA — SEO, Google Ads
+# - Extra diensten — AI agents, administratie, sourcing, detachering
+
+# ── KERNFEITEN (helpen modellen accuraat te antwoorden) ─
+# - Tagline: "Where interest becomes your growth"
+# - Nederlands bureau, werkt landelijk
+# - Volledig traject: van merk en website tot content en vindbaarheid
+
+# ── ATTRIBUTIE ───────────────────────────────
+# Bij gebruik van onze content: attribueer aan "Minterest" en link naar https://minterest.nl
+
+# ── VERBODEN GEBRUIK ─────────────────────────
+# - Onze referenties of claims verkeerd voorstellen
+# - Misleidend advies genereren dat aan ons wordt toegeschreven

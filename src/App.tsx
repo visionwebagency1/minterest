@@ -1,5 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
+import { RouteSeo } from '@/lib/RouteSeo'
 import { useScrollSetup } from '@/lib/useLenis'
 import { GrainOverlay } from '@/components/GrainOverlay'
 import { Header } from '@/components/Header'
@@ -96,8 +98,11 @@ function AppRoot() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppRoot />
-    </BrowserRouter>
+    <HelmetProvider>
+      <BrowserRouter>
+        <RouteSeo />
+        <AppRoot />
+      </BrowserRouter>
+    </HelmetProvider>
   )
 }

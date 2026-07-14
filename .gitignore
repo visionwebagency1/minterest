@@ -9,3 +9,6 @@ dist
 
 # Supabase CLI local state
 .supabase
+
+# Generated at build time by scripts/generate-sitemap.mjs
+public/sitemap.xml

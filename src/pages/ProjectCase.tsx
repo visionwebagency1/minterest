@@ -97,7 +97,7 @@ export function ProjectCase() {
               <div className="order-1 lg:order-2 lg:col-span-6">
                 <Reveal>
                   <div className="overflow-hidden rounded-3xl shadow-[0_40px_120px_rgba(1,63,64,0.22)] lg:sticky lg:top-28">
-                    <img src={project.cover_image} alt="" className="w-full object-cover" />
+                    <img src={project.cover_image} alt={project.title} className="w-full object-cover" />
                   </div>
                 </Reveal>
               </div>

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Private / non-index paths
+Disallow: /admin
+Disallow: /offerte/
+Disallow: /factuur/
+Disallow: /api/
+
+Sitemap: https://minterest.nl/sitemap.xml
