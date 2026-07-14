@@ -32,47 +32,99 @@ function clip(input: string, max = 160): string {
 
 const withBrand = (title: string) => (title.includes(SITE_NAME) ? title : `${title}${SEP}${SITE_NAME}`)
 
+// Curated, keyword-optimised titles + descriptions per page. Titles ~50-60 chars,
+// descriptions ~150-160. The primary keyword leads the title where it fits.
 const STATIC: Record<string, { title: string; description: string }> = {
   '/': {
-    title: 'Minterest | Where interest becomes your growth',
+    title: 'Marketingbureau voor merk, website en groei | Minterest',
     description:
       'Minterest is een creatief marketingbureau voor merk, website, video en social media. Wij maken jouw bedrijf professioneel zichtbaar en helpen je groeien.',
   },
   '/diensten': {
-    title: 'Diensten',
+    title: 'Diensten: branding, web, video en social | Minterest',
     description:
       'De diensten van Minterest: design en branding, web development, video en fotografie, social media, SEO en SEA en meer. Alles om jouw merk te laten groeien.',
   },
   '/work': {
-    title: 'Ons werk',
+    title: 'Ons werk: portfolio van Minterest',
     description:
-      'Bekijk het werk van Minterest: merken, websites en campagnes die we voor onze klanten hebben gebouwd.',
+      'Bekijk het werk van Minterest: merken, websites en campagnes die we voor onze klanten bouwden. Ontdek wat we voor jouw bedrijf kunnen betekenen.',
   },
   '/about': {
-    title: 'Over Minterest',
+    title: 'Over Minterest | Creatief marketingbureau',
     description:
-      'Maak kennis met Minterest, het creatieve marketingbureau achter merk, web en groei. Ontdek wie we zijn en waar we voor staan.',
+      'Maak kennis met Minterest, het creatieve marketingbureau achter merk, web en groei. Ontdek wie we zijn, hoe we werken en waar we voor staan.',
   },
   '/contact': {
-    title: 'Contact',
+    title: 'Contact | Minterest marketingbureau',
     description:
       'Neem contact op met Minterest. Vertel ons over je project en ontdek hoe we jouw merk professioneel zichtbaar maken en laten groeien.',
   },
   '/start': {
-    title: 'Start jouw project',
+    title: 'Start jouw project bij Minterest',
     description:
-      'Klaar om te groeien? Start jouw project bij Minterest. Vertel ons waar je staat en wij helpen je met merk, website en marketing.',
+      'Klaar om te groeien? Start jouw project bij Minterest. Vertel ons waar je staat en wij helpen je met merk, website en marketing die werkt.',
   },
   '/website-audit': {
-    title: 'Gratis website-audit',
+    title: 'Gratis website-audit aanvragen | Minterest',
     description:
-      'Vraag een gratis website-audit aan bij Minterest. Ontdek waar je website beter kan presteren en meer bezoekers omzet in aanvragen.',
+      'Vraag een gratis website-audit aan bij Minterest. Ontdek waar je website beter kan presteren en meer bezoekers omzet in aanvragen en klanten.',
   },
   '/algemene-voorwaarden': {
-    title: 'Algemene voorwaarden',
+    title: 'Algemene voorwaarden | Minterest',
     description:
       'De algemene voorwaarden van Minterest, van toepassing op onze offertes, overeenkomsten en werkzaamheden.',
   },
+}
+
+// Per-service SEO overrides (primary keyword led). Keyed by service slug.
+const SERVICE_META: Record<string, { title: string; description: string; keyword: string }> = {
+  'design-branding': {
+    keyword: 'branding bureau',
+    title: 'Branding bureau voor een sterke huisstijl | Minterest',
+    description:
+      'Branding bureau Minterest bouwt merken die blijven hangen: logo, huisstijl, packaging en complete branding. Professioneel, herkenbaar en klaar om te groeien.',
+  },
+  'web-development': {
+    keyword: 'webdesign bureau',
+    title: 'Webdesign bureau | Website laten maken | Minterest',
+    description:
+      'Website laten maken bij webdesign bureau Minterest. Websites en webshops die vertrouwen wekken, duidelijk converteren en meegroeien met je bedrijf.',
+  },
+  'video-fotografie': {
+    keyword: 'video en fotografie',
+    title: 'Video en fotografie voor je merk | Minterest',
+    description:
+      'Professionele video en fotografie die je merk sterk neerzetten: short video, AI video en fotoshoots voor je website, social media en campagnes.',
+  },
+  'social-media': {
+    keyword: 'social media bureau',
+    title: 'Social media bureau voor bereik en groei | Minterest',
+    description:
+      'Social media bureau Minterest: beheer, influencer marketing en advertenties op Meta en TikTok. Wij vergroten je bereik en zetten aandacht om in klanten.',
+  },
+  'seo-sea': {
+    keyword: 'SEO bureau',
+    title: 'SEO en SEA bureau voor meer bezoekers | Minterest',
+    description:
+      'SEO bureau Minterest zorgt dat je beter gevonden wordt in Google met SEO en Google Ads. Meer relevante bezoekers die je omzet in aanvragen en klanten.',
+  },
+  extra: {
+    keyword: 'extra diensten',
+    title: 'Extra diensten: AI, administratie en meer | Minterest',
+    description:
+      'AI agents, administratie, sourcing en detachering. Slimme extra diensten die je bedrijf ontzorgen en helpen sneller en efficienter te werken.',
+  },
+}
+
+// Keyword-form of each parent service, used in sub-service titles.
+const PARENT_KEYWORD: Record<string, string> = {
+  'design-branding': 'Branding bureau',
+  'web-development': 'Webdesign bureau',
+  'video-fotografie': 'Video en fotografie',
+  'social-media': 'Social media bureau',
+  'seo-sea': 'SEO bureau',
+  extra: 'Extra diensten',
 }
 
 /** Paths that must never be indexed (private / token-based). */
@@ -102,9 +154,9 @@ export function metaForPath(pathname: string): RouteMeta {
   if (seg[0] === 'diensten' && seg.length === 3) {
     const sub = SUB_BY_KEY[`${seg[1]}/${seg[2]}`]
     if (sub) {
-      const parent = SERVICE_BY_SLUG[sub.serviceSlug]
+      const parentKw = PARENT_KEYWORD[sub.serviceSlug] ?? SERVICE_BY_SLUG[sub.serviceSlug]?.label ?? 'Diensten'
       return {
-        title: withBrand(`${sub.name}${SEP}${parent?.label ?? 'Diensten'}`),
+        title: withBrand(`${sub.name}${SEP}${parentKw}`),
         description: clip(sub.tagline),
         canonical,
       }
@@ -113,6 +165,8 @@ export function metaForPath(pathname: string): RouteMeta {
 
   // /diensten/:slug
   if (seg[0] === 'diensten' && seg.length === 2) {
+    const meta = SERVICE_META[seg[1]]
+    if (meta) return { title: withBrand(meta.title), description: clip(meta.description), canonical }
     const svc = SERVICE_BY_SLUG[seg[1]]
     if (svc) return { title: withBrand(svc.label), description: clip(svc.cardDesc || svc.tagline), canonical }
   }

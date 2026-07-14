@@ -37,6 +37,25 @@ const website = {
   publisher: { '@id': ORG_ID },
 }
 
+// LocalBusiness (ProfessionalService subtype) for local SEO. Serves the whole of
+// the Netherlands. Add a street address here once available to strengthen local
+// rich results, alongside a Google Business Profile.
+const localBusiness = {
+  '@type': 'ProfessionalService',
+  '@id': `${SITE_URL}/#localbusiness`,
+  name: SITE_NAME,
+  url: SITE_URL,
+  image: `${SITE_URL}/og-default.png`,
+  email: 'info@minterest.nl',
+  description:
+    'Creatief marketingbureau in Nederland voor merk, website, video en social media.',
+  areaServed: { '@type': 'Country', name: 'Nederland' },
+  priceRange: '€€',
+  vatID: 'NL003932189B46',
+  identifier: { '@type': 'PropertyValue', name: 'KvK', value: '83955526' },
+  parentOrganization: { '@id': ORG_ID },
+}
+
 type Crumb = { name: string; path: string }
 
 function breadcrumb(crumbs: Crumb[]) {
@@ -86,7 +105,7 @@ export function structuredDataForPath(pathname: string): object[] {
 
   if (path === '/admin' || path.startsWith('/offerte/') || path.startsWith('/factuur/')) return []
 
-  if (path === '/') return [website, organization]
+  if (path === '/') return [website, organization, localBusiness]
 
   const seg = path.split('/').filter(Boolean)
 

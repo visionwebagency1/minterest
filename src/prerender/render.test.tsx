@@ -21,7 +21,7 @@ describe('renderRoute', () => {
     })
     expect(svc.bodyHtml.length).toBeGreaterThan(500)
     expect(titleOf(home.headHtml)).not.toBe(titleOf(svc.headHtml))
-    expect(titleOf(svc.headHtml)).toMatch(/Web Development/i)
+    expect(titleOf(svc.headHtml)).toMatch(/Webdesign bureau/i)
   })
 
   it('injectIntoTemplate bakes body + head and drops the default title', () => {
