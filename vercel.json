@@ -3,6 +3,9 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/websites", "destination": "/website-abonnement", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/((?!api/|assets/|.*\\.).*)", "destination": "/index.html" }
   ],
