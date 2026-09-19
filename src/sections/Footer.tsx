@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Logo } from '@/components/Logo'
 import { MAIN_SERVICES } from '@/data/services'
+import { WEBSITE_SUBSCRIPTION } from '@/data/websitePlans'
 import { SiteContentProvider, useContent } from '@/content/SiteContent'
 
 /**
@@ -19,6 +20,8 @@ const COLS = [
   {
     title: 'Minterest',
     links: [
+      // Geen dienst maar een eigen product, dus bewust niet in de dienstenkolom.
+      { label: WEBSITE_SUBSCRIPTION.navLabel, to: WEBSITE_SUBSCRIPTION.path },
       { label: 'Ons werk', to: '/work' },
       { label: 'Over ons', to: '/about' },
       { label: 'Contact', to: '/contact' },

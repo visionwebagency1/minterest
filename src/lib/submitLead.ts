@@ -24,14 +24,25 @@ const toArray = (value: unknown): string[] =>
 const text = (value: unknown): string | null =>
   typeof value === 'string' && value.trim() !== '' ? value.trim() : null
 
+/** Only pass through something that really is a uuid, so a bad value never
+ *  turns a lead insert into a failed request. */
+const uuid = (value: unknown): string | null =>
+  typeof value === 'string' && /^[0-9a-f-]{36}$/i.test(value) ? value : null
+
 /** Maps a form payload onto a row of the `leads` table. */
 function toLeadRow(formType: string, data: LeadPayload) {
   return {
     source: formType,
     name: text(data.name),
     email: text(data.email),
+    phone: text(data.phone),
     company: text(data.company),
     website_url: text(data.url),
+    // Website subscription: the chosen plan, template and wanted domain. Null
+    // for every other form, so the same row shape serves all of them.
+    plan_id: uuid(data.planId),
+    template_id: uuid(data.templateId),
+    desired_domain: text(data.desiredDomain),
     interest: toArray(data.interest).length ? toArray(data.interest) : toArray(data.services),
     budget: text(data.budget),
     timeline: text(data.timeline),

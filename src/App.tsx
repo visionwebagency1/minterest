@@ -17,6 +17,7 @@ import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
 import { Start } from '@/pages/Start'
 import { WebsiteAbonnement } from '@/pages/WebsiteAbonnement'
+import { AbonnementBestellen } from '@/pages/AbonnementBestellen'
 import { Audit } from '@/pages/Audit'
 import { Terms } from '@/pages/Terms'
 import { NotFound } from '@/pages/NotFound'
@@ -55,6 +56,7 @@ function PublicSite() {
             {/* Website subscription: its own proposition, not a web-development
                 service. /websites is kept as an alias so older links keep working. */}
             <Route path="/website-abonnement" element={<WebsiteAbonnement />} />
+            <Route path="/website-abonnement/bestellen" element={<AbonnementBestellen />} />
             <Route path="/websites" element={<Navigate to="/website-abonnement" replace />} />
 
             {/* Redirects from the old per-service routes to the new structure. */}
