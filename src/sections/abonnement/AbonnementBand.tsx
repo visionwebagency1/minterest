@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Reveal } from '@/components/Reveal'
-import { BrowserFrame, TemplatePreview } from '@/components/abonnement/TemplatePreview'
+import { BrowserFrame, TemplateShot, demoDomain } from '@/components/abonnement/TemplatePreview'
 import { WEBSITE_SUBSCRIPTION } from '@/data/websitePlans'
 import { WEBSITE_TEMPLATES } from '@/data/websiteTemplates'
 
@@ -72,21 +72,12 @@ export function AbonnementBand({ className = '' }: { className?: string }) {
                   className="absolute -top-8 right-0 w-[78%] rotate-[5deg] opacity-45"
                 >
                   <BrowserFrame domain="">
-                    <TemplatePreview
-                      layout={back.layout}
-                      palette={back.palette}
-                      className="block aspect-[4/3] w-full"
-                    />
+                    <TemplateShot template={back} />
                   </BrowserFrame>
                 </div>
                 <div className="relative w-[86%]">
-                  <BrowserFrame domain={`${front.slug}.nl`} className="ring-1 ring-mint/15">
-                    <TemplatePreview
-                      layout={front.layout}
-                      palette={front.palette}
-                      className="block aspect-[4/3] w-full"
-                      title={`Voorbeeld van template ${front.name}`}
-                    />
+                  <BrowserFrame domain={demoDomain(front)} className="ring-1 ring-mint/15">
+                    <TemplateShot template={front} />
                   </BrowserFrame>
                 </div>
               </div>

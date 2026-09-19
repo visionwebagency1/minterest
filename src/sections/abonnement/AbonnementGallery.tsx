@@ -1,14 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
-import { BrowserFrame, TemplatePreview } from '@/components/abonnement/TemplatePreview'
+import {
+  BrowserFrame,
+  TemplateFullShot,
+  TemplateShot,
+  demoDomain,
+} from '@/components/abonnement/TemplatePreview'
 import { WEBSITE_TEMPLATES, type WebsiteTemplate } from '@/data/websiteTemplates'
 import { PLAN_BY_SLUG, type WebsitePlanSlug } from '@/data/websitePlans'
 
 /**
- * The template gallery: a portfolio, not a list. Filter by plan, a bigger look
- * per template in a lightbox, and from every card straight into the order flow.
+ * The template gallery. Every card is a screenshot of a page that really
+ * exists, filled with the demo business for that sector, and the detail view
+ * scrolls through the whole page so nothing is hidden above the fold.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const
@@ -23,7 +29,7 @@ const FILTERS: { key: Filter; label: string }[] = [
 
 function PlanBadges({ plans }: { plans: WebsitePlanSlug[] }) {
   return (
-    <div className="flex flex-wrap gap-1.5">
+    <div className="flex shrink-0 flex-wrap gap-1.5">
       {plans.map((p) => (
         <span
           key={p}
@@ -45,40 +51,45 @@ function Lightbox({
   onClose: () => void
   onChoose: (t: WebsiteTemplate) => void
 }) {
+  // Escape closes, and the page behind should not scroll along.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    document.documentElement.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.documentElement.style.overflow = ''
+    }
+  }, [onClose])
+
   return (
     <motion.div
-      className="fixed inset-0 z-50 grid place-items-center bg-near-black/80 p-4 backdrop-blur-sm md:p-10"
+      className="fixed inset-0 z-50 overflow-y-auto bg-near-black/85 p-4 backdrop-blur-sm md:p-8"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`Voorbeeld van template ${template.name}`}
+      aria-label={`Voorbeeldwebsite ${template.name}`}
     >
       <motion.div
-        className="w-full max-w-4xl"
-        initial={{ opacity: 0, y: 24, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 12, scale: 0.99 }}
+        className="mx-auto w-full max-w-5xl"
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 12 }}
         transition={{ duration: 0.4, ease: EASE }}
         onClick={(e) => e.stopPropagation()}
       >
-        <BrowserFrame domain={`${template.slug}.nl`}>
-          <TemplatePreview
-            layout={template.layout}
-            palette={template.palette}
-            className="block aspect-[4/3] w-full"
-            title={`Voorbeeld van template ${template.name}`}
-          />
-        </BrowserFrame>
-
-        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-4 pb-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h3 className="font-display text-2xl font-semibold text-cream">{template.name}</h3>
-            <p className="mt-1.5 max-w-md font-sans text-sm text-cream/60">{template.description}</p>
+            <span className="font-sans text-xs uppercase tracking-[0.22em] text-mint">
+              {template.sector}
+            </span>
+            <h3 className="mt-2 font-display text-2xl font-semibold text-cream">{template.name}</h3>
+            <p className="mt-1.5 max-w-lg font-sans text-sm text-cream/60">{template.layoutNote}</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex shrink-0 gap-3">
             <button
               type="button"
               onClick={onClose}
@@ -95,6 +106,18 @@ function Lightbox({
             </button>
           </div>
         </div>
+
+        {/* The whole page, scrollable inside its own window. */}
+        <BrowserFrame domain={demoDomain(template)}>
+          <div className="max-h-[72vh] overflow-y-auto overscroll-contain" data-lenis-prevent>
+            <TemplateFullShot template={template} />
+          </div>
+        </BrowserFrame>
+
+        <p className="mt-4 text-center font-sans text-xs text-cream/40">
+          Voorbeeld met de gegevens van {template.demo.name} uit {template.demo.city}. Jouw teksten,
+          foto&apos;s en kleuren komen hiervoor in de plaats.
+        </p>
       </motion.div>
     </motion.div>
   )
@@ -117,13 +140,14 @@ export function AbonnementGallery({ onChoose }: { onChoose: (t: WebsiteTemplate)
         </Reveal>
         <Reveal delay={0.05}>
           <h2 className="mt-8 max-w-3xl text-balance font-display text-[clamp(2.25rem,5.5vw,4.25rem)] font-semibold leading-[1.03] tracking-tight">
-            Kies de look die bij je <Accent>bedrijf</Accent> past.
+            Zes ontwerpen, elk voor een ander <Accent>vak</Accent>.
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-near-black/60">
-            Elk template is compleet: teksten, kleuren, foto's en je eigen logo worden erin gezet.
-            Je ziet je site voordat hij live gaat.
+          <p className="mt-6 max-w-2xl font-sans text-lg leading-relaxed text-near-black/60">
+            Geen zes kleurvarianten van dezelfde pagina. Een kapsalon heeft een prijslijst nodig, een
+            installateur zijn telefoonnummer en een restaurant zijn openingstijden. Dat zie je terug
+            in de opbouw. Klik op een template om de hele pagina te bekijken.
           </p>
         </Reveal>
 
@@ -155,24 +179,22 @@ export function AbonnementGallery({ onChoose }: { onChoose: (t: WebsiteTemplate)
                   type="button"
                   onClick={() => setPreview(t)}
                   className="block overflow-hidden rounded-2xl text-left transition-transform duration-500 group-hover:-translate-y-1.5"
-                  aria-label={`Bekijk voorbeeld van template ${t.name}`}
+                  aria-label={`Bekijk de hele voorbeeldwebsite ${t.name}`}
                 >
-                  <BrowserFrame domain={`${t.slug}.nl`}>
-                    <TemplatePreview
-                      layout={t.layout}
-                      palette={t.palette}
-                      className="block aspect-[4/3] w-full"
-                    />
+                  <BrowserFrame domain={demoDomain(t)}>
+                    <TemplateShot template={t} />
                   </BrowserFrame>
                 </button>
 
                 <div className="mt-5 flex flex-1 flex-col">
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="font-display text-xl font-semibold">{t.name}</h3>
+                    <div>
+                      <h3 className="font-display text-xl font-semibold">{t.name}</h3>
+                      <p className="mt-1 font-sans text-sm text-near-black/50">{t.sector}</p>
+                    </div>
                     <PlanBadges plans={t.plans} />
                   </div>
-                  <p className="mt-2 font-sans text-sm text-near-black/50">{t.sector}</p>
-                  <p className="mt-2 flex-1 font-sans text-base leading-relaxed text-near-black/65">
+                  <p className="mt-3 flex-1 font-sans text-base leading-relaxed text-near-black/65">
                     {t.description}
                   </p>
 
@@ -190,7 +212,7 @@ export function AbonnementGallery({ onChoose }: { onChoose: (t: WebsiteTemplate)
                       onClick={() => setPreview(t)}
                       className="font-sans text-sm font-semibold text-emerald underline-offset-4 hover:underline"
                     >
-                      Bekijk voorbeeld
+                      Bekijk hele pagina
                     </button>
                   </div>
                 </div>
@@ -201,8 +223,9 @@ export function AbonnementGallery({ onChoose }: { onChoose: (t: WebsiteTemplate)
 
         <Reveal delay={0.05}>
           <p className="mt-12 max-w-2xl font-sans text-sm leading-relaxed text-near-black/50">
-            Staat jouw stijl er niet bij? Bij Pro ontwerpen we je site helemaal op maat, zonder
-            template.
+            De voorbeelden zijn ingevuld met een verzonnen bedrijf per branche, zodat je ziet hoe een
+            afgemaakte site eruitziet. Jouw teksten, foto&apos;s, kleuren en logo komen daarvoor in de
+            plaats. Staat jouw stijl er niet bij, dan ontwerpen we bij Pro helemaal op maat.
           </p>
         </Reveal>
       </div>

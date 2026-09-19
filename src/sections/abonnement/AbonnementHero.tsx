@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Accent } from '@/components/Accent'
 import { HERO_BG, HeroMWatermark } from '@/components/PageHero'
-import { BrowserFrame, TemplatePreview } from '@/components/abonnement/TemplatePreview'
+import { BrowserFrame, TemplateShot, demoDomain } from '@/components/abonnement/TemplatePreview'
 import { WEBSITE_TEMPLATES } from '@/data/websiteTemplates'
 import { lenisScrollTo } from '@/lib/useLenis'
 
@@ -46,11 +46,7 @@ function TemplateStack() {
         className="pointer-events-none absolute -right-7 -top-9 hidden h-full w-full rotate-[4deg] scale-[0.94] opacity-40 sm:block"
       >
         <BrowserFrame domain="">
-          <TemplatePreview
-            layout={WEBSITE_TEMPLATES[(index + 1) % WEBSITE_TEMPLATES.length].layout}
-            palette={WEBSITE_TEMPLATES[(index + 1) % WEBSITE_TEMPLATES.length].palette}
-            className="block aspect-[4/3] w-full"
-          />
+          <TemplateShot template={WEBSITE_TEMPLATES[(index + 1) % WEBSITE_TEMPLATES.length]} />
         </BrowserFrame>
       </div>
       <div
@@ -58,11 +54,7 @@ function TemplateStack() {
         className="pointer-events-none absolute -left-8 top-7 hidden h-full w-full -rotate-[5deg] scale-[0.9] opacity-25 sm:block"
       >
         <BrowserFrame domain="">
-          <TemplatePreview
-            layout={WEBSITE_TEMPLATES[(index + 2) % WEBSITE_TEMPLATES.length].layout}
-            palette={WEBSITE_TEMPLATES[(index + 2) % WEBSITE_TEMPLATES.length].palette}
-            className="block aspect-[4/3] w-full"
-          />
+          <TemplateShot template={WEBSITE_TEMPLATES[(index + 2) % WEBSITE_TEMPLATES.length]} />
         </BrowserFrame>
       </div>
 
@@ -72,7 +64,7 @@ function TemplateStack() {
         transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
         className="relative"
       >
-        <BrowserFrame domain={`${template.slug}.nl`} className="ring-1 ring-mint/15">
+        <BrowserFrame domain={demoDomain(template)} className="ring-1 ring-mint/15">
           <div className="relative aspect-[4/3] w-full">
             <AnimatePresence mode="sync">
               <motion.div
@@ -83,12 +75,7 @@ function TemplateStack() {
                 transition={{ duration: 0.7, ease: EASE }}
                 className="absolute inset-0"
               >
-                <TemplatePreview
-                  layout={template.layout}
-                  palette={template.palette}
-                  className="block h-full w-full"
-                  title={`Voorbeeld van template ${template.name}`}
-                />
+                <TemplateShot template={template} className="h-full" eager={index === 0} />
               </motion.div>
             </AnimatePresence>
           </div>

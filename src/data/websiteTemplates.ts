@@ -1,97 +1,108 @@
 /**
- * The template gallery for /websites.
+ * The template gallery for the website subscription.
  *
- * Phase 1 of the websites platform builds the real templates in the renderer;
- * until then these entries drive the gallery and the hero mockups with drawn
- * previews (see components/websites/TemplatePreview.tsx) instead of screenshots.
- * The shape already matches the `web_templates` table, so swapping a drawn
- * preview for a real screenshot later is a one-field change (`preview`).
+ * Each entry mirrors a template that really exists in the renderer
+ * (websites/renderer/templates) and is filled with its own demo content: an
+ * existing business in that sector, with its own texts, prices and photography.
+ * The previews are screenshots of those actual pages, not mockups.
+ *
+ * Keep this list in step with websites/renderer/templates/index.ts. That file is
+ * the source of truth for what a template is; this one is what the sales page
+ * shows about it.
  */
 
 import type { WebsitePlanSlug } from './websitePlans'
 
-/** The drawn preview layouts. One per look, reused across templates. */
-export type TemplateLayout = 'split' | 'centered' | 'grid' | 'editorial'
-
-export interface TemplatePalette {
-  /** Page background. */
-  bg: string
-  /** Headings and blocks of text. */
-  ink: string
-  /** Buttons, links and highlights. */
-  accent: string
-  /** Image placeholders and quiet surfaces. */
-  muted: string
-}
-
 export interface WebsiteTemplate {
   slug: string
   name: string
-  /** Who this template is for, in one line. */
+  /** Who this design is for, in one line. */
   description: string
   /** Branche label, used as the gallery filter chip. */
   sector: string
-  layout: TemplateLayout
-  palette: TemplatePalette
+  /** What is different about this layout, for the detail view. */
+  layoutNote: string
+  /** The demo business shown in the preview. */
+  demo: { name: string; city: string }
+  /** Card preview: the top of the real page, 4:3. */
+  preview: string
+  /** The whole page, shown in the lightbox. */
+  full: string
   /** Which plans this template is available on. */
   plans: WebsitePlanSlug[]
-  /** Real screenshot once the template exists (phase 1). Empty = drawn preview. */
-  preview?: string
 }
 
 export const WEBSITE_TEMPLATES: WebsiteTemplate[] = [
   {
     slug: 'atelier',
     name: 'Atelier',
-    description: 'Rustig en verzorgd, met veel ruimte voor beeld.',
-    sector: 'Studio en creatief',
-    layout: 'editorial',
-    palette: { bg: '#F6F4EF', ink: '#1C1C1C', accent: '#008081', muted: '#E2DFD6' },
+    sector: 'Kapsalon en beauty',
+    description: 'Rustig en verzorgd, met een grote foto voorop en je behandelingen als prijslijst.',
+    layoutNote:
+      'Beeldvullende hero, een overlappende foto bij het verhaal en de behandelingen als kaart met prijzen, zoals je ze in de salon ophangt.',
+    demo: { name: 'Studio Atelier', city: 'Haarlem' },
+    preview: '/templates/atelier.jpg',
+    full: '/templates/atelier-volledig.jpg',
     plans: ['start', 'groei'],
   },
   {
     slug: 'kade',
     name: 'Kade',
-    description: 'Stevig en zakelijk, voor bouw, techniek en installatie.',
-    sector: 'Bouw en techniek',
-    layout: 'split',
-    palette: { bg: '#0E1B1A', ink: '#F4F4F4', accent: '#90EE90', muted: '#1E3230' },
+    sector: 'Installatie en techniek',
+    description: 'Stevig en zakelijk, met je telefoonnummer altijd in beeld.',
+    layoutNote:
+      'Gedeelde hero met de belofte links en het werk rechts, harde cijfers in een balk eronder en diensten in een strak raster. Scherpe hoeken, geen franje.',
+    demo: { name: 'Kade Installatietechniek', city: 'Zaandam' },
+    preview: '/templates/kade.jpg',
+    full: '/templates/kade-volledig.jpg',
     plans: ['start', 'groei'],
   },
   {
     slug: 'bloem',
     name: 'Bloem',
-    description: 'Warm en uitnodigend, voor horeca en winkels.',
-    sector: 'Horeca en retail',
-    layout: 'grid',
-    palette: { bg: '#FFFDF8', ink: '#2A2118', accent: '#C2703D', muted: '#F0E6DA' },
+    sector: 'Horeca',
+    description: 'Warm en uitnodigend, met openingstijden en kaart direct in beeld.',
+    layoutNote:
+      'Hero over het hele scherm, openingstijden in een balk er direct onder en de kaart als echte menukaart met prijzen.',
+    demo: { name: 'Bistro Bloem', city: 'Utrecht' },
+    preview: '/templates/bloem.jpg',
+    full: '/templates/bloem-volledig.jpg',
     plans: ['start', 'groei'],
   },
   {
     slug: 'praktijk',
     name: 'Praktijk',
-    description: 'Helder en vertrouwd, voor zorg, coaching en advies.',
-    sector: 'Zorg en advies',
-    layout: 'centered',
-    palette: { bg: '#F4FAF7', ink: '#13322C', accent: '#42C28C', muted: '#DCEDE5' },
+    sector: 'Zorg en praktijk',
+    description: 'Licht en geruststellend, met wachttijd en vergoeding meteen zichtbaar.',
+    layoutNote:
+      'Gedeelde hero met de foto in een zachte lijst, een vertrouwensbalk eronder en behandelingen in rustige kaarten. Alles rond en licht.',
+    demo: { name: 'Praktijk Verhoeven', city: 'Amersfoort' },
+    preview: '/templates/praktijk.jpg',
+    full: '/templates/praktijk-volledig.jpg',
     plans: ['start', 'groei'],
   },
   {
     slug: 'vakman',
     name: 'Vakman',
-    description: 'Direct en duidelijk, met je diensten en contact vooraan.',
-    sector: 'Dienstverlening',
-    layout: 'split',
-    palette: { bg: '#FFFFFF', ink: '#1C1C1C', accent: '#0B6BCB', muted: '#E8EEF4' },
+    sector: 'Hovenier en klus',
+    description: 'Fotografie voorop, met een galerij van je werk en je werkgebied erbij.',
+    layoutNote:
+      'Beeldvullende hero, diensten als lijst met iconen, een galerij van opgeleverd werk en je cijfers op een donkere band.',
+    demo: { name: 'Vakman Hoveniers', city: 'Apeldoorn' },
+    preview: '/templates/vakman.jpg',
+    full: '/templates/vakman-volledig.jpg',
     plans: ['start', 'groei'],
   },
   {
     slug: 'noord',
     name: 'Noord',
-    description: 'Donker en zelfverzekerd, voor merken die opvallen.',
-    sector: 'Merk en lifestyle',
-    layout: 'editorial',
-    palette: { bg: '#141414', ink: '#F4F4F4', accent: '#90EE90', muted: '#262626' },
+    sector: 'Zakelijke dienstverlening',
+    description: 'De rustigste van de zes, voor advies, administratie en makelaardij.',
+    layoutNote:
+      'Kop op wit met een brede foto eronder, zoals een jaarverslag opent. Diensten als genummerde lijst, niets in een kader.',
+    demo: { name: 'Noord Advies', city: 'Groningen' },
+    preview: '/templates/noord.jpg',
+    full: '/templates/noord-volledig.jpg',
     plans: ['groei'],
   },
 ]
@@ -104,3 +115,6 @@ export const TEMPLATE_BY_SLUG: Record<string, WebsiteTemplate> = Object.fromEntr
 export function templatesForPlan(plan: WebsitePlanSlug): WebsiteTemplate[] {
   return WEBSITE_TEMPLATES.filter((t) => t.plans.includes(plan))
 }
+
+/** The sectors, for the gallery filter. */
+export const TEMPLATE_SECTORS = Array.from(new Set(WEBSITE_TEMPLATES.map((t) => t.sector)))

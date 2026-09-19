@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Reveal } from '@/components/Reveal'
 import { Footer } from '@/sections/Footer'
-import { BrowserFrame, TemplatePreview } from '@/components/abonnement/TemplatePreview'
+import { BrowserFrame, TemplateShot, demoDomain } from '@/components/abonnement/TemplatePreview'
 import { HERO_BG } from '@/components/PageHero'
 import {
   PLAN_BY_SLUG,
@@ -263,12 +263,8 @@ export function AbonnementBestellen() {
                         active ? 'bg-emerald/10 ring-2 ring-emerald' : 'hover:bg-white'
                       }`}
                     >
-                      <BrowserFrame domain={`${t.slug}.nl`}>
-                        <TemplatePreview
-                          layout={t.layout}
-                          palette={t.palette}
-                          className="block aspect-[4/3] w-full"
-                        />
+                      <BrowserFrame domain={demoDomain(t)}>
+                        <TemplateShot template={t} />
                       </BrowserFrame>
                       <span className="mt-3 block px-1 font-display text-lg font-semibold">
                         {t.name}
@@ -487,12 +483,8 @@ export function AbonnementBestellen() {
 
                 <div className="flex flex-col gap-4">
                   {chosenTemplate && (
-                    <BrowserFrame domain={details.domain || `${chosenTemplate.slug}.nl`}>
-                      <TemplatePreview
-                        layout={chosenTemplate.layout}
-                        palette={chosenTemplate.palette}
-                        className="block aspect-[4/3] w-full"
-                      />
+                    <BrowserFrame domain={details.domain || demoDomain(chosenTemplate)}>
+                      <TemplateShot template={chosenTemplate} />
                     </BrowserFrame>
                   )}
 
