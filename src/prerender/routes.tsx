@@ -10,6 +10,7 @@ import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
 import { Start } from '@/pages/Start'
 import { Audit } from '@/pages/Audit'
+import { Websites } from '@/pages/Websites'
 import { Terms } from '@/pages/Terms'
 import { MAIN_SERVICES } from '@/data/services'
 import { SUB_SERVICES } from '@/data/subServices'
@@ -40,6 +41,7 @@ const COMPONENT_BY_PATH: Record<string, ComponentType<unknown>> = {
   '/about': About,
   '/contact': Contact,
   '/start': Start,
+  '/websites': Websites,
   '/website-audit': Audit,
   '/algemene-voorwaarden': Terms,
 }
