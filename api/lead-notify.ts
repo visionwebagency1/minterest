@@ -31,6 +31,34 @@ const FORM_LABELS: Record<string, string> = {
   start: 'Projectaanvraag',
   audit: 'Website-audit',
   'offerte-akkoord': 'Offerte geaccepteerd',
+  'website-abonnement': 'Aanvraag website abonnement',
+}
+
+/** Slug naar leesbare naam, zodat er geen "groei" in een mail belandt. */
+const PLAN_NAMES: Record<string, string> = {
+  start: 'Start (30 euro p/m)',
+  groei: 'Groei (45 euro p/m)',
+  pro: 'Pro (vanaf 60 euro p/m)',
+}
+
+/** Diensten uit de start-funnel: anders staat er "design-branding" in de mail. */
+const INTEREST_NAMES: Record<string, string> = {
+  'design-branding': 'Design en branding',
+  'web-development': 'Web Development (maatwerk)',
+  'video-fotografie': 'Video en fotografie',
+  'social-media': 'Social media beheer',
+  'seo-sea': 'SEO en SEA',
+  extra: 'Extra diensten',
+  'website-abonnement': 'Website abonnement',
+}
+
+const TEMPLATE_NAMES: Record<string, string> = {
+  atelier: 'Atelier (kapsalon en beauty)',
+  kade: 'Kade (installatie en techniek)',
+  bloem: 'Bloem (horeca)',
+  praktijk: 'Praktijk (zorg en praktijk)',
+  vakman: 'Vakman (hovenier en klus)',
+  noord: 'Noord (zakelijke dienstverlening)',
 }
 
 const CUSTOMER_INTRO: Record<string, string> = {
@@ -42,6 +70,8 @@ const CUSTOMER_INTRO: Record<string, string> = {
     'Bedankt voor je aanvraag voor een gratis website-audit. We bekijken je website zorgvuldig en sturen je onze bevindingen toe.',
   'offerte-akkoord':
     'Bedankt voor je akkoord. We hebben je goedkeuring ontvangen en gaan voor je aan de slag. Je ontvangt binnenkort de vervolgstappen.',
+  'website-abonnement':
+    'Bedankt voor je aanvraag. We hebben je keuze goed ontvangen en nemen binnen 1 werkdag contact met je op om de laatste details en de eerste betaling te regelen. Daarna gaan we je website bouwen.',
 }
 
 const esc = (v: unknown): string =>
@@ -57,12 +87,31 @@ const asText = (v: unknown): string | null =>
 const asList = (v: unknown): string[] => (Array.isArray(v) ? v.map(String).filter(Boolean) : [])
 
 /** Normalize the many form shapes onto one set of fields. */
-function normalize(data: Payload) {
-  const interest = asList(data.interest).length ? asList(data.interest) : asList(data.services)
+function normalize(data: Payload, formType = 'contact') {
+  const raw = asList(data.interest).length ? asList(data.interest) : asList(data.services)
+  // Een interesse die het formulier zelf al is, zegt niets extra's.
+  const interest = raw
+    .filter((key) => key !== formType)
+    .map((key) => INTEREST_NAMES[key] ?? key)
+  const planSlug = asText(data.plan)
+  const templateSlug = asText(data.template)
+  const domain = asText((data as Payload).desiredDomain) ?? asText((data as Payload).desired_domain)
+  const domainChoice = asText((data as Payload).domainChoice)
   return {
     name: asText(data.name),
     email: asText(data.email),
+    phone: asText(data.phone),
     company: asText(data.company),
+    plan: planSlug ? PLAN_NAMES[planSlug] ?? planSlug : null,
+    template: templateSlug ? TEMPLATE_NAMES[templateSlug] ?? templateSlug : null,
+    // Heeft de klant al een domein, of moeten wij er een regelen?
+    domain: domain
+      ? domainChoice === 'nieuw'
+        ? `${domain} (wij regelen registratie)`
+        : domain
+      : domainChoice === 'nieuw'
+        ? 'Nog geen domein, wij regelen er een'
+        : null,
     website: asText(data.url) ?? asText((data as Payload).website_url) ?? asText((data as Payload).website),
     interest,
     budget: asText(data.budget),
@@ -122,7 +171,11 @@ function internalRows(f: ReturnType<typeof normalize>): Row[] {
   const rows: Row[] = []
   if (f.name) rows.push({ label: 'Naam', value: f.name })
   if (f.email) rows.push({ label: 'E-mail', value: f.email })
+  if (f.phone) rows.push({ label: 'Telefoon', value: f.phone })
   if (f.company) rows.push({ label: 'Bedrijf', value: f.company })
+  if (f.plan) rows.push({ label: 'Gekozen plan', value: f.plan })
+  if (f.template) rows.push({ label: 'Gekozen template', value: f.template })
+  if (f.domain) rows.push({ label: 'Domein', value: f.domain })
   if (f.website) rows.push({ label: 'Website', value: f.website })
   if (f.interest.length) rows.push({ label: 'Interesse', value: f.interest.join(', ') })
   if (f.budget) rows.push({ label: 'Budget', value: f.budget })
@@ -138,6 +191,9 @@ function internalRows(f: ReturnType<typeof normalize>): Row[] {
 function customerRows(f: ReturnType<typeof normalize>): Row[] {
   const rows: Row[] = []
   if (f.company) rows.push({ label: 'Bedrijf', value: f.company })
+  if (f.plan) rows.push({ label: 'Je plan', value: f.plan })
+  if (f.template) rows.push({ label: 'Je template', value: f.template })
+  if (f.domain) rows.push({ label: 'Je domein', value: f.domain })
   if (f.website) rows.push({ label: 'Website', value: f.website })
   if (f.interest.length) rows.push({ label: 'Interesse', value: f.interest.join(', ') })
   if (f.quoteNumber) rows.push({ label: 'Offerte', value: f.quoteNumber })
@@ -196,7 +252,7 @@ export default async function handler(req: any, res: any) {
 
   const formType = asText(body.formType) || 'contact'
   const data = (body.data && typeof body.data === 'object' ? body.data : body) as Payload
-  const f = normalize(data)
+  const f = normalize(data, formType)
   const label = FORM_LABELS[formType] || 'Aanvraag'
 
   // 1) Internal notification to Minterest (reply goes straight to the customer).
