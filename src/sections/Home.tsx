@@ -4,6 +4,7 @@ import { Hero } from './Hero'
 import { LogoMarquee } from './LogoMarquee'
 import { ServicesIntro } from './ServicesIntro'
 import { ServicesShowcase } from './ServicesShowcase'
+import { AbonnementBand } from './abonnement/AbonnementBand'
 import { Showcase } from './Showcase'
 import { Approach } from './Approach'
 import { Testimonials } from './Testimonials'
@@ -24,6 +25,8 @@ export function Home() {
         <LogoMarquee />
         <ServicesIntro />
         <ServicesShowcase />
+        {/* Meteen onder de diensten: de kortere route voor wie geen maatwerk zoekt. */}
+        <AbonnementBand />
         <Showcase />
         <Approach />
         <Testimonials />

@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { Reveal } from '@/components/Reveal'
 import { Accent } from '@/components/Accent'
 import { Footer } from '@/sections/Footer'
+import { AbonnementBand } from '@/sections/abonnement/AbonnementBand'
 import { M_PATH } from '@/three/mPath'
 import { MAIN_SERVICES } from '@/data/services'
 import { SiteContentProvider, useContent } from '@/content/SiteContent'
@@ -114,6 +115,9 @@ function ServicesInner() {
           ))}
         </div>
       </section>
+
+      {/* Na de zes diensten: het abonnement als eigen route, geen zevende dienst. */}
+      <AbonnementBand />
 
       <Footer />
     </>
