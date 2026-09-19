@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand-tokens. Gelijk aan websites/shared/brand.json en aan de hoofdsite. */
+:root {
+  --emerald-deep: #013f40;
+  --emerald: #008081;
+  --mint: #42c28c;
+  --lime-accent: #90ee90;
+  --cream: #f4f4f4;
+  --near-black: #0a1512;
+
+  --font-display: 'Clash Display', system-ui, sans-serif;
+  --font-body: 'Satoshi', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--near-black);
+    color: var(--cream);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.05;
+  }
+}

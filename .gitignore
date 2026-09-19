@@ -12,3 +12,8 @@ dist
 
 # Generated at build time by scripts/generate-sitemap.mjs
 public/sitemap.xml
+
+# Next.js (websites-platform)
+.next/
+next-env.d.ts
+*.tsbuildinfo

@@ -1,0 +1,16 @@
+{
+  "name": "minterest-websites",
+  "private": true,
+  "description": "Abonnementsplatform: websites per maand onder Minterest (renderer, panel, gedeelde basis).",
+  "workspaces": [
+    "shared",
+    "renderer",
+    "panel"
+  ],
+  "scripts": {
+    "dev:renderer": "npm run dev --workspace renderer",
+    "dev:panel": "npm run dev --workspace panel",
+    "build": "npm run build --workspace renderer && npm run build --workspace panel",
+    "lint": "npm run lint --workspace renderer && npm run lint --workspace panel"
+  }
+}

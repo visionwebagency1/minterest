@@ -1,0 +1,19 @@
+{
+  "name": "@minterest/websites-shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Gedeelde basis voor renderer en panel: brand-tokens, Tailwind-preset en datamodel-types.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./brand.json": "./brand.json",
+    "./tailwind-preset": "./tailwind-preset.cjs"
+  },
+  "files": [
+    "src",
+    "brand.json",
+    "tailwind-preset.cjs"
+  ]
+}

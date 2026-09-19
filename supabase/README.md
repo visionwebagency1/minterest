@@ -22,6 +22,17 @@ Easiest way (no tooling):
    - [`migrations/0003_customers.sql`](migrations/0003_customers.sql) - `customers` (klanten) + link to leads.
    - [`migrations/0004_quotes.sql`](migrations/0004_quotes.sql) - `company_settings`, `quotes` + `quote_lines`, and the public quote functions.
    - [`migrations/0005_invoices.sql`](migrations/0005_invoices.sql) - `invoices` + `invoice_lines` and the public invoice function.
+   - ... migrations 0006 t/m 0014 - content, projecten, branding en nummering.
+   - [`migrations/0015_auth_roles.sql`](migrations/0015_auth_roles.sql) - admin
+     en klant gescheiden in `profiles.role` (nodig zodra klanten inloggen).
+   - [`migrations/0016_websites_platform.sql`](migrations/0016_websites_platform.sql) -
+     het abonnementsplatform: `web_plans`, `web_templates`, `web_subscriptions`,
+     `web_sites`, `web_site_content`, `web_domains`, `web_change_requests`, plus
+     uitbreidingen op `customers`, `leads` en `invoices`. Het voorvoegsel `web_`
+     houdt ze gescheiden van de tabellen van het bureau (`site_content` bestaat
+     al als CMS van de hoofdsite).
+   - [`migrations/0017_websites_seed_plans.sql`](migrations/0017_websites_seed_plans.sql) -
+     de plannen Start, Groei en Pro.
 
 Or, with the Supabase CLI:
 
@@ -56,7 +67,10 @@ directly in Supabase:
 2. Enter your email and a password, and tick **Auto Confirm User** so you can log
    in right away.
 3. A matching row in `public.profiles` is created automatically (a database
-   trigger does this), which marks the user as an admin.
+   trigger does this). Since migration `0015_auth_roles.sql` a new user is a
+   **klant** by default, so also set `raw_app_meta_data` to `{"role": "admin"}`
+   when adding the user, or let an existing admin run
+   `select public.grant_admin('nieuwe@minterest.nl');` in the SQL editor.
 
 You can now log in at `/admin/login` with that email and password.
 Repeat for any extra team members.
@@ -70,7 +84,9 @@ Repeat for any extra team members.
   migrations (content, inbox, quotes) to check whether the current request is a
   logged-in admin.
 - **`handle_new_user()` + `on_auth_user_created`** - the trigger that creates a
-  profile for every new auth user.
+  profile for every new auth user. Since `0015` that profile gets role `klant`
+  unless `app_metadata.role` says `admin`, so customer logins for the websites
+  platform can never reach the admin data.
 - **`public.leads`** - the inbox: every request from the public site (contact
   form, "Start jouw project" funnel, website-audit). RLS lets the anon key only
   INSERT a fresh `nieuw` request; reading, status changes and deleting are
