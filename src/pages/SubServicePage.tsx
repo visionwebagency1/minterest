@@ -7,6 +7,14 @@ import { HERO_BG, HeroMWatermark } from '@/components/PageHero'
 import { SERVICE_ICON_BY_SLUG } from '@/components/serviceIcons'
 import { SUB_ICON_BY_SLUG } from '@/components/subServiceIcons'
 import { Footer } from '@/sections/Footer'
+import { AbonnementAlt } from '@/components/abonnement/AbonnementAlt'
+
+/**
+ * Sub-diensten waar een bezoeker ook op het abonnement kan uitkomen. Voor
+ * applicaties en software bestaat die kortere route niet, dus daar tonen we hem
+ * ook niet.
+ */
+const ALT_SUBS = ['websites', 'webshops']
 import { SUB_RENDER_BY_KEY } from '@/sections/subServiceRenders'
 import { SUB_BY_KEY, parentService, subsForService, type SubService } from '@/data/subServices'
 import { subPath } from '@/data/services'
@@ -370,6 +378,10 @@ function SubServicePage({ sub: base }: { sub: SubService }) {
             </div>
           </Reveal>
         </section>
+
+        {/* "Websites" en "Webshops" zijn hier maatwerk. Het abonnement is een
+            ander product, dus staat het als aparte route naast de aanvraag. */}
+        {ALT_SUBS.includes(sub.slug) && <AbonnementAlt variant="naar-abonnement" />}
       </div>
 
       <Footer />

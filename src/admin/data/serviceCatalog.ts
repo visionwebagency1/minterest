@@ -21,7 +21,17 @@ export const SERVICE_CATALOG: CatalogGroup[] = [
     ],
   },
   {
-    group: 'Web Development',
+    group: 'Website Abonnement (per maand)',
+    items: [
+      { name: 'Website Abonnement Start (per maand)', price: 30 },
+      { name: 'Website Abonnement Groei (per maand)', price: 45 },
+      { name: 'Website Abonnement Pro (per maand)', price: 60 },
+      { name: 'Extra tekstwijziging buiten het abonnement', price: 45 },
+      { name: 'Domeinregistratie (per jaar, doorbelast)', price: 15 },
+    ],
+  },
+  {
+    group: 'Web Development (maatwerk)',
     items: [
       { name: 'Website', price: 1500 },
       { name: 'Webshop', price: 2500 },

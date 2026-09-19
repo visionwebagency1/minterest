@@ -67,9 +67,26 @@ export function GlobeIcon() {
 }
 
 /** Lead-form service options — the 6 main services (keys = landing-page slugs). */
+/** Website subscription: a browser window with a recurring arrow. */
+export function SubscriptionIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2.5" y="4" width="19" height="14" rx="2.5" />
+      <path d="M2.5 8h19" />
+      <path d="M9 14.5a3 3 0 0 1 5.2-2M15 11.5a3 3 0 0 1-5.2 2" />
+      <path d="M14.2 12.5h1.6v-1.6M9.8 13.5H8.2v1.6" />
+    </svg>
+  )
+}
+
 export const SERVICE_OPTIONS = [
   { key: 'design-branding', label: 'Branding voor groei', Icon: BrandIcon },
-  { key: 'web-development', label: 'Web Development', Icon: WebIcon },
+  // Maatwerk: een project met een offerte vooraf.
+  { key: 'web-development', label: 'Web Development (maatwerk)', Icon: WebIcon },
+  // Geen maatwerk maar een kant-en-klare site op abonnement. Staat hier zodat
+  // iemand die "gewoon een website" wil niet per ongeluk een offertetraject
+  // instapt dat veel duurder en trager is dan wat hij zoekt.
+  { key: 'website-abonnement', label: 'Website abonnement (vanaf \u20AC 30 p/m)', Icon: SubscriptionIcon },
   { key: 'video-fotografie', label: 'Video & Fotografie', Icon: VideoIcon },
   { key: 'social-media', label: 'Social Media Groei', Icon: NetworkIcon },
   { key: 'seo-sea', label: 'SEO & SEA', Icon: SeoIcon },

@@ -16,7 +16,7 @@ import { ProjectCase } from '@/pages/ProjectCase'
 import { About } from '@/pages/About'
 import { Contact } from '@/pages/Contact'
 import { Start } from '@/pages/Start'
-import { Websites } from '@/pages/Websites'
+import { WebsiteAbonnement } from '@/pages/WebsiteAbonnement'
 import { Audit } from '@/pages/Audit'
 import { Terms } from '@/pages/Terms'
 import { NotFound } from '@/pages/NotFound'
@@ -52,8 +52,10 @@ function PublicSite() {
             <Route path="/diensten/:slug" element={<ServiceRoute />} />
             <Route path="/diensten/:slug/:subslug" element={<SubServiceRoute />} />
 
-            {/* Website subscription: the sales page for Minterest Websites. */}
-            <Route path="/websites" element={<Websites />} />
+            {/* Website subscription: its own proposition, not a web-development
+                service. /websites is kept as an alias so older links keep working. */}
+            <Route path="/website-abonnement" element={<WebsiteAbonnement />} />
+            <Route path="/websites" element={<Navigate to="/website-abonnement" replace />} />
 
             {/* Redirects from the old per-service routes to the new structure. */}
             <Route path="/branding" element={<Navigate to="/diensten/design-branding" replace />} />

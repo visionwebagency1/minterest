@@ -8,6 +8,7 @@ import { BorderBeam } from '@/components/BorderBeam'
 import { HERO_BG, HeroMWatermark } from '@/components/PageHero'
 import { SUB_ICON_BY_SLUG } from '@/components/subServiceIcons'
 import { Footer } from '@/sections/Footer'
+import { AbonnementAlt } from '@/components/abonnement/AbonnementAlt'
 import { M_PATH } from '@/three/mPath'
 import {
   SERVICE_BY_SLUG,
@@ -237,6 +238,10 @@ function ServicePageInner({ base }: { base: MainService }) {
             </div>
           </Reveal>
         </section>
+
+        {/* Web Development is maatwerk. Wie daar niet op zit te wachten, ziet
+            hier de kortere route naar een website. */}
+        {s.slug === 'web-development' && <AbonnementAlt variant="naar-abonnement" />}
       </div>
 
       <Footer />

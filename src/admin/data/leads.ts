@@ -52,7 +52,8 @@ export function leadStatusMeta(status: LeadStatus) {
 /** Service-slug → readable label (kept local so the admin bundle stays lean). */
 export const INTEREST_LABELS: Record<string, string> = {
   'design-branding': 'Branding voor groei',
-  'web-development': 'Web Development',
+  'web-development': 'Web Development (maatwerk)',
+  'website-abonnement': 'Website abonnement',
   'video-fotografie': 'Video & Fotografie',
   'social-media': 'Social Media Groei',
   'seo-sea': 'SEO & SEA',

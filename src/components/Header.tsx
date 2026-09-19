@@ -5,6 +5,7 @@ import { BorderBeam } from './BorderBeam'
 import { Logo } from './Logo'
 import { SERVICE_ICON_BY_SLUG } from './serviceIcons'
 import { MAIN_SERVICES } from '@/data/services'
+import { WEBSITE_SUBSCRIPTION } from '@/data/websitePlans'
 
 /**
  * Floating glass header + a slide-down navigation panel:
@@ -15,12 +16,15 @@ import { MAIN_SERVICES } from '@/data/services'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
+// Het website-abonnement staat bewust NAAST "Onze diensten" en niet erin: het is
+// geen maatwerkdienst maar een eigen product met een eigen prijs en flow.
 const PRIMARY = [
   { no: '01', label: 'Home', to: '/' },
   { no: '02', label: 'Onze diensten', to: '/diensten' },
-  { no: '03', label: 'Onze projecten', to: '/work' },
-  { no: '04', label: 'Over ons', to: '/about' },
-  { no: '05', label: 'Contact', to: '/contact' },
+  { no: '03', label: WEBSITE_SUBSCRIPTION.navLabel, to: WEBSITE_SUBSCRIPTION.path, tag: `vanaf \u20AC ${WEBSITE_SUBSCRIPTION.priceFrom} p/m` },
+  { no: '04', label: 'Onze projecten', to: '/work' },
+  { no: '05', label: 'Over ons', to: '/about' },
+  { no: '06', label: 'Contact', to: '/contact' },
 ]
 
 /* ---- social icons ---- */
@@ -127,6 +131,11 @@ export function Header() {
                       <NavRow key={item.to} no={item.no} delay={0.1 + i * 0.05}>
                         <Link to={item.to} onClick={close} className="group flex items-baseline gap-4 py-3 md:gap-6">
                           <BigLabel>{item.label}</BigLabel>
+                          {item.tag && (
+                            <span className="shrink-0 rounded-full border border-mint/30 bg-mint/10 px-2.5 py-1 font-sans text-[11px] font-semibold uppercase tracking-wider text-mint">
+                              {item.tag}
+                            </span>
+                          )}
                           <Arrow />
                         </Link>
                       </NavRow>

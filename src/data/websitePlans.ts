@@ -7,6 +7,24 @@
  * the source of truth for the sales page. Keep them in sync when prices change.
  */
 
+/**
+ * Naam, route en positionering van het product. Bewust op een plek: het
+ * abonnement moet duidelijk iets anders zijn dan Web Development (maatwerk),
+ * dus als de naam verandert, verandert hij overal in een keer mee.
+ */
+export const WEBSITE_SUBSCRIPTION = {
+  /** Productnaam in lopende tekst en koppen. */
+  name: 'Website Abonnement',
+  /** Label in het navigatiemenu en in keuzelijsten. */
+  navLabel: 'Website abonnement',
+  path: '/website-abonnement',
+  /** Laagste maandprijs, gebruikt in labels en cross-links. */
+  priceFrom: 30,
+  /** Het verschil met maatwerk, in een zin. */
+  difference:
+    'Een kant-en-klare website op abonnement, geen maatwerkproject. Vaste lage maandprijs, geen investering vooraf.',
+} as const
+
 export type WebsitePlanSlug = 'start' | 'groei' | 'pro'
 
 export interface WebsitePlan {

@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Accent } from '@/components/Accent'
 import { HERO_BG, HeroMWatermark } from '@/components/PageHero'
-import { BrowserFrame, TemplatePreview } from '@/components/websites/TemplatePreview'
+import { BrowserFrame, TemplatePreview } from '@/components/abonnement/TemplatePreview'
 import { WEBSITE_TEMPLATES } from '@/data/websiteTemplates'
 import { lenisScrollTo } from '@/lib/useLenis'
 
 /**
- * Hero of /websites: the promise on the left, what you actually get on the
- * right. The stack of browser windows cycles through the gallery, so within a
+ * Hero of the website subscription page: the promise on the left, what you
+ * actually get on the right. The stack of browser windows cycles through the gallery, so within a
  * few seconds a visitor has seen that these are finished, different websites.
  */
 
@@ -124,7 +124,7 @@ function TemplateStack() {
   )
 }
 
-export function WebsitesHero() {
+export function AbonnementHero() {
   const reduce = useReducedMotion()
   const rise = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 18 },
@@ -146,7 +146,7 @@ export function WebsitesHero() {
               {...rise(0)}
               className="block font-sans text-xs uppercase tracking-[0.28em] text-mint/80"
             >
-              Minterest Websites
+              Website Abonnement
             </motion.span>
 
             <motion.h1

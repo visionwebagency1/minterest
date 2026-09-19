@@ -120,7 +120,7 @@ function Cell({ value }: { value: CompareRow['start'] }) {
   return <span className="font-sans text-sm text-near-black/70">{value}</span>
 }
 
-export function WebsitesPlans({ onChoose }: { onChoose: (plan: WebsitePlan) => void }) {
+export function AbonnementPlans({ onChoose }: { onChoose: (plan: WebsitePlan) => void }) {
   return (
     <section id="plannen" className="relative scroll-mt-24 bg-[#EAF4EC] py-28 text-near-black md:py-36">
       <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">

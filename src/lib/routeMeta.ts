@@ -65,7 +65,7 @@ const STATIC: Record<string, { title: string; description: string }> = {
     description:
       'Klaar om te groeien? Start jouw project bij Minterest. Vertel ons waar je staat en wij helpen je met merk, website en marketing die werkt.',
   },
-  '/websites': {
+  '/website-abonnement': {
     title: 'Website abonnement vanaf 30 euro per maand | Minterest',
     description:
       'Een professionele website vanaf 30 euro per maand. Ontwerp, eigen domein, hosting, SSL en onderhoud inbegrepen. Geen opstartkosten, maandelijks opzegbaar.',
